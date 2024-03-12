@@ -1,0 +1,58 @@
+<view class="container">
+  <view hidden="{{detail_link}}" class='item' hover-class="opcity" hover-stay-time="150" style="width: 100%;">
+    <image class='middle-item-img' src="{{ljzt=='连接成功' ? '../../../static/images/my/myLock001.gif' : '../../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'UnlinkBLE' : 'linkBLE'}}"></image>
+    <text class='title-name'>{{sbmc}}</text>
+  </view>
+	<view class="swiper-items" style="margin-top: 130rpx;">
+	<scroll-view class="scroll-views" style="height:{{winHeight-60}}px;" scroll-y="true" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+      <!--<view style="margin-top: 10rpx;font-weight: bold;">{{sbmc}}</view>-->
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+        <view class="service-text" data-index="{{index}}">
+				  <view class="text" data-key="{{item.id}}">
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 55%;">授权方式：{{item.kslxmc}}</view>
+              <view class="service-tite" style="width: 45%;">
+                <label class="button-right-type" bindtap="Resend" data-key="{{item.id}}" data-rentid="{{item.renterid}}" data-hid="{{item.hid}}" data-pwd="{{item.pwd}}" data-lx="{{item.lx}}" style="margin-right: 30rpx;">重新发送</label>
+                <label class="button-right-type" bindtap="delList" data-key="{{item.id}}">删除</label>
+              </view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 55%;">编号：{{item.yhbh}}</view>
+              <!--<view class="service-tite" style="width: 50%;">
+                <label class="button-left-type" bindtap="frozen" data-key="{{item.id}}">冻结</label>
+                <label class="button-right-type" bindtap="unfreeze" data-key="{{item.id}}">解冻</label>
+              </view>-->
+              <!--<view class="service-tite" style="width: 45%;">
+                <view wx:if="{{item.lylx=='5' || item.lylx=='6'}}"> 
+                  <label class="button-right-type" bindtap="delTX" data-key="{{item.id}}" style="margin-right: 30rpx;">蓝牙删除</label>
+                </view>
+                <view wx:else>
+                </view>            
+              </view>-->
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">来源：{{item.ly}}</view>
+            </view>
+            <!--<view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">密码：{{item.pwd}}</view>
+            </view>-->
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">状态：{{item.ztmc}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">用户：{{item.pwd_user}}</view>
+            </view>                  
+            <view style="display: flex;">
+            <mp-icon icon="time" size="14" color="#C0C0C0" style="height: 40rpx;line-height:40rpx;margin:-10rpx 8rpx 0 0;"></mp-icon>
+            <text class="service-city">{{item.yxsj}}</text>         
+            </view>
+					</view>
+      </view>  
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+	</scroll-view>
+</view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

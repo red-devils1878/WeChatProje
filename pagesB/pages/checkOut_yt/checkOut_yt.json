@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "应退租客金额",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

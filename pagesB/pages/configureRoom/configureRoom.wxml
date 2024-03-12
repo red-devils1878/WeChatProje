@@ -1,0 +1,120 @@
+
+<view class="container" style="background-color: white;">
+  <swiper-item class="swiper-items">
+  <view class="page-body">
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight-50}}px">
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 20rpx 0 0 0;">
+      <view class="form_table_left">已选房间</view>
+    </view>
+  </view> 
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="color: #5677FC;">
+    {{roomNo}}
+    </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="font-weight: bold;">
+      <view class="form_table_left">房型信息</view>
+    </view>
+  </view> 
+  <view style="display: flex;width: 100%;margin-bottom: 10rpx;" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+    <view class="form_table_border_none" style="width:25%;margin-right: 0rpx;background-color: #e9ebf3;">
+      <view class="form_table_border_in">
+        <view class="form_table_left" style="text-align: center;width: 100%;font-size: 3.5vw;"><span class="fangxing_style_left">{{item.name}}</span></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border_none" style="width:45%;margin: 0rpx;background-color: #fafafa;">
+      <view class="form_table_border_in">
+        <view class="form_table_left" style="font-size: 3.5vw;">{{item.fxName}}</view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view style="width: 20%;background-color: #fafafa;">
+      <view class="form_table_border_in">
+        <mp-icon bindtap="update" icon="pencil" data-id="{{item.id}}" size="22" color="#5677FC" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+        <mp-icon bindtap="del" icon="delete" data-id="{{item.id}}" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+      </view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-bottom: 20rpx;">
+      <view class="form_table_border_in">    
+        <button type="primary" style="background-color: #ffffff;border:2rpx solid #5677FC;color: #5677FC;margin-bottom:auto;" bindtap="addFX">+ 添加房型</button>
+      </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="font-weight: bold;">
+      <view class="form_table_left">配置房间基本信息</view>
+    </view>
+  </view> 
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  房型</view>
+      <view class="form_table_right">
+        <picker bindchange="bindFXChange" value="{{servicelist[fxIndex].id}}" range="{{servicelist}}" range-key="{{'name'}}" name="fx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{servicelist[fxIndex].name}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  朝向</view>
+      <view class="form_table_right">
+        <picker bindchange="bindCXChange" value="{{cx[cxIndex].code}}" range="{{cx}}" range-key="{{'othername'}}" name="cx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{cx[cxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  面积</view>
+      <view class="form_table_right">
+        <input type="digit" class="form_table_right_text" style="width: 50vw;" name="area" placeholder="请输入" value="{{area}}"/>
+      </view>
+      <view style="position: absolute;right: 50rpx;margin-top: 4rpx;">(㎡)</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  出租价格</view>
+      <view class="form_table_right">
+        <input type="digit" class="form_table_right_text" style="width: 50vw;" name="rent" placeholder="请输入" value="{{rent}}"/>
+        <input type="number" name="id2" value="{{id}}" hidden="true"/>
+        <input type="number" name="S" value="{{S}}" hidden="true"/>
+        <input type="number" name="T" value="{{T}}" hidden="true"/>
+        <input type="number" name="W" value="{{W}}" hidden="true"/>
+        <input type="text" name="fwpz" value="{{fwpz}}" hidden="true"/>
+        <input type="text" name="room_name" value="{{room_name}}" hidden="true"/>
+      </view>
+      <view style="position: absolute;right: 50rpx;margin-top: 6rpx;">元/月</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_line"></view>
+  </scroll-view>
+  <view class="form_info_bot1">
+    <view class="form_table_border">
+      <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit" >保存</button>
+    </view>
+  </view>
+  </form>
+  </view>
+</swiper-item>
+</view>

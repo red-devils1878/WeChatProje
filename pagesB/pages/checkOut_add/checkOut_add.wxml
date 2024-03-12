@@ -1,0 +1,125 @@
+<view class="container">
+  <swiper-item class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view class="page-body">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+      <view class="title_form_line"><span class="span-title">退租信息</span></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">退租原因</view>
+          <view class="form_table_right">
+            <picker bindchange="bindTZChange" value="{{tzyy[tzyyIndex].code}}" range="{{tzyy}}" range-key="{{'othername'}}" name="tzyy">
+              <view class="form_table_right_text" style="padding-top:5rpx;">
+                <view class="picker">{{tzyy[tzyyIndex].othername}}</view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  退租时间</view>
+          <view class="form_table_right">
+            <view class="form_table_right_text">
+              <picker data-field="date" mode="date" value="{{Tdate}}" bindchange="tDateChange" name="tzTime">
+                <view class="weui-input">{{Tdate}}</view>
+              </picker> 
+            </view>
+          </view>
+          <view class="arrow" style="margin-top: 10rpx;"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">申请人</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" value="{{sqr}}" name="sqr"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">应退租客金额</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="1" data-key="{{tzNo}}">
+              <input type="text" class="form_table_right_text" value="{{ytje}}" name="ytje" disabled="true"/>
+            </view>
+          <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">扣除租客金额</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="2" data-key="{{tzNo}}">
+              <input type="text" class="form_table_right_text" value="{{kcje}}" name="kcje" disabled="true"/>
+            </view>
+          <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">物品交割金额</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="3" data-key="{{tzNo}}">
+              <input type="text" class="form_table_right_text" value="{{jgje}}" name="jgje" disabled="true"/>
+            </view>
+          <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">结转金额</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" value="{{jzje}}" name="jzje" disabled="true" />
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">总计</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" value="{{zje}}" name="zje" disabled="true" style="color: #ff0000;"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">退租备注</view>
+          <view class="form_table_right" bindtap='tapEvent' data-index="4" data-key="{{tzNo}}">
+            <input type="text" class="form_table_right_text" name="tzbz" placeholder="" disabled="true"/>
+          </view>
+          <view class="arrow2"></view>
+        </view>
+      </view>
+    <view class="weui-uploader">
+      <view class="weui-uploader__hd" style="padding: 20rpx;">
+        <view class="weui-uploader__overview">
+          <view class="weui-uploader__title">退租照片</view>
+          <view class="weui-uploader__info" style="font-size: 32rpx;">{{img_qty}}/3</view>
+        </view>
+      </view>
+      <view class="img-v weui-uploader__bd" style="padding: 0 20rpx;">
+        <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+          <image class="weui-uploader__img" src="{{item.url}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage">
+            <icon type='cancel' class="delete-btn" data-index="{{index}}" data-key="{{item.FileID}}" catchtap="deleteImg"></icon>
+          </image>
+        </view>
+      <view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"> </view>
+    </view>
+  </view>
+  <view class="form_line"></view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">退租</button>
+      </view>
+     </view>
+    </form>
+  </view>
+</scroll-view> 
+</swiper-item>
+</view>

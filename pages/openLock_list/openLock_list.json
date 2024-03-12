@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "开门记录",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

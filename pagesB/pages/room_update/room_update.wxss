@@ -1,0 +1,8 @@
+/* pages/room_update/room_update.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.weui-agree .weui-agree__text {
+  display: inline;
+}
+.scroll-views{
+  height: 100%;
+}

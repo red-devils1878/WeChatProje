@@ -1,0 +1,338 @@
+<view class="container">
+<scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">电表</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="1" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">基本信息</view>
+      <view class="{{arrow_jbxx}}"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view hidden="{{detail_jbxx}}">
+  <view class="form_table_border" style="display: flex;">
+    <view class="form_table_border_in" style="width: 100%;">
+      <view class="form_table_detail_left" style="width: 20%;">名称</view>
+      <view class="table_center">
+        <view type="text" class="form_table_detail_right_text">{{mc}}</view>
+        <view class="button_left" bindtap="updateMC">修改</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">设备号</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{dsn}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">UUID</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{uuid}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">状态</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{zt}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">绑定网关</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{bdwg}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">绑定时间</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{hx}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 20rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 4.5vw;font-weight:bold;">用电信息</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">剩余电量</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text" style="color: #ff0000;">{{sydl}}度</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">当前用电</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{dqyd}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">最新上报时间</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{zxsbsj}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">屏显读数</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{pxds}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">电表状态</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{dbzt}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <!--<view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">跳闸阈值</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{tzyz}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">透支额度</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{tzed}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>-->
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">当前电压</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{zdgl}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 20rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 4.5vw;font-weight:bold;">保修信息</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">起始时间</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{ks}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">结束时间</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{js}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="2" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">电表操作</view>
+      <view class="{{arrow_yd}}"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view hidden="{{detail_yd}}">
+    <view class="form_table_border" bindtap='tapYD' data-index="1" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">充值电量</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="2" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">查看充值记录</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="3" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">剩余电量清零</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="4" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">查看用电记录</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="5" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">房间通电</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="6" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">房间断电</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <!--<view class="form_table_border" bindtap='tapYD' data-index="7" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">房间用电配置</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>-->
+    <view class="form_table_border" bindtap='tapYD' data-index="8" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">智能抄表</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view wx:if="{{paymentMode==='1'}}"> 
+      <view class="form_table_border" bindtap='tapYD' data-index="9" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">保电操作</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="10" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">解除保电</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    </view>
+    <view wx:else> 
+    </view>
+    <view wx:if="{{ptlx==='485'}}"> 
+      <view wx:if="{{paymentMode==='2'}}"> 
+      <view class="form_table_border" bindtap='tapYD' data-index="11" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">切到预付费</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    </view>
+    <view wx:else> 
+      <view class="form_table_border" bindtap='tapYD' data-index="12" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">切到后付费</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    </view>
+    </view>
+    <view wx:else>
+    </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="3" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">操作记录</view>
+      <view class="arrowZDY"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <!--<view class="form_table_border" bindtap='tapDB' data-index="4" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">异常记录</view>
+      <view class="arrowZDY"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="5" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">替换设备</view>
+      <view class="arrowZDY"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="6" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">删除设备</view>
+      <view class="arrowZDY"></view>
+      <view class="clear"></view>
+    </view>
+  </view>-->
+  <view class="form_table_border" bindtap='tapDB' data-index="7" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">用电记录</view>
+      <view class="arrowZDY"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+</scroll-view>
+</view>
+<view class='toast-box' hidden="{{!ifName}}">
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>修改设备名称</text>
+    </view>
+    <view class='toast-main'>
+      <view class='toast-input'>
+        <input placeholder='请输入新设备名称' bindinput='setValue' data-name='stuEidtName' value="{{sbmc}}"></input>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='cancelButton'>
+        <button catchtap='cancel'>取消</button>
+      </view>
+      <view class='confirmButton'>
+        <button catchtap='confirm'>确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

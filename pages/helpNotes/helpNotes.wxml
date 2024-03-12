@@ -1,0 +1,2 @@
+<!--<web-view src="http://api.WeChat.langsi.com.cn/mo/pay_info.html?fid={{fid}}"></web-view>-->
+<web-view src="https://aiot.langsi.com.cn/helper/helper.html"></web-view>

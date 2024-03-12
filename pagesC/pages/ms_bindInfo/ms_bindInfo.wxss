@@ -1,0 +1,63 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 20rpx;
+}
+.service-list{
+	padding: 0 20rpx;
+}
+.service-item{
+	display: flex;
+	padding: 20rpx 0; 
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.service-img{
+  /*
+  width: 50rpx;
+  height: 50rpx;*/
+  width: 80rpx;
+  height: 80rpx;
+  padding-top: 8rpx;
+}
+.service-img_right{
+  width: 50rpx;
+  height: 50rpx;
+  padding-top: 42rpx;
+  margin-right: 40rpx;
+}
+.service-item-image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.service-text{
+  flex: 1;
+  margin-left: 20rpx;
+  width: 70%;
+}
+.service-text .service-tite{
+  /*color:#ff0000;*/
+  color: #333;
+  width: 90%;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.service-city{
+  width: 75%;
+  height: 40rpx;
+  /*margin: 10rpx 0;*/
+  font-size: 28rpx;
+  /*color: #04BE02;*/
+  color: #c0c0c0;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

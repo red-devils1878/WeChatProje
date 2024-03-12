@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>开始日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                  </picker>            
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>结束日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+<view class="weui-uploader">
+  <view class="weui-uploader__hd" style="padding: 20rpx 40rpx 6rpx 40rpx;">
+    <view class="weui-uploader__overview">
+      <view class="weui-uploader__title" style="font-weight: bold;">图片上传</view>
+      <view class="weui-uploader__info" style="font-size: 32rpx;">{{imgs.length}}/1</view>
+    </view>
+  </view>
+  <view class="img-v weui-uploader__bd" style="padding: 10rpx 40rpx;">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+      <image class="weui-uploader__img" src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage" bindlongtap='previewLongImg'>
+        <icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>
+      </image>
+    </view>
+    <view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"></view>
+  </view>
+</view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>
+          </view>
+      </view>
+  </view>
+  </form>
+  </view>
+</view>

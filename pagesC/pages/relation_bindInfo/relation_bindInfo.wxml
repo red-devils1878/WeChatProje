@@ -1,0 +1,72 @@
+<view class="container" style="background-color: white;">
+<form bindsubmit="formSubmit" catchtap="noop" catchreset="formReset">
+<view style="background-color: white;padding-bottom: 20rpx;border-bottom: 6rpx dashed #5677fc;">
+  <view style="display: flex;margin: 0 20rpx;">
+    <view class="query_style_l" style="width: 75%;">
+      <input type="number" style="width: 100%;" placeholder="请输入楼层" bindinput="inputLC"></input>
+    </view>
+    <view class="button_left" bindtap="submitSearch">关联{{sblx}}</view>
+  </view>
+</view>
+</form>
+<view class="title_form_line" style="margin-top: 100rpx;"><span class="span-title">{{sblx}}采集器</span></view>
+ <view class="service-list">
+	<view class="service-item">
+      <view class="service-img">
+		    <image src="{{imageUrl}}" mode="aspectFill"></image>
+	  	</view>
+		  <view class="service-text">
+		  <view class="service-tite">{{mc}}</view>
+        <view style="display: flex;">
+          <text class="service-city">{{collectorNo}}</text>  
+        </view>
+	  	</view>
+	</view>
+ </view>
+ <view class="title_form_line"><span class="span-title">{{sblx}}</span></view>
+ <scroll-view class="scroll-views" scroll-y="true" style="height:650rpx;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+ <view class="service-list" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+	<view class="service-item">
+      <view class="service-img">
+		<image src="{{item.imageUrl}}" mode="aspectFill"></image>
+	  </view>
+	  <view class="service-text">
+		<view class="service-tite">{{item.name}}</view>
+        <view style="display: flex;">
+          <text class="service-city">{{item.sbNo}}</text>  
+        </view>
+	   </view>
+       <view class="service-img_right" style="padding-top: 22rpx;" bindtap="unRelation" data-key="{{item.id}}" data-collectorno="{{item.collectorSn}}" data-lylx="{{item.lylx}}" data-ptlx="{{item.ptlx}}">
+		<image src="../../../static/images/my/delete48.png" mode="aspectFill"></image>
+	   </view>
+	</view>
+ </view>
+</scroll-view>
+</view>
+<view class="popup-box" wx:if="{{showIndex=='3'}}" bindtap="closePopup"></view> 
+<view class="info-left" wx:if="{{showIndex=='3'}}">
+  <view class="row-info">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 40}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+ <view class="service-list" wx:for="{{notRelationlist}}" wx:key="{{item.id}}">
+	<view class="service-item" style="width: 100%;padding: 10rpx 0;">
+      <view class="service-img">
+		<image src="{{item.imageUrl}}" mode="aspectFill"></image>
+	  </view>
+	  <view class="service-text">
+		<view class="service-tite">{{item.name}}</view>
+        <view style="display: flex;">
+          <text class="service-city">{{item.sbNo}}</text>  
+        </view>
+	   </view>
+       <view class="service-img_right" bindtap="relation" data-key="{{item.id}}" data-lylx="{{item.lylx}}" data-ptlx="{{item.ptlx}}">
+		<image src="../../../static/images/my/add48.png" mode="aspectFill"></image>
+	   </view>
+	</view>
+ </view>
+  </scroll-view>
+  </view>
+  <view class="row-btn fixed">
+    <view class="left-btn" bindtap="closePopup">取消</view>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

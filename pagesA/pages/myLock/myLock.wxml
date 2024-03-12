@@ -1,0 +1,203 @@
+<!--pages/myLock/myLock.wxml-->
+<view class='container'>
+  <!--顶部消息 primary-->
+  <tui-tips id="tui-tips-ctx"></tui-tips>
+  <!--顶部消息-->
+  <view class='middle-container'>
+    <view class='ul-item' style="margin-bottom: 20rpx;">
+    <view bindtap='back' class='item' hover-class="opcity" hover-stay-time="150" style="width: 25%;">
+      <text class='item-name' style="font-weight:bold;color: black;">返回首页</text>
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 100%;">
+      <image class='middle-item-img' src="{{ljzt=='连接成功' ? '../../../static/images/my/myLock001.gif' : '../../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'UnlinkBLE' : 'linkBLE'}}"></image>
+      <text class='title-name'>{{sbmc}}</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name' style="font-weight:bold;color: black;">{{powerV}}%</text>
+    </view>
+    </view>
+  <!--<view>{{sbmc}}</view>-->
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="01" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>蓝牙开门</text>
+    </view>
+    <view bindtap='tapEvent' data-index="02" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>密码管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="03" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>授时</text>
+    </view>
+    <view bindtap='tapEvent' data-index="04" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>动态密码</text>
+    </view>
+    </view>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="05" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>装修密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="06" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>添加授权</text>
+    </view>
+    <view wx:if="{{mslx=='5' || mslx=='6' || mslx=='20' || mslx=='21'}}" bindtap='tapEvent' data-index="14"  class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>蓝牙下发</text>
+    </view>
+    <view wx:else bindtap='tapEvent' data-index="07" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>音量调节</text>
+    </view>
+    <view bindtap='tapEvent' data-index="17" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>离线密码</text>
+    </view>
+    </view>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="11" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>下发指纹</text>
+    </view>
+    <view bindtap='tapEvent' data-index="09" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>添加卡片</text>
+    </view>
+    <!--<view wx:if="{{yhid=='admin'}}" bindtap='tapEvent' data-index="13" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>添加人脸</text>
+    </view>
+    <view wx:else bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>-->
+    <view bindtap='tapEvent' data-index="15" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>设备详情</text>
+    </view>
+    <view bindtap='tapEvent' data-index="08" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>开门记录</text>
+    </view>
+    </view>
+    <view class='ul-item'>
+    <view wx:if="{{mslx=='2' || mslx=='20' || mslx=='21'}}" bindtap='tapEvent' data-index="16" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>网关开门</text>
+    </view>
+    <view wx:else bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    <view wx:if="{{mslx=='2' && yhid=='admin'}}" bindtap='tapEvent' data-index="12"  class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>下管理员</text>
+    </view>
+    <view wx:else bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    <view wx:if="{{mslx=='2' && yhid=='admin'}}" bindtap='tapEvent' data-index="18"  class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>门锁OTA</text>
+    </view>
+    <view wx:else bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    </view>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>音量调节</view>
+      </view>
+      <view class='toast-main'>
+        <!--<view class='toast-input'>
+          <input placeholder='请输入房号' bindinput='setValue' data-name='stuEidtName' value="{{fjmc}}"></input>
+        </view>-->
+      <view class="form_table_border_in">
+        <view class="form_table_right" style="width: 100%;">
+          <radio-group bindchange="radioChangeSJ" name="ydlx">
+            <view class="form_table_left" style="width: 100%;">
+              <radio color="#5677fc" value="00" checked="{{check0}}" class="list-radio" style="width: 25%;">静音</radio>
+              <radio color="#5677fc" value="01" checked="{{check1}}" class="list-radio" style="width: 25%;">低</radio>
+              <radio color="#5677fc" value="02" checked="{{check2}}" class="list-radio" style="width: 25%;">中</radio>
+              <radio color="#5677fc" value="03" checked="{{check3}}" class="list-radio" style="width: 25%;">高</radio>
+            </view>           
+          </radio-group>
+        </view>
+        <view class="clear"></view>
+      </view>
+      </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>
+  <view class='toast-box' hidden="{{!ifNameF}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>临时密码</view>
+      </view>
+      <view class='toast-mainF'>
+        <view class="form_table_border" style="margin: 0 20rpx;">
+        <view class="form_table_border_in">
+        <view class="form_table_right" style="width: 100%;">
+          <radio-group bindchange="radioChangeXF" name="xflx">
+            <view class="form_table_left" style="width: 100%;">
+              <radio color="#5677fc" value="ycx" checked="true" class="list-radio" style="width: 60%;">一次性密码</radio>
+              <radio color="#5677fc" value="offline" class="list-radio" style="width: 40%;">离线密码</radio>
+            </view>           
+          </radio-group>
+        </view>
+        <view class="clear"></view>
+        </view>
+      </view>
+      <view hidden="{{showTime}}">
+        <view class="form_table_border" style="margin: 0 20rpx;">
+        <view class="form_table_border_in">
+          <view class="form_table_leftF"><span style="color: red;">*</span>开始日期</view>
+            <view class="form_table_rightF">
+              <view class="form_table_right_textF">
+                  <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                  </picker>            
+              </view>
+            </view>
+            <view class="arrow" style="right: 20rpx;"></view>
+            <view class="clear"></view>
+        </view>
+        </view>
+        <view class="form_table_border" style="margin: 0 20rpx;">
+        <view class="form_table_border_in">
+          <view class="form_table_leftF"><span style="color: red;">*</span>结束日期</view>
+            <view class="form_table_rightF">
+              <view class="form_table_right_textF">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow" style="right: 20rpx;"></view>
+            <view class="clear"></view>
+        </view>
+        </view>
+      </view>
+      </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancelF'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirmF'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>

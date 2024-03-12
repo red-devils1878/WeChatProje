@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "入住详情",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

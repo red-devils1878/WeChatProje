@@ -1,0 +1,20 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 40rpx;
+}
+.checkbox-cell{
+  padding: 4rpx 20rpx;
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.list-radio{
+  transform: scale(0.9);
+}

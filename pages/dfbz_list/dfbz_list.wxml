@@ -1,0 +1,52 @@
+
+<view class="container hidenScroll">
+<!--
+    <view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+	<view class="search-bar">
+		<input type="text" maxlength="12" placeholder="请搜索房号/设备号" bindinput="inputSearch"></input>
+		<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+	</view>
+    </view>
+	-->
+	<view style="display: flex;margin: 0 20rpx;">
+    <span class="title_span" style="width: 12%;">楼栋</span>
+    <view class="query_style_l" style="width: 62%;">
+      <picker bindchange="bindFYChange" value="{{fy[fyIndex].houseNo}}" range="{{fy}}" range-key="{{'houseName'}}" name="fy">
+      <view class="form_table_right_text" style="width: 100%;text-align: left;padding-top: 5rpx;">
+        <view class="picker">
+          {{fy[fyIndex].houseName}}
+        </view>
+      </view>
+      </picker>
+    </view>
+    <view class="button_left" bindtap="submitSearch">查询</view>
+  </view>
+  <view style="margin: 10rpx 20rpx;">
+    共{{total}}条消息
+  </view>
+	<view class="swiper-items" style="height:{{winHeight - 75}}px;">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 75}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}" id="{{item.id}}" data-hid="{{item.hid}}" bindtap="bindJump">
+				<view class="service-text">
+            <view style="display: flex;margin: 10rpx 0;">
+                <view class="service-img">
+			       <image src="{{item.imgurl}}" class="service-item-image" mode="aspectFill"></image>
+			    </view>
+				<view class="service-tite" style="font-weight: bold;">{{item.title}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 50%;"><span class="title_style">剩余电量：</span><span class="value_style">{{item.sydl}}</span></view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 50%;"><span class="title_style">当前度数：</span>{{item.dqds}}</view>
+            </view> 
+            <view style="display: flex;">
+				<view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 100%;"><span class="title_style">更新时间：</span>{{item.gxsj}}</view>
+              <view class="{{item.czzt=='已出租' ? 'line-div' : 'line-div2'}}">{{item.czzt}}</view>
+            </view>        
+		  	</view>
+			</view>
+		</view>	
+	   <view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+</view>
+</view>

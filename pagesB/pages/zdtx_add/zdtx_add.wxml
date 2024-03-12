@@ -1,0 +1,128 @@
+<view class="container">
+<form bindsubmit="formSubmit" catchtap="noop" catchreset="formReset">
+<view style="background-color: white;">
+  <!--<view class="form_table_border">
+    <view class="form_table_border_in">
+      <radio-group bindchange="radioChange" name="szlx">
+        <view class="form_table_left">
+          <radio color="#5677fc" value="in" style="margin-right:70rpx" checked="true"> 收款</radio>
+          <radio color="#5677fc" value="out"> 付款</radio>
+        </view>
+      </radio-group>
+    </view>
+  </view>-->
+  <view class="form_table_border">
+        <view class="form_table_border_in">
+              <view class="form_table_left"><span style="color: red;">*</span>  费用名称</view>
+              <view class="form_table_right">
+                  <picker bindchange="bindfylxChange" value="{{fylx[fylxIndex].code}}" range="{{fylx}}" range-key="{{'othername'}}" name="fymc">
+                  <view class="form_table_right_text">
+                  <view class="picker">
+                    {{fylx[fylxIndex].othername}}
+                  </view>
+                  </view>
+                  </picker>
+              </view>
+              <view class="arrow"></view>
+        </view>
+  </view> 
+  <view class="form_table_border_none">
+        <view class="form_table_border_in">
+              <view class="form_table_left"><span style="color: red;">*</span>  账单金额</view>
+              <view class="form_table_right">
+                  <input type="digit" class="form_table_right_text" name="je" bindinput="jeChange" placeholder="请输入"/>
+              </view>
+        </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  所属账单类型</view>
+      <view class="form_table_right">
+        <picker bindchange="bindzdlxChange" value="{{zdlx[zdlxIndex].code}}" range="{{zdlx}}" range-key="{{'othername'}}" name="zdlx">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{zdlx[zdlxIndex].othername}}
+              </view>
+            </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view> 
+  <view class="form_table_border_none">
+        <view class="form_table_border_in">
+                <view class="form_table_left"><span style="color: red;">*</span>  应收日期</view>
+                <view class="form_table_right">
+                <view class="form_table_right_text">
+                  <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange" name="txDate">
+                     <view class="weui-input">{{date}}</view>
+                   </picker>   
+                </view>
+               </view>
+               <view class="arrow"></view>
+        </view>
+  </view>
+  <view hidden="{{detail_dlzd}}">
+  <view class="title_form_line"><span class="span-title">账单周期</span></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">起始时间</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{Sdate}}" bindchange="startDateChange" name="startDate">  
+            <view class="weui-input">{{Sdate}}</view>
+          </picker>   
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">终止时间</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{Edate}}" bindchange="endDateChange" name="endDate">
+            <view class="weui-input">{{Edate}}</view>
+          </picker>   
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  </view>
+  <view hidden="{{detail_zqzd}}">
+  <view class="title_form_line"><span class="span-title">请勾选周期账单</span></view>
+  <scroll-view scroll-y="true" style="height: 350rpx;">
+    <!--<radio-group bindchange="checkboxChange" name="zqzd">
+      <label class="checkbox-cell" wx:for="{{items}}" wx:key="{{item.id}}">
+        <view class="weui-cell__hd">
+          <radio value="{{item.id}}" checked="{{item.checked}}" color="#5677fc" class="list-radio"/>
+        </view>
+        <view class="weui-cell__bd">{{item.periods_num}}  ({{item.kssj2}}到{{item.jssj2}})</view>
+      </label>
+    </radio-group>-->
+
+    <checkbox-group bindchange="checkboxChange" name="zqzd">
+      <label class="checkbox-cell" wx:for="{{items}}" wx:key="{{item.id}}">
+        <view class="weui-cell__hd">
+          <checkbox value="{{item.id}}" checked="{{item.checked}}"/>
+        </view>
+        <view class="weui-cell__bd">{{item.periods_num}}  ({{item.kssj2}}到{{item.jssj2}})</view>
+      </label>
+    </checkbox-group>
+  </scroll-view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+      <view wx:if="{{disableT===''}}"> 
+            <button type="default" style="background-color: #c0c0c0;margin-bottom:auto;" disabled="true">生成提醒</button>
+      </view>
+      <view wx:else> 
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" bindtap="addList" formType="submit">确认添加</button>
+      </view>
+  </view>
+</view>
+</form>
+</view>

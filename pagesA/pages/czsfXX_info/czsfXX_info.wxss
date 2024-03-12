@@ -1,0 +1,72 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.font_left{
+  display: inline-block;
+  width: 20%;
+  /*margin-left: 20rpx;*/
+}
+.font_right{
+  display: inline-block;
+  width: 80%;
+  text-align: left;
+}
+.xx_font{
+  width: 100%;
+  font-size: 24rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-bottom: 2rpx solid #e6e6e6;
+  color: rgb(172, 171, 171);
+  margin: 0 20rpx;
+  padding: 10rpx 0;
+}
+.td_sj{
+  display: inline-block;
+  margin-right: 5vw;
+  width: 27vw;
+  height: 6vh;
+  margin-top:5vw;
+  color: #5677fc;
+  text-align: center;
+  line-height: 6vh;
+  border: solid 2rpx #5677fc;
+}
+.td_sj:hover{
+  background-color: #5677fc;
+  color: #fff;
+}
+.shuj{
+  position: relative;
+  left: 3vw;
+  top: 3vh;
+}
+.dibu{
+  display: flex;
+  height: 7vh;
+  /*position: absolute;*/
+  position: fixed;
+  /*top: 95vh;*/
+  width: 100%;
+  border-top: 2rpx solid #e6e6e6;
+  border-bottom: 2rpx solid #e6e6e6;
+}
+.zf{
+  display: inline-block;
+  height: 100%;
+  width: 25vw;
+  float: right;
+  text-align: center;
+  line-height: 7vh;
+  color: #fff;
+  background-color: #5677fc;
+}
+.good{
+  display: flex;
+  width: 75vw;
+  height: 90rpx;
+  line-height: 90rpx;
+  position: relative;
+  left: 3vw;
+  top:50%;
+  transform: translateY(-50%);
+  color: #5677fc;
+}

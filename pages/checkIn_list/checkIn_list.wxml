@@ -1,0 +1,53 @@
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+		<view class="search-bar">
+			<input type="text" placeholder="请搜索楼栋、房号" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+ </view>
+<view class="container">
+<dl class="menu">
+    <dt data-index="0" bindtap="tapMainMenu">分组</dt>
+    <dd class="{{subMenuDisplay[0]}}">
+      <ul wx:for="{{fz_list}}" wx:key="{{item.sid}}">
+      <li class="{{subMenuHighLight[0][item.i]}}" data-index="0-{{item.i}}" data-type="FZ" data-code="{{item.sid}}" bindtap="tapSubMenu">{{item.sname}}</li>
+      </ul>
+    </dd>
+    <dt data-index="1" bindtap="tapMainMenu">房源类型</dt>
+    <dd class="{{subMenuDisplay[1]}}">
+      <ul wx:for="{{xq_list}}" wx:key="{{item.rid}}">
+      <li class="{{subMenuHighLight[1][item.i]}}" data-index="1-{{item.i}}" data-type="XQ" data-code="{{item.rid}}" bindtap="tapSubMenu">{{item.rname}}</li>
+      </ul>
+    </dd>
+    <dt data-index="2" bindtap="tapMainMenu">房源</dt>
+    <dd class="{{subMenuDisplay[2]}}">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 85}}px;" lower-threshold="50">
+      <ul wx:for="{{fy_list}}" wx:key="{{item.rid}}">
+        <li class="{{subMenuHighLight[2][item.i]}}" data-index="2-{{item.i}}" data-type="FY" data-code="{{item.rid}}" bindtap="tapSubMenu">{{item.rname}}</li>
+      </ul>
+    </scroll-view>
+    </dd>
+    <dt data-index="4" style="border-right: none;">数量:{{total_dj}}间</dt>
+</dl>
+<view class="form_line"></view>
+  <view class="swiper-items">
+  <scroll-view scroll-y="true" scroll-into-view="{{leftId}}" class="left" style="height:{{winHeight - 85}}px;">
+    <view wx:for="{{room_list}}" wx:key="*this" data-myid="{{item.floor}}" id="left{{item.floor}}" class="scroll-view-item  {{lifeActiveNum==item.floor?'active':''}}  "  bindtap="leftClick">
+      {{item.floor}}F</view>
+  </scroll-view>
+  <!--<scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 85}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">-->
+  <scroll-view scroll-y="true" class="right" style="height:{{winHeight - 85}}px;" scroll-with-animation="true" bindscroll="rightScrollTop" scroll-into-view="{{rightId}}">
+    <view wx:for="{{room_list}}" wx:key="index" id="right{{item.floor}}" class="scroll-view-item rightblock">
+      <view class="index_build_background">
+        <view class="index_build_border" style="width: 100%;">
+          <view class="index_build_border_t1" wx:if="{{item.floor>0}}"><span class="floor_title">{{item.houseName}}第{{item.floor}}层</span></view>
+          <view class="index_build_border_t1" wx:else></view>
+        </view>
+        <view class="{{newitem.cz_state=='1001' ? 'index_build_icon_borderN_2' : 'index_build_icon_borderN_1'}}" wx:for="{{item.roomList}}" wx:key="index" wx:for-item="newitem" id="{{newitem.hid}}" data-cz="{{newitem.cz_state}}" bindtap="bindJump">
+          <view class="index_build_icon_t4">{{newitem.roomNo}}</view>
+        </view>
+      </view>
+    </view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+    </scroll-view>
+</view>
+</view>

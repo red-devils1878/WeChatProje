@@ -1,0 +1,31 @@
+<view class="container">
+	<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+		<view class="search-bar">
+			<input type="text" maxlength="12" placeholder="请输入房号、姓名、电话查询" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+	</view>
+	<view class="swiper-items">
+	<scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 60}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<navigator class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}" url="/pages/tenant_info/tenant_info?contractNo={{item.id}}">
+            <view class="service-img">
+					<image src="{{item.imgurl}}" mode="aspectFill"></image>
+			</view>
+			<view class="service-text">
+					<view class="service-tite">{{item.name}}</view>
+          <view style="display: flex;">
+            <mp-icon icon="time" size="14" color="#C0C0C0" style="height: 40rpx;line-height:40rpx;margin-right:8rpx;"></mp-icon>
+            <text class="service-city">{{item.zq}}</text>         
+          </view>
+				</view>
+        <view style="padding-top: 22rpx;">
+          <text style="font-size: 28rpx;color: #C0C0C0;">{{item.tag}}</text>
+          <mp-icon icon="arrow" size="14" color="#C0C0C0" style="margin-left: 10rpx;"></mp-icon>
+        </view>
+			</navigator>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+	</scroll-view>
+</view>
+</view>

@@ -1,0 +1,76 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.table{
+  width: 100%;
+}
+.th{
+  border-top:1px solid rgb(197, 197, 197) ;
+  border-bottom:1px solid rgb(197, 197, 197) ;
+  display: inline-block;
+  width: 50%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.td_l{
+  width: 50%;
+  float: left;
+  text-align: left;
+  font-size: 4vw;
+  height: 50rpx;
+  color: #c0c0c0; 
+}
+.td_r{
+  width: 50%;
+  float: right;
+  text-align: right;
+  font-size: 4vw;
+  height: 50rpx;
+  color: #c0c0c0;
+}
+.form_table_border{
+  border-bottom: 2rpx solid rgb(197, 197, 197);
+  margin: 0 40rpx;   
+}
+.date_style{
+  margin: 20rpx 0rpx;
+  background-color: white;
+  width: 75%;
+  padding: 4rpx 20rpx;
+  border: 2rpx solid;
+}
+.tr{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 5vh;
+  line-height: 5vh;
+  align-items: center;
+}
+.form_info_bot_td2_r{
+  width:23%;
+  text-align:center;
+  line-height: 5vh;
+  font-size: 3.5vw;
+  background-color:#e8e8e8;
+  border-radius: 10rpx;
+}
+.showBorder{
+  border: 4rpx solid #000000;
+  font-weight: bold;
+}
+.query_style_l{
+  margin: 20rpx 0rpx;
+  background-color: white;
+  width: 25%;
+  padding: 4rpx 20rpx;
+  border: 2rpx solid;
+  border-right: none;
+}
+.hidenScroll{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+}

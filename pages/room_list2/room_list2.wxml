@@ -1,0 +1,199 @@
+<view class="nav" style="height:{{navH}}px">
+  <view class="title_icon">
+    <label style="color: white;padding-left: 288rpx;">房源列表</label>
+    <mp-icon bindtap='showSrarch' color="white" icon="search" type="filled" size="26" style="margin-left: 10rpx;"></mp-icon>
+    <mp-icon bindtap='addFY' color="white" icon="add" type="filled" size="26" style="margin-left: 10rpx;"></mp-icon>
+  </view>
+</view>
+<view class='container' style="background-color: white;margin-top: {{navH}}px;">
+  <view class="search-bar" hidden="{{detail_search}}">
+		<input type="text" style="margin: 10rpx;background:#e8e8e8;border-radius:10rpx;" placeholder="请搜索房源名称/房号/租客/电话" bindinput="inputSearch">
+    </input>
+	</view>
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">整租</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">合租</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">独栋</view>
+</view>
+<dl class="menu">
+    <dt data-index="0" bindtap="tapMainMenu">分组</dt>
+    <dd class="{{subMenuDisplay[0]}}" style="top:{{140 + showHight}}px;">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 140- showHight-50}}px;" lower-threshold="50">
+      <ul wx:for="{{fz_list}}" wx:key="{{item.sid}}">
+        <li class="{{subMenuHighLight[0][item.i]}}" data-index="0-{{item.i}}" data-type="FZ" data-code="{{item.sid}}" bindtap="tapSubMenu">{{item.sname}}</li>
+      </ul>
+    </scroll-view>
+    </dd>
+    <dt data-index="1" bindtap="tapMainMenu">房源</dt>
+    <dd class="{{subMenuDisplay[1]}}" style="top:{{140 + showHight}}px;">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 140- showHight-50}}px;" lower-threshold="50">
+      <ul wx:for="{{xq_list}}" wx:key="{{item.rid}}">
+        <li class="{{subMenuHighLight[1][item.i]}}" data-index="1-{{item.i}}" data-type="XQ" data-code="{{item.rid}}" bindtap="tapSubMenu">{{item.rname}}</li>
+      </ul>
+    </scroll-view>
+    </dd>
+    <dt data-index="2" bindtap="tapMainMenu">{{fjztmc}}</dt>
+    <dd class="{{subMenuDisplay[2]}}" style="top:{{140 + showHight}}px;">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 140- showHight-50}}px;" lower-threshold="50">
+      <ul wx:for="{{ft_list}}" wx:key="{{item.code}}">
+        <li class="{{subMenuHighLight[2][item.i]}}" data-index="2-{{item.i}}" data-type="FT" data-code="{{item.code}}" bindtap="tapSubMenu">{{item.othername}}</li>
+      </ul>
+    </scroll-view>
+    </dd>
+    <dt data-index="4" style="border-right: none;">数量:{{roomTotal}}间</dt>
+</dl>
+<view class="form_line"></view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight-140-showHight}}px;border-top: 2rpx solid #d2d2d2;" bindchange="bindChange">
+  <swiper-item class="swiper-items">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 140- showHight-50}}px;background-color:#fafafa;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">    
+    <view wx:for="{{room_list}}" wx:key="index">
+      <view class="index_build_border" style="width: 100%;">
+        <view class="index_build_border_t1" wx:if="{{item.floor>0}}"><span class="floor_title">{{item.houseName}}第{{item.floor}}层</span></view>
+        <view class="index_build_border_t1" wx:else></view>
+      </view>
+      <view class="{{newitem.fj_status=='jjdq' || newitem.fj_status=='yq' ? 'index_build_icon_borderN_3' : newitem.cz_state=='1001' ? 'index_build_icon_borderN_2' : 'index_build_icon_borderN_1'}}" wx:for="{{item.roomList}}" wx:key="index" wx:for-item="newitem" id="{{newitem.hid}}" data-cz="{{newitem.cz_state}}" bindtap="showControl">
+        <view class="index_build_icon_t4">{{newitem.roomNo}}</view>
+      </view>      
+    </view>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item class="swiper-items">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 140- showHight-50}}px;background-color:#fafafa;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">    
+    <view wx:for="{{room_list}}" wx:key="index">
+      <view class="index_build_border" style="width: 100%;">
+        <view class="index_build_border_t1" wx:if="{{item.floor>0}}">
+          <span class="floor_title">{{item.houseName}}第{{item.floor}}层</span>
+          <mp-icon bindtap='addRoom' color="blue" icon="more2" size="22" style="margin-left: 20rpx;" data-h="{{item.houseNo}}" data-f="{{item.floor}}"></mp-icon>       
+        </view>
+        <view class="index_build_border_t1" wx:else></view>
+      </view>
+      <view class="{{newitem.fj_status=='jjdq' || newitem.fj_status=='yq' ? 'index_build_icon_borderN_3' : newitem.cz_state=='1001' ? 'index_build_icon_borderN_2' : 'index_build_icon_borderN_1'}}" wx:for="{{item.roomList}}" wx:key="index" wx:for-item="newitem" id="{{newitem.hid}}" data-cz="{{newitem.cz_state}}" bindtap="showControl">
+        <view class="index_build_icon_t4">{{newitem.roomNo}}</view>
+      </view>   
+    </view>
+    </scroll-view>
+  </swiper-item>
+    <swiper-item class="swiper-items">
+    <scroll-view scroll-y="true" scroll-into-view="{{leftId}}" class="left" style="height:{{winHeight - 140- showHight-50}}px;">
+      <view wx:for="{{room_list}}" wx:key="*this" data-myid="{{item.floor}}" id="left{{item.floor}}" class="scroll-view-item  {{lifeActiveNum==item.floor?'active':''}}  "  bindtap="leftClick">
+      {{item.floor}}F</view>
+    </scroll-view>
+    <scroll-view scroll-y="true" class="right" style="height:{{winHeight - 140- showHight-50}}px;background-color:#fafafa;" scroll-with-animation="true" bindscroll="rightScrollTop" scroll-into-view="{{rightId}}">
+    <view wx:for="{{room_list}}" wx:key="{{item.hid}}" id="right{{item.floor}}" class="scroll-view-item rightblock">
+      <view style="padding:10rpx 0;display: flex;">
+        <view class="index_build_border_t1">
+        <span class="floor_title">{{item.houseName}}第{{item.floor}}层</span>
+        <mp-icon bindtap='addRoom' color="blue" icon="more2" size="22" style="margin-left: 20rpx;" data-h="{{item.houseNo}}" data-f="{{item.floor}}"></mp-icon>
+      </view>
+      </view>
+      <view class="index_build_background">
+        <view class="{{newitem.fj_status=='jjdq' || newitem.fj_status=='yq' ? 'index_build_icon_borderN_3' : newitem.cz_state=='1001' ? 'index_build_icon_borderN_2' : 'index_build_icon_borderN_1'}}" wx:for="{{item.roomList}}" wx:key="index" wx:for-item="newitem" id="{{newitem.hid}}" data-cz="{{newitem.cz_state}}" bindtap="showControl">
+          <view class="index_build_icon_t4">{{newitem.roomNo}}</view>
+        </view> 
+      </view>
+    </view>
+    </scroll-view>
+    </swiper-item>
+</swiper>
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+    <block wx:for-items="{{actionSheetItems}}">
+      <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+  </action-sheet>
+  <action-sheet hidden="{{actionSheetHidden_add}}" bindchange="actionSheetbindchange_add">
+    <block wx:for-items="{{actionSheetItems_add}}">
+      <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+  </action-sheet>
+  <view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>新增房间</view>
+        <!--<view>{{floor}}层</view>-->
+      </view>
+      <!--<view class='toast-main'>
+        <view class='toast-input'>
+          <input placeholder='请输入房号' bindinput='setValue' data-name='stuEidtName' value="{{fjmc}}"></input>
+        </view>
+      </view>-->
+      <view class='toast-mainF'>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  所在楼层</view>
+            <view class="form_table_right">
+              <!--<view class="form_table_right_text">
+                <input placeholder='请输入楼层' maxlength="3" type="number" bindinput='setValueF' value="{{floor}}"></input>     
+              </view>-->  
+              <picker bindchange="bindFloorChange" value="{{lc[lcIndex].code}}" range="{{lc}}" range-key="{{'code'}}" name="lc">
+                <view class="form_table_right_text">
+                <view class="picker">
+                  {{lc[lcIndex].code}}
+                </view>
+                </view>
+              </picker>
+            </view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>  房号</view>
+        <view class="form_table_right">
+          <view class="form_table_right_text">
+            <input placeholder='请输入房号' bindinput='setValue' data-name='stuEidtName' value="{{fjmc}}"></input>    
+          </view>              
+        </view>
+      </view>
+    </view>
+    </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>
+  <view class='toast-box' hidden="{{!ifNameF}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>新增楼层</view>
+      </view>
+      <view class='toast-mainF'>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  所在楼层</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                <input placeholder='请输入楼层' maxlength="3" type="number" bindinput='setValueF' value="{{szlc}}"></input>     
+              </view>    
+            </view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>  每层房间数</view>
+        <view class="form_table_right">
+          <view class="form_table_right_text">
+            <input placeholder='请输入房间数' maxlength="3" type="number" bindinput='setValueR' value="{{mcfjs}}"></input>     
+          </view>              
+        </view>
+      </view>
+    </view>
+  </view>
+    <view class='toast-button'>
+      <view class='cancelButton'>
+        <button catchtap='cancelF'>取消</button>
+      </view>
+      <view class='confirmButton'>
+        <button catchtap='confirmF'>确定</button>
+      </view>
+    </view>
+  </view>
+  </view>
+</view>

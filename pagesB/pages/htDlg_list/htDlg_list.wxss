@@ -1,0 +1,12 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.checkbox-cell{
+  padding: 8rpx 0rpx;
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border-bottom: 2rpx solid #fafafa;
+}
+.list-radio{
+  transform: scale(0.85);
+}

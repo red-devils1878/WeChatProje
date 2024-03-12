@@ -1,0 +1,56 @@
+<view class="container" style="background-color: white;">
+<form bindsubmit="formSubmit" catchreset="formReset">
+<swiper-item class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view wx:for="{{inputList}}" wx:key="id">
+  <view class="form_table_border_none">
+      <view class="form_table_border_in" style="height: 20rpx;">
+            <view class="form_table_left" style="font-weight: bold;">物料{{index+1}}</view>
+            <view class="form_table_right">
+                  <view type="text" class="form_table_right_text">
+                    <mp-icon bindtap="delmore" data-index="{{index+1}}" data-key="{{item.lsh}}" icon="delete" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+                  </view>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_table_border">
+      <view class="form_table_border_in" bindtap='tapList' data-idx='{{index}}'>
+            <view class="form_table_left"><span style="color: red;">*</span>  物料编号</view>
+            <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="lsh{{index+1}}" value="{{item.lsh}}" hidden="true"/>
+            <input type="text" class="form_table_right_text" name="prd{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{prdNoVal[index]}}' hidden="true"/>
+            <view class="form_table_right_text">{{prdNoVal[index]}}</view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+      </view>
+  </view> 
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+            <view class="form_table_left"><span style="color: red;">*</span>  物料名称</view>
+            <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="name{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{inputVal[index]}}' bindinput='nameInputVal'/>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  数量</view>
+      <view class="form_table_right">
+         <input type="number" class="form_table_right_text" name="qty{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{qtyVal[index]}}' bindblur='qtyInputVal'/>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>  
+  <view class="form_line"></view>
+</view>
+  <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+    <button data-index="{{maxIndex+1}}" class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="addmore">+添加物料</button>
+    <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" formType="submit">保存</button>
+  </view>
+  </scroll-view>
+</swiper-item>
+</form>
+</view>

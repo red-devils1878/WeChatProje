@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择合同",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

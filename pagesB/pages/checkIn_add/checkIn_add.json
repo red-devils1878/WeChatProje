@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "component": true,
+  "navigationBarTitleText": "办理入住",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"   
+  }
+}

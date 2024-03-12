@@ -1,0 +1,51 @@
+<!--<view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}" >
+        <view class='header'>
+            <image src='/static/images/my/weixin.jpg'></image>
+        </view>
+        <view class='content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view>
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" 
+        bindgetuserinfo="bindGetUserInfo" hidden="true">
+            授权登录
+        </button>
+        <button class='bottom' type='primary' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权登录</button>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view>
+<view wx:else>
+    <view></view>
+</view>-->
+<view style="margin-top: -400rpx;">
+  <view class='header'>
+    <image src='/static/images/my/mine_def_touxiang_3x.png'></image>
+  </view>
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <view class="input-list" hidden="{{isHideAuthCode}}">
+    <view class="input-item">
+      <text class="input-item-label">账号</text>
+      <view class="input-item-content">
+        <view class="search-bar2">
+          <input type="text" placeholder="请输入账号" data-id="zh" name="zh" bindinput="bindInputHandler" value="{{zh}}"></input>
+        </view>
+      </view>
+    </view>
+    <view class="input-item">
+      <text class="input-item-label">密码</text>
+      <view class="input-item-content">
+        <view class="search-bar2">
+          <input password type="text" placeholder="请输入密码" data-id="pwd" name="pwd" bindinput="bindInputHandler" value="{{pwd}}"></input>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+      <button class="mini-btn" type="primary" size="mini" formType="submit" style="width:35%;height: 70rpx;line-height: 70rpx;">登录</button>
+    </view>
+  </view>
+  </form>
+
+</view>

@@ -1,0 +1,192 @@
+<view class="container" style="background-color: white;">
+  <view class="page-body">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight -50}}px" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+      <view class="form_table_border" style="margin: 20rpx 40rpx;border: none;">
+        <view class='ul-item'>
+          <view bindtap='tapEvent' data-index="1"  data-key="{{hid}}" class='item' hover-class="opcity" hover-stay-time="150">
+            <image class='item-img' src='../../../static/images/my/book.jpg'></image>
+            <text class='item-name'>入住信息</text>
+          </view>
+          <view bindtap='tapEvent' data-index="2" data-key="{{hid}}"  class='item' hover-class="opcity" hover-stay-time="150">
+            <image class='item-img' src='../../../static/images/my/lock.jpg'></image>
+            <text class='item-name'>开锁记录</text>
+          </view>
+          <view bindtap='tapEvent' data-index="3" data-key="{{hid}}"  class='item' hover-class="opcity" hover-stay-time="150">
+            <image class='item-img' src='../../../static/images/my/water.jpg'></image>
+            <text class='item-name'>水电煤</text>
+          </view>
+          <!--<view bindtap='tapEvent' data-index="9" data-key="{{hid}}"  class='item' hover-class="opcity" hover-stay-time="150">
+            <image class='item-img' src='../../../static/images/my/blrz.jpg'></image>
+            <text class='item-name'>办理入住</text>
+          </view>-->
+          <view bindtap='tapEvent' data-index="10" data-key="{{hid}}"  class='item' hover-class="opcity" hover-stay-time="150">
+            <image class='item-img' src='../../../static/images/my/yshs.jpg'></image>
+            <text class='item-name'>钥匙回收</text>
+          </view>
+        </view>
+      </view>
+      <view hidden="{{detail_user}}">
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">用户管理</view>
+            <view class="form_table_right">
+              <span style="color: #c0c0c0;float: right;">查看所有用户</span>
+            </view>
+        </view>
+      </view>
+      <scroll-view class="scroll-views" scroll-y="true" style="height:80px" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+        <view class="form_li_icon_border" wx:for="{{servicelist}}" wx:key="{{item.rentNo}}" id="{{item.rentNo}}">
+          <view class="form_li_icon_t1">
+            <image class='middle-item-img' src="../../../static/images/my/zktx.jpg"></image>      
+          </view>
+          <view class="form_li_icon_t2">{{item.name}}</view>
+        </view>    
+      </scroll-view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+                <view class="form_table_left">房间照片</view>
+                <view class="form_table_right" bindtap='tapEvent' data-index="4" data-key="{{hid}}">
+                  <input type="text" class="form_table_right_text" value="{{fjzp}}" name="fjzp" placeholder="完善信息" disabled="true"/>
+                </view>
+                <view class="arrow2"></view>
+            </view>
+      </view>
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+                <view class="form_table_left">房态</view>
+                <view class="form_table_right">
+                  <input type="text" class="form_table_right_text" value="{{ft_name}}" name="ft" placeholder="完善信息" disabled="true"/>
+                </view>
+                <view class="arrow2"></view>
+            </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">智能设备</view>
+          <view class="form_table_right" bindtap='tapEvent' data-index="5" data-key="{{hid}}">
+            <input type="text" class="form_table_right_text" disabled="true"/>
+          </view>
+          <view class="{{arrow_sb}}"></view>
+        </view>
+      </view> 
+    <view hidden="{{detail_sb}}">
+    <view wx:for="{{sblist}}" wx:key="{{item.dsn}}">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left" style="width: 70%;">{{item.sbmc}}</view>
+        <view class="form_table_right" style="width: 30%;">
+          <view type="text" class="form_table_right_text" style="width: 100%;color: #7dd2d6;" data-key="{{item.dsn}}" data-sblx="{{item.sblx}}" bindtap="tapSB">详情</view>
+        </view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    </view>
+    </view>
+      <view class="form_table_border_none">
+            <view class="form_table_border_in">
+                <view class="form_table_left">房间信息</view>
+                <view class="form_table_right">
+                  <label type="text" class="form_table_right_text"/>
+                </view>
+                <view class="arrow2"></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">社区</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{ssmd}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">房型</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{fangxing}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">租金</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{zj}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">面积</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{area}}㎡</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">地址</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{address}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>     
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+                <view class="form_table_left">房屋配置</view>
+                <view class="form_table_right" bindtap='tapEvent' data-index="6" data-key="{{hid}}">
+                  <input type="text" class="form_table_right_text" name="fwpz" placeholder="" disabled="true"/>
+                </view>
+                <view class="arrow2"></view>
+            </view>
+      </view>
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+                <view class="form_table_left">房间描述</view>
+                <view class="form_table_right" bindtap='tapEvent' data-index="7" data-key="{{hid}}">
+                  <input type="text" class="form_table_right_text" name="fjms" placeholder="" disabled="true"/>
+                </view>
+                <view class="arrow2"></view>
+            </view>
+      </view>
+      <!--<view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">开门设置</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="8" data-key="{{hid}}">
+            </view>
+            <view class="arrow2"></view>
+          </view>
+      </view>-->
+      <view class="form_info_bot1" style="border: none;">
+        <view class="tr bg-w" wx:if="{{czzt=='1002'}}" >
+          <view class="form_info_bot_td2_r" bindtap='tapBLRZ' data-key="{{hid}}">办理入住</view>
+          <view style="width: 2rpx;"></view>
+          <view class="form_info_bot_td2_r" bindtap='tapEdit' data-key="{{hid}}">编辑房间</view>
+          <view style="width: 2rpx;"></view>
+          <view class="form_info_bot_td2_r" bindtap='tapDel' data-key="{{hid}}">删除房间</view>
+          <view style="width: 2rpx;"></view>
+          <!--<view class="form_info_bot_td2_r" bindtap='tapFX' data-key="{{hid}}">分享</view>-->
+        </view>
+        <view class="tr bg-w" wx:else> 
+          <view class="form_info_bot_td2_r" bindtap='tapRZXQ' data-key="{{hid}}">入住详情</view>
+          <view style="width: 2rpx;"></view>
+          <view class="form_info_bot_td2_r" bindtap='tapEdit' data-key="{{hid}}">编辑房间</view>
+          <view style="width: 2rpx;"></view>
+          <view class="form_info_bot_td2_r" bindtap='tapDel' data-key="{{hid}}">删除房间</view>
+          <view style="width: 2rpx;"></view>
+          <!--<view class="form_info_bot_td2_r" bindtap='tapFX' data-key="{{hid}}">分享</view>-->
+        </view>
+      </view>
+    </scroll-view>     
+    </form>
+  </view>
+</view>

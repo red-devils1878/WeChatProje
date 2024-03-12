@@ -1,0 +1,88 @@
+<view hidden="{{detail_master}}" class="hidenScroll" style="height:{{winHeight}}px">
+<view class="container">
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">操作记录</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view style="display: flex;margin: 0 40rpx;">
+    <view class="query_style_l">
+      <picker bindchange="bindLXChange" value="{{yclx[yclxIndex].code}}" range="{{yclx}}" range-key="{{'othername'}}" name="yclx">
+      <view class="form_table_right_text" style="width: 100%;text-align: left;">
+        <view class="picker">
+          {{yclx[yclxIndex].othername}}
+        </view>
+      </view>
+    </picker>
+    </view>
+    <view class="date_style"  bindtap="showDJdate"> {{djks}} 至 {{djjs}} > </view>
+  </view>
+  <view class="table">
+    <view class="form_table_border_none">
+        <view class="th" style="text-align: left;">操作时间</view>
+        <view class="th" style="text-align: right;">操作说明</view>
+    </view>
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 160}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+      <view class="form_table_border" wx:for="{{servicelist}}">
+      <view class="form_table_border_in">
+        <view class="td_l">{{item.date}}</view>
+        <view class="td_r">{{item.du}}</view>
+      </view>
+      </view>
+    </scroll-view>
+</view>
+</view>
+</view>
+<view style="background-color: #ffffff;height:{{winHeight/2}}px;" hidden="{{detail_djDate}}">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="padding: 20rpx 0rpx;" bindtap="cancelDJ">取消</span></view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_right_text" style="width: 100%;"><span style="padding: 20rpx 0rpx;" bindtap="sureDJ">确定</span></view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='jintian' ? 'showBorder' : ''}}" data-djsjqx="jintian" bindtap="swichDJ">今天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='zuotian' ? 'showBorder' : ''}}" data-djsjqx="zuotian" bindtap="swichDJ">昨天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last7' ? 'showBorder' : ''}}" data-djsjqx="Last7" bindtap="swichDJ">最近7天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last30' ? 'showBorder' : ''}}" data-djsjqx="Last30" bindtap="swichDJ">最近30天</view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin: 20rpx 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='threeMonth' ? 'showBorder' : ''}}" data-djsjqx="threeMonth" bindtap="swichDJ">最近3个月</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='sixMonth' ? 'showBorder' : ''}}" data-djsjqx="sixMonth" bindtap="swichDJ">最近半年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='oneYear' ? 'showBorder' : ''}}" data-djsjqx="oneYear" bindtap="swichDJ">最近1年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='twoYear' ? 'showBorder' : ''}}" data-djsjqx="twoYear" bindtap="swichDJ">最近2年</view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{SdateDJ}}" bindchange="startDateChangeDJ" name="startDateDJ">
+            <view class="weui-input">{{SdateDJ}}</view>
+          </picker>   
+        </view>
+      </view>
+      至
+      <view class="form_table_right" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{EdateDJ}}" bindchange="endDateChangeDJ" name="endDateDJ">
+            <view class="weui-input">{{EdateDJ}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

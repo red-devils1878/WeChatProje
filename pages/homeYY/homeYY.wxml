@@ -1,0 +1,31 @@
+<view class='container'>
+<view class='top-container'>
+    <image class='bg-img' src='../../static/images/my/mine_bg_3x.jpg'></image>
+</view>
+    <swiper-item class="swiper-items">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 170-50}}px;margin-top:340rpx;background-color: white;"scroll-top="{{scrolltop}}">
+    <view cellspacing="10" cellpadding="10" style="width:100%;margin-bottom:10px;">
+    <view class="tr">
+      <view class="index_mine_td" bindtap='tapEvent' data-index="01">
+        <view class="index_mine_td_d1">
+          <image src="../../static/images/my/ms.png"/>
+          <view>门锁列表</view>
+        </view>
+      </view>
+      <view class="index_mine_td" bindtap='tapEvent' data-index="02">
+        <view class="index_mine_td_d1">
+          <image src="../../static/images/my/04.png"/>
+          <view>工单管理</view>
+        </view>
+      </view>
+      <view class="index_mine_td" bindtap='tapEvent' data-index="03">
+          <view class="index_mine_td_d1">
+            <!--<image src="../../static/images/my/db.png"/>
+            <view>电表绑定</view>-->
+          </view>
+      </view>
+    </view>
+  </view>	
+  </scroll-view>
+  </swiper-item>
+</view>

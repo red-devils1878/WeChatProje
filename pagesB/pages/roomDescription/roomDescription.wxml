@@ -1,0 +1,19 @@
+<view class="container" style="background-color: white;">
+  <form bindsubmit="formSave" catchtap="noop" catchreset="formReset">
+  <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+    <textarea style="height: 40vh;" value="{{fjms}}" name="fjms" bindinput="valueChange"></textarea>
+  </view>
+  <view class="form_table_border">
+    <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>
+      <!--
+      <view class="form_table_border_in">
+        <view wx:if="{{disableT===''}}"> 
+            <button type="default" style="background-color: #c0c0c0;margin-bottom:auto;" disabled="true">确定</button>
+        </view>
+        <view wx:else> 
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>
+        </view>
+      </view>-->
+  </view>
+  </form>
+</view>

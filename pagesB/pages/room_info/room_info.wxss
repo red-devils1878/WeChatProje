@@ -1,0 +1,115 @@
+/* pages/room_info/room_info.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.ul-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.item-img{
+  width: 60rpx;
+  height: 60rpx;
+}
+.item-name{
+  padding-top: 8rpx;
+  font-size: 20rpx;
+  /*color: #666666;*/
+  min-width: 80rpx;
+  text-align: center;
+  /*color:#C0C0C0;*/
+  /*font-family:LiSu,STLiti,"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;*/
+}
+.form_info_bot1{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 7vh;
+  border-top: 1px solid #e6e6e6;
+  background-color: white;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 7vh;
+  line-height: 7vh;
+  align-items: center;
+}
+.form_info_bot_td2_r{
+  width:33%;
+  text-align:center;
+  line-height: 7vh;
+  font-size: 4vw;
+  background-color:#5677FC;
+  color:white;
+}
+.form_show_border_in{
+  padding:20rpx 0rpx;
+  height:20rpx;
+  line-height:20rpx;
+}
+.form_show_left{
+  float:left;
+  font-size:3.5vw;
+  height:20rpx;
+  color: #afadad;
+}
+.form_show_right{
+  float:right;
+  height:20rpx;
+  width:85%;
+}
+.form_show_right_text{
+  font-size:3.5vw;
+}
+.form_li_icon_border{
+  float:left;
+  width:18%;
+  margin:10rpx 6rpx;
+}
+.form_li_icon_t1{
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: white;
+}
+.middle-item-img{
+  width: 80rpx;
+  height: 80rpx;
+}
+.form_li_icon_t2{
+  text-align: center;
+  margin: 10rpx 0 4rpx 0;
+  font-size: 3vw;
+}
+.form_table_detail_left{
+  float: left;
+  font-size: 4vw;
+  height: 50rpx;
+  color: #c0c0c0;
+}
+.arrow_bottom{
+  width: 0;
+  height: 0;
+  border-left: 20rpx solid transparent;
+  border-right: 20rpx solid transparent;
+  border-top: 20rpx solid #cfcbcb;
+  position: absolute;
+  right: 50rpx;
+  margin-top: 20rpx;
+}
+.arrow_top{
+  width: 0;
+  height: 0;
+  border-left: 20rpx solid transparent;
+  border-right: 20rpx solid transparent;
+  border-bottom: 20rpx solid #cfcbcb;
+  position: absolute;
+  right: 50rpx;
+  margin-top: 20rpx;
+}

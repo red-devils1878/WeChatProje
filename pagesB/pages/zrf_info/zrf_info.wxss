@@ -1,0 +1,155 @@
+/* pages/input09/input09.wxss */
+.app{
+    background-color: #fafafa;
+    overflow: scroll;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  .top{
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(242, 159, 89);
+    border-radius:0px 0px 30rpx 30rpx ;
+    height: 25vh;
+  }
+  .headPortraitsBox{
+  position: relative;
+  left:50%;
+  width: 50px;
+  top:10%;
+  transform: translate(-50%,-10%);
+  }
+  .headPortraits{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  .userNameMsg{
+    width: 100%;
+    /*width: 200px;*/
+    position: relative;
+    top: 5%;
+    color: #fff;
+    text-align: center;
+    /*left: 50%;
+    transform: translate(-50%,-5%);*/
+  }
+  .wxLogo{
+    position: relative;
+    width: 40rpx;
+    height: 40rpx;
+    top: 10rpx;
+    right: 10rpx;
+  }
+  .payButton{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgb(92,197,113);
+    width: 80%;
+    padding-top: 10rpx;
+    margin-top: 4vh;
+    padding-bottom: 10rpx;
+    color: #fff;
+    border-radius:20px;
+  
+  }
+  .c1{
+    background-color: rgb(92,197,113);
+    color:#fff;
+    width: 95%;
+  }
+  .box1{
+   width: 90vw;
+   height: 420rpx;
+   position: relative;
+   border-radius:20rpx;
+   left: 50%;
+   top: -10vh;
+   transform: translate(-50%);
+   background-color: rgb(255, 255, 255);
+  }
+  .fk{
+    padding-top: 20rpx;
+    margin-top: 10px;
+    text-align: center;
+    color: rgb(177, 177, 177);
+    font-size: 28rpx;
+  }
+  .money{
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+  }
+  .time{
+    text-align: center;
+    margin-top: 10rpx;
+  }
+  .timeBox{
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+  }
+  .boxw{
+    height: 460rpx;
+    position: relative;
+    left: 50%;
+    top:-100rpx;
+    transform: translate(-50%);
+  }
+  .box2{
+    width: 90vw;
+    height: 460rpx;
+    overflow: scroll;
+    position: relative;
+    left: 50%;
+    background-color: #fff;
+    transform: translate(-50%);
+    border-radius:10px;
+  }
+  .boxtop{
+    position: relative;
+    padding-left: 30rpx;
+    top: 10px;
+    font-weight: bold;
+  }
+  .orr{
+    position: relative;
+    top:50rpx;
+  }
+  .Logo{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top:10rpx;
+  }
+  .leftword{
+    position: relative;
+    left: 5%;
+    display: inline-block;
+    width: 45%;
+    color: rgb(187, 187, 187);
+  }
+  .rightword{
+    display: inline-block;
+    width: 45%;
+    color: rgb(187, 187, 187);
+    text-align: right;
+  }
+  .cf{
+    margin-top: 5px;
+  }
+  .fk_sm{
+    top:-100rpx;
+    position: relative;
+    padding: 40rpx;
+    color: rgb(128, 128, 128);
+  }
+  .sm{
+    font-size: 14px;
+    margin: 4px 0rpx;
+  }
+  

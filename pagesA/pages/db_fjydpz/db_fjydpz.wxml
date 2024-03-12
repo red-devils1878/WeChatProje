@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <view class="form_table_border" style="margin-top: 40rpx;">
+       <view class="form_table_border_in">
+        <view class="form_table_left" style="font-size: 5vw;font-weight:bold;">房间用电配置</view>
+        <view class="clear"></view>
+       </view>
+      </view>
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">电价方案</view>
+        <view class="form_table_right">
+          <picker bindchange="bindFAChange" value="{{plan[faIndex].code}}" range="{{plan}}" range-key="{{'othername'}}" name="plan">
+            <view class="form_table_right_text" style="padding-top:5rpx;">
+              <view class="picker">{{plan[faIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">付费模式</view>
+        <view class="form_table_right">
+          <picker bindchange="bindFFChange" value="{{ffms[ffIndex].code}}" range="{{ffms}}" range-key="{{'othername'}}" name="ffms">
+            <view class="form_table_right_text" style="padding-top:5rpx;">
+              <view class="picker">{{ffms[ffIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">确认</button>
+        </view>
+    </view>
+    </form>
+  </view>
+</view>

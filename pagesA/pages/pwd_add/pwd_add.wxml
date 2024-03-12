@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>开始日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <!--<view class="weui-input" name="start_time">{{Starttime}}</view>-->
+                    <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                  </picker>            
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>结束日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>密码</view>
+            <view class="form_table_right">
+              <input type="number" maxlength="6" class="form_table_right_text" bindinput='setValue' name="pwd" value="{{pwd}}"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <!--<button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>-->
+        <view wx:if="{{lylx==='5' || lylx==='6' || lylx==='20' || lylx==='21'}}"> 
+          <button class="mini-btn" type="primary" size="mini" style="margin-right: 50rpx;width: 45%;background-color: #5677fc;height: 70rpx;line-height: 70rpx;" formType="submit" data-labelnum="wangguan">网关下发</button>
+          <button class="mini-btn" type="primary" size="mini" style="width: 45%;background-color: #5677fc;height: 70rpx;line-height: 70rpx;" formType="submit" data-labelnum="lanya">蓝牙下发</button>
+        </view>
+        <view wx:else> 
+          <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit" data-labelnum="wangguan">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  </form>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

@@ -1,0 +1,76 @@
+<view class="main">
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <scroll-view scroll-y="true" scroll-into-view="{{leftId}}" class="left" style="height:{{winHeight - 55}}px;">
+    <view wx:for="{{menuArr}}" wx:key="*this" data-myid="{{item.floor}}" id="left{{item.floor}}" class="scroll-view-item  {{lifeActiveNum==item.floor?'active':''}}  "  bindtap="leftClick">
+      {{item.floor}}F</view>
+  </scroll-view>
+  <scroll-view scroll-y="true" class="right" style="height:{{winHeight - 55}}px;" scroll-with-animation="true" bindscroll="rightScrollTop" scroll-into-view="{{rightId}}">
+    <view wx:for="{{menuArr}}" wx:key="{{item.hid}}" id="right{{item.floor}}" class="scroll-view-item rightblock">
+      <view style="padding:10rpx;display: flex;">
+        <view class="index_build_border_t1" style="width: 65%;">{{item.houseName}}第{{item.floor}}层</view>
+        <view class="index_build_border_r">
+          <checkbox class="checkbox_title" bindtap="checked" checked="{{item.checked}}" data-floor="{{item.floor}}">全选本层</checkbox>
+        </view>
+      </view>
+      <checkbox-group bindchange="checkboxChange" data-floor="{{item.floor}}" name="xzfj">  
+      <view class="index_build_background">
+        <view class="index_build_icon_borderN_1" wx:for="{{item.roomList}}" wx:key="{{newitem.hid}}" wx:for-item="newitem">
+          <view class="index_build_icon_t4" style="text-align: left;">
+            <checkbox class="checkbox_style" value="{{newitem.hid}}" checked="{{newitem.checked}}"></checkbox>
+            <span>{{newitem.roomNo}}</span>
+          </view>
+          <view class="index_build_icon_t5" >
+            <span>{{newitem.fj_type}}</span>
+          </view>
+          <view class="index_build_icon_t5">
+            <span>{{newitem.rent}}</span>
+          </view>
+        </view>
+        <view class="index_build_icon_borderN_1" data-floorno="{{item.floor}}" bindtap="addRoom">
+          <view class="index_build_icon_t4" style="text-align: center;">
+            <span style="color: #c0c0c0;">+</span>
+          </view>
+          <view class="index_build_icon_t5" style="text-align: center;">
+            <span>添加房间</span>
+          </view>
+          <view class="index_build_icon_t5" style="text-align: center;">
+            <span></span>
+          </view>
+        </view>
+      </view>
+      </checkbox-group>
+    </view>
+  </scroll-view>
+  <view class="form_info_bot1">
+    <view class="tr bg-w"> 
+      <view class="form_info_bot_td2_1" bindtap='goback' data-key="{{hid}}">返回列表</view>
+       <view style="width: 10rpx;"></view>
+      <view class="form_info_bot_td2_c" bindtap='del' data-key="{{hid}}">删除选中房间</view>
+      <view style="width: 10rpx;"></view>
+      <view class="form_info_bot_td2_r" bindtap='jumpPZ' data-key="{{hid}}">配置选中房间</view>
+    </view>
+  </view>
+</form>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>新增房间</view>
+        <view>{{floorNo}}层</view>
+      </view>
+      <view class='toast-main'>
+        <view class='toast-input'>
+          <input placeholder='请输入房号' bindinput='setValue' data-name='stuEidtName' value="{{fjmc}}"></input>
+        </view>
+      </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>
+</view>

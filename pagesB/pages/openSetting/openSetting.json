@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "免扰时段",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

@@ -1,0 +1,90 @@
+<view hidden="{{detail_master}}" class="hidenScroll" style="height:{{winHeight}}px">
+<view class="container">
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">充值记录</view>
+    <view class="clear"></view>
+  </view>
+  </view>
+  <view class="swiper-items">
+  <view style="margin: 0 20rpx;">
+    <view class="date_style" bindtap="showDJdate"> {{djks}} 至 {{djjs}} ></view>
+  </view>
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 100}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+	<view class="service-list">
+      <view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+        <view class="service-text" wx:if="{{sblx==='sb'}}">
+        <view class="service-tite" style="font-size: 28rpx;">时间：{{item.czsj}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">充值人：{{item.renterName}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">金额(元)：{{item.amount}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">水价(元/吨)：{{item.price}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">购水量(吨)：{{item.degrees}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">状态：充值成功</view>
+	    </view>
+      <view class="service-text" wx:else> 
+        <view class="service-tite" style="font-size: 28rpx;">时间：{{item.czsj}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">充值人：{{item.renterName}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">金额(元)：{{item.amount}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">电价(元/度)：{{item.price}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">购电量(度)：{{item.degrees}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">状态：充值成功</view>
+      </view>
+      </view>
+	</view>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+  </scroll-view>
+</view>
+</view>
+</view>
+<view style="background-color: #ffffff;height:{{winHeight/2}}px;" hidden="{{detail_djDate}}">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="padding: 20rpx 0rpx;" bindtap="cancelDJ">取消</span></view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_right_text" style="width: 100%;"><span style="padding: 20rpx 0rpx;" bindtap="sureDJ">确定</span></view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='jintian' ? 'showBorder' : ''}}" data-djsjqx="jintian" bindtap="swichDJ">今天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='zuotian' ? 'showBorder' : ''}}" data-djsjqx="zuotian" bindtap="swichDJ">昨天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last7' ? 'showBorder' : ''}}" data-djsjqx="Last7" bindtap="swichDJ">最近7天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last30' ? 'showBorder' : ''}}" data-djsjqx="Last30" bindtap="swichDJ">最近30天</view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin: 20rpx 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='threeMonth' ? 'showBorder' : ''}}" data-djsjqx="threeMonth" bindtap="swichDJ">最近3个月</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='sixMonth' ? 'showBorder' : ''}}" data-djsjqx="sixMonth" bindtap="swichDJ">最近半年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='oneYear' ? 'showBorder' : ''}}" data-djsjqx="oneYear" bindtap="swichDJ">最近1年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='twoYear' ? 'showBorder' : ''}}" data-djsjqx="twoYear" bindtap="swichDJ">最近2年</view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{SdateDJ}}" bindchange="startDateChangeDJ" name="startDateDJ">
+            <view class="weui-input">{{SdateDJ}}</view>
+          </picker>   
+        </view>
+      </view>
+      至
+      <view class="form_table_right" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{EdateDJ}}" bindchange="endDateChangeDJ" name="endDateDJ">
+            <view class="weui-input">{{EdateDJ}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

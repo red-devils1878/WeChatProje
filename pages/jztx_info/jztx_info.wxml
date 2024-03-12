@@ -1,0 +1,61 @@
+<view class="container">
+<navigator class="info_style" target="miniProgram" open-type="navigate" app-id="{{appId}}" path="{{path}}" extra-data="" version="{{envVersion}}">
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 20rpx 0 0 0;">
+      <view class="form_table_left" style="font-size: 4.5vw;">租金账单通知</view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 0 0 20rpx 0;">
+      <view class="zdtz_table_left">您的本期房屋账单已出，请及时缴纳</view>
+    </view>
+  </view>
+	<view class="form_table_border_none">
+    <view class="zdtz_table_border_in">
+      <view class="zdtz_table_left">地址：</view>
+      <view class="zdtz_table_right">
+				<view class="zdtz_table_right_text">{{roomNo}}</view>
+      </view>
+    </view>
+  </view>
+	<view class="form_table_border_none">
+    <view class="zdtz_table_border_in">
+      <view class="zdtz_table_left">账期：</view>
+      <view class="zdtz_table_right">
+				<view class="zdtz_table_right_text">{{zq}}</view>
+      </view>
+    </view>
+  </view>
+	<view class="form_table_border_none">
+    <view class="zdtz_table_border_in">
+      <view class="zdtz_table_left">金额：</view>
+      <view class="zdtz_table_right">
+				<view class="zdtz_table_right_text">{{je}}</view>
+      </view>
+    </view>
+  </view>
+	<view class="form_table_border_none">
+    <view class="zdtz_table_border_in">
+      <view class="zdtz_table_left">最晚付款时间：</view>
+      <view class="zdtz_table_right">
+				<view class="zdtz_table_right_text">{{fksj}}</view>
+      </view>
+    </view>
+  </view>
+	<view class="form_table_border_none">
+    <view class="zdtz_table_border_in" style="height: 100rpx;">
+      <view class="zdtz_table_left">备注：</view>
+      <view class="zdtz_table_right">
+				<view class="zdtz_table_right_text">逾期可能会产生账单违约金，点击前往支付</view>
+      </view>
+    </view>
+  </view>
+<view style="border-top: 1rpx solid #c0c0c0;margin-top: 20rpx;"></view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">查看详情</view>
+			<view class="arrow"></view>
+    </view>
+  </view>
+</navigator>
+</view>

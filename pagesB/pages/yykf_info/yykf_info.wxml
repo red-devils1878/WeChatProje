@@ -1,0 +1,159 @@
+<view class="form_table_border" style="border: none;">
+  <view class="form_table_border_in">
+    <input type="text" name="yyNo" value="{{yyNo}}" hidden="true"/>
+      <view class="form_table_left">{{houseName}}</view>
+      <view class="form_table_right" style="width: 40vw;">
+        <span class="title-right-span">{{djzt_name}}</span>
+      </view>
+      <view class="clear"></view>
+  </view>
+</view>
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">预约详情</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">操作记录</view>
+</view>
+<view class="form_line"></view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 97}}px" bindchange="bindChange">
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 97-50}}px"> 
+      <view class="form_table_border" style='border-bottom:none;height: 50rpx;'>
+            <view class="form_show_border_in">
+                <view class="form_show_left">姓名：</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{name}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border" style='border-bottom:none;height: 50rpx;display: flex;'>
+        <view class="form_show_border_in" style="width: 95%;">
+            <view class="form_show_left">联系方式：</view>
+            <view class="form_show_right" style="width: 78%;">
+                <span class="form_show_right_text">{{tel}}</span>
+            </view>
+            <view class='clear'></view>
+        </view>
+        <view>
+            <view class="form_table_border_in" style="padding:2rpx 0;height: 30rpx;width: 30rpx;" bindtap="callTel" data-tel="{{tel}}">
+            <image class='item-img' src='../../../static/images/my/tel.jpg' style="width: 30rpx;height:30rpx;margin: 1rpx 0;"></image>
+            </view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">预约日期：</view>
+                <view class="form_show_right" style="width: 80%;">
+                  <span class="form_show_right_text">{{yyDate}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;">需求</view>
+              <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+        <textarea style="height: 15vh;" disabled name="demand" value="{{demand}}"></textarea>
+      </view>
+    <view class="form_line"></view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">预计上门时间</view>
+        <view class="form_table_right">
+          <view class="form_table_right_text">
+            <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" disabled="{{yy_state=='1004' ? true : false}}">
+              <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+            </picker>   
+          </view>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">紧急程度</view>
+        <view class="form_table_right">
+          <picker bindchange="jjcdChange" value="{{jjcd[jjcdIndex].code}}" range="{{jjcd}}" range-key="{{'othername'}}" name="jjcd" disabled="{{yy_state=='1004' ? true : false}}">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{jjcd[jjcdIndex].othername}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">任务状态</view>
+        <view class="form_table_right">
+          <picker bindchange="rwztChange" value="{{rwzt[rwztIndex].code}}" range="{{rwzt}}" range-key="{{'othername'}}" name="rwzt" disabled="{{yy_state=='1004' ? true : false}}">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{rwzt[rwztIndex].othername}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <!--<view class="form_table_border_none" style="margin-top: 50rpx;text-align: center;" wx:if="{{yy_state!='1004'}}"> 
+      <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 30%;background-color: #5677fc;" bindtap="jxz">进行中</button>
+      <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 30%;background-color: #5677fc;" bindtap="gqz">挂起中</button>
+      <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 30%;background-color: #5677fc;" bindtap="ywc">已完成</button>
+    </view>
+    <view wx:else></view>-->
+    </scroll-view>
+      <view class="form_info_bot1" style="border: none;" wx:if="{{yy_state!='1004'}}">
+        <view class="form_info_bot_td2_tz" bindtap='tapGJ' data-key="{{yyNo}}">写跟进</view>
+      </view> 
+    </swiper-item>
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 97}}px;"scroll-top="{{scrolltop}}">
+        <view class="weui-cell-third">
+     <view class="page_title">
+      <block wx:for="{{recordList}}" wx:key="*this">
+        <view class="weui-cell-list">
+           <view class="weui-cell-circle"></view>
+           <view class="weui-cell-line"> 
+             <view class="weui-cell-name">{{item.name}}</view>
+             <view class="weui-cell-time">{{item.time}}</view>
+             <view class="weui-cell-event">{{item.event}}</view>
+           </view>
+        </view>
+      </block>
+     </view>
+    </view> 
+  </scroll-view>        
+  </swiper-item>
+</swiper>
+<view class='toast-box' hidden="{{!ifName}}">
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>写下您的跟进记录</text>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+    <view class='toast-main' style="text-align: left;">
+      <view class='toast-input' style="background-color: #fafafa;border-radius: 10rpx;">
+        <textarea placeholder='请输入跟进记录' style="height: 20vh;padding: 0rpx;" name='stuRecord'></textarea>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='cancelButton'>
+        <button catchtap='cancel'>取消</button>
+      </view>
+      <view class='confirmButton'>
+        <button catchtap='confirm' form-type="submit">确定</button>
+      </view>
+    </view>
+  </form>
+  </view>
+  </view>

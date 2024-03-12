@@ -1,0 +1,87 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>楼栋</view>
+        <view class="form_table_right">
+          <picker bindchange="bindFYChange" value="{{fy[fyIndex].houseNo}}" range="{{fy}}" range-key="{{'houseName'}}" name="fy">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{fy[fyIndex].houseName}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>楼层</view>
+            <view class="form_table_right">
+              <input type="number" class="form_table_right_text" name="floor" placeholder="必填项" bindinput="floorChange"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">房号</view>
+            <view class="form_table_right">
+              <input type="text" class="form_table_right_text" name="room" placeholder="选填" bindinput="roomChange"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>开始日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <!--<view class="weui-input" name="start_time">{{Starttime}}</view>-->
+                    <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true" placeholder="必填项"/>
+                  </picker>            
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>结束日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true" placeholder="必填项"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>密码</view>
+            <view class="form_table_right">
+              <input type="number" maxlength="6" class="form_table_right_text" bindinput='setValue' name="pwd" value="{{pwd}}" placeholder="必填项"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <button size="mini" type="primary" style="background-color: #5677FC;margin-bottom:auto;width: 45%;margin-right: 40rpx;" formType="submit">批量下发</button>
+        <button size="mini" type="primary" style="background-color: #5677FC;margin-bottom:auto;width: 45%;" bindtap="del">批量删除</button>
+      </view>
+    </view>
+  </view>
+  </form>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

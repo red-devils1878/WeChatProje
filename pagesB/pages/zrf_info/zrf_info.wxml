@@ -1,0 +1,55 @@
+<view class="app">
+<view class="top">
+<view class="headPortraitsBox">
+<image class="headPortraits" src="../../../static/images/my/people.png" alt=""/>
+</view>
+<view class="userNameMsg">
+{{tenantName}}：发起了订单代付请求
+</view>
+</view>
+<view class="box1">
+<view class="fk">需付款</view>
+<view class="money">￥{{xstje}}</view>
+<!--<view class="time">剩余支付时间 
+<span class="timeBox">23</span>:
+<span class="timeBox">23</span>:
+<span class="timeBox">00</span>
+</view>-->
+<view class="payButton">
+<button class="c1" open-type="share" bindtap="send"><image class="wxLogo" src="../../../static/images/my/wxLogo.png" alt=""/>
+<span>发给微信好友</span>
+</button>
+</view>
+</view>
+<view class="boxw">
+<view class="box2">
+<view class="boxtop">{{roomNo}}</view>
+<view class="orr">
+<view class="cf">
+<view class="leftword">
+<image class="Logo" src="../../../static/images/my/reward.png" alt=""/>
+<span style="color:#000 ;">{{zy}}</span></view>
+<view class="rightword" style="color:#000 ;">{{xstje}}</view></view>
+<view class="cf" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+  <view class="leftword">
+  <span >{{item.fylx_name}}</span></view>
+  <view class="rightword">{{item.xstje}}</view>
+</view>
+<view class="cf">
+  <view class="leftword">
+    <span >开始时间</span>
+  </view>
+  <view class="rightword">{{kssj}}</view>
+  <view class="leftword">
+    <span >结束时间</span>
+  </view>
+  <view class="rightword">{{jssj}}</view>
+</view>
+</view>
+</view>
+</view>
+<view class="fk_sm">
+<view>付款说明</view>
+<view class="sm">①代付订单创建成功后24小时内未付款，订单会自动取消，你可以重新发起代付。</view>
+</view>
+</view>

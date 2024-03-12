@@ -1,0 +1,2 @@
+/* pages/checkOut_wpjg/checkOut_wpjg.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/

@@ -1,0 +1,173 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.title_form_line{
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 20rpx;
+}
+.service-list{
+	padding: 0 20rpx;
+}
+.service-item{
+	display: flex;
+	padding: 20rpx 0; 
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.service-img{
+  /*
+  width: 50rpx;
+  height: 50rpx;*/
+  width: 80rpx;
+  height: 80rpx;
+  padding-top: 8rpx;
+}
+.service-img_right{
+  width: 50rpx;
+  height: 50rpx;
+  padding-top: 42rpx;
+  margin-right: 40rpx;
+}
+.service-text{
+  flex: 1;
+  margin-left: 20rpx;
+  width: 70%;
+}
+.service-text .service-tite{
+  /*color:#ff0000;*/
+  color: #333;
+  width: 90%;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.service-city{
+  width: 75%;
+  height: 40rpx;
+  /*margin: 10rpx 0;*/
+  font-size: 28rpx;
+  /*color: #04BE02;*/
+  color: #c0c0c0;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.query_style_l{
+  /*margin: 20rpx 0rpx;*/
+  margin-top: 20rpx;
+  background-color: white;
+  width: 35%;
+  padding: 4rpx 20rpx;
+  border: 2rpx solid;
+}
+.button_left{
+  font-size: 14px;
+  width: 25%;
+  background-color: #f7982a;
+  text-align: center;
+  border-radius: 10rpx;
+  color: #ffffff;
+  margin: 20rpx 0rpx 0 10rpx;
+  height: 72rpx;
+  line-height: 72rpx;  
+}
+
+/* 蒙层 */
+.popup-box{
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+}
+/* 左 */
+.info-left{
+  position: fixed;
+  z-index: 999;
+  width: 70%;
+  height: 100%;
+  top: 0;
+  background-color: white;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+/* 自定义内容（根据自己需求更改,可删除） */
+button{
+  margin: 15rpx 0;
+}
+.row-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15rpx;
+  font-size: 32rpx;
+}
+.row-info view{
+  /*
+  padding: 10rpx 0;
+  */
+  padding:0;
+}
+.row-info view:first-child{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.line{
+  width: 100rpx;
+  height: 1rpx;
+}
+.left-line{
+  background-image: linear-gradient(to left,orange,white);
+}
+.right-line{
+  background-image: linear-gradient(to right,orange,white);
+}
+.row-author{
+  font-size: 24rpx;
+  color: gray;
+}
+.row-btn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1rpx dashed #f1f1f1;
+}
+.row-btn view{
+  flex: 1;
+  text-align: center;
+  margin: 20rpx 10%;
+  padding: 12rpx 0;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+}
+.left-btn{
+  background-color: #f1f1f1;
+  color: #33ccff;
+}
+.right-btn{
+  background-color: #33ccff;
+  color: white;
+}
+.fixed{
+  position: fixed;
+  bottom: 0;
+  width: 70%;
+}
+.curtain{
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-color: black;
+  z-index:9999;
+  top:0;
+  left:0;
+  opacity:0.4;
+}

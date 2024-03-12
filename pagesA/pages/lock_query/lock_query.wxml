@@ -1,0 +1,29 @@
+<view class="container hidenScroll">
+  <view style="display: flex;margin:0 40rpx 20rpx 40rpx;">
+    <!--<span class="title_span" style="width: 15%;">设备号</span>-->
+    <view class="query_style_l" style="width: 75%;">
+      <input type="text" style="width: 100%;" placeholder="开始扫描" bindinput="inputsbh"></input>
+    </view>
+    <view class="button_left" bindtap="submitSearch">扫描</view>
+  </view>
+<view class="swiper-items" style="height:{{winHeight - 50}}px;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 50}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+    <view class="service-list">
+	  <view class="service-item" wx:for="{{scanDevices}}" wx:key="{{item.sn}}" bindtap="jupLock" data-key="{{item.sn}}">
+        <view class="service-img">
+		  <image src="../../../static/images/my/lock2.jpg" mode="aspectFill"></image>
+		</view>
+		<view class="service-text">
+		  <view class="service-tite">{{item.name}}</view>
+          <view style="display: flex;">
+            <text class="service-city">{{item.sn}}</text>  
+            <span class="Link-singVal">{{item.RSSI}}</span>
+            <span class="Link-span">点击连接</span>
+          </view>
+		</view>
+	  </view>
+	</view>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+  </scroll-view>
+</view>
+</view>

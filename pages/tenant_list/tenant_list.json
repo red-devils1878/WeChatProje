@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "租客",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

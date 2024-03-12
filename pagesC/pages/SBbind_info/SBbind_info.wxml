@@ -1,0 +1,90 @@
+<view class="container" style="background-color: white;">
+<form bindsubmit="formSubmit" catchtap="noop" catchreset="formReset">
+<view class="title_form_line"><span class="span-title">设备信息</span></view> 
+<view style="background-color: white;">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span> 平台类型</view>
+      <view class="form_table_right">
+        <picker bindchange="bindptlxChange" value="{{ptlx[ptlxIndex].code}}" range="{{ptlx}}" range-key="{{'othername'}}" name="ptlx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{ptlx[ptlxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span> 通讯类型</view>
+      <view class="form_table_right">
+        <picker bindchange="bindtxlxChange" value="{{txlx[txlxIndex].code}}" range="{{txlx}}" range-key="{{'othername'}}" name="txlx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{txlx[txlxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+      <view class="clear"></view>
+    </view>
+  </view>  
+  <view class="form_table_border" style="display: flex;">
+    <view class="form_table_border_in" style="width: 100%;">
+      <view class="form_table_left"><span style="color: red;">*</span> 设备号</view>
+      <view class="form_table_right">
+        <input type="text" class="form_table_right_text" name="dsn" value="{{result}}" placeholder="请输入设备号"/>
+      </view>
+      <view class="clear"></view>
+    </view>
+    <view style="border-left: 2rpx solid #f5f5f5;" bindtap="scanCode">
+      <view class="form_table_border_in">
+        <image class='item-img' src='../../../static/images/my/qrcode2.png' style="width: 50rpx;height:50rpx;margin: 2rpx 20rpx;"></image>
+      </view>
+    </view>
+  </view>
+  <!--<view class="form_table_border" style="display: flex;">
+    <view class="form_table_border_in" style="width: 100%;">
+      <view class="form_table_left">IMEI</view>
+      <view class="form_table_right">
+        <input type="text" class="form_table_right_text" name="imei" value="{{result_imei}}" placeholder="请输入IMEI号"/>
+      </view>
+        <view class="clear"></view>
+    </view>
+    <view style="border-left: 2rpx solid #f5f5f5;" bindtap="scanCodeIMEI">
+      <view class="form_table_border_in">
+        <image class='item-img' src='../../../static/images/my/qrcode2.png' style="width: 50rpx;height:50rpx;margin: 2rpx 20rpx;"></image>
+      </view>
+    </view>
+  </view>-->
+</view>
+<view class="form_table_border">
+    <view class="form_table_border_in">    
+      <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" bindtap="bindNext" formType="submit">绑定</button>
+    </view>
+</view>
+</form>
+<view class="title_form_line" style="margin-top: 100rpx;"><span class="span-title">已绑设备</span></view>
+ <view class="service-list" hidden="{{hiddenYB}}">
+	  <view class="service-item">
+      <view class="service-img">
+		    <image src="{{imageUrl}}" mode="aspectFill"></image>
+	  	</view>
+		  <view class="service-text">
+		  <view class="service-tite">{{mc}}</view>
+        <view style="display: flex;">
+          <text class="service-city">{{dsn}}</text>  
+        </view>
+	  	</view>
+      <view class="service-img_right" style="padding-top: 22rpx;" bindtap="Unbind" data-hid="{{hid}}" data-dsn="{{dsn}}">
+		    <image src="../../../static/images/my/delete48.png" mode="aspectFill"></image>
+	  	</view>
+	  </view>
+ </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

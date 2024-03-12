@@ -1,0 +1,1007 @@
+<view class="nav" style="height:{{navH}}px">
+  <view class="title_icon">
+    <view style="width: 60rpx;" bindtap="{{bindTap}}">
+      <mp-icon color="white" icon="back" type="filled" size="12"></mp-icon>
+    </view>
+    <label style="color: white;padding-left: 220rpx;">{{title}}</label>
+  </view>
+</view>
+<view class="container" style="background-color: white;margin-top: {{navH}}px;">
+  <swiper-item class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view class="page-body">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view hidden="{{master}}">
+      <!--<view class="form_table_border">
+      <view class="form_table_border_in" bindtap='tapYD'>
+        <view class="form_table_left"><span style="color: red;"> *</span>预定单号</view>
+          <view class="form_table_right">
+            <input type="text" name="ydNo" value="{{ydNo}}" hidden="true"/>
+            <view class="form_table_right">
+              <view class="form_table_right_text">{{ydNo}}</view>
+            </view>
+          </view>
+        <view class="arrow"></view>
+      </view>
+      </view>-->
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <input type="text" name="hid" value="{{hid}}" hidden="true"/>
+            <view class="form_table_left">{{houseName}}</view>
+            <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">签约方式</view>
+            <view class="form_table_right">
+              <view class="switch_to">
+              <view bindtap="checkcheackQYLX" value="1" class="switch_to_left {{!cheackQYFS?'bgb':'bga'}}"><span>纸质合同</span></view>
+              <view bindtap="checkcheackQYLX" value="2" class="switch_to_right {{cheackQYFS?'bgb':'bga'}}"><span>电子合同</span></view>
+              </view>
+            </view>
+        </view>
+      </view>
+      <!--<view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">入住人信息</view>
+          <view class="clear"></view>
+        </view>
+      </view>-->
+      <view class="title_form_line"><span class="span-title">入住人信息</span></view> 
+      <view style="display: flex;width: 100%;">
+        <view class="form_table_border" style="width:80%;margin-right: 0rpx;">
+            <view class="form_table_border_in">
+              <view class="form_table_left"><span style="color: red;">*</span>  姓名</view>
+              <view class="form_table_right">
+                <input type="text" class="form_table_right_text" style="width: 58vw;" name="name" placeholder="请输入" value="{{name}}" bindinput="nameChange"/>
+              </view>
+              <view class="clear"></view>
+            </view>
+        </view>
+        <view style="width: 10%;border-bottom: 2rpx solid #f5f5f5;">
+          <view class="form_table_border_in" style="padding:0;">
+            <image class='item-img' src='../../../static/images/my/sao.jpg' style="width: 50rpx;height:50rpx;margin: 26rpx 0;"></image>
+          </view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  联系方式</view>
+          <view class="form_table_right">
+            <input type="number" maxlength="11" class="form_table_right_text" name="tel" placeholder="请输入" value="{{tel}}" bindblur="telChange"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">证件类型</view>
+          <view class="form_table_right">
+            <picker bindchange="bindCardChange" value="{{card[cardIndex].code}}" range="{{card}}" range-key="{{'othername'}}" name="cardType">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{card[cardIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  证件号</view>
+          <view class="form_table_right">
+            <input type="idcard" class="form_table_right_text" name="cardNo" value="{{cardNo}}" placeholder="请输入" bindblur="cardNoChange"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">更多信息</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="6" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">其他个人信息</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">同住人</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="2" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">添加同住人</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <!--<view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">备注</view>
+            <input type="text" class="form_table_right_text" value="{{remark}}" name="remark" hidden="true"/>
+            <view class="form_table_right" bindtap='tapRZ' data-index="3" data-val='{{remark}}'>             
+            </view>
+            <view class="arrow"></view>
+        </view>
+      </view>-->
+      <!--<view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <view class="form_table_left">开门分享</view>
+            <view class="form_table_right">
+                <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 100%;background-color: white;" open-type="share">确定</button>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+      </view>-->
+      <!--<view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">入住周期</view>
+          <view class="clear"></view>
+        </view>
+      </view>-->
+      <view class="title_form_line"><span class="span-title">合同信息</span></view>           
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  开始时间</view>
+          <view class="form_table_right">
+            <view class="form_table_right_text">
+              <picker data-field="date" mode="date" value="{{Sdate}}" bindchange="startDateChange" name="startDate">
+                <view class="weui-input">{{Sdate}}</view>
+              </picker>   
+            </view>
+          </view>
+          <view class="arrow" style="margin-top: 10rpx;"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  结束时间</view>
+          <view class="form_table_right">
+            <view class="form_table_right_text">
+              <picker data-field="date" mode="date" value="{{Edate}}" bindchange="endDateChange" name="endDate">
+                <view class="weui-input">{{Edate}}</view>
+              </picker>   
+            </view>
+          </view>
+          <view class="arrow" style="margin-top: 10rpx;"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <!--<view class="form_table_left">预定类型</view>-->
+        <view class="form_table_right" style="width: 100%;">
+          <radio-group bindchange="radioChangeSJ" name="ydlx">
+            <view class="form_table_left">
+              <radio color="#5677fc" value="1" checked="{{check1}}" class="list-radio" style="margin-right: 50rpx;">1月</radio>
+              <radio color="#5677fc" value="3" checked="{{check3}}" class="list-radio" style="margin-right: 50rpx;">3月</radio>
+              <radio color="#5677fc" value="6" checked="{{check6}}" class="list-radio" style="margin-right: 50rpx;">6月</radio>
+              <radio color="#5677fc" value="12" checked="{{check12}}" class="list-radio">1年</radio>
+            </view>           
+          </radio-group>
+        </view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">出租时长</view>
+              <view class="form_table_right">
+                <picker bindchange="bindCycleChange" value="{{cycle[cycleIndex].code}}" range="{{cycle}}" range-key="{{'othername'}}" name="cycle" disabled="true">
+                <view class="form_table_right_text">
+                <view class="picker">
+                  {{cycle[cycleIndex].othername}}
+                </view>
+                </view>
+               </picker>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view> 
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">付款方式</view>
+              <view class="form_table_right">
+                <picker mode="multiSelector" bindchange="bindFKFSPickerChange" value="[{{fkfsArray[0][fkfsIndex[0]].code}},{{fkfsArray[1][fkfsIndex[1]].code}}]" range="{{fkfsArray}}" range-key="{{'othername'}}" name="fkfs">
+                    <view class="form_table_right_text">
+                       <view class="picker">
+                         {{fkfsArray[0][fkfsIndex[0]].othername}}{{fkfsArray[1][fkfsIndex[1]].othername}}
+                       </view>
+                    </view>
+                </picker>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view> 
+      <view style="display: flex;">
+        <view class="form_table_border" style="border-right: 2rpx solid #f5f5f5; width: 70%;margin:0 0 0 40rpx;">
+            <view class="form_table_border_in">
+                <view class="form_table_left">租金</view>
+                <view class="form_table_right">
+                    <input type="digit" class="form_table_right_text" value="{{rent}}" name="rent" placeholder="请填写房间价格" bindinput="rentChange"/>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+        <view style="width: 20%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_table_border_in">
+          <view class="form_table_right">
+            <picker bindchange="bindPickerChange" value="{{unit[unitIndex].code}}" range="{{unit}}" range-key="{{'othername'}}" name="rent_unit" disabled="true">
+              <view class="form_table_right_text" style="padding-top:5rpx;">
+                <view class="picker">
+                  {{unit[unitIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+        </view>
+        </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">押金</view>
+            <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" name="yj" value="{{deposit}}" placeholder="选填" disabled="{{yj_dis}}"/>
+            </view>
+            <view style="position: absolute;right: 36rpx;margin-top: 7rpx;">元</view>
+            <view class="clear"></view>
+          </view>
+      </view>
+      <!--<view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">收租日期</view>
+              <view class="form_table_right">
+                <view class="form_table_right_text">
+                    <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange" name="szDate">
+                        <view class="weui-input">{{date}}</view>
+                    </picker>   
+                </view>
+               </view>
+               <view class="arrow" style="margin-top: 10rpx;"></view>             
+              <view class="clear"></view>
+          </view>
+      </view>-->
+      <!--<view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">收租日期</view>
+              <view class="form_table_right">
+                <picker bindchange="bindszrqChange" value="{{szrq[szrqIndex].code}}" range="{{szrq}}" range-key="{{'othername'}}" name="szrq">
+                <view class="form_table_right_text">
+                <view class="picker">
+                  {{szrq[szrqIndex].othername}}
+                </view>
+                </view>
+               </picker>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view>-->
+      <!--<view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">添加记账</view>
+            <view class="form_table_right" bindtap='tapRZ' data-index="4" data-key='{{htNo}}'>                    
+            </view>
+            <view class="arrow"></view>
+        </view>
+      </view>-->
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <view class="form_table_left">添加其他费用</view>
+            <view class="form_table_right" bindtap='tapRZ' data-index="5" data-key='{{htNo}}'>                   
+            </view>
+            <view class="arrow"></view>
+        </view>
+      </view>
+      <!--<view class="form_line"></view>
+      <view class="form_table_border_none">
+          <view class="form_table_border_in">
+              <view class="form_table_left">支付时间</view>
+              <view class="form_table_right">
+                <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="[{{multiArray[0][multiIndex[0]].code}},{{multiArray[1][multiIndex[1]].code}}]" range="{{multiArray}}" range-key="{{'othername'}}" name="zfsj">
+                    <view class="form_table_right_text">
+                       <view class="picker">
+                         {{multiArray[0][multiIndex[0]].othername}}{{multiArray[1][multiIndex[1]].othername}}
+                       </view>
+                    </view>
+                </picker>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">物业交割</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="7" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">房间物品</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>-->
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">更多</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="8" data-key='{{htNo}}' style="width:75%;">
+            <view class="form_table_right_text" style="width: 62vw;"><span style="color: #c0c0c0;">备注信息/合同扫描/补充条款等</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">紧急联系人</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="9" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;"></span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">签约信息</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="10" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">签约人/签约时间/合同类型</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">合同编号</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="hthNo" placeholder="选填"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">租客来源</view>
+              <view class="form_table_right">
+                <picker bindchange="bindzklyChange" value="{{zkly[zklyIndex].code}}" range="{{zkly}}" range-key="{{'othername'}}" name="zkly">
+                <view class="form_table_right_text">
+                <view class="picker">
+                  {{zkly[zklyIndex].othername}}
+                </view>
+                </view>
+               </picker>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view> 
+      <view style="display: flex;">
+        <view class="form_table_border" style="border-right: 2rpx solid #f5f5f5; width: 70%;margin:0 0 0 40rpx;">
+            <view class="form_table_border_in">
+                <view class="form_table_left">水费</view>
+                <view class="form_table_right">
+                  <input type="digit" class="form_table_right_text" value="{{cWater_price}}" name="cWater_price" placeholder="请填写水费价格" bindinput="cWaterChange"/>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+        <view style="width: 20%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_table_border_in">
+          <view class="form_table_right" style="width: 100%;">
+            <view style="position: absolute;right: 70rpx;margin-top: 7rpx;">元/吨</view>
+          </view>
+        </view>
+        </view>
+      </view>
+      <view style="display: flex;">
+        <view class="form_table_border" style="border-right: 2rpx solid #f5f5f5; width: 70%;margin:0 0 0 40rpx;">
+          <view class="form_table_border_in">
+            <view class="form_table_left">电费</view>
+            <view class="form_table_right">
+              <input type="digit" class="form_table_right_text" value="{{ele_price}}" name="ele_price" placeholder="请填写电费价格" bindinput="eleChange"/>
+            </view>
+            <view class="clear"></view>
+          </view>
+        </view>
+        <view style="width: 20%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_table_border_in">
+          <view class="form_table_right" style="width: 100%;">
+            <view style="position: absolute;right: 70rpx;margin-top: 7rpx;">元/度</view>
+          </view>
+        </view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">水表底数</view>
+          <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" value="{{sbds}}" name="sbds" placeholder="请输入" bindinput="sbdschange"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">电表底数</view>
+          <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" value="{{dbds}}" name="dbds" placeholder="请输入" bindinput="dbdschange"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border" style="margin-bottom: 10rpx;">
+        <view class="form_table_border_in">    
+          <view wx:if="{{disableT===''}}"> 
+            <button type="default" style="background-color: #c0c0c0;margin-bottom:auto;" disabled="true">下一步：账单</button>
+          </view>
+        <view wx:else> 
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">下一步：账单</button>
+        </view>
+      </view>
+      </view>
+    </view>
+    <view hidden="{{detail_tzr}}">
+    <view wx:for="{{inputList}}" wx:key="id">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">同住人{{index+1}}</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text">
+              <mp-icon bindtap="delmore" data-index="{{index+1}}" data-key="{{index+1}}" icon="delete" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+            </view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  姓名</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="name{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{inputVal[index]}}' bindinput='nameInputVal'/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">联系方式</view>
+          <view class="form_table_right">
+            <input type="number" maxlength="11" class="form_table_right_text" name="tel{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{telVal[index]}}' bindblur='telInputVal'/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">证件类型</view>
+        <view class="form_table_right">
+          <!--<picker bindchange="bindCardTChange" value="{{cardT[cardTIndex].code}}" range="{{cardT}}" range-key="{{'othername'}}" name="cardType{{index+1}}" data-idx='{{index}}'>-->
+            <picker bindchange="bindCardTChange" value="{{cardT[ctVal[index]].code}}" range="{{cardT}}" range-key="{{'othername'}}" name="cardType{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_right_text">
+              <view class="picker">
+              {{cardT[ctVal[index]].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+      </view>  
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>  证件号</view>
+        <view class="form_table_right">
+          <input type="idcard" class="form_table_right_text" name="cardNo{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{cardNoVal[index]}}' bindblur='cardNoInputVal'/>
+        </view>
+        <view class="clear"></view>
+      </view>
+      </view>
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">性别</view>
+        <view class="form_table_right">
+            <picker bindchange="bindSexTChange" value="{{sexT[sexVal[index]].code}}" range="{{sexT}}" range-key="{{'othername'}}" name="sexType{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_right_text">
+              <view class="picker">
+              {{sexT[sexVal[index]].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+      </view>
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">关系</view>
+        <view class="form_table_right">
+            <picker bindchange="bindGXTChange" value="{{gxT[gxVal[index]].code}}" range="{{gxT}}" range-key="{{'othername'}}" name="gxType{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_right_text">
+              <view class="picker">
+              {{gxT[gxVal[index]].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+      </view>  
+      <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <view class="form_table_left">开门权限</view>
+        <view class="form_table_right">
+            <picker bindchange="bindQXTChange" value="{{qxT[qxVal[index]].code}}" range="{{qxT}}" range-key="{{'othername'}}" name="qxType{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_right_text">
+              <view class="picker">
+              {{qxT[qxVal[index]].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+      </view>  
+    <view class="form_line"></view>
+    </view>
+    <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+      <button data-index="{{maxIndex+1}}" class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="addmore">+添加同住人</button>
+      <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="hiddenTZR">保存</button>
+    </view>
+    </view>
+    <view hidden="{{detail_fymx}}">
+      <view wx:for="{{fymxList}}" wx:key="id">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">费用{{index+1}}</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text">
+              <mp-icon bindtap="FYdelmore" data-index="{{index+1}}" icon="delete" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+            </view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+      <!--<view class="form_table_border">
+        <view class="form_table_border_in">
+          <radio-group bindchange="radioChange" name="szlx{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_left">
+              <radio color="#5677fc" value="in" style="margin-right:70rpx" checked="{{srVal[index]}}"> 收入</radio>
+              <radio color="#5677fc" value="out" checked="{{zcVal[index]}}"> 支出</radio>
+            </view>
+          </radio-group>
+        </view>
+      </view>-->
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  费用名称</view>
+          <view class="form_table_right">
+          <picker bindchange="bindfylxChange" value="{{fylx[fyVal[index]].code}}" range="{{fylx}}" range-key="{{'othername'}}" name="fymc{{index+1}}" data-idx='{{index}}'>
+            <view class="form_table_right_text">
+              <view class="picker">
+              {{fylx[fyVal[index]].othername}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>  金额</view>
+          <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" name="je{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{jeVal[index]}}' bindinput='jeInputVal'/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view> 
+    <view class="form_line"></view>
+    </view>
+    <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+      <button data-index="{{FYmaxIndex+1}}" class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="FYaddmore">+添加费用</button>
+      <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="hiddenFY">确定</button>
+    </view>
+    </view>
+
+    <view hidden="{{detail_more}}">
+      <view class="form_table_border">
+      <view class="form_table_border_in">
+        <!--<view class="form_table_left">预定类型</view>-->
+        <view class="form_table_right" style="width: 100%;">
+          <radio-group bindchange="radioChange" name="isIn">
+            <view class="form_table_left">
+              <radio color="#5677fc" value="1001" checked="true" class="list-radio" style="margin-right: 60rpx;">本人入住</radio>
+              <radio color="#5677fc" value="1002" class="list-radio">非本人入住</radio>
+            </view>
+          </radio-group>
+        </view>
+        <view class="clear"></view>
+      </view>
+    </view> 
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">性别</view>
+        <view class="form_table_right">
+          <picker bindchange="bindSexChange" value="{{sex[sexIndex].code}}" range="{{sex}}" range-key="{{'othername'}}" name="sex">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{sex[sexIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>  
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">国籍</view>
+          <view class="form_table_right">
+            <picker bindchange="bindGJChange" value="{{gj[gjIndex].code}}" range="{{gj}}" range-key="{{'othername'}}" name="gj">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{gj[gjIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">职业</view>
+          <view class="form_table_right">
+            <picker bindchange="bindZYChange" value="{{zy[zyIndex].code}}" range="{{zy}}" range-key="{{'othername'}}" name="zy">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{zy[zyIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">工作单位</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="gzdw" value="{{gzdw}}" placeholder="请输入"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">籍贯地址</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="jgdz" value="{{jgdz}}" placeholder="选填"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showMaster" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_wyjg}}">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">房间物品交割</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="11" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">请选择</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <!--<view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">水电煤读数</view>
+          <view class="form_table_right" bindtap='tapRZ' data-index="12" data-key='{{htNo}}'>
+            <view class="form_table_right_text"><span style="color: #c0c0c0;">请输入</span></view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>-->
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showMaster" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_jjlxr}}">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">关系</view>
+          <view class="form_table_right">
+            <picker bindchange="bindJJLXRChange" value="{{lxrgx[lxrgxIndex].code}}" range="{{lxrgx}}" range-key="{{'othername'}}" name="lxrgx">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{lxrgx[lxrgxIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">姓名</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="lxrxm" value="{{lxrxm}}" placeholder="请输入"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">手机号</view>
+          <view class="form_table_right">
+            <input type="number" maxlength="11" class="form_table_right_text" name="tel_lxr" value="{{tel_lxr}}" placeholder="请输入"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showMaster" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_bz}}">
+      <view class="weui-uploader">
+  <view class="weui-uploader__hd" style="padding: 20rpx 40rpx 6rpx 40rpx;">
+    <view class="weui-uploader__overview">
+        <view class="weui-uploader__title" style="font-weight: bold;">合同扫描件</view>
+        <view class="weui-uploader__info" style="font-size: 32rpx;">{{imgs.length}}/12</view>
+    </view>
+  </view>
+  <view class="img-v weui-uploader__bd" style="padding: 10rpx 40rpx;">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <image class="weui-uploader__img" src="{{item}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage" bindlongtap='previewLongImg'>
+          <icon type='cancel' class="delete-btn" data-index="{{index}}" catchtap="deleteImg"></icon>
+        </image>
+    </view>
+    <view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"></view>
+  </view>
+</view>
+<view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">补充条款</view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;border-radius: 20rpx;">
+        <textarea maxlength="{{max}}" style="height: 25vh;border-radius: 10rpx;background-color:#fafafa;" name="supplement">
+        </textarea>
+      <!--<view class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</view>-->
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">合同备注</view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;border-radius: 20rpx;">
+        <textarea  maxlength="250" style="height: 25vh;border-radius: 10rpx;background-color: #fafafa;" name="remark"></textarea>
+      </view>    
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showMaster" style="background-color: #5677FC;margin-bottom:auto;">保存</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_qyxx}}">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">签约人</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="qyr" placeholder="请输入"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">签约时间</view>
+          <view class="form_table_right">
+            <view class="form_table_right_text">
+              <picker data-field="date" mode="date" value="{{QYdate}}" bindchange="qyDateChange" name="qyDate">
+                <view class="weui-input">{{QYdate}}</view>
+              </picker>   
+            </view>
+          </view>
+          <view class="arrow" style="margin-top: 10rpx;"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">合同类型</view>
+          <view class="form_table_right">
+            <picker bindchange="bindHTLXChange" value="{{htlx[htlxIndex].code}}" range="{{htlx}}" range-key="{{'othername'}}" name="htlx">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{htlx[htlxIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showMaster" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_wpjg}}">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">模板名称</view>
+          <view class="form_table_right">
+            <picker bindchange="bindHTLXChange" value="{{mbmc[mbmcIndex].code}}" range="{{mbmc}}" range-key="{{'othername'}}" name="mbmc">
+              <view class="form_table_right_text">
+                <view class="picker">
+                  {{mbmc[mbmcIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>  
+      <view class="title_form_line" style="background-color: #e4e4e4;"><span class="span-title">房间物品</span></view>   
+      <view class="form_table_border" wx:for="{{wpList}}" wx:key="gid">
+        <view class="form_table_border_in">
+          <view class="form_table_left">{{item.gname}}</view>
+          <view class="form_table_right">    
+            <view class="form_table_right_text" style="float: right;">
+              <view style="display: flex;float: right;">
+              <view class="but1"  data-index="{{index}}" bindtap="numjsj">-</view>          
+              <input  class="input1" data-index="{{index}}" type="number" name="" id="" bindinput="numchange" value="{{item.num}}"/>
+              <view class="but1" data-index="{{index}}" bindtap="numjs">+</view>
+            </view>
+          </view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="title_form_line" style="background-color: #e4e4e4;"><span class="span-title">公区物品</span></view>   
+      <view class="form_table_border" wx:for="{{gqList}}" wx:key="gid">
+        <view class="form_table_border_in">
+          <view class="form_table_left">{{item.gname}}</view>
+          <view class="form_table_right">    
+            <view class="form_table_right_text" style="float: right;">
+              <view style="display: flex;float: right;">
+              <view class="but1"  data-index="{{index}}" bindtap="numjsjGQ">-</view>          
+              <input  class="input1" data-index="{{index}}" type="number" name="" id="" bindinput="numchangeGQ" value="{{item.num}}"/>
+              <view class="but1" data-index="{{index}}" bindtap="numjsGQ">+</view>
+            </view>
+          </view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showWYJG" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{detail_sdds}}">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">交割方式</view>
+          <view class="form_table_right">
+            <view class="switch_to">
+              <view bindtap="checkcheack" class="switch_to_left {{!cheack?'bgb':'bga'}}"><span>立刻交割</span></view>
+              <view bindtap="checkcheack" class="switch_to_right {{cheack?'bgb':'bga'}}"><span>后续交割</span></view>
+            </view>
+          </view>
+        </view>
+      </view> 
+      <view wx:if="{{!cheack}}" class="form_table_border" >
+        <view class="form_table_border_in">
+          <view class="form_table_left">交割时间</view>
+          <view class="form_table_right">
+            <view class="form_table_right_text">
+              <picker data-field="date" mode="date" value="{{JGdate}}" bindchange="changeTime" name="jgDate">
+                <view class="weui-input">{{JGdate}}</view>
+              </picker>   
+            </view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view>
+      <view wx:if="{{!cheack}}">
+<view class="box1"> 
+  <view class="form_table_left">房间</view>
+  <view class="form_table_centre">支付方式</view>
+  <view class="form_table_centre2">底数</view>
+</view>
+<view class="page-body">
+  <view class="form_table_border" wx:for="{{roomdata}}" wx:key="code">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="width: 100rpx;">{{item.othername}}</view>
+      <view class=".form_table_centre">
+        <span style="color: #aaa9a9;font-size: 14px;">预付费</span>
+      </view>
+      <view class="form_table_right2">
+        <input data-index="{{index}}" placeholder="请输入" class="inputdow" type="digit" value="{{item.minimum}}" bindinput="minchange" />
+      </view>
+      <view class="arrow3"></view>
+    </view> 
+  </view> 
+</view>
+<view class="box1"> 
+  <view class="form_table_left">公区</view>
+  <view class="form_table_centre">支付方式</view>
+  <view class="form_table_centre2">底数</view>
+</view>
+<view class="page-body">
+  <view class="form_table_border" wx:for="{{publicdata}}" wx:key="code">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="width: 100rpx;">{{item.othername}}</view>
+      <view class=".form_table_centre">
+        <span style="color: #aaa9a9;font-size: 14px;">后付费</span>
+      </view>
+      <view class="form_table_right2">
+        <input data-index="{{index}}" placeholder="请输入" class="inputdow" type="digit" value="{{item.minimum}}" bindinput="minchange1" />
+      </view>
+      <view class="arrow3"></view>
+    </view>  
+  </view> 
+</view>
+  <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" bindtap="showWYJG" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+  </view>
+  </view>
+</view>
+    </form>
+  </view>
+</scroll-view>
+</swiper-item>
+  <view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+          <text>在线确认</text>
+      </view>
+      <view class='toast-main'>
+        <span style="font-size: 32rpx;font-weight: bold;">是否给租客确认</span>
+      </view>
+      <view class='toast-button'>
+          <view class='cancelButton'>
+            <button catchtap='cancel'>取消</button>
+          </view>
+          <view class='confirmButton'>
+            <button catchtap='confirm' open-type="share">确定</button>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>

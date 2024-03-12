@@ -1,0 +1,195 @@
+/* pages/checkIn_add/checkIn_add.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+/*标题栏样式开始*/
+.nav{
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background:#5677fc;
+}
+.title_icon{
+  position:absolute;
+  bottom: 18rpx;
+  left: 30rpx;
+  /*
+  border-radius: 70rpx;
+  box-sizing: border-box;
+  border: 0.5px solid #c0c0c0;
+  */
+  display: flex;
+  z-index: 20;
+}
+/*标题栏样式结束*/
+.weui-agree .weui-agree__text {
+  display: inline;
+}
+.swiper-items{
+  height: 100%;
+  background-color: white;
+}
+.scroll-views{
+  height: 100%;
+}
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 40rpx;
+}
+.list-radio{
+  transform: scale(0.9);
+}
+/*物业交割*/
+.but1{
+  background-color: #fff;
+  width: 50rpx;
+  border: 1px solid #d2d2d2;
+  text-align: center;
+  padding: 0px;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.input1{
+  text-align: center;
+  background-color: #fff;
+  /*height: 20px;*/
+  border-top: 1px solid #d2d2d2;
+  border-bottom: 1px solid #d2d2d2;
+  /*display: inline-block;*/
+  width: 50px;
+  position: relative;
+  top: 32%;
+  z-index:0;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+ /*物业交割*/
+ /*水电煤*/
+ .form_table_centre{
+  position: relative;
+  left: 35%;
+  transform: translate(-50%);
+  font-size:4vw;
+  width: 30vw;
+  height:50rpx;
+}
+.form_table_centre2{
+  position: relative;
+  left: 55%;
+  width: 70px;
+  margin-top: -50rpx;
+}
+.form_table_right2{
+  position: relative;
+  left: 64%;
+  width: 70px;
+  top: -28px;
+  }
+  .switch_to{
+    float: right;
+    width:120px ;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 10px;
+    height: 28px;
+    background-color: #e2e2e2;
+  }
+  .switch_to_left{
+    border-radius: 5px;
+    background-color:transparent;
+    display: inline-block;
+    height: 22px;
+    font-weight: bold;
+    width: 60px;
+    text-align: center;
+    margin-top: 2px;
+    padding-top: 2px;
+    font-size: 12px;
+  }
+  .switch_to_right{
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: transparent;
+    font-size: 12px;
+    padding-top: 2px;
+    height: 22px;
+    width: 60px;
+    text-align: center;
+    margin-top: 2px;
+    display: inline-block;
+  }
+  .bga{
+    background-color: transparent;
+  }
+  .bgb{
+    background-color: rgb(255, 255, 255);
+  }
+.box1{
+    width: 100vw;
+    height: 60rpx;
+    line-height: 60rpx;
+    background-color: #e4e4e4;
+}
+.box1 .form_table_left{
+  /*margin-top: 5px;*/
+  margin-left: 20px;
+}
+.box1 .form_table_centre{
+  /*padding-top: 5px;*/
+  padding-left: 3px;
+}
+.box1 view{
+  color: #a0a0a0;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+}
+.inputdow{
+  text-align: center;font-size: 12px;border-radius: 5px;border: 1px solid rgb(185, 185, 185);width: 70px;background-color: rgb(255, 255, 255);
+}
+.arrow3{
+  width: 10px;
+  height: 10px;
+  border-top: 4rpx solid #cfcbcb;
+  border-right: 4rpx solid #cfcbcb;
+  position: relative;
+  left: 95%;
+  top:-100rpx;
+  transform: rotate(45deg);
+}
+.img{
+  display: inline-block;
+}
+.pic {
+  float:left;
+  position:relative;
+  margin-right:18rpx;
+  margin-bottom:18rpx;
+  width: 146rpx;
+  height: 146rpx;
+}
+.delete-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.weui-uploader{
+  /*padding: 10rpx;*/
+  background-color: white;
+}
+.pic image{
+  width: 100%;
+  height: 100%;
+}
+.currentWordNumber {
+  background-color: #fafafa;
+  padding-right: 10rpx;
+  color: #888;
+  text-align: right;
+}

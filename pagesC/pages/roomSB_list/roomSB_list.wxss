@@ -1,0 +1,81 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.service-list{
+	padding: 0 20rpx;
+}
+.service-item{
+	display: flex;
+	padding: 20rpx 0; 
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.service-img{
+  /*
+  width: 50rpx;
+  height: 50rpx;*/
+  width: 80rpx;
+  height: 80rpx;
+  padding-top: 8rpx;
+}
+.service-text{
+  flex: 1;
+  margin-left: 20rpx;
+  width: 70%;
+}
+.service-text .service-tite{
+  /*color:#ff0000;*/
+  width: 90%;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.swiper-items{
+  height: 100%;
+  background-color: white;
+}
+.scroll-views{
+  height: 100%;
+}
+.service-city{
+  width: 60%;
+  height: 40rpx;
+  /*margin: 10rpx 0;*/
+  font-size: 28rpx;
+  /*color: #04BE02;*/
+  color: #c0c0c0;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.query_style_l{
+  /*margin: 20rpx 0rpx;*/
+  margin-top: 20rpx;
+  background-color: white;
+  width: 35%;
+  padding: 4rpx 20rpx;
+  border: 2rpx solid;
+}
+.title_span{
+  /*margin: 20rpx 0;*/
+  margin-top: 20rpx;
+  height: 72rpx;
+  line-height: 72rpx;  
+}
+.button_left{
+  font-size: 14px;
+  width: 20%;
+  background-color: #f7982a;
+  text-align: center;
+  border-radius: 10rpx;
+  color: #ffffff;
+  margin: 20rpx 0rpx 0 10rpx;
+  height: 72rpx;
+  line-height: 72rpx;  
+}
+.hidenScroll{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+}

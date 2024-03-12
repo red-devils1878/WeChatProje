@@ -1,0 +1,17 @@
+<view class="weui-uploader">
+  <view class="weui-uploader__hd" style="padding: 20rpx;">
+    <view class="weui-uploader__overview">
+        <view class="weui-uploader__title">图片上传</view>
+        <view class="weui-uploader__info" style="font-size: 32rpx;">{{img_qty}}/12</view>
+    </view>
+  </view>
+  <view class="img-v weui-uploader__bd" style="padding: 0 20rpx;">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <image class="weui-uploader__img" src="{{item.url}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage">
+            <icon type='cancel' class="delete-btn" data-index="{{index}}" data-key="{{item.FileID}}" catchtap="deleteImg"></icon>
+        </image>
+    </view>
+    <view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"> </view>
+  </view>
+  <button hidden="{{showView}}" type="primary" style="background-color: #5677FC;margin-bottom:auto;margin-top: 50rpx;" bindtap="chooseImg">拍照 / 上传</button>
+</view>

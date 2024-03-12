@@ -1,0 +1,63 @@
+<view class="container" style="background-color:#fafafa;">
+<form bindsubmit="formSave" catchtap="noop" catchreset="formReset">
+  <view style="background-color: white;">
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+          <view class="form_table_left">水费</view>
+          <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" style="width: 47vw;" name="sf" placeholder-style="color:#c0c0c0" value="{{price_sf}}" placeholder="请填写水费" bindinput="sfChange"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">(元/吨)</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+          <view class="form_table_left">电费</view>
+          <view class="form_table_right">
+              <input type="digit" class="form_table_right_text" style="width: 47vw;" name="df" placeholder-style="color:#c0c0c0" value="{{price_df}}" placeholder="请填写电费" bindinput="dfChange"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">(元/度)</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+
+  <!--<view class="form_table_border_none">
+      <view class="form_table_border_in">
+          <view class="form_table_left">燃气费</view>
+          <view class="form_table_right">
+              <input type="digit" class="form_table_right_text" style="width: 39vw;" name="rqf" placeholder-style="color:#c0c0c0" value="{{price_rq}}" placeholder="请填写燃气费"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">(元/立方米)</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+          <view class="form_table_left">物业费</view>
+          <view class="form_table_right">
+              <input type="digit" class="form_table_right_text" style="width: 47vw;" name="wyf" placeholder-style="color:#c0c0c0" value="{{price_wy}}" placeholder="请填写物业费"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">(元/月)</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_table_border_none">
+      <view class="form_table_border_in">
+          <view class="form_table_left">宽带费</view>
+          <view class="form_table_right">
+            <input type="digit" class="form_table_right_text" style="width: 47vw;" name="kdf" placeholder-style="color:#c0c0c0" value="{{price_kd}}" placeholder="请填写宽带费"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">(元/月)</view>
+          <view class="clear"></view>
+      </view>
+  </view>-->
+  </view>
+  <view class="form_table_border" style="margin-top:40rpx;">
+    <view class="form_table_border_in">
+      <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">确认</button>
+    </view>
+  </view>
+</form>
+</view>

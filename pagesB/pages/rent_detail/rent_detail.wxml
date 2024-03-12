@@ -1,0 +1,173 @@
+<view class="container" style="background-color: white;">
+<scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight -50}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoadingZD">
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 20rpx 0 0 0;">
+      <view class="form_zfje_style" wx:if="{{jqzt!='3'}}">{{xstje}}</view>
+      <view class="form_zfje_style" wx:else>+ {{ysje}}</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in" style="padding: 0;margin-bottom: 10rpx;color: #ff0000;" wx:if="{{jqzt!='3'}}">
+      <view class="form_table_right" style="font-size: 3.5vw;width: 100%;text-align: center;">待处理</view>
+    </view>
+    <view class="form_table_border_in" style="padding: 0;margin-bottom: 10rpx;" wx:else>
+      <view class="form_table_right" style="font-size: 3.5vw;width: 100%;text-align: center;">已完成</view>
+    </view>
+  </view>
+  <view class="form_table_border_tx">
+    <view class="form_table_border_none">
+      <view class="rpt_table_border_in" style="height: 100rpx;">
+        <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text">线下收租请及时操作收款，避免生成不必要的滞纳金，推荐在线收租，收款自动确认，资金安全到账。</span>
+        </view>
+        <view class='clear'></view>
+      </view>
+    </view>  
+  </view>
+    <view class="service-list">
+			<view class="service-item" style="border-bottom: none;">
+        <view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite">{{zy}}</view>
+            </view>
+            <view style="display: flex;">
+					    <view class="service-tite" style="width: 70%;font-size: 30rpx;color: #c0c0c0;">{{roomNo}}</view>
+              <view bindtap='JumpHT' data-key="{{contractNo}}" style="width: 30%;text-align: right;font-size: 30rpx;color:#c0c0c0;">合同详情 ></view>
+            </view>          
+		  	</view>
+			</view>
+		</view>
+  <view class="title_form_line"><span class="span-title">账单明细</span></view>
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+				<view class="service-text">
+          <view style="display: flex;">
+					  <view class="service-tite">{{item.fylx_name}}</view>
+            <view style="width: 60%;text-align: right;font-size: 30rpx;color:#04BE02;">{{item.xstje}}</view>
+          </view>
+          <view style="display: flex;">
+					  <view class="service-tite" style="width: 70%;font-size: 30rpx;color: #c0c0c0;">{{item.yssj2}}</view>
+          </view>          
+		  	</view>
+			</view>
+		</view>
+    <view class="title_form_line"><span class="span-title">应收</span></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">应收总额</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{zdje}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">已收总额</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{ysje}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">应支付日</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{yssj}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+    <view hidden="{{hiden_ysk}}">
+    <view class="title_form_line"><span class="span-title">已完成</span></view>
+    <view wx:for="{{ysklist}}" wx:key="{{item.djbh}}">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">创建时间</view>
+        <view class="form_table_right">
+          <view type="text" class="form_table_right_text2">{{item.cjsj}}</view>
+        </view>
+        <view class="clear"></view>
+      </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">收款方式</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{item.skfs}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">收款明细</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{item.skmx}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">审批状态</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text2">{{item.spzt}}</view>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+    </view>
+    </view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTopZD"></view>   
+</scroll-view>
+  <view class="form_info_bot1" style="border: none;">
+    <view class="tr bg-w" wx:if="{{jqzt!='3'}}">
+      <view class="form_info_bot_td2_r" bindtap='tapMore' data-key="{{id}}" data-jq="{{jqzt}}">更多</view>
+      <view style="width: 2rpx;"></view>
+      <view class="form_info_bot_td2_r" data-key="{{id}}">
+        <button class="mini-btn" type="primary" size="mini" style="text-align:center;font-size: 4vw;background-color:#5677FC;display: inline-flex;" open-type="share">催租</button>
+      </view>
+      <view style="width: 2rpx;"></view>
+      <view class="form_info_bot_td2_r" bindtap='tapZRF' data-key="{{id}}">找人付</view>
+      <view style="width: 2rpx;"></view>
+      <view class="form_info_bot_td2_r" bindtap='tapSK' data-key="{{id}}">收款</view>
+    </view>
+    <view wx:else>
+    </view>
+  </view>  
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+  <block wx:for-items="{{actionSheetItems}}">
+    <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+  </block>
+  <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+  </action-sheet>
+  <view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <text>账单改期</text>
+      </view>
+      <view class="toast-main" style="display: flex;">
+        <view class="toast-table-left">应收日期</view>
+        <view class="toast-table-right">
+          <picker data-field="date" mode="date" value="{{Sdate}}" bindchange="startDateChange">
+            <view class="weui-input">{{Sdate}}</view>
+          </picker>
+        </view>
+        <view class="arrow" style="margin-top: 22rpx;"></view>
+      </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>
+</view>

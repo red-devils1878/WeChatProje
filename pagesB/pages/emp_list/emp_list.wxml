@@ -1,0 +1,63 @@
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+	<view class="search-bar">
+		<input type="text" placeholder="请搜索姓名、电话" bindinput="inputSearch"></input>
+		<button class="search-btn" bindtap="submitSearch">搜索</button>
+	</view>
+</view>
+<view class="container">
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <view class="swiper-items">
+    <!--<view class="form_table_border_none" style="margin: 0 20rpx;">
+      <view class="form_table_border_in">
+        <view class="form_table_left">用户列表</view>
+      </view>
+    </view>-->
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 60}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+       <checkbox-group bindchange="checkboxChange" name="hidD">
+        <!--<label class="checkbox-cell" wx:for="{{items}}" wx:key="{{item.value}}">
+        <view class="weui-cell__hd">
+            <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+        </view>
+        <view class="weui-cell__bd">{{item.name}}</view>
+        </label>-->
+        <view class="service-list">
+		<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.emp_no}}" id="{{item.emp_no}}">
+          <view class="weui-cell__hd">
+            <checkbox value="{{item.emp_no}}" checked="{{item.checked}}" class="checked_type"/>
+          </view>
+          <view class="service-img">
+			<image src="../../../static/images/my/zktx.jpg" mode="aspectFill"></image>
+		  </view>
+          <view class="service-text">
+            <view style="display: flex;">
+			  <view class="service-tite" style="font-weight: bold;">{{item.emp_name}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;width: 80%;">{{item.c_tel}}</view>
+            </view>   
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">职务:{{item.job_name}}</view>
+            </view>      
+		  </view>
+		</view>
+	   </view>
+    </checkbox-group>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    <view class="form_info_bot1" style="border: none;">
+    <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <!--<view class="form_table_left" style="width: 50%;">
+          <radio bindtap="checked" checked="{{checked}}" color="#5677fc" value="out" class="middle-item-radio"></radio>全选     
+        </view>-->
+        <view class="form_table_right" style="width: 50%;display: flex;">
+          <!--合计：共<span style="color: #5677fc;">{{qty}}</span>把-->
+          合计：共<span style="color: #5677fc;">{{qty}}</span>人
+          <button type="mini" class="form_info_bot_td2_r2" formType="submit">确定</button>
+        </view>      
+      </view>
+    </view>
+    </view>
+  </view>
+  </form>
+</view>

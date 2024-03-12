@@ -1,0 +1,97 @@
+<view class="container">
+<scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">基本信息</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" style="display: flex;">
+    <view class="form_table_border_in" style="width: 100%;">
+      <view class="form_table_detail_left" style="width: 20%;">网关名称</view>
+      <view class="table_center">
+        <view type="text" class="form_table_detail_right_text">{{mc}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">网关编号</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{dsn}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">状态</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{zt}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">网关版本</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{appVersion}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">硬件版本</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{hardwareVersion}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_detail_left">更新时间</view>
+      <view class="form_table_right">
+        <view type="text" class="form_table_detail_right_text">{{online_time}}</view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" bindtap='tapDB' data-index="2" data-key="{{dsn}}">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">网关操作</view>
+      <view class="{{arrow_yd}}"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view hidden="{{detail_yd}}">
+    <view class="form_table_border" bindtap='tapYD' data-index="1" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">获取信号</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border" bindtap='tapYD' data-index="3" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">获取版本</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view wx:if="{{yhid=='admin'}}" class="form_table_border" bindtap='tapYD' data-index="2" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">重启网关</view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view wx:else>
+    </view>
+  </view>
+</scroll-view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

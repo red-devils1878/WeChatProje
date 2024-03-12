@@ -1,0 +1,23 @@
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+  <view class="search-bar">
+		<input type="text" maxlength="12" placeholder="请搜索房号客户名、电话、房号" bindinput="inputSearch"></input>
+		<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+	</view>
+ </view>
+<view class="container">
+	<scroll-view class="scroll-views" style="height:{{winHeight-50}}px;" scroll-y="true" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+<view style="background-color: white;">
+  <view class="form_table_border" style="margin-left: 0rpx;">
+  <radio-group bindchange="checkboxChange">
+      <label class="checkbox-cell" wx:for="{{items}}" wx:key="{{item.value}}">
+        <view class="weui-cell__bd">{{item.name}}</view>
+        <view class="weui-cell__hd">
+            <radio value="{{item.value}}" checked="{{item.checked}}" color="#5677fc" class="list-radio"/>
+        </view>
+      </label>
+  </radio-group>
+  </view> 
+</view>
+<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+</scroll-view>
+</view>

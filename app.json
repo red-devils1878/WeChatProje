@@ -1,0 +1,229 @@
+{
+    "pages": [
+        "pages/home/home",
+        "pages/homeYS/homeYS",
+        "pages/room_list2/room_list2",
+        "pages/my/my",
+        "custom-tab-bar/index",
+        "pages/plxf_info/plxf_info",
+        "pages/zhengdong_add/zhengdong_add",
+        "pages/yshs_list/yshs_list",
+        "pages/index/index",
+        "pages/hezu_add/hezu_add",
+        "pages/zhengtao_add/zhengtao_add",
+        "pages/logs/logs",
+        "pages/checkIn_list/checkIn_list",
+        "pages/contract_list/contract_list",
+        "pages/auth/auth",
+        "pages/workOrder_list/workOrder_list",
+        "pages/rzjl_list/rzjl_list",
+        "pages/openLock_list/openLock_list",
+        "pages/ddms_list/ddms_list",
+        "pages/tenant_list/tenant_list",
+        "pages/rzr_list/rzr_list",
+        "pages/zjdj_list/zjdj_list",
+        "pages/myLock_list/myLock_list",
+        "pages/myDevice_list/myDevice_list",
+        "pages/myDeviceDB_list/myDeviceDB_list",
+        "pages/device_list/device_list",
+        "pages/cqwkm_list/cqwkm_list",
+        "pages/helpNotes/helpNotes",
+        "pages/dfbz_list/dfbz_list",
+        "pages/ms_info/ms_info",
+        "pages/yykf_list/yykf_list",
+        "pages/alarm_query/alarm_query",
+        "pages/jztx_info/jztx_info",
+        "pages/forward_info/forward_info",
+        "pages/homeYY/homeYY"
+    ],
+    "subPackages": [
+        {
+            "root": "pagesA",
+            "pages": [
+                "pages/db_chongzhijilu/db_chongzhijilu",
+                "pages/db_czjl/db_czjl",
+                "pages/db_fjydpz/db_fjydpz",
+                "pages/db_operate/db_operate",
+                "pages/db_ycjl/db_ycjl",
+                "pages/db_ydjl/db_ydjl",
+                "pages/sb_czjl/sb_czjl",
+                "pages/sb_operate/sb_operate",
+                "pages/sb_ycjl/sb_ycjl",
+                "pages/sb_ysjl/sb_ysjl",
+                "pages/czdf_info/czdf_info",
+                "pages/czsfXX_info/czsfXX_info",
+                "pages/myLock/myLock",
+                "pages/mssj_list/mssj_list",
+                "pages/msyhZK_list/msyhZK_list",
+                "pages/xfsq_add/xfsq_add",
+                "pages/pwd_add/pwd_add",
+                "pages/zhiwen_add/zhiwen_add",
+                "pages/pwdGL_add/pwdGL_add",
+                "pages/face_add/face_add",
+                "pages/pwdTX_add/pwdTX_add",
+                "pages/jdrz_add/jdrz_add",
+                "pages/card_add/card_add",
+                "pages/gateway_list/gateway_list",
+                "pages/wg_operate/wg_operate",
+                "pages/offline_add/offline_add",
+                "pages/lock_query/lock_query",
+                "pages/lock_test/lock_test",
+                "pages/cx_mrdl/cx_mrdl",
+                "pages/myLockYY/myLockYY"
+            ],
+            "independent": false
+        },
+        {
+            "root": "pagesB",
+            "pages": [
+                "pages/rzxq_info/rzxq_info",
+                "pages/checkIn_add/checkIn_add",
+                "pages/checkIn_record/checkIn_record",
+                "pages/checkOut_add/checkOut_add",
+                "pages/checkOut_wpjg/checkOut_wpjg",
+                "pages/checkOut_yt/checkOut_yt",
+                "pages/checkOut_ys/checkOut_ys",
+                "pages/checkOut_remark/checkOut_remark",
+                "pages/relet_add/relet_add",
+                "pages/report_zk/report_zk",
+                "pages/zrf_info/zrf_info",
+                "pages/sk_add/sk_add",
+                "pages/fk_add/fk_add",
+                "pages/account_add/account_add",
+                "pages/zdtx_add/zdtx_add",
+                "pages/rent_detail/rent_detail",
+                "pages/rent_detailFK/rent_detailFK",
+                "pages/rzxq_updateRemark/rzxq_updateRemark",
+                "pages/zdyl_list/zdyl_list",
+                "pages/room_next/room_next",
+                "pages/htDlg_list/htDlg_list",
+                "pages/batchRoom_list/batchRoom_list",
+                "pages/publishRoom_list/publishRoom_list",
+                "pages/room_info/room_info",
+                "pages/room_update/room_update",
+                "pages/roomDescription/roomDescription",
+                "pages/roommate/roommate",
+                "pages/roomPhotos/roomPhotos",
+                "pages/roomUser_add/roomUser_add",
+                "pages/roomUser_list/roomUser_list",
+                "pages/contractPhotos/contractPhotos",
+                "pages/configureRoom/configureRoom",
+                "pages/fangxing_update/fangxing_update",
+                "pages/fangxing_add/fangxing_add",
+                "pages/fwpz/fwpz",
+                "pages/price_update/price_update",
+                "pages/emp_list/emp_list",
+                "pages/openSetting/openSetting",
+                "pages/energy_list/energy_list",
+                "pages/yykf_info/yykf_info",
+                "pages/tenant_info/tenant_info",
+                "pages/workOrder_info/workOrder_info",
+                "pages/fenzu_list/fenzu_list",
+                "pages/cjq_list/cjq_list"
+            ],
+            "independent": false
+        },
+        {
+            "root": "pagesC",
+            "pages": [
+                "pages/workOrderYY_list/workOrderYY_list",
+                "pages/workOrderYY_info/workOrderYY_info",
+                "pages/baoxiuYY_add/baoxiuYY_add",
+                "pages/baoxiuYY_update/baoxiuYY_update",
+                "pages/workOrderWB_list/workOrderWB_list",
+                "pages/workOrderWB_info/workOrderWB_info",
+                "pages/baoxiuWB_add/baoxiuWB_add",
+                "pages/baoxiuWB_update/baoxiuWB_update",
+                "pages/work_result/work_result",
+                "pages/work_photos/work_photos",
+                "pages/work_parts/work_parts",
+                "pages/prd_list/prd_list",
+                "pages/old_device/old_device",
+                "pages/ms_bind/ms_bind",
+                "pages/ms_bindInfo/ms_bindInfo",
+                "pages/sb_bind/sb_bind",
+                "pages/db_bind/db_bind",
+                "pages/new_device/new_device",
+                "pages/roomSB_list/roomSB_list",
+                "pages/roomCollector_list/roomCollector_list",
+                "pages/relation_list/relation_list",
+                "pages/roomDB_list/roomDB_list",
+                "pages/SBbind_info/SBbind_info",
+                "pages/collector_bindInfo/collector_bindInfo",
+                "pages/relation_bindInfo/relation_bindInfo"
+            ],
+            "independent": false
+        }
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#5677FC",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "white",
+        "backgroundColorTop": "#fafafa",
+        "backgroundColorBottom": "#fafafa"
+    },
+    "tabBar": {
+        "custom": true,
+        "color": "#666666",
+        "selectedColor": "#6a96fd",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "首页",
+                "iconPath": "static/images/tabbar/shouye1.jpg",
+                "selectedIconPath": "static/images/tabbar/shouye2.jpg"
+            },
+            {
+                "pagePath": "pages/room_list2/room_list2",
+                "text": "房源",
+                "iconPath": "static/images/tabbar/house1.jpg",
+                "selectedIconPath": "static/images/tabbar/house2.jpg"
+            },
+            {
+                "pagePath": "pages/homeYS/homeYS",
+                "text": "操作页",
+                "iconPath": "static/images/tabbar/code_gray.png",
+                "selectedIconPath": "static/images/tabbar/code_active.png"
+            },
+            {
+                "pagePath": "pages/homeYY/homeYY",
+                "text": "操作页",
+                "iconPath": "static/images/tabbar/code_gray.png",
+                "selectedIconPath": "static/images/tabbar/code_active.png"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": "我的",
+                "iconPath": "static/images/tabbar/me1.jpg",
+                "selectedIconPath": "static/images/tabbar/me2.jpg"
+            }
+        ]
+    },
+    "networkTimeout": {
+        "request": 90000,
+        "connectSocket": 10000,
+        "uploadFile": 10000,
+        "downloadFile": 10000
+    },
+    "navigateToMiniProgramAppIdList": [
+        "wx5823704502996153"
+    ],
+    "plugins": {
+        "myPlugin": {
+            "version": "1.25.0",
+            "provider": "wxd114a381b75d71fd"
+        }       
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于定位效果展示"
+        }
+    },
+    "useExtendedLib": {
+        "weui": true
+    },
+    "debug": true,
+    "sitemapLocation": "sitemap.json"
+}

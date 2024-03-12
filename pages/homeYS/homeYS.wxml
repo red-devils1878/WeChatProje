@@ -1,0 +1,164 @@
+
+<view class='container'>
+  <tui-tips id="tui-tips-ctx"></tui-tips>
+  <view class="scroll-views" style="height:{{winHeight}}px;">
+  <view class='top-container'>
+    <image class='bg-img' src='../../static/images/my/mine_bg_3x.jpg'></image>
+  </view>
+  <view class='middle-container'>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="01" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>一次性密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="02" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>录入指纹</text>
+    </view>
+    <view bindtap='tapEvent' data-index="03" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>录入密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="04" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>蓝牙开门</text>
+    </view>
+    </view>
+  </view>
+  <view class='bottom-container'>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="11" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/sb.png'></image>
+      <text class='item-name'>授时管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="12" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <text class='item-name'>密码管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="13" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/gg.jpg'></image>
+      <text class='item-name'>音量调节</text>
+    </view>
+    <view bindtap='tapEvent' data-index="14" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>我的门锁</text>
+    </view>
+  </view>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="15" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>开门记录</text>
+    </view>
+    <view bindtap='tapEvent' data-index="16" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/kf.png'></image>
+      <text class='item-name'>信号查看</text>
+    </view>
+    <view bindtap='tapEvent' data-index="17" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/kf.png'></image>
+      <text class='item-name'>成员管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="18" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/gg.jpg'></image>
+      <text class='item-name'>胁迫密码</text> 
+    </view>
+  </view>
+  <view class='ul-item'>
+    <!--<view bindtap='tapEvent' data-index="19" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>免扰时段</text>
+    </view>
+    <view bindtap='tapEvent' data-index="20" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/kf.png'></image>
+      <text class='item-name'>报警查询</text>
+    </view>-->
+    <view bindtap='tapEvent2' data-index="21" class='item' hover-class="opcity" hover-stay-time="150" style="width: 104rpx;">
+      <image class='item-img' src='../../static/images/my/kf.png'></image>
+      <text class='item-name'>搜索门锁</text>
+    </view>
+    <view bindtap='tapEvent2' data-index="22" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/04.png'></image>
+      <text class='item-name'>工单管理</text>
+    </view>
+    <view bindtap='tapEvent2' data-index="23" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/db.png'></image>
+      <text class='item-name'>水电(旧)</text>
+    </view>
+    <view bindtap='tapEvent2' data-index="24" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/db.png'></image>
+      <text class='item-name'>水电(新)</text>
+    </view>
+  </view>
+  <view class='ul-item'>
+    <view bindtap='tapEvent2' data-index="25" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/sb.png'></image>
+      <text class='item-name'>水表读数</text>
+    </view>
+    <view bindtap='tapEvent2' data-index="26" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/db.png'></image>
+      <text class='item-name'>电表读数</text>
+    </view>
+    <view bindtap='tapEvent2' class='item' hover-class="opcity" hover-stay-time="150" style="width: 104rpx;">
+    </view>
+    <view bindtap='tapEvent2' class='item' hover-class="opcity" hover-stay-time="150" style="width: 104rpx;">
+    </view>
+  </view>
+  </view>
+</view>
+</view>
+<view style="position: fixed; left: 90vw;top:-1vh;font-size: 25px;" bindtap="changeRoom" hidden="{{detail_add}}">
+  <tui-icon class="tui-icon tui-icon-search-2" style="color: #000000;"></tui-icon>
+</view>
+<view>
+    <view bindtap='clickEvent' hover-class="opcity" hover-stay-time="150" class='avatar' data-index="9">
+      <image class='avatar-img' src="{{ljzt=='连接成功' ? '../../static/images/my/myLock001.gif' : '../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'unLinkBLE' : 'linkBLE'}}"></image>
+    </view>
+</view>
+<view hidden="{{hi}}" class="show_roomList">
+  <view  class="{{item.cl}}" style="width: 100%;height: 20px;border-bottom: #fff solid 1px;font-size: 14px;margin: 20rpx 0rpx;" wx:for='{{roomlist}}'wx:key="room" bindtap="roomXz" data-hid="{{item.hid}}" data-no="{{item.no}}"> 
+    {{item.room}}
+  </view>
+</view>
+<view hidden="{{!detail_Ref}}">
+  <view class='toastbgT'>
+    <view class='showToastT'>
+      <view class='toast-mainT'>
+        <view style="font-size: 24rpx;padding: 0 10rpx;">{{sbmc}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view>音量调节</view>
+      </view>
+      <view class='toast-main'>
+        <!--<view class='toast-input'>
+          <input placeholder='请输入房号' bindinput='setValue' data-name='stuEidtName' value="{{fjmc}}"></input>
+        </view>-->
+      <view class="form_table_border_in">
+        <view class="form_table_right" style="width: 100%;">
+          <radio-group bindchange="radioChangeSJ" name="ydlx">
+            <view class="form_table_left" style="width: 100%;">
+              <radio color="#5677fc" value="00" checked="{{check0}}" class="list-radio" style="width: 25%;">静音</radio>
+              <radio color="#5677fc" value="01" checked="{{check1}}" class="list-radio" style="width: 25%;">低</radio>
+              <radio color="#5677fc" value="02" checked="{{check2}}" class="list-radio" style="width: 25%;">中</radio>
+              <radio color="#5677fc" value="03" checked="{{check3}}" class="list-radio" style="width: 25%;">高</radio>
+            </view>           
+          </radio-group>
+        </view>
+        <view class="clear"></view>
+      </view>
+      </view>
+      <view class='toast-button'>
+        <view class='cancelButton'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='confirmButton'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>

@@ -1,0 +1,158 @@
+<view class="nav" style="height:{{navH}}px">
+  <view class="title_icon">
+    <view style="width: 60rpx;" bindtap="{{bindTap}}">
+      <mp-icon color="white" icon="back" type="filled" size="12"></mp-icon>
+    </view>
+    <label style="color: white;padding-left: 220rpx;">{{title}}</label>
+  </view>
+</view>
+<view class="container" style="margin-top: {{navH}}px;">
+  <swiper-item class="swiper-items">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+    <view class="page-body">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view hidden="{{master}}" style="background-color: white;">
+      <view class="box1"> 
+        <view class="form_table_left">类型</view>
+        <view class="form_table_centre">待处理</view>
+        <view class="form_table_title_right">本次支付</view>
+      </view>
+  <view class="form_table_border" wx:for="{{ysdata}}" wx:key="code">
+    <view class="form_table_border_in">
+      <view class="form_table_left" hidden="true">{{item.id}}</view>
+      <view class="form_table_left" style="width: 25vw;color:#aaa9a9;">{{item.fylx_name}}</view>
+      <view class="form_table_centre2">
+        <span style="color: #aaa9a9;font-size: 28rpx;">+{{item.bcys}}</span>
+      </view>
+      <view class="form_table_right2">
+        <input data-index="{{index}}" placeholder="请输入" class="inputdow" type="digit" value="{{item.bczf}}" bindinput="minchange" />
+      </view>
+    </view> 
+</view>
+<view class="form_line"></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">本次处理(元)</view>
+      <view class="form_table_right">
+        <input type="text" hidden="true" name="hthNo" value="{{hthNo}}"/>
+        <input type="text" class="form_table_right_text" style="color:#aaa9a9;" name="ysje" value="{{ysje}}" disabled="true"/>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">收款日期</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{SKdate}}" bindchange="bindDateChange" name="SKdate">
+            <view class="weui-input">{{SKdate}}</view>
+          </picker>  
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">支付方式</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+        <picker bindchange="bindzffsChange" value="{{zffs[zffsIndex].code}}" range="{{zffs}}" range-key="{{'othername'}}" name="zffs">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{zffs[zffsIndex].othername}}
+            </view>
+          </view>
+        </picker>      
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="height: 20rpx;">
+      <view class="form_table_left" style="font-weight: bold;">备注</view>
+    </view>
+  </view>
+  <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+    <textarea style="height: 12vh;" name="remark" placeholder="备注(选填)"></textarea>
+  </view>
+  <view style="background-color: #fafafa;padding-top: 30rpx;">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <!--<button type="primary" bindtap="showZF" style="background-color: #5677FC;margin-bottom:auto;">确定</button>-->
+        <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+      </view>
+    </view>
+  </view>
+  </view>
+  <view hidden="{{detail_zf}}" style="background-color: white;">
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 20rpx 0 0 0;">
+      <view class="form_zfje_style">+ {{ysje}}
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 0;color: #c0c0c0;">
+      <view class="form_table_right" style="font-size: 4vw;width: 100%;text-align: center;">支付金额</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">选择支付方式</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <radio-group bindchange="checkboxChange" name="zflx">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">
+        <image class='item-img' src='../../../static/images/my/ylzf.jpg' style="width: 50rpx;height:50rpx;"></image>
+        <view class="form_zflx_style">
+          <text class="form_table_right_text">银联支付</text>
+          <radio color="#5677fc" class="radio_type" value="ylzf"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">
+      <image class='item-img' src='../../../static/images/my/zfb.jpg' style="width: 50rpx;height:50rpx;"></image>
+      <view class="form_zflx_style">
+        <text class="form_table_right_text">支付宝</text>
+        <radio color="#5677fc" class="radio_type" value="zfb"/>
+      </view>
+      </view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">
+      <image class='item-img' src='../../../static/images/my/weixin.jpg' style="width: 50rpx;height:50rpx;"></image>
+      <view class="form_zflx_style">
+        <text class="form_table_right_text">微信支付</text>
+        <radio color="#5677fc" class="radio_type" value="wxzf"/>
+      </view>
+      </view>
+    </view>
+  </view>
+</radio-group>
+  <view style="background-color: #fafafa;padding-top: 30rpx;">
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">立即支付</button>
+      </view>
+    </view>
+  </view>
+  </view>
+</form>
+</view>
+  </scroll-view>
+</swiper-item>
+</view>

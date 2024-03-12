@@ -1,0 +1,20 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.curtain{
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-color: black;
+  z-index:9999;
+  top:0;
+  left:0;
+  opacity:0.4;
+}
+.header {
+  margin-top: 300rpx;
+  text-align: center;
+}
+.header image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}

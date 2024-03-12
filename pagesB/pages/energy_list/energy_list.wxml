@@ -1,0 +1,74 @@
+<!--pages/energy_list/energy_list.wxml-->
+<view class="nav" style="height:{{navH}}px">
+  <view class="title_icon">
+    <mp-icon bindtap='tapInfo' data-index="1"  color="white" icon="back" type="filled" size="12"></mp-icon>
+    <label style="color: white;padding-left: 288rpx;">水电煤</label>
+    <label bindtap='tapInfo' data-index="2" style="color: white;padding-left: 40rpx;">单价</label>
+  </view>
+</view>
+<view class="container" style="background-color: #fafafa;margin-top: {{navH}}px;">
+  <view class="form_table_border" style="border: none;height: 100rpx;">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;width: 80%;font-size: 32rpx;">水费  <span style="font-weight:normal;color:#c0c0c0">{{price_sf}}元/吨</span></view>
+              <view  style="float: right;">
+                <button type="primary" size="mini" style="background-color: #5677FC;margin-bottom:auto;" bindtap="bindSF">抄表</button>
+              </view>
+        </view>
+  </view>
+  <view class="form_view">
+    <textarea class="form_textarea" disabled="true" value="{{use_sl}}"></textarea>
+    <textarea class="form_textarea" disabled="true" value="{{amount_sl}}"></textarea>
+  </view>
+  <view class="form_table_border" style="border: none;height: 100rpx;">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;width: 80%;font-size: 32rpx;">电费  <span style="font-weight:normal;color:#c0c0c0">{{price_df}}元/度</span></view>
+              <view  style="float: right;">
+                <button type="primary" size="mini" style="background-color: #5677FC;margin-bottom:auto;" bindtap="bindDF">抄表</button>
+              </view>
+        </view>
+  </view>
+  <view class="form_view">
+    <textarea class="form_textarea" disabled="true" value="{{use_dl}}"></textarea>
+    <textarea class="form_textarea" disabled="true" value="{{amount_dl}}"></textarea>
+  </view>
+  <!--
+  <view class="form_table_border" style="border: none;height: 100rpx;">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;width: 80%;font-size: 32rpx;">燃气费  <span style="font-weight:normal;color:#c0c0c0">{{price_rq}}元/立方米</span></view>
+              <view  style="float: right;">
+                <button type="primary" size="mini" style="background-color: #5677FC;margin-bottom:auto;" bindtap="bindRQ">抄表</button>
+              </view>
+        </view>
+  </view>
+  <view class="form_view">
+    <textarea class="form_textarea" disabled="true" value="{{use_rq}}"></textarea>
+    <textarea class="form_textarea" disabled="true" value="{{amount_rq}}"></textarea>
+  </view>
+  <view class="form_line"></view>
+  <view style="background-color: white;">
+  <view class="form_table_border_none">
+      <view class="form_table_border_in">
+          <view class="form_table_left">物业费</view>
+          <view class="form_table_right">
+              <input type="text" class="form_table_right_text" style="width: 50vw;" name="wyf" disabled="true"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">{{price_wy}}元/月</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+</view>
+<view class="form_line"></view>
+  <view style="background-color: white;">
+  <view class="form_table_border_none">
+      <view class="form_table_border_in">
+          <view class="form_table_left">宽带费</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" style="width: 50vw;" name="kdf" disabled="true"/>
+          </view>
+          <view style="position: absolute;right: 40rpx;margin-top: 6rpx;">{{price_kd}}元/月</view>
+          <view class="clear"></view>
+      </view>
+  </view>
+</view>
+-->
+</view>

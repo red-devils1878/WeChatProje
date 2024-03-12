@@ -1,0 +1,138 @@
+.container{
+    position: relative;
+  }
+  .middle-container{
+    /*height: 480rpx;*/
+    /*height: 610rpx;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25rpx 45rpx 15rpx 45rpx;
+    margin: 10rpx 10rpx 20rpx 10rpx;
+    background-color: #FFFFFF;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    box-shadow: 0 0 10rpx #efefef
+  }
+  .middle-item-img{
+    width: 80rpx;
+    height: 80rpx;
+  }
+  .middle-item{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ul-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 20%;
+  }
+  .item-img{
+    width: 64rpx;
+    height: 64rpx;
+  }
+  .item-name{
+    padding-top: 13rpx;
+    font-size: 26rpx;
+    /*color: #666666;*/
+    min-width: 80rpx;
+    text-align: center;
+    color:#C0C0C0;
+    /*font-family:LiSu,STLiti,"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;*/
+  }
+  .title-name{
+    padding-top: 13rpx;
+    font-size: 32rpx;
+    min-width: 80rpx;
+    text-align: center;
+    color:#000000;
+    font-weight: bold;
+  }
+/*以下为弹出框样式*/
+.toast-box {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+.toastbg {
+  opacity: 0.2;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+}
+.showToast {
+  position: absolute;
+  opacity: 1;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 40%;
+}
+.toast-title {
+  text-align: center;
+  padding-left: 5%;
+  background-color: #5677fc;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+.toast-main {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: white;
+  text-align: center;
+}
+.toast-input {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+.toast-button {
+  display: flex;
+}
+.button1 {
+  width: 50%;
+  border-top: 2rpx solid #ddd;
+  border-right: 2rpx solid #ddd;
+}
+.button2 {
+  width: 50%;
+  border-top: 2rpx solid #ddd;
+}
+.button1 button {
+  width: 100%;
+  background-color: white;
+  color:#7ebcf7;
+  border-radius: 0px;
+  border-bottom-left-radius: 16rpx;
+}
+.button2 button{
+  width: 100%;
+  background-color: white;
+  color:#7ebcf7;
+  border-radius: 0px;
+  border-bottom-right-radius: 16rpx;
+}
+.picker {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+/*以上为弹出框样式*/

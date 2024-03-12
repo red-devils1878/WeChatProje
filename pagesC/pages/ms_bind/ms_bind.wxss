@@ -1,0 +1,55 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 20rpx;
+}
+.scroll-views{
+  height: 100%;
+}
+.form_table_input_border{
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.form_table_input_in{
+  padding: 20rpx 40rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.form_table_input{
+  float: right;
+  height: 50rpx;
+  width: 100%;
+}
+.form_table_input_text{
+  border: none;
+  font-size: 4vw;
+  line-height: 50rpx;
+  outline: medium;
+  text-align: left;
+  width: 100%;
+}
+.index_build_icon_borderN_1{
+  float:left;
+  width:17.5%;
+  margin:6rpx;
+  background-color: white;
+  border-radius: 6rpx;
+  border: 1rpx solid #c0c0c0;
+}
+.index_build_icon_borderN_3{
+  float:left;
+  width:17.5%;
+  margin:6rpx;
+  background-color:#33d32e;
+  border-radius: 6rpx;
+  border: 1rpx solid #fafafa;
+}
+.index_build_icon_t4{
+  margin: 10rpx;
+  font-size: 3.5vw;
+  text-align: center;
+}

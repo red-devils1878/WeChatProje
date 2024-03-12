@@ -1,0 +1,129 @@
+<view class="container" style="background-color:#fafafa;">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight-50}}px">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <input type="text" class="form_table_right_text" name="orderNo" value="{{orderNo2}}" hidden="true"/>
+          <view class="form_table_left"><span style="color: red;">*</span>楼栋</view>
+            <view class="form_table_right">
+              <input type="text" class="form_table_right_text" name="ld" value="{{ld}}" placeholder="请输入"/>
+            </view>
+            <view class="arrow2"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>房号</view>
+            <view class="form_table_right">
+              <input type="text" class="form_table_right_text" name="room" value="{{room}}" placeholder="请输入"/>
+            </view>
+            <view class="arrow2"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>报修设备</view>
+        <view class="form_table_right">
+          <picker bindchange="bindSBChange" value="{{sblx[sblxIndex].code}}" range="{{sblx}}" range-key="{{'othername'}}" name="sblx">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{sblx[sblxIndex].othername}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>联系人</view>
+            <view class="form_table_right">
+              <input type="text" class="form_table_right_text" name="name" value="{{name}}" placeholder="请输入"/>
+            </view>
+            <view class="arrow2"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>联系电话</view>
+            <view class="form_table_right">
+              <input type="number" class="form_table_right_text" name="tel" value="{{tel}}" placeholder="请输入"/>
+            </view>
+            <view class="arrow2"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">预计上门时间</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                    <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                       <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                    </picker>   
+                </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span>紧急程度</view>
+        <view class="form_table_right">
+          <picker bindchange="jjcdChange" value="{{jjcd[jjcdIndex].code}}" range="{{jjcd}}" range-key="{{'othername'}}" name="jjcd">
+            <view class="form_table_right_text">
+              <view class="picker">
+                {{jjcd[jjcdIndex].othername}}
+              </view>
+            </view>
+          </picker>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_line"></view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+           <view class="form_table_left">详情描述</view>
+           <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+      <textarea style="height: 20vh;" name="wtms" value="{{wtms}}" placeholder="详细描述一下故障情况[选填]"></textarea>
+    </view>
+    <view class="form_line"></view>
+    <view class="weui-uploader" hidden='{{orderNo2=="" ? true : false}}'>
+  <view class="weui-uploader__hd" style="padding: 20rpx;">
+    <view class="weui-uploader__overview">
+        <view class="weui-uploader__title">图片上传</view>
+        <view class="weui-uploader__info" style="font-size: 32rpx;">{{img_qty}}/6</view>
+    </view>
+  </view>
+  <view class="img-v weui-uploader__bd" style="padding: 0 20rpx;">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+        <image class="weui-uploader__img" src="{{item.url}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage">
+            <icon type='cancel' class="delete-btn" data-index="{{index}}" data-key="{{item.FileID}}" catchtap="deleteImg"></icon>
+        </image>
+    </view>
+    <view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"> </view>
+  </view>
+</view>
+  </scroll-view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>
+          </view>
+      </view>
+  </view>
+  </form>
+  </view>
+</view>

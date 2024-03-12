@@ -1,0 +1,50 @@
+<view class="container hidenScroll">
+  <view style="display: flex;margin: 0 20rpx;">
+    <span class="title_span" style="width: 12%;">楼栋</span>
+    <view class="query_style_l" style="width: 52%;">
+      <picker bindchange="bindFYChange" value="{{fy[fyIndex].houseNo}}" range="{{fy}}" range-key="{{'houseName'}}" name="fy">
+      <view class="form_table_right_text" style="width: 100%;text-align: left;padding-top: 5rpx;">
+        <view class="picker">
+          {{fy[fyIndex].houseName}}
+        </view>
+      </view>
+      </picker>
+    </view>
+    <span class="title_span" style="width: 17%;text-align: center;">楼层</span>
+    <view class="query_style_l" style="width: 18%;">
+      <input type="number" style="width: 100%;" bindinput="inputLC"></input>
+    </view>
+  </view>
+  <view style="display: flex;margin: 0 20rpx;">
+    <span class="title_span" style="width: 10.5%;">设备</span>
+    <view class="query_style_l" style="width: 62%;">
+      <input type="text" style="width: 100%;" placeholder="请搜索设备号、名称、房号" bindinput="inputsbh"></input>
+    </view>
+    <view class="button_left" bindtap="submitSearch">查询</view>
+  </view>
+  <view style="margin: 10rpx 20rpx;">
+    共{{total}}条消息
+  </view>
+<view class="swiper-items" style="height:{{winHeight - 125}}px;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 125}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+    <view class="service-list">
+	  <view class="{{item.find=='' ? 'service-item' : 'service-item'}}" wx:for="{{servicelist}}" wx:key="{{item.id}}" bindtap="{{item.find=='' ? 'jupLock' : 'jupLock'}}" data-key="{{item.id}}">
+        <view class="service-img">
+		  <image src="../../static/images/my/lock2.jpg" mode="aspectFill"></image>
+		</view>
+		<view class="service-text">
+		  <view class="service-tite">{{item.name}}</view>
+          <view style="display: flex;">
+            <text class="service-city">{{item.id}}</text>  
+            <span class="Link-singVal">{{item.singVal}}</span>
+            <span wx:if="{{item.find==''}}" class="notLink-span">不可连接</span>
+            <span wx:else class="Link-span">点击连接</span>
+            <!--<span class="Link-span">点击连接</span>-->
+          </view>
+		</view>
+	  </view>
+	</view>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+  </scroll-view>
+</view>
+</view>

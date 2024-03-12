@@ -1,0 +1,29 @@
+<view style="width: 100%;height: 100%;background-color: #fff;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight -50}}px;"scroll-top="{{scrolltop}}">
+  <view class="xx_font"><view class="font_left">公寓收款方：</view><view class="font_right">{{skf}}</view></view>
+  <view class="xx_font"><view class="font_left">充值房间：</view><view class="font_right">{{houseName}}</view></view>
+  <view class="xx_font"><view class="font_left">水费单价：</view><view class="font_right">{{price}}元</view></view>
+  <view class="xx_font"><view class="font_left">剩余水量：</view><view class="font_right">{{sydl}}吨</view></view>
+  <view class="shuj">
+  <view>
+    充值水费
+  </view>
+  <view class="tr_sj">
+    <view class="td_sj" data-je="20" bindtap="swichJE">20元</view>
+    <view class="td_sj" data-je="30" bindtap="swichJE">30元</view>
+    <view class="td_sj" data-je="50" bindtap="swichJE">50元</view>
+  </view>
+  <view class="tr_sj">
+    <view class="td_sj" data-je="100" bindtap="swichJE">100元</view>
+    <view class="td_sj" data-je="200" bindtap="swichJE">200元</view>
+    <view class="td_sj" data-je="300" bindtap="swichJE">300元</view>
+  </view>
+  </view>
+    </scroll-view>
+  <view class="dibu">
+    <view class="good">￥
+      <input type="number" value="{{amount}}" bindinput="jeChange" placeholder="请输入金额" style="width: 80%;height:90rpx;line-height:90rpx;"/>
+    </view>
+    <view class="zf" bindtap="bindPay">支付</view>
+  </view>
+</view>

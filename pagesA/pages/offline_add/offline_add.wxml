@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>开始日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                    <!--<view class="weui-input" name="start_time">{{Starttime}}</view>-->
+                    <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                  </picker>            
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>结束日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;padding: 40rpx 0rpx;">
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">生成</button>
+          </view>
+      </view>
+  </view>
+  <view style="background-color:#fafafa;">
+      <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <view class="form_table_left" style="font-weight: bold;">离线密码注意事项：</view>
+      </view>
+    </view>
+    <view class="form_table_border_none" style="height: 300rpx;">
+      <view class="form_table_border_in" style="padding: 5rpx 0;">
+        <view class="form_table_left" style="font-size: 4.5vw;color:#c0c0c0;">1.生效后24小时内必须使用1次，否则失效。</view>
+      </view>
+      <view class="form_table_border_in" style="padding: 5rpx 0;height: 100rpx;">
+        <view class="form_table_left" style="font-size: 4.5vw;color:#c0c0c0;height: auto;">2.当前整点内同有效期生成的离线密码是重复一样的。</view>
+      </view>
+      <view class="form_table_border_in" style="padding: 5rpx 0;height: 100rpx;">
+        <view class="form_table_left" style="font-size: 4.5vw;color:#c0c0c0;height: auto;">3.重复的离线密码，其中一个删除，其它密码也会删除。</view>
+      </view>
+    </view>
+    </view>
+  </form>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

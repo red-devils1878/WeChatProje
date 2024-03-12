@@ -1,0 +1,118 @@
+<view hidden="{{detail_master}}" style="height:{{winHeight}}px">
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+  <view class="search-bar">
+			<input type="text" maxlength="12" placeholder="请搜索房号/租客姓名/手机号/房东电话/房东" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+ </view>
+<view class="container">
+<dl class="menu">
+    <dt data-index="0" bindtap="tapMainMenu">社区</dt>
+    <dd class="{{subMenuDisplay[0]}}">
+      <ul wx:for="{{fz_list}}" wx:key="{{item.sid}}">
+      <li class="{{subMenuHighLight[0][item.i]}}" data-index="0-{{item.i}}" data-type="SQ" data-code="{{item.sid}}" bindtap="tapSubMenu">{{item.sname}}</li>
+      </ul>
+    </dd>
+    <dt data-index="1" bindtap="tapMainMenu">房源类型</dt>
+    <dd class="{{subMenuDisplay[1]}}">
+        <ul wx:for="{{czlx_list}}" wx:key="{{item.codeLX}}">
+      <li class="{{subMenuHighLight[1][item.i]}}" data-index="1-{{item.i}}" data-type="CZlx" data-code="{{item.codeLX}}" bindtap="tapSubMenu">{{item.othernameLX}}</li>
+      </ul>
+    </dd>
+    <dt data-index="2" bindtap="tapMainMenu">入住状态</dt>
+    <dd class="{{subMenuDisplay[2]}}">
+      <ul wx:for="{{rzzt_list}}" wx:key="{{item.code}}">
+      <li class="{{subMenuHighLight[2][item.i]}}" data-index="2-{{item.i}}" data-type="rzzt" data-code="{{item.othername}}" bindtap="tapSubMenu">{{item.othername}}</li>
+      </ul>
+    </dd>
+</dl>
+<view class="form_line" style="height: 10rpx;"></view>
+  <view class="swiper-items">
+    <view style="display: flex;height: 80rpx;">
+      <view style="padding-left: 20rpx;line-height: 80rpx;">入住日期：</view>
+      <view class="date_style" bindtap="showDJdate"  wx:if="{{djks !='' }}"> {{djks}} 至 {{djjs}} > </view>
+      <view class="date_style" bindtap="showDJdate"  wx:else> > </view>
+    </view>
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 115}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}" id="{{item.id}}">
+				<view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-weight: bold;">{{item.houseName}}</view>
+              <view class="service-tite" style="font-size: 28rpx;width: 100%;padding-right: 20rpx;text-align: right"><span class="{{item.rzzt=='在住' ? 'span-style-cz' : 'span-style-wcz'}}">{{item.rzzt}}</span></view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;width: 100%;">{{item.rzzq}} | {{item.tenantName}}</view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;width: 100%;">身份：{{item.sf}}
+              <span class="{{item.tsStype}}">{{item.ts}}</span>
+              <span class="span_button" bindtap="openLock" data-hid="{{item.hid}}">查看开门记录</span>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;width: 100%;">房东：{{item.fdxx}}</view>
+            </view>  
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+    </scroll-view>
+</view>
+</view>
+</view>
+<view style="background-color: #ffffff;height:{{winHeight/2}}px;" hidden="{{detail_djDate}}">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="padding: 20rpx 0rpx;" bindtap="cancelDJ">取消</span></view>
+      <view class="form_table_right" style="width: 58%;">
+        <view type="text" class="form_table_right_text" style="width: 100%;">
+        <span style="float: left;" bindtap="qkDJ">清空日期</span>
+        <span style="padding: 20rpx 0rpx;" bindtap="sureDJ">确定</span>
+        </view>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='jintian' ? 'showBorder' : ''}}" data-djsjqx="jintian" bindtap="swichDJ">今天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='zuotian' ? 'showBorder' : ''}}" data-djsjqx="zuotian" bindtap="swichDJ">昨天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last7' ? 'showBorder' : ''}}" data-djsjqx="Last7" bindtap="swichDJ">最近7天</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='Last30' ? 'showBorder' : ''}}" data-djsjqx="Last30" bindtap="swichDJ">最近30天</view>
+    </view>
+  </view>
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_r {{currentDJ=='threeMonth' ? 'showBorder' : ''}}" data-djsjqx="threeMonth" bindtap="swichDJ">最近3个月</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='sixMonth' ? 'showBorder' : ''}}" data-djsjqx="sixMonth" bindtap="swichDJ">最近半年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='oneYear' ? 'showBorder' : ''}}" data-djsjqx="oneYear" bindtap="swichDJ">最近1年</view>
+      <view style="width: 20rpx;"></view>
+      <view class="form_info_bot_td2_r {{currentDJ=='fiveYear' ? 'showBorder' : ''}}" data-djsjqx="fiveYear" bindtap="swichDJ">最近5年</view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{SdateDJ}}" bindchange="startDateChangeDJ" name="startDateDJ">
+            <view class="weui-input">{{SdateDJ}}</view>
+          </picker>   
+        </view>
+      </view>
+      至
+      <view class="form_table_right" style="width: 45%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_date_right_text">
+          <picker data-field="date" mode="date" value="{{EdateDJ}}" bindchange="endDateChangeDJ" name="endDateDJ">
+            <view class="weui-input">{{EdateDJ}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

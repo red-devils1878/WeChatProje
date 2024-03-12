@@ -1,0 +1,36 @@
+<view class='container'>
+  <tui-tips id="tui-tips-ctx"></tui-tips>
+  <view class='middle-container'>
+    <view class='ul-item' style="margin-bottom: 20rpx;">
+    <view bindtap='back' class='item' hover-class="opcity" hover-stay-time="150" style="width: 25%;">
+      <!--<text class='item-name' style="font-weight:bold;color: black;">返回首页</text>-->
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 100%;">
+      <image class='middle-item-img' src="{{ljzt=='连接成功' ? '../../../static/images/my/myLock001.gif' : '../../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'UnlinkBLE' : 'linkBLE'}}"></image>
+      <text class='title-name'>{{sbmc}}</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name' style="font-weight:bold;color: black;">{{powerV}}%</text>
+    </view>
+    </view>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="01" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>蓝牙开门</text>
+    </view>
+    <view bindtap='tapEvent' data-index="03" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>授时</text>
+    </view>
+    <view bindtap='tapEvent' data-index="04" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>动态密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="15" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>设备详情</text>
+    </view>
+    </view>
+  </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

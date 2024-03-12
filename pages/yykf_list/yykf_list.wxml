@@ -1,0 +1,143 @@
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding: 10rpx 20rpx;">
+		<view class="search-bar">
+			<input type="text" maxlength="12" placeholder="搜索：姓名/电话/房号" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+	</view>
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">待处理{{total_wcl}}</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">进行中{{total_clz}}</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">挂起中{{total_gqz}}</view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">已完成</view>
+</view>
+<view class="form_line"></view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight-95}}px" bindchange="bindChange">
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 95}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" style="border-bottom: 12rpx solid #fafafa;" wx:for="{{servicelist}}" wx:key="{{item.id}}" data-key="{{item.id}}" bindtap="jumpInfo">
+				<view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite">{{item.houseName}}</view>
+              <view class="title_gjzt">{{item.gjzt}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">联系人：{{item.name}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">{{item.tel}}</view>
+              <view style="width: 25%;text-align: center;font-size: 28rpx;border-left: 2rpx solid #e8e8e8;" bindtap="callTel" data-tel="{{item.tel}}">
+                <image class='item-img' src='../../static/images/my/tel.jpg' style="width: 28rpx;height:28rpx;margin-bottom: -4rpx;"></image>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">预约日期：{{item.yyDate2}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 100%;">{{item.sjd_name}}</view>
+            </view> 
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">预计上门时间：{{item.smsj}}</view>
+            </view>   
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">需求：{{item.demand}}</view>
+            </view>     
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    </swiper-item>
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 95}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" style="border-bottom: 12rpx solid #fafafa;" wx:for="{{servicelist}}" wx:key="{{item.id}}" data-key="{{item.id}}" bindtap="jumpInfo">
+				<view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite">{{item.houseName}}</view>
+              <view class="title_gjzt">{{item.gjzt}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">联系人：{{item.name}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">{{item.tel}}</view>
+              <view style="width: 25%;text-align: center;font-size: 28rpx;border-left: 2rpx solid #e8e8e8;" bindtap="callTel" data-tel="{{item.tel}}">
+                <image class='item-img' src='../../static/images/my/tel.jpg' style="width: 28rpx;height:28rpx;margin-bottom: -4rpx;"></image>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">预约日期：{{item.yyDate2}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 100%;">{{item.sjd_name}}</view>
+            </view> 
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">预计上门时间：{{item.smsj}}</view>
+            </view>   
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">需求：{{item.demand}}</view>
+            </view>     
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    </swiper-item>
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 95}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" style="border-bottom: 12rpx solid #fafafa;" wx:for="{{servicelist}}" wx:key="{{item.id}}" data-key="{{item.id}}" bindtap="jumpInfo">
+				<view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite">{{item.houseName}}</view>
+              <view class="title_gjzt">{{item.gjzt}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">联系人：{{item.name}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">{{item.tel}}</view>
+              <view style="width: 25%;text-align: center;font-size: 28rpx;border-left: 2rpx solid #e8e8e8;" bindtap="callTel" data-tel="{{item.tel}}">
+                <image class='item-img' src='../../static/images/my/tel.jpg' style="width: 28rpx;height:28rpx;margin-bottom: -4rpx;"></image>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">预约日期：{{item.yyDate2}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 100%;">{{item.sjd_name}}</view>
+            </view> 
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">预计上门时间：{{item.smsj}}</view>
+            </view>   
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">需求：{{item.demand}}</view>
+            </view>     
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    </swiper-item>
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 95}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" style="border-bottom: 12rpx solid #fafafa;" wx:for="{{servicelist}}" wx:key="{{item.id}}" data-key="{{item.id}}" bindtap="jumpInfo">
+				<view class="service-text">
+            <view style="display: flex;">
+					    <view class="service-tite">{{item.houseName}}</view>
+              <view class="title_gjzt">{{item.gjzt}}</view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">联系人：{{item.name}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">{{item.tel}}</view>
+              <view style="width: 25%;text-align: center;font-size: 28rpx;border-left: 2rpx solid #e8e8e8;" bindtap="callTel" data-tel="{{item.tel}}">
+                <image class='item-img' src='../../static/images/my/tel.jpg' style="width: 28rpx;height:28rpx;margin-bottom: -4rpx;"></image>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">预约日期：{{item.yyDate2}}</view>
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 100%;">{{item.sjd_name}}</view>
+            </view> 
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">预计上门时间：{{item.smsj}}</view>
+            </view>
+            <view style="display: flex;">
+					    <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 90%;">需求：{{item.demand}}</view>
+            </view>     
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    </swiper-item>
+</swiper>

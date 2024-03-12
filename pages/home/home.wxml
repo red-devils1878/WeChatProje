@@ -1,0 +1,145 @@
+<view class='container'>
+  <!--顶部消息 primary-->
+  <tui-tips id="tui-tips-ctx"></tui-tips>
+  <!--顶部消息-->
+  <view class="scroll-views" style="height:{{winHeight-50}}px;">
+  <view class='top-container'>
+    <image class='bg-img' src='../../static/images/my/mine_bg_3x.jpg'></image>
+  </view>
+  <view class='middle-container'>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="01" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>办理入住</text>
+    </view>
+    <view bindtap='tapEvent' data-index="02" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>入住人</text>
+    </view>
+    <view bindtap='tapEvent' data-index="03" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>合同管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="04" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>报修流程</text>
+    </view>
+    </view>
+  </view>
+  <view class='bottom-container'>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="11" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/tabbar/house2.jpg'></image>
+      <text class='item-name'>新增房源</text>
+    </view>
+    <view bindtap='tapEvent' data-index="12" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/kf.png'></image>
+      <text class='item-name'>空房管理</text>
+    </view>
+    <!--<view bindtap='tapEvent' data-index="13" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <text class='item-name'>即将到期</text>
+    </view>-->
+    <view bindtap='tapEvent' data-index="21" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <!--<text class='item-name'>预约看房</text>-->
+      <text class='item-name'>网关列表</text>
+    </view>
+    <view bindtap='tapEvent' data-index="14" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>低电量锁</text>
+    </view>
+  </view>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="18" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <text class='item-name'>入住记录</text>
+    </view>
+    <view bindtap='tapEvent' data-index="15" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>我的门锁</text>
+    </view>
+    <view bindtap='tapEvent' data-index="16" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/zd.png'></image>
+      <text class='item-name'>账单查询</text>
+    </view>
+    <view bindtap='tapEvent' data-index="20"  class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/02.png'></image>
+      <text class='item-name'>长期未开</text>
+    </view>
+  </view>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="17"  class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/sb.png'></image>
+      <text class='item-name'>水表读数</text>
+    </view>
+    <view bindtap='tapEvent' data-index="19" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/db.png'></image>
+      <text class='item-name'>电表读数</text>
+    </view>
+    <view bindtap='tapEvent' data-index="22" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/03.png'></image>
+      <text class='item-name'>添加记账</text>
+    </view>
+    <view wx:if="{{yhid=='admin' || yhid=='SuZhouJianXin5821U'}}" bindtap='tapEvent' data-index="23" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <text class='item-name'>批量操作</text>
+    </view>
+    <view wx:else bindtap='tapEvent' data-index="23" class='item' hover-class="opcity" hover-stay-time="150" style="width: 104rpx;">
+      <image class='item-img' src='../../static/images/my/dq.png'></image>
+      <text class='item-name'>批量操作</text>
+    </view>
+  </view>
+  </view>
+  <view class='bottom-container2'>
+  <view class='ul-item'>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{jrrz}}</text>
+      <text class='item-name2'>今日入住</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{jrtf}}</text>
+      <text class='item-name2'>今日退房</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{fjs}}</text>
+      <text class='item-name2'>房间数</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{kfs}}</text>
+      <text class='item-name2'>空房数</text>
+    </view>
+  </view>
+  <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="30" class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{dfbz}}</text>
+      <text class='item-name2'>电费不足</text>
+    </view>
+    <view bindtap='tapEvent' data-index="31" class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{sbgz}}</text>
+      <text class='item-name2'>长期未开门</text>
+    </view>
+    <view bindtap='tapEvent' data-index="32" class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{zddj}}</text>
+      <text class='item-name2'>账单待缴</text>
+    </view>
+    <view bindtap='tapEvent' data-index="33" class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name2'>{{fw}}</text>
+      <text class='item-name2'>未完服务</text>
+    </view>
+  </view>
+  </view>
+</view>
+</view>
+<view>
+  <view class='toastbg'>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <view style="font-size: 32rpx;font-weight: bold;">{{rzl}}</view>
+      </view>
+      <view class='toast-main'>
+        <view style="font-size: 24rpx;">当前入住率</view>
+      </view>
+    </view>
+  </view>
+</view>

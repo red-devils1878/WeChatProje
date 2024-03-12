@@ -1,0 +1,11 @@
+<view id="container">
+  <view class="title">
+    {{title}}
+  </view>
+  <!--<view class="ewm">
+    <image class='item-img' src='{{imgUrl}}' show-menu-by-longpress="true" bindtap="clickImg"></image>
+  </view>-->
+  <navigator class="ewm" target="miniProgram" open-type="navigate" app-id="{{appId}}" path="{{path}}" extra-data="" version="{{envVersion}}">
+    <image class='item-img' src='{{imgUrl}}'></image>
+  </navigator>
+</view>

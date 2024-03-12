@@ -1,0 +1,6 @@
+/* pages/tenant_info/tenant_info.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.item-img{
+  width: 60rpx;
+  height: 60rpx;
+}

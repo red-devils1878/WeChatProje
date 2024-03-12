@@ -1,0 +1,29 @@
+.ewm{
+    background-color: #e8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 680rpx;
+    height: 680rpx;
+    margin: 40rpx auto;
+  }
+  .inpt{
+    border: 1rpx solid #e8e8e8;
+    width: 660rpx;
+    margin: 20rpx auto;
+    padding: 10rpx;
+  }
+  .btn{
+    width: 680rpx;
+  }
+  .title{
+    margin-top: 20rpx;
+    padding-left: 20rpx;
+    font-size: 34rpx;
+    font-weight: bold;
+    color:black;
+  }
+  .item-img{
+    width: 600rpx;
+    height: 600rpx;
+  }

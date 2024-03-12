@@ -1,0 +1,589 @@
+<view class="container" style="background-color: white;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight-50}}px">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="rpt_title">房屋租赁合同</view>
+        </view>
+      </view>   
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">合同编号：</view>
+          <view class="rpt_table_left" style="width: 40%;">
+            <span class="form_show_right_text">{{contractNo}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">甲方：</view>
+          <view class="rpt_table_left" style="width: 60%;">
+            <span class="form_show_right_text">{{jf}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none" style="margin-bottom: 10rpx;">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">乙方：</view>
+          <view class="rpt_table_left" style="width: 60%;">
+            <span class="form_show_right_text">{{tenantName}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text">根据国家有关法律、法规和本市有关规定，甲、乙双方在自愿、平等、互利的基础上。经协商一致，就甲方提供房屋给乙方租赁使用事宜，订立本合同。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">承租方身份信息</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">承租方名称：</view>
+          <view class="rpt_table_left" style="width: 30%;">
+            <span class="form_show_right_text">{{tenantName}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">承租方证件类型：</view>
+          <view class="rpt_table_left" style="width: 30%;">
+            <span class="form_show_right_text">{{zjlx_name}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">承租方证件号码：</view>
+          <view class="rpt_table_left" style="width: 50%;">
+            <span class="form_show_right_text">{{cardNo}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">承租方电话：</view>
+          <view class="rpt_table_left" style="width: 40%;">
+            <span class="form_show_right_text">{{tel}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">第一条 房屋信息</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <!--<view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">房屋位置：</view>
+          <view class="rpt_table_left" style="width: 70%;">
+            <span class="form_show_right_text">{{address}}</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>-->
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height:auto;">
+          <view class="form_table_left">房屋位置：</view>
+          <view style="text-decoration: underline;">{{address}}</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">租用面积：</view>
+          <view class="rpt_table_left" style="width: 20%;">
+            <span class="form_show_right_text">{{area}}</span>
+          </view>
+          <view class="form_table_left">平米。</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">第二条 租赁期限</view>
+          <view class='clear'></view>
+        </view>
+      </view>   
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="form_table_left">租赁期限自：</view>
+          <view class="rpt_table_left" style="width: 26%;text-align: center;">
+            <span class="form_show_right_text">{{inTime2}}</span>
+          </view>
+          <view class="form_table_left">至</view>
+          <view class="rpt_table_left" style="width: 26%;text-align: center;">
+            <span class="form_show_right_text">{{outTime2}}</span>
+          </view>  
+          <view class="form_table_left">止。</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 300rpx;">
+          <view class="form_table_left">甲方应于</view>
+          <view class="rpt_table_left" style="width: 26%;text-align: center;">
+            <span class="form_show_right_text">{{inTime2}}</span>
+          </view>
+          <span class="form_show_right_text">前将房屋按约定条件交付给乙方。租赁期满，甲方有权收回全部房屋，乙方应如期或提前交还；乙方若要求继续提供或提前终止租赁的，须在本合同期满前一个月向甲方提出书面申请，经双方洽商并同意新的住宿条件后重新签订房屋租赁合同。</span>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">第三条 租金费用</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">(1)押金</view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height:auto;">
+          <view class="form_table_left">签订本合同时，甲方收取乙方押金</view>
+          <view style="text-decoration: underline;">{{deposit}},(大写：{{dxje_yj}}),即：常规押金：{{deposit}}元。</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">(2)租金与支付</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view style="padding-left: 40rpx;font-size: 3.5vw;">1.<span class="underline">{{inTime2}}</span>至<span class="underline">{{outTime2}}</span>期间，<span class="underline">租金</span>为<span class="underline">{{rent}}</span>元/月，(大写：<span class="underline">{{dxje_zj}}</span>),付款方式为<span class="underline">{{fkfsF_name}}</span>。
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">(3)其他费用</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none" wx:for="{{qtfyData}}">
+        <view class="rpt_table_border_in" style="height:auto;">
+          <view style="padding-left: 40rpx;font-size: 3.5vw;">{{item.sort}}.<span class="underline">{{item.fylx_name}}</span>每月为<span class="underline">{{item.amount}}</span>元(大写：<span class="underline">{{item.dxje_qtfy}}</span>),付款方式为<span class="underline">随租金一并支付</span></view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">乙方租金及支付方式详见如下表格：</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in">
+          <view class="form_table_left">1.租约费用</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+  <view class="table">
+    <view class="tr">
+      <view class="th">期数</view>
+      <view class="th1">账期</view>
+      <view class="th2">账单</view>
+      <view class="th2">应付日</view>
+    </view>
+    <block wx:for="{{listData}}" wx:key="{[id]}">
+      <view class="tr">
+        <view class="td">{{item.periods_num}}</view>
+        <view class="td1">{{item.zhangqi}}</view>
+        <view class="td2">{{item.zdxq}}</view>
+        <view class="td2">{{item.yssj2}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="rpt_table_title_none">
+    <view class="rpt_table_border_in">
+      <view class="rpt_table_title_one">第四条 支付时间和首付款</view>
+      <view class='clear'></view>
+    </view>
+  </view>  
+  <!--<view class="form_table_border_none">
+    <view class="rpt_table_border_in"  style="height: auto;">
+      <view class="form_table_left">支付时间：每期费用开始前提前</view>
+      <view class="rpt_table_left" style="width: 20%;text-align: center;">
+        <span class="form_show_right_text">{{tqsksj}}</span>
+      </view>
+      <view class='clear'></view>
+    </view>
+  </view>-->
+  <view class="form_table_border_none">
+    <view class="rpt_table_border_in" style="height:auto;">
+      <view class="form_table_left">支付时间：每期费用开始前提前</view>
+      <view style="text-decoration: underline;">{{tqsksj}}</view>
+      <view class='clear'></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="rpt_table_border_in" style="height: auto;">
+      <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+        <view class="form_show_right_text">合同签订之日，乙方应支付首笔款项：包括租金，押金，管理服务费，共<span class="underline"> {{amount_first}} </span>元。</view>
+      </view>
+      <view class='clear'></view>
+    </view>
+  </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第五条 其他相关费用</view>
+          <view class='clear'></view>
+        </view>
+      </view>  
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(一)租赁期限内，该房屋所发生的:水费、电费、煤气费、有线电视费、网络宽带费、物业管理费、室内设施维修费(人为使用不当的应由乙方承担的除外)、保洁费、暖气费中，甲方承担的费用为：<span class="underline">无</span>除甲方承担的费用外，其他费用均由【乙方】承担。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(二)除上述约定的情形外，本合同未列明细的与租赁房屋有关的费用，均由乙方承担。如甲方垫付了应由乙方支付的费用，甲方有权根据相关缴费凭据要求乙方予以返还。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第六条 房屋维护和维修</view>
+          <view class='clear'></view>
+        </view>
+      </view>  
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(一)甲方应保证租赁房屋的建筑结构和设备设施符合建筑、消防、治安、卫生等方面的安全条件，不得危及人身安全；房屋租赁期间，乙方应遵守国家法律法规、市区及管理规定及该房屋所在的小区的物业管理规定，乙方严禁在房屋内摆放易燃、易爆、剧毒等危险违禁物品，或持有法律、法规禁止的各类物品。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(二)租赁期限内，甲方承担房屋及附属物品、设备设施因老化产生的维护、维修事宜(不含乙方自带物品、设备设施)，甲方有权根据房屋及附属物品、设施设备的实际情况设定维修方案，具体方案以甲方实际维修共同出具的房屋维修、鉴定方案为准；乙方承担房屋及附属品、设备设施因使用不当造成的维护、维修事宜，如维护项目不在前述范围之内，应依据谁导致谁承担的原则，由甲乙双方另行协商解决。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(三)租赁期间内，甲乙双方应共同保障租赁房屋及其附属品、设备设施处于使用和安全的状态。乙方应维护租赁房屋既有设备和设施的正常使用，如需调整的，应事先征得甲方的书面同意，因乙方保管不当或不合理使用(包括但不仅限于水路、电器和天然气)，致使该房屋及附属物品、设备设施发生损坏、故障、丢失或造成重大人身事故的(包括公共区域内的设备设施)，乙方应负责维修、承担维修费用或承担事故责任(维修范围内无法界定的公共设施维修责任由公共设施的全体承担的人共同承担)，甲方有权从押金中扣除前述相关费用，不足部分由乙方承担赔偿责任。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(四)租赁期间，甲方对租赁房屋进行维护、维修时，乙方须予以配合。如因乙方怠于或拒绝配合，导致甲方无法及时维护、维修的，由此产生的一切损失(包括但不限于租金损失、违约责任以及由此给甲方造成的其他损失等)均由乙方承担。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第七条 其他权利义务</view>
+          <view class='clear'></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">甲方有权对乙方提供的所有证件和个人资料进行审查并保存复印件。甲方承诺，乙方提供的复印件仅供本次租赁使用；未经乙方书面同意，不作为其他使用。乙方应按照甲方要求提供本人身份证原件、工作单位证明文件以及其他证明文件、联系方式等资料，且乙方保证其所提供的个人资料真实、合法、有效。如乙方未按照要求相关证明材料、提供的文件有虚假，甲方可随时要求解除协议并要求乙方承担相当于一个月租金的违约金。乙方信息如发生变更的，乙方应立即以书面形式通知甲方，如因乙方未能及时通知导致的任何损失，责任由乙方自行承担。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第八条 合同解除</view>
+          <view class='clear'></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(一)甲乙双方协商一致，可以解除本合同。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(二)因不可抗力、政府行为(如政府部门要求调整房屋现有户型)等原因导致本合同无法继续履行的，本合同自行解除，双方均不承担任何违约责任。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(三)甲方有下列情形之一的，乙方有权单方解除合同：</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">1.延迟交付房屋达七日的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">2.拒绝承担约定的维修义务，致使乙方无法正常使用房屋的。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(四)乙方有下列情形之一的，甲方有权单方解除合同，收回房屋：</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">1.未按约定日期支付；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">2.欠缴各项费用达月租金额的15%。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">3.擅自改变房屋用途、拆改变动或损害房屋主体结构的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">4.保管不当或不合理使用导致房屋附属物品、设备设施损坏并拒不赔偿的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">5.擅自将房屋转租给第三人的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">6.租赁期间居住人数超过合同约定数量或共同租住人中有年龄低于16周岁的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">7.因扰民、饲养宠物等原因干扰他人正常生活，导致周边邻居、居委会书面投诉或派出所出警协调的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">8.利用租赁房屋从事违法活动的、损害公共利益的。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(五)出现其他法定的合同解除情形或甲乙双方另有约定的，遵照法律规定或双方约定解除合同。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(六)在合同解除当日，乙方应依据本合同之附件二《房屋交割清单》，将租赁房屋及设施交还甲方，并清空乙方物品，如乙方留存任何物品，均视为乙方抛弃，甲方有权进行处置；合同期满，乙方将房屋交还甲方之时，应将房屋打扫干净。上述第八条第(四)款情形发生后，甲方须向乙方发出合同解除通知函；解除通知函发出次日，即视为甲乙双发对解除合同事宜协商一致，本合同及其相关协议即告解除。甲乙双方对解除合同事宜协商一致，本合同及其相关协议即告解除。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第九条 违约责任</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(一)甲方有本合同第八条第(三)款约定的情形之一的，应按月租金100%向乙方支付违约金；乙方有本合同第八条第(四)款约定的情形之一的，应按月租金100%向甲方支付违约金，且应将租赁房屋恢复原状并赔偿甲方因乙方的违约行为而遭受的相应损失。因乙方违反第八条第(四)款规定，导致甲方被有关行政机关处罚的，甲方有权向乙方继续追偿。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(二)租赁期限内，甲方需提前收回房屋，或乙方需提前退租的，按如下方式处理：</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">1.甲方需提前收回房屋的，应提前30日书面或电话通知乙方，并按月租金的100%向乙方支付违约金。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">2.乙方提前退租，应提前30日通知甲方；并按照月租金的100%向甲方支付违约金。乙方结清应承担的各项费用后，甲方应退还乙方尚未发生的相应租金。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(三)违约方有下列情形之一的，每逾期一日，应向守约方支付相当于日租金即(月租金标准/30)的200%的违约金，并赔偿守约方因此遭受的相应损失：</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">1.甲方未按约定时间交付房屋的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">2.乙方未按约定时间支付租金的；</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text" style="padding-left: 40rpx;font-size: 3.5vw;">3.乙方未按约定时间返还房屋的。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">(四)乙方未按约定时间支付租金且达到解除合同条件的，甲方有权随时收回该房屋的使用权，并清空乙方物品，如乙方留存任何物品，均视为乙方抛弃，甲方有权进行处置，由此造成的一切损失均由乙方承担，与甲方无关。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第十条 合同争议的解决方法</view>
+          <view class='clear'></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">本合同项下发生的争议，由双方当事人协商解决；协商不成的，双方当事人约定将争议提交甲方住所地人民法院解决。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view> 
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">第十一条 其他约定的事项</view>
+          <view class='clear'></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">本合同经双方签字盖章后生效。本合同(及附件)一式贰份，甲方、乙方各执壹份。本合同生效后，双方对合同内容的变更或补充应采取书面形式，作为合同的附件。附件与合同具有同等的法律效力。</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_two">补充条款</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: auto;">
+          <view class="rpt_table_left_none" style="width: 100%;height: auto;">
+          <view class="form_show_right_text">{{supplement}}</view>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+      <view class="form_table_border">
+        <view class="form_table_border_in"> 
+          <view wx:if="{{djly=='htqy'}}"> 
+            <button type="primary" bindtap="qrqy" data-key="{{contractNo}}"  style="background-color: #ff0000;margin-bottom:auto;">确认签约</button>
+          </view>
+          <view wx:else> 
+          </view>   
+        </view>  
+      </view>
+    </view>
+</view>

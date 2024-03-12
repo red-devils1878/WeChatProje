@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "低电量锁",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

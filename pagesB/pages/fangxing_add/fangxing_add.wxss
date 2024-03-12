@@ -1,0 +1,64 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.swiper-items{
+  height: 100%;
+  background-color: white;
+}
+.scroll-views{
+  height: 100%;
+}
+.form_info_bot1{
+  padding: 10rpx 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 6vh;
+  border-top: 1px solid #e6e6e6;
+  background-color: white;
+}
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 40rpx;
+}
+.form_li_border{
+  float:left;
+  width:100%;
+  margin-top:10rpx;
+}
+.form_li_border_t1{
+  padding:0 20rpx;
+  font-size:4vw;
+  font-weight:bold;
+  width: 100%;
+}
+.form_li_icon_border{
+  float:left;
+  width:18%;
+  margin:10rpx 6rpx;
+}
+.form_li_icon_t1{
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: white;
+}
+.form_li_icon_t2{
+  text-align: center;
+  margin: 10rpx 0 4rpx 0;
+  font-size: 3vw;
+}
+.form_li_icon_t3{
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+.middle-item-img{
+  width: 80rpx;
+  height: 80rpx;
+}
+.middle-item-checkbox{
+  transform: scale(0.7,0.7);
+}

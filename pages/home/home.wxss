@@ -1,0 +1,144 @@
+.container{
+  position: relative;
+}
+.top-container{
+  height: 340rpx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.bg-img{
+  position: absolute;
+  width: 100%;
+  height: 350rpx;
+  z-index: -1;
+}
+.middle-container{
+  height: 168rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15rpx 74rpx 15rpx 45rpx;
+  margin: -20rpx 10rpx 20rpx 10rpx;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 10rpx #efefef
+}
+.middle-item-img{
+  width: 80rpx;
+  height: 80rpx;
+}
+.middle-item{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.bottom-container{
+  /*height: 350rpx;*/
+  height: 470rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30rpx 74rpx 30rpx 45rpx;
+  margin: 0 10rpx;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 10rpx #efefef
+}
+.bottom-container2{
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*padding: 40rpx 74rpx 40rpx 95rpx;*/
+  padding: 20rpx 50rpx;
+  margin: 20rpx 10rpx 16rpx 10rpx;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 10rpx #efefef
+}
+.ul-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.item-img{
+  width: 64rpx;
+  height: 64rpx;
+}
+.item-name{
+  padding-top: 13rpx;
+  font-size: 26rpx;
+  /*color: #666666;*/
+  min-width: 80rpx;
+  text-align: center;
+  color:#C0C0C0;
+  font-family:LiSu,STLiti,"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+.item-name2{
+  /*padding-top: 13rpx;*/
+  font-size: 26rpx;
+  /*color: #666666;*/
+  min-width: 80rpx;
+  text-align: center;
+  color:#C0C0C0;
+  font-family:LiSu,STLiti,"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+}
+.scroll-views{
+  height: 100%;
+  overflow-y: auto;
+}
+/*隐藏滚动条*/
+  ::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+/*以下为弹出框样式*/
+.toastbg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.showToast {
+  width: 160rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  align-self: center;
+  background: transparent;
+  display: inline-block;
+  position: fixed;
+  top:90px;
+  left: 77%;
+}
+.toast-title {
+  text-align: center;
+  opacity: 0.6;
+  background-color: black;
+  color: white;
+  padding-top: 16rpx;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+.toast-main {
+  text-align: center;
+  opacity: 0.6;
+  background-color: black;
+  color: white;
+  padding-bottom: 16rpx;
+  border-bottom-right-radius: 16rpx;
+  border-bottom-left-radius: 16rpx;
+}
+/*以上为弹出框样式*/
+  

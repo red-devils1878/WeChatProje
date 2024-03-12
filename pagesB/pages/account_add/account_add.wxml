@@ -1,0 +1,178 @@
+<view class="container">
+  <swiper-item class="swiper-items">
+<form bindsubmit="formSubmit" catchreset="formReset">
+<view style="background-color: white;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight-50}}px">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <radio-group bindchange="radioChange" name="szlx">
+        <view class="form_table_left">
+          <radio color="#5677fc" value="in" style="margin-right:70rpx" checked="true"> 收入</radio>
+          <radio color="#5677fc" value="out"> 支出</radio>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" bindtap='tapHT'>
+      <view class="form_table_left"><span style="color: red;">*</span>  相关合同</view>
+      <view class="form_table_right">
+        <input type="text" name="htNo" value="{{htNo}}" hidden="true"/>
+        <view class="form_table_right">
+          <view class="form_table_right_text">{{houseName}}</view>
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  费用名称</view>
+      <view class="form_table_right">
+        <picker bindchange="bindfylxChange" value="{{fylx[fylxIndex].code}}" range="{{fylx}}" range-key="{{'othername'}}" name="fymc">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{fylx[fylxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  记账金额</view>
+      <view class="form_table_right">
+        <input type="digit" class="form_table_right_text" name="je" bindinput="jeChange" placeholder="请输入"/>
+      </view>
+    </view>
+  </view> 
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  支付日期</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{date}}" bindchange="bindDateChange" name="jzDate">
+            <view class="weui-input">{{date}}</view>
+          </picker>   
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">结算时间</view>
+      <view class="form_table_right">
+        <picker bindchange="bindzflxChange" value="{{zflx[zflxIndex].code}}" range="{{zflx}}" range-key="{{'othername'}}" name="zflx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{zflx[zflxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">起始时间</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{Sdate}}" bindchange="startDateChange" name="startDate">  
+            <view class="weui-input">{{Sdate}}</view>
+          </picker>   
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">终止时间</view>
+      <view class="form_table_right">
+        <view class="form_table_right_text">
+          <picker data-field="date" mode="date" value="{{Edate}}" bindchange="endDateChange" name="endDate">
+            <view class="weui-input">{{Edate}}</view>
+          </picker>   
+        </view>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">支付方式</view>
+      <view class="form_table_right">
+        <picker bindchange="bindzffsChange" value="{{zffs[zffsIndex].code}}" range="{{zffs}}" range-key="{{'othername'}}" name="zffs">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{zffs[zffsIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view> 
+  <view hidden="{{detail_zhxx}}">
+  <view class="title_form_line"><span class="span-title">账户信息</span></view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">收款人</view>
+      <view class="form_table_right">
+        <input type="text" class="form_table_right_text" name="skr" placeholder="请输入"/>
+      </view>
+    </view>
+  </view> 
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">收款账号</view>
+      <view class="form_table_right">
+        <input type="text" class="form_table_right_text" name="skzh" placeholder="请输入"/>
+      </view>
+    </view>
+  </view> 
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">收款账户</view>
+      <view class="form_table_right">
+        <picker bindchange="bindskyhChange" value="{{skyh[skyhIndex].code}}" range="{{skyh}}" range-key="{{'othername'}}" name="skyh">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{skyh[skyhIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view> 
+  </view>
+  <view class="form_line"></view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="height: 20rpx;">
+      <view class="form_table_left" style="font-weight: bold;">备注</view>
+    </view>
+  </view>
+  <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+    <textarea style="height: 10vh;" name="remark" placeholder="请填写备注(选填)"></textarea>
+  </view>
+  <view class="form_line"></view>
+</scroll-view>
+  <view class="form_info_bot1" style="border: none;">
+    <view wx:if="{{disableT===''}}" class="form_table_border_none" style="margin-top: 10rpx;text-align: center;">
+    <button type="default" disabled="true" style="background-color: #c0c0c0;margin-bottom:auto;">确定</button>
+  </view>
+  <view wx:else class="form_table_border_none" style="margin-top: 10rpx;text-align: center;"> 
+    <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+  </view>
+  </view>
+</view>
+</form>
+</swiper-item>
+</view>

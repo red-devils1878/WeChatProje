@@ -1,0 +1,96 @@
+<view class="container" style="background-color: white;">
+<form bindsubmit="formSubmit" catchreset="formReset">
+<swiper-item class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view wx:for="{{inputList}}" wx:key="id">
+  <view class="form_table_border_none">
+      <view class="form_table_border_in" style="height: 20rpx;">
+          <view class="form_table_left" style="font-weight: bold;">设置{{index+1}}</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text">
+              <mp-icon bindtap="delmore" data-index="{{index+1}}" data-key="{{item.lsh}}" icon="delete" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+            </view>
+          </view>
+          <view class="clear"></view>
+      </view>
+  </view> 
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span> 开始日期</view>
+        <view class="form_table_right">
+          <input type="text" class="form_table_right_text" name="lsh{{index+1}}" value="{{item.lsh}}" hidden="true"/>  
+          <view class="form_table_right_text">
+            <picker data-field="date" mode="date" value="{{ksrqVal[index]}}" bindchange="startDateChange" name="startDate{{index+1}}" data-idx='{{index}}'>
+              <view class="weui-input">{{ksrqVal[index]}}</view>
+            </picker>   
+          </view>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+  </view>  
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span> 结束日期</view>
+        <view class="form_table_right">
+          <view class="form_table_right_text">
+            <picker data-field="date" mode="date" value="{{jsrqVal[index]}}" bindchange="endDateChange" name="endDate{{index+1}}" data-idx='{{index}}'>
+              <view class="weui-input">{{jsrqVal[index]}}</view>
+            </picker>   
+          </view>
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+  </view>  
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span> 开始时间</view>
+        <view class="form_table_right">
+            <picker bindchange="bindStartChange" value="{{kssj[kssjVal[index]].code}}" range="{{kssj}}" range-key="{{'othername'}}" name="kssjType{{index+1}}" data-idx='{{index}}'>
+                <view class="form_table_right_text">
+                    <view class="picker">
+                      {{kssj[kssjVal[index]].othername}}
+                    </view>
+                </view>
+            </picker>                
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+  </view>  
+  <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <view class="form_table_left"><span style="color: red;">*</span> 结束时间</view>
+        <view class="form_table_right">
+            <picker bindchange="bindEndChange" value="{{jssj[jssjVal[index]].code}}" range="{{jssj}}" range-key="{{'othername'}}" name="jssjType{{index+1}}" data-idx='{{index}}'>
+                <view class="form_table_right_text">
+                    <view class="picker">
+                      {{jssj[jssjVal[index]].othername}}
+                    </view>
+                </view>
+            </picker>                
+        </view>
+        <view class="arrow"></view>
+        <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_table_border_none" hidden="true">
+      <view class="form_table_border_in">
+            <view class="form_table_left"><span style="color: red;">*</span> 开门次数</view>
+            <view class="form_table_right">
+                  <input type="number" class="form_table_right_text" name="kmcs{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{kmcsVal[index]}}' bindinput='kmcsInputVal'/>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view>
+  <view class="form_line"></view>
+</view>
+  <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+    <button data-index="{{maxIndex+1}}" class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="addmore">+添加设置</button>
+    <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" formType="submit">保存</button>
+  </view>
+  </scroll-view>
+</swiper-item>
+</form>
+</view>

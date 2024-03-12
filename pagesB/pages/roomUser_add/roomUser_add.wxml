@@ -1,0 +1,68 @@
+<view class="container">
+  <view class="page-body" style="background-color: white;">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>姓名</view>
+            <view class="form_table_right">
+              <input type="text" class="form_table_right_text" name="name" placeholder="必填项"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>电话</view>
+            <view class="form_table_right">
+              <input type="number" maxlength="11" class="form_table_right_text" name="tel" placeholder="必填项" value="{{tel}}" bindblur="telChange"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>身份证号</view>
+            <view class="form_table_right">
+              <input type="idcard" class="form_table_right_text" name="cardNo" value="{{cardNo}}" placeholder="必填项" bindblur="cardNoChange"/>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>起始日期</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                <picker mode="multiSelector" bindchange="bindStartPickerChange" bindcolumnchange="bindStartPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                  <input class="weui-input" name="start_time" value='{{Starttime}}' disabled="true"/>
+                </picker>            
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left"><span style="color: red;">*</span>到期时间</view>
+            <view class="form_table_right">
+              <view class="form_table_right_text">
+                  <picker mode="multiSelector" bindchange="bindEndPickerChange" bindcolumnchange="bindEndPickerColumnChange" value="{{endIndex}}" range="{{multiArray}}">
+                    <input class="weui-input" name="end_time" value='{{Endtime}}' disabled="true"/>
+                  </picker>       
+              </view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+  <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit">确定</button>
+        </view>
+    </view>
+  </view>
+  </form>
+  </view>
+</view>

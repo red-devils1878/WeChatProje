@@ -1,0 +1,17 @@
+/* pages/account_add/account_add.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.swiper-items{
+  height: 100%;
+}
+.scroll-views{
+  height: 100%;
+}
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 40rpx;
+}

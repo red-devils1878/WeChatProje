@@ -1,0 +1,60 @@
+<view class="container">
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <view class="swiper-items">
+    <view class="form_table_border_none" style="margin: 0 20rpx;">
+      <view class="form_table_border_in">
+        <view class="form_table_left">用户列表</view>
+      </view>
+    </view>
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 60}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+       <checkbox-group bindchange="checkboxChange" name="hidD">
+        <!--<label class="checkbox-cell" wx:for="{{items}}" wx:key="{{item.value}}">
+        <view class="weui-cell__hd">
+            <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+        </view>
+        <view class="weui-cell__bd">{{item.name}}</view>
+        </label>-->
+        <view class="service-list">
+		<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.hidD}}" id="{{item.hidD}}">
+          <view class="weui-cell__hd">
+            <checkbox value="{{item.hidD}}" checked="{{item.checked}}" class="checked_type"/>
+          </view>
+          <view class="service-img">
+			<image src="/static/images/my/zktx.jpg" mode="aspectFill"></image>
+		  </view>
+      <view class="service-text">
+        <view style="display: flex;">
+          <view class="service-tite" style="font-weight: bold;width: 35%;">{{item.rentname}}</view>
+          <view class="service-tite" style="width: 65%;">
+            <label class="button-left-type" bindtap="tjsq" data-key="{{item.rentNo}}">授权</label>
+            <label class="button-right-type" bindtap="ckqx" data-key="{{item.rentNo}}">查看权限</label>
+          </view>         
+        </view>
+        <view style="display: flex;">
+          <view class="service-tite" style="font-size: 28rpx;width: 80%;">{{item.rentphone}} | {{item.gxm}}</view>
+        </view>   
+        <view style="display: flex;">
+          <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">有效期至 {{item.jssj}}</view>
+        </view>       
+		  </view>
+		</view>
+	   </view>
+    </checkbox-group>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+    <view class="form_info_bot1" style="border: none;">
+    <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <view class="form_table_left" style="width: 50%;">
+          <radio bindtap="checked" checked="{{checked}}" color="#5677fc" value="out" class="middle-item-radio"></radio>全选     
+        </view>
+        <view class="form_table_right" style="width: 50%;display: flex;">
+          合计：共<span style="color: #5677fc;">{{qty}}</span>把
+          <button type="mini" class="form_info_bot_td2_r2" formType="submit">回收</button>
+        </view>      
+      </view>
+    </view>
+    </view>
+  </view>
+  </form>
+</view>

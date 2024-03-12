@@ -1,0 +1,52 @@
+<view class="container" style="background-color: white;">
+  <wxs module="util">
+    var isChecked = function(str1,str2){
+    return str1.indexOf(str2) !=-1 ? true:false;
+    } 
+    module.exports = {
+      isChecked : isChecked
+    }
+  </wxs>
+  <form bindsubmit="formSubmit" catchtap="noop" catchreset="formReset">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight -50}}px" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+  <checkbox-group name="sb">
+    <view wx:for="{{servicelist}}" wx:key="{{item.id}}">
+      <view class="form_li_border" style="width: 100%;">
+        <view class="form_li_border_t1">{{item.sbdl}}</view>
+      </view>
+      <view class="form_li_icon_border" wx:for="{{item.sbList}}" wx:key="{{newitem.sbbh}}" wx:for-item="newitem" id="{{newitem.idd}}">
+        <view class="form_li_icon_t1">
+          <image class='middle-item-img' src="{{newitem.imgUrl=='' ? '../../../static/images/my/ycxmm.png' : newitem.imgUrl}}"></image>      
+        </view>
+        <view class="form_li_icon_t2">{{newitem.sbmc}}</view>
+        <view class="form_li_icon_t3">
+          <checkbox value="{{newitem.sbbh}}" class="middle-item-checkbox" checked="{{util.isChecked(fwpz,newitem.sbbh)}}"></checkbox>
+        </view>
+      </view>
+    </view>
+  </checkbox-group>
+    <!--
+    <view id="house_list">
+    <view class="form_li_border" style="width: 100%;">
+      <view class="form_li_border_t1">{{sbdl}}</view>
+    </view>  
+    <view class="form_li_icon_border">
+      <view class="form_li_icon_t1">
+        <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>      
+      </view>
+      <view class="form_li_icon_t2">电视</view>
+      <view class="form_li_icon_t3">
+        <checkbox class="middle-item-checkbox" checked="true"></checkbox>
+      </view>
+    </view>-->
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+  </scroll-view>
+    <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">确定</button>
+        </view>
+      </view>
+    </view>  
+  </form>
+</view>

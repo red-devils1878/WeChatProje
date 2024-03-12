@@ -1,0 +1,79 @@
+<view class="container">
+  <view class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 50}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+    <view style="padding: 14rpx 20rpx">账单明细</view>
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.fid}}" id="{{item.fid}}">
+				<view class="service-text">
+          <view style="display: flex;">
+					  <view class="service-tite" style="font-weight: bold;">{{item.periods_num}}</view>
+            <view class="zd_tite_MQ_right">{{item.zj_mq}}</view>
+          </view>
+          <view class="form_line" style="height: 4rpx;margin-right:20rpx;margin-bottom:10rpx;"></view>  
+          <view style="display: flex;">
+					  <view class="zd_tite_MX_left">开始时间</view>
+            <view class="zd_tite_MX_right">{{item.start_mq}}</view>
+          </view>
+          <view style="display: flex;">
+					  <view class="zd_tite_MX_left">结束时间</view>
+            <view class="zd_tite_MX_right">{{item.end_mq}}</view>
+          </view>  
+          <view style="display: flex;">
+					  <view class="zd_tite_MX_left">应收时间</view>
+            <view class="zd_tite_MX_right">{{item.ysrq_mq}}</view>
+          </view>
+          <view style="display: flex;" wx:for="{{item.rentList}}" wx:key="index" wx:for-item="newitem" id="{{newitem.id}}">
+					  <view class="zd_tite_MX_left">{{newitem.rentType}}</view>
+            <view class="zd_tite_MX_right">{{newitem.zj_mx}}</view>
+          </view>              
+		  	</view>
+			</view>
+		</view>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+  </scroll-view>
+  <view class="form_info_bot1" style="border: none;">
+    <view class="tr bg-w">
+      <view class="form_info_bot_td2_l">账单总额：<span style="color: #ff0000;font-weight: bold;">{{amountTotal}}</span></view>
+      <view class="form_info_bot_td2_r" bindtap='tapSure'>确定并创建</view>
+    </view>
+  </view>   
+</view>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+          <text>在线确认</text>
+      </view>
+      <view class='toast-main'>
+        <span style="font-size: 32rpx;font-weight: bold;">是否给租客确认</span>
+      </view>
+      <view class='toast-button'>
+          <view class='cancelButton'>
+            <button catchtap='cancel'>取消</button>
+          </view>
+          <view class='confirmButton'>
+            <button catchtap='confirm' open-type="share">确定</button>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='toast-box' hidden="{{!ifNameXF}}">
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>下发密码</text>
+    </view>
+    <view class='toast-main'>
+      <span style="font-size: 32rpx;font-weight: bold;">是否下发密码</span>
+    </view>
+    <view class='toast-button'>
+      <view class='cancelButton'>
+        <button catchtap='cancelXF'>取消</button>
+      </view>
+      <view class='confirmButton'>
+        <button catchtap='confirmXF'>确定</button>
+      </view>
+    </view>
+  </view>
+</view>

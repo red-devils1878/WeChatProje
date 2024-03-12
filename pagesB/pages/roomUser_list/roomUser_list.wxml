@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="swiper-items">
+    <view class="form_table_border_none" style="margin: 0 20rpx;">
+      <view class="form_table_border_in">
+        <view class="form_table_left">用户列表</view>
+        <view hidden="{{job=='样品管理员' ? fasle : true}}">
+          <mp-icon bindtap='addUser' color="blue" icon="add" type="filled" size="26" class="icon_right" hidden="true"></mp-icon>
+        </view>
+      </view>
+    </view>
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 60}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoading">
+      <view class="service-list">
+		<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.hidD}}" id="{{item.hidD}}">
+        <view class="service-img">
+			<image src="../../../static/images/my/zktx.jpg" mode="aspectFill"></image>
+		  </view>
+          <view class="service-text">
+            <view style="display: flex;">
+			  <view class="service-tite" style="font-weight: bold;width: 35%;">{{item.rentname}}</view>
+              <view class="service-tite" style="width: 65%;">
+                <label class="button-left-type" bindtap="tjsq" data-key="{{item.rentNo}}">添加授权</label>
+                <label class="button-right-type" bindtap="ckqx" data-key="{{item.rentNo}}">查看权限</label>
+              </view>
+            </view>
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;width: 80%;">{{item.rentphone}} | {{item.gxm}}</view>
+            </view>   
+            <view style="display: flex;">
+              <view class="service-tite" style="font-size: 28rpx;color: #7d7d7d;width: 80%;">有效期至:{{item.outTime}}</view>
+            </view>       
+		  </view>
+		</view>
+	   </view>
+	<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>           
+    </scroll-view>
+  </view>
+</view>

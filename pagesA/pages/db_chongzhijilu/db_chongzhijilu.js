@@ -1,0 +1,287 @@
+var SdDJ = "";//开始时间
+var EdDJ = "";//结束时间
+var dsn = "";//电表设备号
+var sblx = "";//设备类型
+var mysl = 20; //每页数量
+var page_total = 0; //总页数
+var fyQJ = [];  //房源数组
+var app = getApp();
+var apiUrl = "";   //获取api地址
+Page({
+
+  data: {  //页面的初始数据
+    winWidth: 0,
+    winHeight: 0,
+    detail_master:false, 
+    detail_djDate:true, //查询待缴日期
+    currentYJ: "jintian",
+  },
+
+  onLoad: function (options) {  //生命周期函数--监听页面加载
+    var that = this;
+    apiUrl = app.globalData.apiUrl;
+    dsn = options.dsn;
+    sblx = options.sblx;
+    //获取当前设备的宽高
+    wx.getSystemInfo( { 
+        success: function( res ) {
+            that.setData( {
+                winWidth: res.windowWidth,
+                winHeight: res.windowHeight
+            });
+        }
+    });
+    that.initDate();//初始化日期
+    this.get_RechargeLog(dsn,SdDJ,EdDJ); //获取充值记录
+  },
+  initDate: function (e) {  //初始化日期
+    if(!SdDJ){
+      const date = new Date(); //获取当前时间
+      let y = date.getFullYear();  //年
+      let m = date.getMonth()+1; //月
+      let d = date.getDate();  //日
+      if(m < 10){ m = '0'+ m }
+      if(d < 10){ d = '0'+ d }
+      SdDJ = y+'-'+m+'-'+d;  //拼接时间如2022-01-02
+      EdDJ = y+'-'+m+'-'+d;  //拼接时间如2022-01-02
+    }
+    this.setData({
+      djks: SdDJ,
+      djjs: EdDJ,
+      SdateDJ: SdDJ,
+      EdateDJ: EdDJ,
+      sblx: sblx,
+    })
+  },
+  startDateChangeDJ: function(e) {  //开始时间
+    let SdDJ2 = e.detail.value;
+    let SdateDJ=new Date(SdDJ2);
+    let EdateDJ=new Date(EdDJ);
+    if(SdateDJ > EdateDJ){
+      wx.showToast({
+        title: "起始时间不能大于终止时间",
+        icon: 'none',
+        duration: 1000
+      })
+      this.setData({
+       SdateDJ: SdDJ
+      })
+      return false;
+    }
+    else{
+     SdDJ = e.detail.value;
+     this.setData({
+       SdateDJ: e.detail.value,
+       currentDJ: ''
+     })
+    }
+   },
+   endDateChangeDJ: function(e) {  //结束时间
+    let EdDJ2 = e.detail.value;
+    let SdateDJ=new Date(SdDJ);
+    let EdateDJ=new Date(EdDJ2);
+    if(SdateDJ > EdateDJ){
+      wx.showToast({
+        title: "起始时间不能大于终止时间",
+        icon: 'none',
+        duration: 1000
+      })
+      this.setData({
+        EdateDJ: EdDJ
+      })
+      return false;
+    }
+    else{
+      EdDJ = e.detail.value;
+      this.setData({
+        EdateDJ: e.detail.value,
+        currentDJ: ''
+      })
+    }
+  },
+  showDJdate: function(e) {
+    this.setData({
+      detail_master: true,
+      detail_djDate: false
+    })
+  },
+  cancelDJ: function(e) {  //取消
+    this.setData({
+      detail_master: false,
+      detail_djDate: true
+    })  
+  },
+  sureDJ: function(e) {  //确定
+    this.setData({
+      detail_master: false,
+      detail_djDate: true,
+      djks: SdDJ,
+      djjs: EdDJ,
+    })
+    this.get_RechargeLog(dsn,SdDJ,EdDJ); //获取充值记录
+  },
+   //日期切换
+   swichDJ: function( e ) {
+    var that = this;
+    let ts = e.target.dataset.djsjqx;
+    if( this.data.currentDJ === e.target.dataset.djsjqx ) {
+        return false;
+    } else {
+        that.setData( {
+          currentDJ: e.target.dataset.djsjqx
+        })
+    }
+    that.getDate_dj(ts);//获取待缴日期
+  },
+  getDate_dj:function (ts) { //获取待缴日期
+    let that = this;
+    var _data = {ac: 'IB_getDate',"ts":ts};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+        var units = res.data.rows;
+        if(units.length > 0){
+          SdDJ = units[0].sDate;
+          EdDJ = units[0].eDate;
+          that.setData({
+            SdateDJ:SdDJ,
+            EdateDJ:EdDJ
+          })
+        }
+      },
+      fail(res) {
+        console.log("getunits fail:",res);
+      },
+      complete(){
+      }
+    });  
+  },
+  get_RechargeLog:function (mac,SdDJ,EdDJ) { //获取充值记录
+    let _this = this;
+    let sblxName = "";
+    if(sblx =='sb'){
+      sblxName = "水表";
+    }
+    else if(sblx =='db'){
+      sblxName = "电表";
+    }
+    fyQJ = [];  //初始化房源数组
+    _this.setData({
+      servicelist:[]
+    })
+    this.setData({
+        page:1
+      })
+      const page = this.data.page;
+      var tips = "加载中...";
+      wx.showLoading({
+       title: tips,
+    })
+    var _data = {ac: 'get_RechargeLog',"mac":mac,"SdDJ":SdDJ,"EdDJ":EdDJ,"sblxName":sblxName};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+        wx.hideLoading();
+        const newlist = [];
+        var units = res.data.rows;
+        var qty_total = units.length; //总条数
+        if(qty_total > 0){
+          fyQJ = units;
+          page_total = Math.ceil(qty_total/mysl);  //总页数
+          var qty = 0;
+          if(qty_total > page*mysl){
+            qty = page*mysl;
+          }
+          else{
+            qty = qty_total;
+          }
+          for (var i = (page-1)*mysl; i < qty; i++) {
+            newlist.push({
+              "id":units[i].id,
+              "mac":units[i].mac,
+              "czsj":units[i].czsj,
+              "amount":units[i].amount,
+              "degrees":units[i].degrees,
+              "price":units[i].price,
+              "czfs":units[i].czfs,
+              "renterName":units[i].renterName,
+            })
+          }        
+        }
+        setTimeout(()=>{
+          _this.setData({
+            servicelist:newlist
+          })
+        },100)
+      },
+      fail(res) {
+        wx.showToast({
+          title: '加载数据失败',
+          icon: 'none'
+        })
+      },
+    });  
+  },
+  scrollLoading:function(){ //滚动加载
+    this.loadMoreData();
+  },
+  loadMoreData: function () {
+    var _this = this
+    var currentPage = _this.data.page; // 获取当前页码
+    currentPage += 1; // 加载当前页面的下一页数据
+    if(currentPage > page_total){
+      wx.showToast({
+        title: '没有更过数据',
+        icon: 'none'
+      })
+    }
+    else{
+      var tips = "加载中...";
+      wx.showLoading({
+        title: tips,
+      })
+      setTimeout(()=>{
+        wx.hideLoading();
+      },500)
+      const newlist = [];
+      var units = fyQJ;
+      var qty_total = units.length; //总条数
+      if(qty_total > 0){
+        var qty = 0;
+        if(qty_total > currentPage*mysl){
+          qty = currentPage*mysl;
+        }
+        else{
+          qty = qty_total;
+        }
+        for (var i = (currentPage-1)*mysl; i < qty; i++) {
+          newlist.push({
+            "id":units[i].id,
+            "mac":units[i].mac,
+            "czsj":units[i].czsj,
+            "amount":units[i].amount,
+            "degrees":units[i].degrees,
+            "price":units[i].price,
+            "czfs":units[i].czfs,
+            "renterName":units[i].renterName,                
+          })
+        }               
+      }
+      setTimeout(()=>{
+        _this.setData({
+          servicelist:_this.data.servicelist.concat(newlist),
+          page: currentPage
+        })
+      },10)
+    }
+  },
+  onShow: function () {  //生命周期函数--监听页面显示
+
+  }
+})

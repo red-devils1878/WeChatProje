@@ -1,0 +1,142 @@
+.mymsg_head{
+  display: inline-block;
+}
+.bg{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+.mymsg_head image{
+  width: 120rpx;
+  height: 120rpx;
+  border: 3rpx solid #fff;
+  border-radius: 50%;
+}
+.mymsg_body_box{/*全部信息*/
+  position:absolute;
+  left:50%;
+  top: 20%;
+  transform: translate(-50%,-20%);
+}
+.nameandpho{
+  display: inline-block;
+  position: relative;
+  left: 20rpx;
+  top: -20rpx;
+}
+.dowmsg{
+  width: 90vw;
+  height: 300px;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8)
+}
+.mymsg_top_box{/*头部信息*/
+  width: 170px;
+  position: relative;
+  left: 26%;
+  transform: translateX(-50%);
+}
+.xuanze{
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px; 
+}
+.xuanze span{
+  position: relative;
+  left: 10px;
+}
+.tub{ 
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin-left: 25px;
+  margin-top:5px;
+}
+.arrow{
+  width: 10px;
+  height: 10px;
+  border-top: 4rpx solid #cfcbcb;
+  border-right: 4rpx solid #cfcbcb;
+  position: absolute;
+  right: 40rpx;
+  transform: rotate(45deg);
+  margin-top: -70rpx;
+}
+/*以下为弹出框样式*/
+.toast-box {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+.toastbg {
+  opacity: 0.2;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+}
+.showToast {
+  position: absolute;
+  opacity: 1;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 40%;
+}
+.toast-title {
+  text-align: center;
+  padding-left: 5%;
+  background-color: #5677fc;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+.toast-main {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: white;
+  text-align: center;
+}
+.toast-input {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+.toast-button {
+  display: flex;
+}
+.button1 {
+  width: 50%;
+  border-top: 2rpx solid #ddd;
+  border-right: 2rpx solid #ddd;
+}
+.button2 {
+  width: 50%;
+  border-top: 2rpx solid #ddd;
+}
+.button1 button {
+  width: 100%;
+  background-color: white;
+  color:#7ebcf7;
+  border-radius: 0px;
+  border-bottom-left-radius: 16rpx;
+}
+.button2 button{
+  width: 100%;
+  background-color: white;
+  color:#7ebcf7;
+  border-radius: 0px;
+  border-bottom-right-radius: 16rpx;
+}

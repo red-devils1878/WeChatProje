@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "门锁管理",
+  "usingComponents": {
+    "tui-tips": "/components/tips/tips",
+    "tui-icon": "/components/icon/icon"
+  }
+}

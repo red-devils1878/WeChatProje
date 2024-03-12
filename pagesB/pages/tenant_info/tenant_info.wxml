@@ -1,0 +1,92 @@
+<view class="container" style="background-color:#fafafa;">
+  <view class="page-body" style="background-color: white;">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">姓名</view>
+              <view class="form_table_right">
+                  <input type="text" name="tenantNo" value="{{tenantNo}}" hidden="true"/>
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;width: 100%;">{{name}}
+                    <mp-icon bindtap='tapName' data-index="1" data-key="{{tenantNo}}" icon="pencil" size="16" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+                  </view>
+              </view>
+              <view class="clear"></view>
+          </view>
+      </view>
+    <view class="form_table_border" style="display: flex;">
+        <view class="form_table_border_in" style="width: 90%;">
+            <view class="form_table_left">手机</view>
+                <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{tel}}
+                </view>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view style="border-left: 2rpx solid #f5f5f5;">
+            <view class="form_table_border_in" bindtap="callTel" data-tel="{{tel}}">
+             <image class='item-img' src='../../../static/images/my/tel.jpg' style="width: 36rpx;height:36rpx;margin: 10rpx 20rpx;"></image>
+            </view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">性别</view>
+            <view class="form_table_right">
+                <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{sex}}</view>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">证件类型</view>
+            <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{cardType}}</view>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>     
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <view class="form_table_left">证件号</view>
+            <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{idcardNo}}</view>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>   
+    <view class="form_line"></view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <view class="form_table_left">开门分享</view>
+            <view class="form_table_right">
+                <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 100%;background-color: white;" open-type="share">确定</button>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <!--<view class="form_table_border_none" bindtap='tapName' data-index="3" data-key="{{contractNo}}">
+        <view class="form_table_border_in">
+            <view class="form_table_left">开门方式</view>
+            <view class="form_table_right">
+                <label type="text" class="form_table_right_text"></label>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+      </view>-->
+      <view class="form_line"></view>     
+      <view class="form_table_border_none" bindtap='tapName' data-index="4" data-key="{{contractNo}}">
+            <view class="form_table_border_in">
+                <view class="form_table_left">入住记录</view>
+                <view class="form_table_right">
+                    <label type="text" class="form_table_right_text"></label>
+                </view>
+                <view class="arrow"></view>
+                <view class="clear"></view>
+            </view>
+      </view>
+    </form>
+  </view>
+</view>

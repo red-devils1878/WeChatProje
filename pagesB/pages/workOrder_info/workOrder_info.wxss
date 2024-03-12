@@ -1,0 +1,65 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.weui-cell-third{
+  background:#fff ;
+}
+.weui-cell-list{
+  background:#fff ;
+  margin: 10rpx 40rpx 10rpx 40rpx;
+}
+.weui-cell-line{
+  margin-left: 10rpx;
+  border-left: 2rpx solid #ddd;
+  height: 130rpx;
+  background:#fff ;
+}
+.weui-cell-circle{
+  border: 2rpx solid #000;
+  border-radius: 10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-color: green;
+}
+.weui-cell-name{
+  float: left;
+  font-size: 28rpx;
+  padding-left: 15rpx;
+  /*width: 170rpx;*/
+}
+.weui-cell-time{
+  font-size: 28rpx;
+  height: 46rpx;
+  /*margin-left: 170rpx;*/
+}
+.weui-cell-event{
+  padding-top: 10rpx;
+  padding-left: 30rpx;
+  font-size: 26rpx;
+}
+.img{
+  display: inline-block;
+}
+.pic {
+float:left;
+position:relative;
+margin-right:18rpx;
+margin-bottom:18rpx;
+width: 192rpx;
+height: 192rpx;
+}
+.delete-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.weui-uploader{
+  padding: 10rpx;
+  background-color: white;
+}
+.pic image{
+  width: 100%;
+  height: 100%;
+}
+.button {
+  width: 100%;
+  margin-top: 30rpx;
+}

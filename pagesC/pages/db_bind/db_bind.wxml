@@ -1,0 +1,52 @@
+<view class="container" style="background-color: white;">
+<view class="title_form_line"><span class="span-title">项目</span></view> 
+  <view class="form_table_input_border">
+    <view class="form_table_input_in">
+      <view class="form_table_input">
+        <picker bindchange="bindXMChange" value="{{xm[xmIndex].code}}" range="{{xm}}" range-key="{{'othername'}}" name="xm" placeholder="请选择项目">
+          <view class="form_table_input_text">
+            <view class="picker">
+              {{xm[xmIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view> 
+  <view class="title_form_line"><span class="span-title">楼栋</span></view> 
+  <view class="form_table_input_border">
+    <view class="form_table_input_in">
+      <view class="form_table_input">
+        <picker bindchange="bindLDChange" value="{{ld[ldIndex].code}}" range="{{ld}}" range-key="{{'othername'}}" name="ld" placeholder="请选择楼栋">
+          <view class="form_table_input_text">
+            <view class="picker">
+              {{ld[ldIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view> 
+  <view class="title_form_line"><span class="span-title">楼层</span></view> 
+  <view class="form_table_input_border">
+    <view class="form_table_input_in">
+      <view class="form_table_input">
+        <picker bindchange="bindLCChange" value="{{lc[lcIndex].code}}" range="{{lc}}" range-key="{{'code'}}" name="lc" placeholder="请选择楼层">
+          <view class="form_table_input_text">
+            <view class="picker">
+              {{lc[lcIndex].code}}
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view> 
+  <view class="title_form_line"><span class="span-title">房间</span></view> 
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 260}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">    
+    <view wx:for="{{room_list}}" wx:key="index">
+      <view class="{{item.dbNo=='' ? 'index_build_icon_borderN_1' : 'index_build_icon_borderN_3'}}" bindtap="jumpBind" data-key="{{item.hid}}">
+        <view class="index_build_icon_t4">{{item.roomNo}}</view>
+      </view>   
+    </view>     
+  </scroll-view>
+</view>

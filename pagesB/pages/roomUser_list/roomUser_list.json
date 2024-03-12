@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "房间用户",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

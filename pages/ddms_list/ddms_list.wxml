@@ -1,0 +1,49 @@
+<!--pages/ddms_list/ddms_list.wxml-->
+<view class="search-flex {{scrolltop>200?'tophide':''}}" style="padding:10rpx 20rpx;border-bottom: none;">
+		<view class="search-bar">
+			<input type="text" maxlength="12" placeholder="请搜索设备名称/设备号" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+    <!--<mp-icon icon="add2" bindtap="deviceAdd" size="30" color="#5677fc" style="height: 72rpx;line-height:72rpx;margin:2rpx 4rpx;"></mp-icon>-->
+	</view>
+<view class="container" >
+  <dl class="menu">
+    <dt data-index="0" bindtap="tapMainMenu">分组</dt>
+    <dd class="{{subMenuDisplay[0]}}">
+      <ul wx:for="{{fz_list}}" wx:key="{{item.sid}}">
+      <li class="{{subMenuHighLight[0][item.i]}}" data-index="0-{{item.i}}" data-type="FZ" data-code="{{item.sid}}" bindtap="tapSubMenu">{{item.sname}}</li>
+      </ul>
+    </dd>
+    <dt data-index="1" bindtap="tapMainMenu">房源类型</dt>
+    <dd class="{{subMenuDisplay[1]}}">
+      <ul wx:for="{{xq_list}}" wx:key="{{item.rid}}">
+      <li class="{{subMenuHighLight[1][item.i]}}" data-index="1-{{item.i}}" data-type="XQ" data-code="{{item.rid}}" bindtap="tapSubMenu">{{item.rname}}</li>
+      </ul>
+    </dd>
+    <dt data-index="4" style="border-right: none;">数量:{{total_dj}}间</dt>
+</dl>
+<!--<view class="form_line"></view>-->
+<view class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 85}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+				<view class="service-text">
+            <view style="display: flex;">
+              <view class="service-img">
+			      		<image src="{{item.imgurl}}" class="service-item-image" mode="aspectFill"></image>
+			       	</view>
+					    <view class="service-tite">
+                 <view class="service-tite-left">{{item.name}}
+                  <image src="{{item.imgurl2}}" class="service-left-img" mode="aspectFill"></image>
+                  <span class="service-tite-span">{{item.dl}}</span>
+                 </view>
+              </view>
+            </view>       
+		  	</view>
+        <view class="arrow"></view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+    </scroll-view>
+</view>
+</view>

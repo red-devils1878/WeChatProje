@@ -1,0 +1,80 @@
+<view class="container">
+  <view class="form_table_border_none" style="margin-top: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">基本信息</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border" style="display: flex;">
+    <view class="form_table_border_in" style="width: 100%;">
+       <view class="form_table_left" style="width: 20%;">名称</view>
+       <view class="table_center">
+          <view type="text" class="form_table_detail_right_text">{{mc}}</view>
+          <!--<view class="button_left" bindtap="updateMC">修改</view>-->
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+       <view class="form_table_left">设备号</view>
+       <view class="form_table_right">
+           <view type="text" class="form_table_detail_right_text" style="width: 100%;">{{dsn}}</view>
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+       <view class="form_table_left">device_id</view>
+       <view class="form_table_right">
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">{{device_id}}</view>
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in" style="height: 100rpx;">
+       <view class="form_table_left" style="width: 30%;height: 100rpx;line-height: 100rpx;">信号强度</view>
+       <view class="form_table_right" style="width: 70%;">
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">{{val_xh}}</view>
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">更新时间：{{at_xh}}</view>
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in" style="height: 100rpx;">
+       <view class="form_table_left" style="width: 30%;height: 100rpx;line-height: 100rpx;">状态</view>
+       <view class="form_table_right" style="width: 70%;">
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">{{zxzt}}</view>
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">更新时间：{{at_xh}}</view>
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in" style="height: 100rpx;">
+       <view class="form_table_left" style="width: 30%;height: 100rpx;line-height: 100rpx;">电量</view>
+       <view class="form_table_right" style="width: 70%;">
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">{{val_dl}}</view>
+          <view type="text" class="form_table_detail_right_text" style="width: 100%;">更新时间：{{at_dl}}</view>
+       </view>
+       <view class="clear"></view>
+    </view>
+  </view>
+  <!--<view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_title_left">门锁操作</view>
+      <view class="clear"></view>
+    </view>
+  </view>-->
+  <view class="form_table_border" bindtap='tapYD' data-index="1" data-key="{{dsn}}">
+      <view class="form_table_border_in">
+        <view class="form_table_detail_left">获取信号</view>
+        <view class="arrow" style="margin-top: -35rpx;"></view>
+        <view class="clear"></view>
+      </view>
+   </view>
+</view>
+<view class='curtain' hidden='{{showMB}}'></view>

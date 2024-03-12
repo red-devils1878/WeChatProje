@@ -1,0 +1,380 @@
+<view class="form_table_border" style="border: none;">
+    <view class="form_table_border_in">
+        <input type="text" name="contractNo" value="{{contractNo}}" hidden="true"/>
+        <view class="form_table_left" style="width: 60%;">{{houseName}}</view>
+            <view class="form_table_right" style="width: 40%;">
+               <span class="title-right-span">{{czzt_name}}</span>
+            </view>
+        <view class="clear"></view>
+    </view>
+</view>
+<view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">入住详情</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">收支流水</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">账单信息</view>
+</view>
+<view class="form_line"></view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 97}}px" bindchange="bindChange">
+    <swiper-item class="swiper-items">
+        <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 97-50}}px">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;">入住人信息</view>
+              <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;width: 100%;">
+                    <!--<mp-icon bindtap="{{ht_status=='1001' ? 'tapInfo' : ''}}" data-index="1" data-key="{{contractNo}}" icon="pencil" size="16" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>-->
+                  </view>
+                </view>
+              <view class="clear"></view>
+          </view>
+      </view>   
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;'>
+            <view class="form_show_border_in">
+               <input type="text" name="tenantNo" value="{{tenantNo}}" hidden="true"/>
+                <view class="form_show_left">姓名：</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{tenantName}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;display: flex;'>
+        <view class="form_show_border_in" style="width: 95%;">
+            <view class="form_show_left">联系方式：</view>
+            <view class="form_show_right" style="width: 78%;">
+                <span class="form_show_right_text">{{tel}}</span>
+            </view>
+            <view class='clear'></view>
+        </view>
+        <view>
+            <view class="form_table_border_in" style="padding:2rpx 0;height: 30rpx;width: 30rpx;" bindtap="callTel" data-tel="{{tel}}">
+            <image class='item-img' src='../../../static/images/my/tel.jpg' style="width: 30rpx;height:30rpx;margin: 1rpx 0;"></image>
+            </view>
+        </view>
+      </view>
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;'>
+            <view class="form_show_border_in">
+                <view class="form_show_left">证件号码：</view>
+                <view class="form_show_right" style="width: 80%;">
+                  <span class="form_show_right_text">{{cardNo}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view>
+      <view class="form_table_border_none">
+            <view class="form_show_border_in">
+                <view class="form_show_left">入住周期：</view>
+                <view class="form_show_right" style="width: 80%;">
+                  <span class="form_show_right_text">{{rzzq}}</span>
+                </view>
+                <view class='clear'></view>
+            </view>
+      </view> 
+      <!--<view class="form_line"></view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">电子钥匙</view>
+            <view class="form_table_right">
+                <input type="text" class="form_table_right_text" id="dzys"/>
+            </view>
+            <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">开门密码</view>
+            <view class="form_table_right" bindtap='tapInfo' data-index="4" data-roomid="{{hid}}"></view>
+            <view class="arrow"></view>
+          </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">IC卡</view>
+            <view class="form_table_right" bindtap='tapInfo' data-index="5" data-roomid="{{hid}}"></view>
+            <view class="arrow"></view>
+          </view>
+      </view>
+      <view class="form_table_border_none">
+          <view class="form_table_border_in">
+            <view class="form_table_left">指纹</view>
+            <view class="form_table_right" bindtap='tapInfo' data-index="6" data-roomid="{{hid}}"></view>
+            <view class="arrow"></view>
+          </view>
+      </view>-->
+      <view class="form_line"></view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+            <view class="form_table_left">押金</view>
+            <view class="form_table_right">
+                <view type="text" class="form_table_right_text">{{deposit}}</view>
+            </view>
+            <view style="position: absolute;right: 36rpx;">元</view>
+            <view class="clear"></view>
+          </view>
+      </view>
+      <view style="display: flex;">
+        <view class="form_table_border" style="border-right: 2rpx solid #f5f5f5; width: 70%;margin:0 0 0 40rpx;">
+            <view class="form_table_border_in">
+                <view class="form_table_left">租金</view>
+                <view class="form_table_right">
+                    <view type="text" class="form_table_right_text">{{rent}}</view>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+        <view style="width: 20%;border-bottom: 2rpx solid #f5f5f5;">
+          <view class="form_table_border_in">
+            <view type="text" class="form_table_right_text" style="width: 100%;">{{rent_unit}}</view>
+            <!--
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{unit}}">
+                <view class="picker">{{unit[index]}}</view>
+            </picker>-->
+          </view>
+        </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">付款方式</view>
+              <view class="form_table_right">
+                <view type="text" class="form_table_right_text">{{fkfs}}</view>
+                <!--
+                <picker data-field="date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                        <view class="weui-input">{{date}}</view>
+                </picker>
+                -->
+              </view>
+              <view class="arrow"></view>
+              <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in">
+              <view class="form_table_left">收租周期</view>
+              <view class="form_table_right">
+                  <view type="text" class="form_table_right_text">{{szzq}}</view>
+              </view>
+              <view class="arrow"></view>
+          </view>
+      </view> 
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">水表底数</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text">{{sbds}}</view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view> 
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">电表底数</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text">{{dbds}}</view>
+          </view>
+          <view class="arrow"></view>
+        </view>
+      </view> 
+      <view class="form_line"></view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">合同扫描件 ( {{img_qty}} )</view>
+          <view class="form_table_right" bindtap='tapInfo' data-index="7" data-key="{{contractNo}}">
+            <input type="text" class="form_table_right_text" disabled="true"/>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;">同住人信息</view>
+              <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;width: 100%;">
+                    <mp-icon bindtap="{{ht_status=='1001' ? 'tapInfo' : ''}}" data-index="2" data-key="{{contractNo}}" icon="pencil" size="16" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+                  </view>
+                </view>
+              <view class="clear"></view>
+        </view>
+      </view>   
+      <view wx:for="{{tzrlist}}" wx:key="{{item.id}}">
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;'>
+            <view class="form_show_border_in">
+                <view class="form_show_left">姓名：</view>
+                <view class="form_show_right">
+                  <span class="form_show_right_text">{{item.name_d}}</span>
+                </view>
+            </view>
+      </view>
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;display: flex;'>
+            <view class="form_show_border_in" style="width: 95%;">
+                <view class="form_show_left">联系方式：</view>
+                <view class="form_show_right" style="width: 78%;">
+                  <span class="form_show_right_text">{{item.tel_d}}</span>
+                </view>
+            </view>
+            <view>
+            <view class="form_table_border_in" style="padding:2rpx 0;height: 30rpx;width: 30rpx;" bindtap="callTel" data-tel="{{item.tel_d}}">
+             <image class='item-img' src='../../../static/images/my/tel.jpg' style="width: 30rpx;height:30rpx;margin: 1rpx 0;"></image>
+            </view>
+          </view>
+      </view>
+      <view class="form_table_border" style='border-bottom:none;height: 40rpx;margin-bottom: 16rpx;'>
+            <view class="form_show_border_in">
+                <view class="form_show_left">证件号码：</view>
+                <view class="form_show_right" style="width: 80%;">
+                  <span class="form_show_right_text">{{item.cardNo_d}}</span>
+                </view>
+            </view>
+      </view>
+      <view class="form_line"></view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+              <view class="form_table_left" style="font-weight: bold;">备注</view>
+              <view class="form_table_right">
+                  <view type="text" class="form_table_right_text" style="color: #c0c0c0;width: 100%;">
+                    <mp-icon bindtap="{{ht_status=='1001' ? 'tapInfo' : ''}}" data-index="3" data-key="{{contractNo}}" icon="pencil" size="16" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+                  </view>
+                </view>
+              <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+        <textarea style="height: 15vh;" disabled name="remark" value="{{remark}}"></textarea>
+      </view>
+    </scroll-view>
+      <!--<view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+        <view class="form_table_border">
+            <view class="form_table_border_in">
+            <view wx:if="{{ht_status=='1001'}}"> 
+              <button type="primary" bindtap="checkOut" data-key="{{contractNo}}"  style="background-color: #5677FC;margin-bottom:auto;">退房</button>
+            </view>
+            <view wx:else></view>
+            </view>
+        </view>
+      </view>-->
+      <view class="form_info_bot1" style="border: none;">
+        <view class="tr bg-w" wx:if="{{ht_status=='1001'}}">
+          <view class="form_info_bot_td2_r" bindtap='tapXZ' data-key="{{contractNo}}">续租</view>
+          <view style="width: 2rpx;"></view>
+          <view class="form_info_bot_td2_r" bindtap='tapTZ' data-key="{{contractNo}}">退租</view>
+        </view>
+        <view class="tr bg-w" wx:elif="{{ht_status=='1003' || ht_status=='1005'}}">
+          <view class="form_info_bot_td2_tz" bindtap='tapXZ' data-key="{{contractNo}}">续租</view>
+        </view>
+        <view class="tr bg-w" wx:else>
+          <!--<view class="form_info_bot_td2_r" bindtap='tapFQ' data-key="{{contractNo}}">发起签约</view>
+          <view style="width: 2rpx;"></view>-->
+          <view class="form_info_bot_td2_tz" bindtap='tapDel' data-key="{{contractNo}}">删除</view>
+        </view>
+      </view>  
+    </swiper-item>
+    <swiper-item class="swiper-items">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 97-50}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoadingZD">
+		<view class="service-list">
+			<view class="service-item" wx:for="{{zdxxlist}}" wx:key="{{item.id}}">
+				<view class="service-text">
+            <view style="display: flex;">
+				<view class="service-tite">{{item.fylx_name}}</view>
+                <view class="{{item.ch=='0' ? 'service-tite-right' : 'service-tite-rightHC'}}">{{item.xstje}}</view>
+            </view>
+            <view style="display: flex;">
+				<view class="service-tite" style="width: 70%;font-size: 30rpx;color: #c0c0c0;">{{item.yssj2}}</view>
+                <!--<view style="width: 30%;text-align: right;font-size: 30rpx;color:#ff0000;">公司管理员</view>-->
+            </view>          
+		  	</view>
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTopZD"></view>     
+  </scroll-view>        
+    </swiper-item>
+    <swiper-item class="swiper-items">
+      <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 97-50}}px;"scroll-top="{{scrolltop}}" bindscrolltolower="scrollLoadingTX"> 
+      <view class="title_form_line"><span class="span-title">待收</span></view>       
+	   	<view class="service-list">
+		  	<view class="service-item" wx:for="{{zdtxlist}}" wx:key="{{item.id}}" bindtap="zdmx" data-key="{{item.id}}" data-lx="{{item.zdlx}}">
+			    	<view class="service-text">
+              <view style="display: flex;">
+					      <view class="service-tite">{{item.fylx}}</view>
+                <view class="service-tite-right">{{item.zdje}}</view>
+              </view>
+              <view style="display: flex;">
+					      <view class="service-tite" style="width: 70%;font-size: 30rpx;color: #c0c0c0;">{{item.txsj2}}</view>
+                <view style="width: 30%;text-align: right;font-size: 30rpx;color:#ff0000;">{{item.ts}}</view>
+              </view>          
+		      	</view>
+		  	</view>
+	   	</view>
+      <view class="title_form_line" wx:if="{{ywczdlist.length > 0}}"><span class="span-title">已完成</span></view>
+	   	<view class="service-list">
+		  	<view class="service-item" wx:for="{{ywczdlist}}" wx:key="{{item.id}}" bindtap="zdmx" data-key="{{item.id}}" data-lx="{{item.zdlx}}">
+			    	<view class="service-text">
+              <view style="display: flex;">
+					      <view class="service-tite">{{item.fylx}}</view>
+                <view class="service-tite-right">{{item.zdje}}</view>
+              </view>
+              <view style="display: flex;">
+					      <view class="service-tite" style="width: 70%;font-size: 30rpx;color: #c0c0c0;">{{item.txsj2}}</view>
+              </view>          
+		      	</view>
+		  	</view>
+	   	</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTopTX"></view>    
+  </scroll-view>  
+        <view class="form_info_bot1" style="height: 100rpx;background-color:#fafafa;border: none;">
+          <view class="form_table_border">
+            <view class="form_table_border_in">
+            <view wx:if="{{ht_status!='1003' && ht_status!='1005'}}"> 
+              <button type="primary" bindtap="zdtxAdd" data-key="{{contractNo}}" style="background-color: #5677FC;margin-bottom:auto;">添加账单</button>
+            </view>
+            <view wx:else></view>
+            </view>
+          </view>
+        </view>       
+    </swiper-item>
+</swiper>
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="action_table_title">退租提示</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="padding: 10rpx 0rpx">
+      <view class="action_table_text">该合同有<span class="action_table_span">{{qty}}</span>个结算单，总额<span class="action_table_span">{{xstje}}</span></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="action_table_text" style="background-color: #ffdab9;">确认退租后不可撤销，且释放房源为可租状态。</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+    <block wx:for-items="{{actionSheetItems}}">
+      <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+  </action-sheet>
+  <!--<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+          <text>在线确认</text>
+      </view>
+      <view class='toast-main'>
+        <span style="font-size: 32rpx;font-weight: bold;">是否给租客确认</span>
+      </view>
+      <view class='toast-button'>
+          <view class='cancelButton'>
+            <button catchtap='cancelQY'>取消</button>
+          </view>
+          <view class='confirmButton'>
+            <button catchtap='confirmQY' open-type="share">确定</button>
+          </view>
+      </view>
+    </view>
+  </view>-->
+  <view class='curtain' hidden='{{showMB}}'></view>

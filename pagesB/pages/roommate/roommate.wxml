@@ -1,0 +1,138 @@
+<!--pages/roommate/roommate.wxml-->
+<view class="container" style="background-color: white;">
+<form bindsubmit="formSubmit" catchreset="formReset">
+<swiper-item class="swiper-items">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view wx:for="{{inputList}}" wx:key="id">
+  <view class="form_table_border_none">
+      <view class="form_table_border_in" style="height: 20rpx;">
+            <view class="form_table_left" style="font-weight: bold;">同住人{{index+1}}</view>
+            <view class="form_table_right">
+                  <view type="text" class="form_table_right_text">
+                    <mp-icon bindtap="delmore" data-index="{{index+1}}" data-key="{{item.lsh}}" icon="delete" size="22" color="#ff0000" style="height: 50rpx;line-height:50rpx;margin-left:20rpx;"></mp-icon>
+                  </view>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view> 
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+            <view class="form_table_left"><span style="color: red;">*</span>  姓名</view>
+            <view class="form_table_right">
+            <input type="text" class="form_table_right_text" name="lsh{{index+1}}" value="{{item.lsh}}" hidden="true"/>
+            <!--<input type="text" class="form_table_right_text" name="name{{index+1}}" value="{{item.name}}" placeholder="请输入"/>-->
+            <input type="text" class="form_table_right_text" name="name{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{inputVal[index]}}' bindinput='nameInputVal'/>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view> 
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+            <view class="form_table_left">联系方式</view>
+            <view class="form_table_right">
+            <!--<input type="number" maxlength="11" class="form_table_right_text" name="tel{{index+1}}" value="{{item.tel}}" placeholder="请输入"/>-->
+            <input type="number" maxlength="11" class="form_table_right_text" name="tel{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{telVal[index]}}' bindblur='telInputVal'/>
+            </view>
+            <view class="clear"></view>
+      </view>
+  </view> 
+  <view class="form_table_border">
+      <view class="form_table_border_in">
+            <view class="form_table_left">证件类型</view>
+            <view class="form_table_right">
+                  <!--<picker bindchange="bindCardChange" value="{{card[cardIndex].code}}" range="{{card}}" range-key="{{'othername'}}" name="cardType{{index+1}}">
+                  <view class="form_table_right_text">
+                  <view class="picker">
+                    {{card[cardIndex].othername}}
+                  </view>
+                  </view>
+                  </picker>-->
+                  <picker bindchange="bindCardChange" value="{{card[ctVal[index]].code}}" range="{{card}}" range-key="{{'othername'}}" name="cardType{{index+1}}" data-idx='{{index}}'>
+                        <view class="form_table_right_text">
+                          <view class="picker">
+                            {{card[ctVal[index]].othername}}
+                          </view>
+                        </view>
+                  </picker>                
+            </view>
+            <!--<view wx:else class="form_table_right">
+                  <picker bindchange="bindCardChange2" value="{{card[ctVal[index]].code}}" range="{{card}}" range-key="{{'othername'}}" name="cardType{{index+1}}" data-idx='{{index}}'>
+                        <view class="form_table_right_text">
+                          <view class="picker">
+                            {{card[ctVal[index]].othername}}
+                          </view>
+                        </view>
+                  </picker>                  
+            </view>-->
+            <view class="arrow"></view>
+            <view class="clear"></view>
+      </view>
+  </view>  
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  证件号</view>
+      <view class="form_table_right">
+        <!--<input type="idcard" class="form_table_right_text" name="cardNo{{index+1}}" value="{{item.cardNo}}" placeholder="请输入"/>-->
+        <input type="idcard" class="form_table_right_text" name="cardNo{{index+1}}" placeholder="请输入" data-idx='{{index}}' value='{{cardNoVal[index]}}' bindblur='cardNoInputVal'/>
+      </view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">性别</view>
+      <view class="form_table_right">
+        <picker bindchange="bindSexTChange" value="{{sexT[sexVal[index]].code}}" range="{{sexT}}" range-key="{{'othername'}}" name="sexType{{index+1}}" data-idx='{{index}}'>
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{sexT[sexVal[index]].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left">关系</view>
+      <view class="form_table_right">
+        <picker bindchange="bindGXTChange" value="{{gxT[gxVal[index]].code}}" range="{{gxT}}" range-key="{{'othername'}}" name="gxType{{index+1}}" data-idx='{{index}}'>
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{gxT[gxVal[index]].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left">开门权限</view>
+      <view class="form_table_right">
+        <picker bindchange="bindQXTChange" value="{{qxT[qxVal[index]].code}}" range="{{qxT}}" range-key="{{'othername'}}" name="qxType{{index+1}}" data-idx='{{index}}'>
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{qxT[qxVal[index]].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+      <view class="clear"></view>
+    </view>
+  </view>   
+  <view class="form_line"></view>
+</view>
+  <view class="form_table_border" style="border: none;margin-top: 10rpx;text-align: center;">
+    <button data-index="{{maxIndex+1}}" class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" bindtap="addmore">+添加同住人</button>
+    <button class="mini-btn" type="primary" size="mini" style="margin: 0 10rpx;width: 40%;background-color: #5677fc;" formType="submit">保存</button>
+  </view>
+  </scroll-view>
+</swiper-item>
+</form>
+</view>

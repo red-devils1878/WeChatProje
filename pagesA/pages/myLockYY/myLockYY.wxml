@@ -1,0 +1,96 @@
+<!--pages/myLock/myLock.wxml-->
+<view class='container'>
+  <!--顶部消息 primary-->
+  <tui-tips id="tui-tips-ctx"></tui-tips>
+  <!--顶部消息-->
+  <view class='middle-container'>
+    <view class='ul-item' style="margin-bottom: 20rpx;">
+    <view bindtap='back' class='item' hover-class="opcity" hover-stay-time="150" style="width: 25%;">
+      <text class='item-name' style="font-weight:bold;color: black;">返回首页</text>
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 100%;">
+      <image class='middle-item-img' src="{{ljzt=='连接成功' ? '../../../static/images/my/myLock001.gif' : '../../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'UnlinkBLE' : 'linkBLE'}}"></image>
+      <text class='title-name'>{{sbmc}}</text>
+    </view>
+    <view class='item' hover-class="opcity" hover-stay-time="150">
+      <text class='item-name'></text>
+      <!--<text class='item-name' style="font-weight:bold;color: black;">{{powerV}}%</text>-->
+    </view>
+    </view>
+  <!--<view>{{sbmc}}</view>-->
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="01" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>蓝牙开门</text>
+    </view>
+    <view bindtap='tapEvent' data-index="02" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>管理</text>
+    </view>
+    <view bindtap='tapEvent' data-index="03" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>授时</text>
+    </view>
+    <view bindtap='tapEvent' data-index="04" class='item' hover-class="opcity" hover-stay-time="150">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>动态密码</text>
+    </view>
+    </view>
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="05" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>新增密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="06" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrzw.png'></image>
+      <text class='item-name'>新增指纹</text>
+    </view>
+    <!--<view bindtap='tapEvent' data-index="07" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>解绑</text>
+    </view>-->
+    <view bindtap='tapEvent' data-index="09" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/lrmm.png'></image>
+      <text class='item-name'>管理密码</text>
+    </view>
+    <view bindtap='tapEvent' data-index="08" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/bxsq.png'></image>
+      <text class='item-name'>开门记录</text>
+    </view>
+    </view>
+
+    <view class='ul-item'>
+    <view bindtap='tapEvent' data-index="10" class='item' hover-class="opcity" hover-stay-time="150" data-key="{{dsn}}">
+      <image class='middle-item-img' src='../../../static/images/my/ycxmm.png'></image>
+      <text class='item-name'>门锁信息</text>
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    <view bindtap='tapEvent' class='item' hover-class="opcity" hover-stay-time="150" style="width: 128.4rpx;">
+    </view>
+    </view>
+  </view>
+</view>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+          <text>管理密码</text>
+      </view>
+      <view class='toast-main'>
+          <view class='toast-input'>
+            <input placeholder='请输入8位数的新密码' bindinput='setValue' data-name='stuEidtName' value="{{fxmc}}" type="number" maxlength="8"></input>
+          </view>
+      </view>
+      <view class='toast-button'>
+          <view class='button1'>
+             <button catchtap='cancel'>取消</button>
+          </view>
+          <view class='button2'>
+              <button catchtap='confirm'>确定</button>
+          </view>
+      </view>
+  </view>
+  </view>

@@ -1,0 +1,200 @@
+<view class="container" style="background-color: white;">
+  <view class="page-body">
+    <form bindsubmit="formSubmit" catchreset="formReset">
+    <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">名称</view>
+          <view class="form_table_right">
+            <input type="text" class="form_table_right_text" value="{{roomNo}}" name="roomNo" placeholder="请填写房间名称"/>
+          </view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+          <view class="form_table_border_in" bindtap='tapFZ'>
+              <view class="form_table_left">社区</view>
+              <view class="form_table_right">
+                  <!--<view class="form_table_right_text" hidden="true" name="fd">{{fz}}</view>-->
+                  <input type="text" class="form_table_right_text" hidden="true" value="{{fz}}" name="fd"/>
+                  <view class="form_table_right_text" name="fdmc">{{sname}}</view>           
+              </view>
+              <view class="arrow"></view>
+              <view class="clear"></view>
+          </view>
+      </view>
+      <view class="form_table_border">
+            <view class="form_table_border_in" bindtap='tapFX33'>
+                <view class="form_table_left">房型</view>
+                <view class="form_table_right">
+                  <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="{{'othername'}}" name="fangxing">
+                    <view class="form_table_right_text">
+                       <view class="picker">
+                         {{multiArray[0][multiIndex[0]].othername}}{{multiArray[1][multiIndex[1]].othername}}{{multiArray[2][multiIndex[2]].othername}}
+                       </view>
+                    </view>
+                  </picker>
+                </view>
+                <view class="arrow"></view>
+            </view>
+      </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">朝向</view>
+        <view class="form_table_right">
+          <picker bindchange="bindCXChange" value="{{cx[cxIndex].code}}" range="{{cx}}" range-key="{{'othername'}}" name="cx">
+            <view class="form_table_right_text" style="padding-top:5rpx;">
+              <view class="picker">{{cx[cxIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">类型</view>
+        <view class="form_table_right">
+          <picker bindchange="bindLXChange" value="{{lx[lxIndex].code}}" range="{{lx}}" range-key="{{'othername'}}" name="lx">
+            <view class="form_table_right_text" style="padding-top:5rpx;">
+              <view class="picker">{{lx[lxIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">房态</view>
+            <view class="form_table_right">
+                <picker bindchange="bindFTChange" value="{{ft[ftIndex].code}}" range="{{ft}}" range-key="{{'othername'}}" name="fjzt">
+                  <view class="form_table_right_text" style="padding-top:5rpx;">
+                     <view class="picker">{{ft[ftIndex].othername}}
+                     </view>
+                  </view>
+                </picker>
+            </view>
+                <view class="arrow"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">出租状态</view>
+        <view class="form_table_right">
+          <picker bindchange="bindCZZTChange" value="{{czzt[czztIndex].code}}" range="{{czzt}}" range-key="{{'othername'}}" name="czzt">
+            <view class="form_table_right_text" style="padding-top:5rpx;">
+              <view class="picker">{{czzt[czztIndex].othername}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class="arrow"></view>
+      </view>
+    </view>
+    <view style="display: flex;">
+      <view class="form_table_border" style="border-right: 2rpx solid #f5f5f5; width: 70%;margin:0 0 0 40rpx;">
+            <view class="form_table_border_in">
+                <view class="form_table_left">租金</view>
+                <view class="form_table_right">
+                    <input type="digit" class="form_table_right_text" value="{{rent}}" style="width: 95%;" name="rent" placeholder="请填写房间价格"/>
+                </view>
+                <view class="clear"></view>
+            </view>
+      </view>
+      <view style="width: 20%;border-bottom: 2rpx solid #f5f5f5;">
+        <view class="form_table_border_in">
+          <view class="form_table_right">
+            <picker bindchange="bindPickerChange" value="{{unit[unitIndex].code}}" range="{{unit}}" range-key="{{'othername'}}" name="rent_unit">
+              <view class="form_table_right_text" style="padding-top:5rpx;">
+                <view class="picker">
+                  {{unit[unitIndex].othername}}
+                </view>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+                <view class="form_table_left">面积</view>
+                <view class="form_table_right">
+                    <input type="digit" class="form_table_right_text" value="{{area}}" style="width: 50vw;" name="area" placeholder="请填写房间面积"/>
+                </view>
+                <view style="position: absolute;right: 50rpx;margin-top: 4rpx;">(㎡)</view>
+                <view class="clear"></view>
+            </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">地址</view>
+          <view class="form_table_right" style="width: 85%;" bindtap='updateDZ'>
+            <input type="text" class="form_table_right_text" value="{{address}}" name="address" placeholder="请选择地址" style="width: 95%;" disabled="true"/>
+          </view>
+          <view class="arrow2"></view>
+          <view class="clear"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">房间照片</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="1" data-key="{{hid}}">
+              <input type="text" class="form_table_right_text" value="{{fjzp}}" name="fjzp" placeholder="完善信息" disabled="true"/>
+            </view>
+            <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">房屋配置</view>
+          <view class="form_table_right" bindtap='tapEvent' data-index="2" data-key="{{hid}}">
+            <input type="text" class="form_table_right_text" name="fwpz" placeholder="" disabled="true"/>
+          </view>
+          <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="form_table_left">房间描述</view>
+            <view class="form_table_right" bindtap='tapEvent' data-index="3" data-key="{{hid}}">
+              <input type="text" class="form_table_right_text" name="fjms" placeholder="" disabled="true"/>
+            </view>
+            <view class="arrow2"></view>
+        </view>
+      </view>
+      <view class="form_line"></view>
+      <view class="form_table_border">
+            <view class="form_table_border_in">
+              <button type="primary" formType="submit" style="background-color: #5677FC;margin-bottom:auto;">保存</button>
+            </view>
+      </view>
+    </scroll-view>
+    </form>
+  </view>
+</view>
+<view class='toast-box' hidden="{{!ifName}}" style="z-index: 999;">
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>请填写地址</text>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+    <view class='toast-main' style="text-align: left;">
+      <view class='toast-input' style="background-color: #fafafa;border-radius: 10rpx;">
+        <textarea placeholder='请输入地址' style="height: 20vh;padding: 0rpx;" name='stuRecord' value="{{xdz}}"></textarea>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='cancelButton'>
+        <button catchtap='cancel'>取消</button>
+      </view>
+      <view class='confirmButton'>
+        <button catchtap='confirm' form-type="submit">确定</button>
+      </view>
+    </view>
+  </form>
+  </view>
+  </view>

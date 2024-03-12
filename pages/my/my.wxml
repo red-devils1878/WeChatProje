@@ -1,0 +1,58 @@
+<!--pages/input12/input12.wxml-->
+<image class="bg" src="../../static/images/my/mymsgbg.jpg"></image>
+<view class="mymsg_body_box"><!--所有信息-->
+<view class="mymsg_top_box"><!--头部信息-->
+<view class="mymsg_head"><image src="../../static/images/my/people.png"></image></view><!--头像-->
+<view class="nameandpho"><!--姓名和电话-->
+<view>{{username}}</view>
+<view>{{tel}}</view>
+</view>
+</view>
+<view class="dowmsg">
+<view class="xuanze" style="border-bottom: rgb(219, 219, 219) solid 1px;" bindtap='tapEvent' data-index="01">
+  <image class="tub" src="../../static/images/my/zhsz.png"></image><span>修改密码</span>
+  <view class="arrow"></view>
+</view>
+<!--<view class="xuanze" style="border-bottom: rgb(219, 219, 219) solid 1px;">
+  <image class="tub" src="../../static/images/my/ggysz.png"> </image><span>共管理设置</span>
+  <view class="arrow"></view>
+</view>-->
+<view class="xuanze" style="border-bottom: rgb(219, 219, 219) solid 1px;" bindtap='tapEvent' data-index="02">
+  <image class="tub" src="../../static/images/my/kfrx.png"> </image><span>客服热线</span>
+  <view class="arrow"></view>
+</view>
+<view class="xuanze" style="border-bottom: rgb(219, 219, 219) solid 1px;" bindtap='tapEvent' data-index="03">
+  <image class="tub" src="../../static/images/my/smrz.png"> </image><span>帮助说明</span>
+  <view class="arrow"></view>
+</view>
+<view class="xuanze" style="border-bottom: rgb(219, 219, 219) solid 1px;" bindtap='tapEvent' data-index="04">
+  <image class="tub" src="../../static/images/my/gywm.png"> </image><span>关于我们</span>
+  <view class="arrow"></view>
+</view>
+<view class="xuanze" bindtap='tapEvent' data-index="05">
+  <image class="tub" src="../../static/images/my/ggysz.png"> </image><span>退出登录</span>
+  <view class="arrow"></view>
+</view>
+</view>
+  <view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+        <text>修改密码</text>
+      </view>
+      <view class='toast-main'>
+        <view class='toast-input'>
+          <input maxlength="20" placeholder='请输入新密码' bindinput='setValue' data-name='stuEidtName' value="{{newPwd}}" type="text" ></input>
+        </view>
+      </view>
+      <view class='toast-button'>
+        <view class='button1'>
+          <button catchtap='cancel'>取消</button>
+        </view>
+        <view class='button2'>
+          <button catchtap='confirm'>确定</button>
+        </view>
+      </view>
+  </view>
+  </view>
+</view>

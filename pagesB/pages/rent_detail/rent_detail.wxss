@@ -1,0 +1,115 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.scroll-views{
+  height: 100%;
+}
+.form_info_bot1{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 7vh;
+  border-top: 1px solid #e6e6e6;
+  background-color: white;
+}
+.service-list{
+  padding: 0 40rpx;
+}
+.service-item{
+  display: flex;
+  padding: 14rpx 0; 
+  border-bottom: 1rpx solid #e8e8e8;
+}
+.service-text{
+  flex: 1;
+  width: 100%;
+}
+.service-text .service-tite{
+  color: #333;
+  width: 100%;
+  font-size: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 7vh;
+  line-height: 7vh;
+  align-items: center;
+}
+.form_info_bot_td2_r{
+  width:25%;
+  text-align:center;
+  line-height: 7vh;
+  font-size: 4vw;
+  background-color:#5677FC;
+  color:white;
+}
+.form_zfje_style{
+  width: 100%;
+  float: right;
+  height: 50rpx;
+  text-align: center;
+  font-size: 5vw;
+  font-weight: bold;
+}
+.title_form_line{
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #fafafa;
+  border: 0;
+}
+.span-title{
+  padding-left: 40rpx;
+}
+.form_table_right_text2{
+  border: none;
+  font-size: 4vw;
+  line-height: 50rpx;
+  outline: medium;
+  text-align: right;
+  width: 100%;
+  color: #c0c0c0;
+}
+.toast-table-left{
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 20rpx;
+}
+.toast-table-right{
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  width: 45%;
+  text-align: right;
+}
+.form_show_right_text{
+  font-size:3.5vw;
+  color: rgb(175,168,139);
+}
+.rpt_table_border_in{
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.rpt_table_left_none{
+  float: left;
+  font-size: 4vw;
+  height: 48rpx;
+}
+.form_table_border_tx{
+  background-color:rgb(252,250,225);
+  margin-bottom: 10rpx;
+}
+.button_style{
+  width:100%;
+  text-align:center;
+  font-size: 4vw;
+  background-color:#5677FC;
+  color:white;
+  display: inline-flex;
+}

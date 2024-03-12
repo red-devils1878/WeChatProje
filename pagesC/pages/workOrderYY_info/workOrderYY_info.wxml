@@ -1,0 +1,124 @@
+<view class="container" style="background-color:#fafafa;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+  <view class="page-body" style="background-color: white;">
+    <!--<form bindsubmit="formSubmit" catchtap="noop" catchreset="formReset">-->
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view style="text-align: center;font-size: 32rpx;font-weight: bold;">{{houseName}}</view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">工单类型</view>
+            <view class="form_table_right">
+              <input type="text" name="orderNo" value="{{orderNo}}" hidden="true"/>
+              <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{gdlx}}</view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+      <view class="form_table_border_in">
+        <view class="form_table_left">{{xmlx}}</view>
+          <view class="form_table_right">
+            <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{xmmc}}</view>
+          </view>
+          <view class="arrow"></view>
+          <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+            <view class="form_table_left">申请时间</view>
+            <view class="form_table_right">            
+              <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{sqsj}}</view>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in">
+            <view class="form_table_left">期望上门时间</view>
+            <view class="form_table_right">            
+              <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{smsj}}</view>
+            </view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+      <view class="form_table_border_in">
+        <view class="form_table_left">预计上门时间</view>
+        <view class="form_table_right">            
+          <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{yjsmsj}}</view>
+        </view>
+        <view class="clear"></view>
+      </view>
+    </view>
+    <view class="form_line"></view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">联系人</view>
+            <view class="form_table_right">
+              <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{lxr}}</view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border">
+        <view class="form_table_border_in">
+          <view class="form_table_left">联系电话</view>
+            <view class="form_table_right">
+              <view type="text" class="form_table_right_text" style="color: #c0c0c0;">{{lxdh}}</view>
+            </view>
+            <view class="arrow"></view>
+            <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border_none">
+        <view class="form_table_border_in" style="height: 20rpx;">
+           <view class="form_table_left">详情描述</view>
+           <view class="clear"></view>
+        </view>
+    </view>
+    <view class="form_table_border" style="border:2rpx solid #f5f5f5;margin: 20rpx 40rpx;">
+      <textarea style="height: 20vh;color: #c0c0c0;" disabled name="remark" value="{{wtms}}"></textarea>
+    </view>
+    <view class="form_line"></view>
+    <view class="weui-uploader" wx:if="{{orderType=='1002'}}">
+  <view class="weui-uploader__hd" style="padding: 20rpx;">
+    <view class="weui-uploader__overview">
+        <view class="weui-uploader__title">图片上传</view>
+        <view class="weui-uploader__info" style="font-size: 32rpx;">{{img_qty}}/6</view>
+    </view>
+  </view>
+  <view class="img-v weui-uploader__bd" style="padding: 0 20rpx;">
+    <view class='pic' wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+      <image class="weui-uploader__img" src="{{item.url}}" data-index="{{index}}" mode="aspectFill" bindtap="previewImage">
+        <!--<icon type='cancel' class="delete-btn" data-index="{{index}}" data-key="{{item.FileID}}" catchtap="deleteImg"></icon>-->
+      </image>
+    </view>
+    <!--<view hidden="{{showView}}" class="weui-uploader__input-box pic" bindtap="chooseImg"> </view>-->
+  </view>
+</view>
+<view wx:else></view>
+    <view class="form_line" style="height: 70rpx;line-height: 70rpx;padding-left: 40rpx;">工单追踪</view>     
+    <!--</form>-->
+    <view class="weui-cell-third">
+     <view class="page_title">
+      <block wx:for="{{recordList}}" wx:key="*this">
+        <view class="weui-cell-list">
+           <view class="weui-cell-circle"></view>
+           <view class="weui-cell-line"> 
+             <view class="weui-cell-name">{{item.name}}</view>
+             <view class="weui-cell-time">{{item.time}}</view>
+             <view class="weui-cell-event">{{item.event}}</view>
+           </view>
+        </view>
+      </block>
+     </view>
+    </view>
+  </view>
+  </scroll-view>
+</view>

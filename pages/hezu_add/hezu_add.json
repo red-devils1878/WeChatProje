@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "component": true,
+  "navigationBarTitleText": "新增合租",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"   
+  }
+}

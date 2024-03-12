@@ -1,0 +1,110 @@
+/* pages/sk_add/sk_add.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+/*标题栏样式开始*/
+.nav{
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background:#5677fc;
+}
+.title_icon{
+  position:absolute;
+  bottom: 18rpx;
+  left: 30rpx;
+  display: flex;
+  z-index: 20;
+}
+/*标题栏样式结束*/
+.form_table_centre{
+  position: relative;
+  left: 40%;
+  transform: translate(-50%);
+  font-size:4vw;
+  width: 30vw;
+  height:50rpx;
+}
+.form_table_centre2{
+  position: relative;
+  left: 15%;
+  display: inline-block;
+  transform: translate(-15%);
+  font-size:4vw;
+  width: 30vw;
+  height:50rpx;
+}
+.form_table_title_right{
+  position: relative;
+  left: 57%;
+  width: 30vw;
+  margin-top: -50rpx;
+}
+.form_table_right2{
+  position: relative;
+  left: 70%;
+  width: 160rpx;
+  top: -28px;
+}
+.box1{
+    width: 100vw;
+    height: 60rpx;
+    line-height: 60rpx;
+    background-color: #e4e4e4;
+}
+.box1 .form_table_left{
+  margin-left: 20px;
+}
+.box1 .form_table_centre{
+  padding-left: 3px;
+}
+.box1 view{
+  color: #a0a0a0;
+  font-size: 4vw;
+  position: relative;
+  text-align: center;
+}
+.inputdow{
+  text-align: center;
+  /*font-size: 28rpx;*/
+  font-size: 3.5vw;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 185, 185);
+  width: 160rpx;
+  background-color: rgb(255, 255, 255);
+}
+.arrow3{
+  width: 10px;
+  height: 10px;
+  border-top: 4rpx solid #cfcbcb;
+  border-right: 4rpx solid #cfcbcb;
+  position: relative;
+  left: 95%;
+  top:-100rpx;
+  transform: rotate(45deg);
+}
+.form_zfje_style{
+  width: 100%;
+  float: right;
+  height: 50rpx;
+  text-align: center;
+  font-size: 6vw;
+  font-weight: bold;
+}
+.form_zflx_style{
+  margin-left: 20rpx;
+  float: right;
+  height: 50rpx;
+  width: 80vw;
+}
+.radio_type{
+  float: right;
+  transform: scale(0.9);
+}
+.scroll-views{
+  height: 100%;
+}
+.swiper-items{
+  height: 100%;
+}

@@ -1,0 +1,2 @@
+/* pages/rzxq_updateRemark/rzxq_updateRemark.wxss */
+@import '/common/commom.wxss';  /*引用公共样式文件*/

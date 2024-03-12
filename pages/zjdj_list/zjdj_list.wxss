@@ -1,0 +1,135 @@
+@import '/common/commom.wxss';  /*引用公共样式文件*/
+.swiper-tab{
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  background-color: white;
+}
+.swiper-tab-list{  
+  font-size: 30rpx;
+  display: inline-block;
+  width: 50%;
+  color: #777777;
+}
+.on{ 
+  font-size: 18px;
+  border-bottom: 6rpx solid #5677fc;
+  font-weight: bold;
+  color:#5677fc;
+}
+.swiper-box{ 
+  display: block;
+  height: 100%; 
+  width: 100%; 
+  overflow: hidden; 
+}
+.swiper-items{
+  height: 100%;
+}
+.scroll-views{
+  height: 100%;
+}
+.service-list{
+  padding: 0 20rpx;
+  /*background-color: #fafafa;*/
+}
+.service-item{
+	display: flex;
+	padding: 14rpx 0; 
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+.service-text{
+	flex: 1;
+	margin-left: 20rpx;
+	width: 100%;
+}
+.service-text .service-tite{
+	color: #333;
+	width: 100%;
+	font-size: 32rpx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.service-tite-left{
+  float: left;
+	color:#1E90FF;
+	width: 45%;
+	font-size: 28rpx;
+	white-space: nowrap;
+	overflow: hidden;
+  text-overflow: ellipsis;
+  border: 2rpx solid #1E90FF;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 4rpx 0;
+}
+.service-tite-right{
+  float: right;
+  color:white;
+  background-color: #5677fc;
+	width: 55%;
+	font-size: 28rpx;
+	white-space: nowrap;
+	overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 4rpx 0;
+  margin-right: 20rpx;
+}
+.yj_text_right{
+  width: 50%;
+  text-align: right;
+  font-size: 14px;
+  color: #04BE02;
+  padding-right: 20rpx;
+}
+.date_style{
+  margin: 20rpx;
+  background-color: white;
+  width: 58%;
+  padding: 4rpx 20rpx;
+  border-radius: 20rpx;
+}
+.form_date_right_text{
+  border: none;
+  font-size: 4vw;
+  line-height: 50rpx;
+  outline: medium;
+  text-align: center;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 5vh;
+  line-height: 5vh;
+  align-items: center;
+}
+.form_info_bot_td2_r{
+  width:23%;
+  text-align:center;
+  line-height: 5vh;
+  font-size: 3.5vw;
+  background-color:#e8e8e8;
+  /*color:white;*/
+  border-radius: 10rpx;
+}
+.syts_style1{
+  width: 100%;
+  text-align: left;
+  font-size: 28rpx;
+  color:#f3ac14ce;
+}
+.syts_style2{
+  width: 100%;
+  text-align: left;
+  font-size: 28rpx;
+  color:#ff0000;
+}
+.showBorder{
+  border: 4rpx solid #000000;
+}

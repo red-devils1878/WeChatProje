@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="form_table_border_none" style="margin: 40rpx;">
+    <view class="form_table_border_in">
+      <view class="form_title">填入详细信息有助于更好的日常管理</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 90}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+	<view class="service-list">
+      <view class="form_table_border" wx:for="{{room_list}}" wx:key="{{item.hid}}">
+        <view class="form_table_border_in">
+          <view class="form_table_left">{{item.roomNo}}</view>
+          <view class="form_table_right" bindtap='tapjump' data-id="{{item.hid}}">
+            <input type="text" class="form_table_right_text" placeholder="完善信息" disabled="true"/>
+          </view>
+          <view class="arrow2"></view>
+        </view>
+      </view> 
+	</view>
+  </scroll-view>
+  <view class="form_info_bot1" style="border: none;">
+    <view class="form_info_bot_td2_r" bindtap='goBack'>返回列表</view>
+  </view>   
+</view>

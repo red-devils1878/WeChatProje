@@ -1,0 +1,90 @@
+<view class="container">
+  <swiper-item class="swiper-items">
+  <view class="page-body">
+  <form bindsubmit="formSubmit" catchreset="formReset">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight-50}}px">
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  房型名称</view>
+      <view class="form_table_right">
+        <input type="text" class="form_table_right_text" name="fxmc" placeholder="请输入"/>
+      </view>
+    </view>
+  </view> 
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  户型</view>
+      <view class="form_table_right">
+        <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="{{'othername'}}" name="fangxing">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{multiArray[0][multiIndex[0]].othername}}{{multiArray[1][multiIndex[1]].othername}}{{multiArray[2][multiIndex[2]].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  朝向</view>
+      <view class="form_table_right">
+        <picker bindchange="bindCXChange" value="{{cx[cxIndex].code}}" range="{{cx}}" range-key="{{'othername'}}" name="cx">
+          <view class="form_table_right_text">
+            <view class="picker">
+              {{cx[cxIndex].othername}}
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="arrow"></view>
+    </view>
+  </view>
+  <view class="form_table_border">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  面积</view>
+      <view class="form_table_right">
+        <input type="digit" class="form_table_right_text" style="width: 50vw;" name="area" placeholder="请输入"/>
+      </view>
+      <view style="position: absolute;right: 50rpx;margin-top: 4rpx;">(㎡)</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in">
+      <view class="form_table_left"><span style="color: red;">*</span>  出租价格</view>
+      <view class="form_table_right">
+        <input type="digit" class="form_table_right_text" style="width: 50vw;" name="rent" placeholder="请输入"/>
+      </view>
+      <view style="position: absolute;right: 50rpx;margin-top: 6rpx;">元/月</view>
+      <view class="clear"></view>
+    </view>
+  </view>
+  <view class="title_form_line"><span class="span-title">房屋配置</span></view> 
+    <checkbox-group name="sb">
+    <view wx:for="{{servicelist}}" wx:key="{{item.id}}">
+      <view class="form_li_border" style="width: 100%;">
+        <view class="form_li_border_t1">{{item.sbdl}}</view>
+      </view>
+      <view class="form_li_icon_border" wx:for="{{item.sbList}}" wx:key="{{newitem.sbbh}}" wx:for-item="newitem" id="{{newitem.idd}}">
+        <!--<view class="form_li_icon_t1">
+          <image class='middle-item-img' src="{{newitem.imgUrl=='' ? '../../../static/images/my/ycxmm.png' : newitem.imgUrl}}"></image>      
+        </view>-->
+        <view class="form_li_icon_t2">{{newitem.sbmc}}</view>
+        <view class="form_li_icon_t3">
+          <checkbox value="{{newitem.sbbh}}" class="middle-item-checkbox" checked="{{util.isChecked(fwpz,newitem.sbbh)}}"></checkbox>
+        </view>
+      </view>
+    </view>
+    </checkbox-group>
+  </scroll-view>
+  <view class="form_info_bot1">
+    <view class="form_table_border">
+      <button type="primary" style="background-color: #5677FC;margin-bottom:auto;" formType="submit" >保存</button>
+    </view>
+  </view>
+  </form>
+  </view>
+</swiper-item>
+</view>

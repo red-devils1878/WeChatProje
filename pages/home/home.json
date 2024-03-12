@@ -1,0 +1,9 @@
+{
+  "backgroundColorTop": "#5677FC",
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "tui-button": "../../../components/button/button",
+    "tui-tips": "../../../components/tips/tips",
+    "tui-icon": "../../../components/icon/icon"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "物品交割金额",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

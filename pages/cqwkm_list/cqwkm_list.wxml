@@ -1,0 +1,44 @@
+<view class="container hidenScroll">
+  <view style="display: flex;margin: 0 20rpx;">
+    <span class="title_span" style="width: 12%;">楼栋</span>
+    <view class="query_style_l" style="width: 52%;">
+      <picker bindchange="bindFYChange" value="{{fy[fyIndex].houseNo}}" range="{{fy}}" range-key="{{'houseName'}}" name="fy">
+      <view class="form_table_right_text" style="width: 100%;text-align: left;padding-top: 5rpx;">
+        <view class="picker">
+          {{fy[fyIndex].houseName}}
+        </view>
+      </view>
+      </picker>
+    </view>
+    <span class="title_span" style="width: 17%;text-align: center;">天数</span>
+    <view class="query_style_l" style="width: 18%;">
+      <input type="number" style="width: 100%;" bindinput="inputLC"></input>
+    </view>
+  </view>
+  <view style="display: flex;margin: 0 20rpx;">
+    <span class="title_span" style="width: 10.5%;">房号</span>
+    <view class="query_style_l" style="width: 62%;">
+      <input type="text" style="width: 100%;" placeholder="租客名称、租客电话、房号" bindinput="inputsbh"></input>
+    </view>
+    <view class="button_left" bindtap="submitSearch">查询</view>
+  </view>
+  <view style="margin: 10rpx 20rpx;">
+    共{{total}}条消息
+  </view>
+  <view class="swiper-items" style="height:{{winHeight - 125}}px;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 125}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+	<view class="service-list">
+    <view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+      <view class="service-text">
+        <view class="service-tite" style="font-size: 28rpx;">房号：{{item.houseName}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">租客：{{item.rent_name}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">开门人：{{item.kmr}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">开门方式：{{item.kmlx}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">未开天数：{{item.wkmts}}</view>
+        <view class="service-tite" style="font-size: 28rpx;">最后开门时间：{{item.zhkmsj}}</view>
+	    </view>
+    </view>
+	</view>
+  </scroll-view>
+</view>
+</view>

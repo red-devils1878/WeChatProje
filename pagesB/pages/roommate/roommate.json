@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "同住人",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

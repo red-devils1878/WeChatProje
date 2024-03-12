@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "扣除租客金额",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}
