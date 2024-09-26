@@ -18,9 +18,9 @@
 <view wx:else>
     <view></view>
 </view>-->
-<view style="margin-top: -400rpx;">
+<view>
   <view class='header'>
-    <image src='/static/images/my/mine_def_touxiang_3x.png'></image>
+    <image src='/static/images/my/lsgj.png'></image>
   </view>
   <form bindsubmit="formSubmit" catchreset="formReset">
   <view class="input-list" hidden="{{isHideAuthCode}}">
@@ -46,6 +46,30 @@
       <button class="mini-btn" type="primary" size="mini" formType="submit" style="width:35%;height: 70rpx;line-height: 70rpx;">登录</button>
     </view>
   </view>
-  </form>
 
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+    </view>
+  </view>
+  <view class="form_table_border_none">
+    <view class="form_table_border_in" style="text-align: center;">
+      <checkbox-group bindchange="checkboxChange" name="chk">
+        <checkbox value="1"/>
+        我已阅读同意<span style="color: #5677fc;" bindtap="yhxy">《用户协议》</span>与<span style="color: #5677fc;" bindtap="yssm">《隐私政策》</span>
+      </checkbox-group>
+    </view>
+  </view>
+  </form>
 </view>

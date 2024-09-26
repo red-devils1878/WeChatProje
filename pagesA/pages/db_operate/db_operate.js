@@ -1,3 +1,23 @@
+const ammeterUtil = require('../../../utils/ammeterutil');
+const dateUtils = require('../../../utils/dateutils');
+/** 服务标识 */
+const SERVICE_UUID = "0000FFF0-0000-1000-8000-00805F9B34FB";
+/** 写标识 */
+const WRITE_UUID = "0000FFF2-0000-1000-8000-00805F9B34FB";
+/** 通知标识 */
+const NOTIFY_UUID = "0000FFF1-0000-1000-8000-00805F9B34FB"
+var filterDeviceName = "";  //查找的设备号
+var deviceId = ''; //设备ID
+
+function inArray(arr, key, val) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i][key] === val) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 var dsn= "";  //设备号
 var sbName = "" //设备名称
 var userid= "";  //登陆人工号
@@ -22,11 +42,26 @@ Page({
     arrow_jbxx: 'arrow_bottom',
     arrow_yd: 'arrow_bottom',
     showMB:true, //幕布
+    ljzt:"",  //连接状态
+
+    devices: [],
+    connected: false,
+    chs: [],
+    // 时间选择器
+    isShowPicker: false,
+    mode: "YMDhm",
+    data: {},
+    date: new Date().getTime(),
+    methodInfo: {
+      method: null, /** 调用方法 */
+      values: null, /** 值 */ 
+    },
   },
 
   onLoad: function (options) {  //生命周期函数--监听页面加载
     var that = this;
     dsn = options.dsn;
+    filterDeviceName = "LYDB"+dsn;
     apiUrl = app.globalData.apiUrl;   //获取api地址
     aiotAPI = app.globalData.aiotAPI;   //水电表指令的api
     userid = app.globalData.userid;   //登陆人工号
@@ -105,6 +140,9 @@ Page({
             paymentMode:units[0].payment_mode,
             ptlx:units[0].ptlx,
           })
+          if(ptlx=="BLE" && lylx=="3"){
+            _this.linkBLE(); //自动连接蓝牙表
+          }
         }
       },
       fail(res) {
@@ -177,6 +215,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     let dbsbh = e.currentTarget.dataset.key;
     let url = "";
+    let connected = this.data.connected;
     if (index == '1') {  //充值电量
       url = '../../../pagesA/pages/czdf_info/czdf_info?hid='+hid+'&dsn='+dbsbh;  
       /*
@@ -195,15 +234,24 @@ Page({
       }
       else{
         if(lylx=="3"){ //启程
-          if(ffms=="1"){  //1代表预付费，2代表后付费
-            that.QC_reset(dbsbh,ptlx);
-          }
-          else{
+          if(ptlx=="BLE"){ //蓝牙电表
             wx.showToast({
-              title: '后付费模式不支持此功能',
+              title: '功能开发中',
               icon: "none",
               duration: 2000
             })
+          }
+          else{
+            if(ffms=="1"){  //1代表预付费，2代表后付费
+              that.QC_reset(dbsbh,ptlx);
+            }
+            else{
+              wx.showToast({
+                title: '后付费模式不支持此功能',
+                icon: "none",
+                duration: 2000
+              })
+            }
           }
         }
         else{
@@ -223,7 +271,34 @@ Page({
         }
       }
       else if(lylx=="3"){ //启程
-        that.QC_power_on(dbsbh,ptlx);
+        if(ptlx=="BLE"){ //蓝牙电表
+          if(connected==true){
+            wx.showModal({
+              title: '房间通电',
+              content: '通电后，可以通过系统断电',
+              success: function (res) {
+                if (res.confirm) { //这里是点击了确定以后
+                  that.data.methodInfo.method="power_on";//通电
+                  let value = "1B"; //通电
+                  let buffer = ammeterUtil.relayControl(that._deviceName, value);
+                  that.writeBLECharacteristicValue(buffer);    
+                } else {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+          else{
+            wx.showToast({
+              title: '请先连接蓝牙',
+              icon: "none",
+              duration: 2000
+            })
+          }
+        }
+        else{
+          that.QC_power_on(dbsbh,ptlx);
+        }
       }
     }else if ( index == '6' ) {  //房间断电
       if(lylx=="2"){ //蜂电
@@ -232,10 +307,60 @@ Page({
         }
       }
       else if(lylx=="3"){ //启程
-        that.QC_power_off(dbsbh,ptlx);
+        if(ptlx=="BLE"){ //蓝牙电表
+          if(connected==true){
+            wx.showModal({
+              title: '房间断电',
+              content: '断电后，可以通过系统通电',
+              success: function (res) {
+                if (res.confirm) { //这里是点击了确定以后
+                  that.data.methodInfo.method="power_off";//断电
+                  let value = "1A"; //断电
+                  let buffer = ammeterUtil.relayControl(that._deviceName, value);
+                  that.writeBLECharacteristicValue(buffer);    
+                } else {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+          else{
+            wx.showToast({
+              title: '请先连接蓝牙',
+              icon: "none",
+              duration: 2000
+            })
+          }
+        }
+        else{
+          that.QC_power_off(dbsbh,ptlx);
+        }
       }
-    }else if ( index == '7' ) {  //房间用电配置
-      url = '../../../pagesA/pages/db_fjydpz/db_fjydpz?dsn='+dbsbh;
+    }else if ( index == '7' ) {  //设置电价
+      //url = '../../../pagesA/pages/db_fjydpz/db_fjydpz?dsn='+dbsbh;
+      if(ptlx=="BLE"){ //蓝牙电表
+        if(connected==true){
+          that.data.methodInfo.method="setPrice";//设置电价
+          url = '../../../pagesB/pages/set_price/set_price?dsn='+dbsbh;
+        }
+        else{
+          wx.showToast({
+            title: '请先连接蓝牙',
+            icon: "none",
+            duration: 2000
+          })
+        }
+      }
+      else if(ptlx=="485"){ 
+        url = '../../../pagesB/pages/set_price/set_price?dsn='+dbsbh;
+      }
+      else{
+        wx.showToast({
+          title: '该款电表不支持此功能',
+          icon: "none",
+          duration: 2000
+        })
+      }
     }else if ( index == '8' ) {  //智能抄表
       if(lylx=="2"){ //蜂电
         if(ptlx=="fd"){
@@ -243,7 +368,34 @@ Page({
         }
       }
       else if(lylx=="3"){ //启程
-        that.QC_meterReading(dbsbh,ptlx);
+        if(ptlx=="BLE"){ //蓝牙电表
+          if(connected==true){    
+            var dqds = "总电量:"+that.data.deviceInfo.totalConsumption+"\n"+"尖电量:"+that.data.deviceInfo.sharpConsumption+"\n"+"峰电量:"+that.data.deviceInfo.peekConsumption+"\n"+"平电量:"+that.data.deviceInfo.shoulderConsumption+"\n"+"谷电量:"+that.data.deviceInfo.offPeakConsumption;
+            console.log("电表当前读数——>>："+dqds);
+            var title = "电表当前读数";
+            wx.showModal({
+              title: title,
+              showCancel: false,
+              cancelText:'关闭',
+              cancelColor:'red',
+              confirmText:'返回',
+              confirmColor:'#47a86c',
+              content:dqds,
+              success: function(res) {
+              }
+            })
+          }
+          else{
+            wx.showToast({
+              title: '请先连接蓝牙',
+              icon: "none",
+              duration: 2000
+            })
+          }
+        }
+        else{
+          that.QC_meterReading(dbsbh,ptlx);
+        }      
       }
     }else if ( index == '9' ) {  //保电操作
       if(lylx=="3"){ //启程
@@ -592,7 +744,7 @@ Page({
         that.setData({
           showMB:true,  //显示幕布
         })
-        console.log(_res.message);
+        console.log(_res.msg);
         wx.showToast({
           title: '抄表失败',
           icon: "error",
@@ -648,11 +800,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -708,7 +860,7 @@ Page({
                 icon: "none",
                 duration: 2000
               })
-              console.log('失败原因——>>'+_res.message);
+              console.log('失败原因——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -761,11 +913,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -815,11 +967,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -869,11 +1021,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -924,11 +1076,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -990,11 +1142,11 @@ Page({
             }
             else{
               wx.showToast({
-                title: _res.message,
+                title: _res.msg,
                 icon: "none",
                 duration: 2000
               })
-              console.log(_res.Code+'——>>'+_res.message);
+              console.log(_res.Code+'——>>'+_res.msg);
             }
            },
            fail(res) {
@@ -1044,6 +1196,374 @@ Page({
       complete(){
       }
     });    
+  },
+  /** 打开蓝牙适配器 */
+  linkBLE() {
+    wx.showToast({
+      title: '连接中...',
+      icon: "loading",
+      duration: 6000
+    })
+    wx.openBluetoothAdapter({
+      success: (res) => {
+        console.log('openBluetoothAdapter success', res)
+        this.startBluetoothDevicesDiscovery()
+      },
+      fail: (res) => {
+        if (res.errCode === 10001) {
+          wx.onBluetoothAdapterStateChange(function (res) {
+            console.log('onBluetoothAdapterStateChange', res)
+            if (res.available) {
+              this.startBluetoothDevicesDiscovery()
+            }
+          })
+        }
+        wx.showToast({
+          title: '请打开蓝牙',
+          icon: 'error',
+          duration: 1000
+        })
+      }
+    })
+  },
+  /** 获取蓝牙适配器状态 */
+  getBluetoothAdapterState() {
+    wx.getBluetoothAdapterState({
+      success: (res) => {
+        console.log('getBluetoothAdapterState', res)
+        if (res.discovering) {
+          this.onBluetoothDeviceFound()
+        } else if (res.available) {
+          this.startBluetoothDevicesDiscovery()
+        }
+      }
+    })
+  },
+  /** 搜索蓝牙设备 */
+  startBluetoothDevicesDiscovery() {
+    if (this._discoveryStarted) {
+      return
+    }
+    this._discoveryStarted = true
+    wx.startBluetoothDevicesDiscovery({
+      allowDuplicatesKey: false,
+      success: (res) => {
+        console.log('startBluetoothDevicesDiscovery success', res)
+        this.onBluetoothDeviceFound()
+      },
+    })
+  },
+  /** 停止搜索蓝牙设备 */
+  stopBluetoothDevicesDiscovery() {
+    wx.stopBluetoothDevicesDiscovery()
+  },
+  /** 找到蓝牙设备时的回调 */
+  onBluetoothDeviceFound() {
+    wx.onBluetoothDeviceFound((res) => {
+      res.devices.forEach(device => {
+        if (!device.name && !device.localName) {
+          return
+        }
+        if (device.name==filterDeviceName) {
+          deviceId = device.deviceId;
+          this.stopBluetoothDevicesDiscovery();
+          this.createBLEConnection(deviceId);
+        }
+
+        /*
+        const foundDevices = this.data.devices
+        const idx = inArray(foundDevices, 'deviceId', device.deviceId)
+        const data = {}
+        if (idx === -1) {
+          data[`devices[${foundDevices.length}]`] = device
+        } else {
+          data[`devices[${idx}]`] = device
+        }
+        this.setData(data)
+        */
+      })
+    })
+  },
+  /** 建立连接 */
+  createBLEConnection(deviceId) {
+    this._deviceName = filterDeviceName.replace("LYDB", "")
+    wx.createBLEConnection({
+      deviceId,
+      success: (res) => {
+        this.setData({
+          connected: true,
+          ljzt:'连接成功'
+        })
+        wx.showToast({
+          title: '连接成功',
+          icon: 'none',
+          duration: 1000
+        }); 
+        this.getBLEDeviceServices(deviceId);
+      }
+    })
+    this.stopBluetoothDevicesDiscovery();
+  },
+  /** 关闭连接 */
+  closeBLEConnection() {
+    wx.closeBLEConnection({
+      deviceId: deviceId
+    })
+    this._discoveryStarted = false;
+    this.setData({
+      connected: false,
+      chs: [],
+      canWrite: false,
+      ljzt: '',
+    })
+  },
+  /** 获取服务 */
+  getBLEDeviceServices(deviceId) {
+    wx.getBLEDeviceServices({
+      deviceId,
+      success: (res) => {
+        for (let i = 0; i < res.services.length; i++) {
+          if(SERVICE_UUID === res.services[i].uuid) {
+            this.getBLEDeviceCharacteristics(deviceId, res.services[i].uuid)
+          }
+        }
+      }
+    })
+  },
+ /** 获取特征值 */
+ getBLEDeviceCharacteristics(deviceId, serviceId) {
+  wx.getBLEDeviceCharacteristics({
+    deviceId,
+    serviceId,
+    success: (res) => {
+      console.log('getBLEDeviceCharacteristics success', res.characteristics)
+      this._deviceId = deviceId
+      this._serviceId = serviceId
+      wx.notifyBLECharacteristicValueChange({
+        deviceId,
+        serviceId,
+        characteristicId: NOTIFY_UUID,
+        state: true,
+      })
+      // 读取表信息
+      this.readInfo();
+    },
+    fail(res) {
+      console.error('getBLEDeviceCharacteristics', res)
+    }
+  })
+  // 操作之前先监听，保证第一时间获取数据
+  wx.onBLECharacteristicValueChange((characteristic) => {
+    console.log("onBLECharacteristicValueChange");
+    const idx = inArray(this.data.chs, 'uuid', characteristic.characteristicId)
+    const data = {}
+    const res = ammeterUtil.decode(characteristic.value);
+    console.log('receive=>' + ammeterUtil.ab2hex(characteristic.value));
+    console.log('receice decode =>' + res);
+    if(res.status) {// 是读取
+      this.data.deviceInfo = res
+      this.setData(this.data);
+    } else { // 是操作
+      let title = res.success ? '操作成功' : '操作失败'
+      let icon = res.success ? 'success' : 'error'
+      this.showToast(title, icon)
+      // 再次读取更新数据
+      this.readInfo();
+      if(res.success){
+        let method = this.data.methodInfo.method; //调用方法
+        if(method=="setPrice"){  //设置单价
+          let price_j= this.data.methodInfo.values[0]; //尖
+          let price_f= this.data.methodInfo.values[1]; //峰
+          let price_p= this.data.methodInfo.values[2]; //平
+          let price_g= this.data.methodInfo.values[3]; //谷
+          this.setPrice(dsn,price_j,price_f,price_p,price_g); //设置电价
+        }
+        else if(method=="power_on"){  //通电
+          this.insertLog_sb(userid,'',dsn,'电表','通电','朗思管理端'); //插入日志
+        }
+        else if(method=="power_off"){  //断电
+          this.insertLog_sb(userid,'',dsn,'电表','断电','朗思管理端'); //插入日志
+        }
+        //初始化
+        //this.data.methodInfo.method="";
+        //this.data.methodInfo.values="";
+
+        //初始化
+        this.setData({
+          methodInfo: {
+            method: null, 
+            values: null,
+          }
+        })
+        //console.log("调用方法："+method);
+        //console.log("值："+values);
+      }
+    }
+    if (idx === -1) {
+      data[`chs[${this.data.chs.length}]`] = {
+        uuid: characteristic.characteristicId,
+        value: ammeterUtil.ab2hex(characteristic.value)
+      }
+    } else {
+      data[`chs[${idx}]`] = {
+        uuid: characteristic.characteristicId,
+        value: ammeterUtil.ab2hex(characteristic.value)
+      }
+    }
+    this.setData(data)
+  })
+ },
+  /** 读取表数据 */
+  readInfo() {;
+    let buffer = ammeterUtil.read(this._deviceName)
+    this.writeBLECharacteristicValue(buffer)
+  },
+  showToast(title, icon, duration) {
+    wx.showToast({
+      title: title,
+      icon: icon,
+      duration: duration ? duration : 2000
+    })
+  },
+  /** 写数据 */
+  writeBLECharacteristicValue(buffer) {
+    console.log('send=>' + ammeterUtil.ab2hex(buffer));
+    wx.writeBLECharacteristicValue({
+      deviceId: this._deviceId,
+      serviceId: this._serviceId,
+      characteristicId: WRITE_UUID,
+      needNotify: true,
+      value: buffer.buffer,
+      success: (res) => {
+        console.log(res);
+      },
+      fail: (res) => {
+        console.log("fail");
+        console.log(res);
+      }
+    })
+  },
+  /** 关闭蓝牙适配器 */
+  closeBluetoothAdapter() {
+    wx.closeBluetoothAdapter()
+    this._discoveryStarted = false
+  },
+  /** 充值 */
+  recharge(rechargeValue) {
+    if(!/^\d{1,6}(\.\d{1,2})?$/.test(rechargeValue)) {
+      this.showToast('充值格式错误', 'error')
+      return;
+    }
+    if(rechargeValue >= 999999.99) {
+      return;
+    }
+    let buffer = ammeterUtil.recharge(this._deviceName, rechargeValue)
+    this.writeBLECharacteristicValue(buffer)
+  },
+  showRecharge() {
+    wx.showModal({
+      editable:true,//显示输入框
+      title: '电表充值',
+      placeholderText:'输入充值金额NNNNNN.NN',//显示输入框提示信息
+      success: res => {
+        if (res.confirm) { //点击了确认
+          this.recharge(res.content)
+        }
+      }
+    })
+  },
+  /** 清除充值 */
+  clearRecharge() {
+    let buffer = ammeterUtil.recharge(this._deviceName, 999999.99)
+    this.writeBLECharacteristicValue(buffer)
+  },
+  /** 继电器控制 */
+  relayControl(e) {
+    const ds = e.currentTarget.dataset
+    let value = ds.value;
+    let buffer = ammeterUtil.relayControl(this._deviceName, value)
+    this.writeBLECharacteristicValue(buffer)
+  },
+  /** 1~4费率设置 */
+  suitPrice(index, priceArray) {
+    let lengthMatch = priceArray.length == 4
+    let formatMatch = true;
+    for(let item of priceArray) {
+      if(!/^\d{1,4}(\.\d{1,4})?$/.test(item)) {
+        formatMatch = false
+        break
+      }
+    }
+    if(!lengthMatch || !formatMatch) {
+      this.showToast('输入格式错误', 'error')
+    }
+    let buffer = ammeterUtil.suitPrice(this._deviceName, index, priceArray)
+    this.writeBLECharacteristicValue(buffer)
+  },
+  /** 报警金额设置 */
+  showAlarmAmount(e) {
+    const ds = e.currentTarget.dataset
+    let index = ds.index;
+    wx.showModal({
+      editable:true,//显示输入框
+      title: '报警金额' + index,
+      placeholderText:'输入报警金额' + index + ':NNNNNN.NN',//显示输入框提示信息
+      success: res => {
+        if (res.confirm) { //点击了确认
+          if(!/^\d{1,6}(\.\d{1,2})?$/.test(res.content)) {
+            this.showToast('数据格式错误', 'error')
+            return;
+          }
+          let buffer = ammeterUtil.alarmAmount(this._deviceName, index, res.content)
+          this.writeBLECharacteristicValue(buffer)
+        }
+      }
+    })
+  },
+  /** 透支金额设置 */
+  showOverdraftLimit() {
+    wx.showModal({
+      editable:true,//显示输入框
+      title: '允许透支金额',
+      placeholderText:'输入允许透支金额NNNNNN.NN',//显示输入框提示信息
+      success: res => {
+        if (res.confirm) { //点击了确认
+          if(!/^\d{1,6}(\.\d{1,2})?$/.test(res.content)) {
+            this.showToast('数据格式错误', 'error')
+            return
+          }
+          let buffer = ammeterUtil.overdraftLimit(this._deviceName, res.content)
+          this.writeBLECharacteristicValue(buffer)
+        }
+      }
+    })
+  },
+  /** 传过来的值存起来 */
+  setValue(value) {
+    this.data.methodInfo.values=value;
+  },
+  //设置电价
+  setPrice:function(dsn,price_j,price_f,price_p,price_g){
+    var _data = {ac: 'setPrice',"dsn":dsn,"price_j":price_j,"price_f":price_f,"price_p":price_p,"price_g":price_g};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+      },
+      fail(res) {
+        console.log("getunits fail:",res);
+      },
+      complete(){
+      }
+    });
+  },
+  onUnload: function () {  //生命周期函数--监听页面卸载
+    if(lylx=="3" && ptlx=="BLE"){
+      this.closeBLEConnection();//断开连接
+      //this.closeBluetoothAdapter();//关闭蓝牙适配器
+    }
   },
   onShow: function () {  //生命周期函数--监听页面显示
     let that = this;

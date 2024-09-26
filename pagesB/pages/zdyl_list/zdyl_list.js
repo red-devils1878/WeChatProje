@@ -212,7 +212,11 @@ Page({
     },10)
   },
   confirmXF: function (e) {  //确定
-    wx.navigateTo({
+    let that = this;
+    that.setData({
+      ifNameXF: false,    //隐藏弹出框
+    }); 
+    wx.redirectTo({
       url: '../../../pagesA/pages/xfsq_add/xfsq_add?renterNo='+renterNo+'&dsn='+dsn
     })
   },

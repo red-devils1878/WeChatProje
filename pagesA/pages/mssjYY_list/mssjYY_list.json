@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "门锁数据",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
+}

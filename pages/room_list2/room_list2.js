@@ -49,6 +49,7 @@ function initSubMenuDisplay() {
       rightId: "right0",
       lifeActiveNum: 0,
       heightArr: [],
+      bottomLift: app.globalData.bottomLift, //苹果X及以上机型的底部安全区域高度
     },
     onLoad: function (options) {  //生命周期函数--监听页面加载
       var that = this;
@@ -77,7 +78,7 @@ function initSubMenuDisplay() {
             winWidth: res.windowWidth,
             winHeight: res.windowHeight,
             navH: res.statusBarHeight+45,
-            fjmc:""
+            fjmc:"",
           });
         }
       });
@@ -94,6 +95,9 @@ function initSubMenuDisplay() {
         return false;
       } else {
         var tabV = e.target.dataset.current;
+        this.setData({
+          subMenuDisplay: initSubMenuDisplay()
+        });      
         if(tabV=="0"){
           fylx = "1";
           //mysl = 6;
@@ -466,13 +470,13 @@ function initSubMenuDisplay() {
           newSubMenuDisplay[index] = 'hidden';
       }        // 设置为新的数组
       this.setData({
-          subMenuDisplay: newSubMenuDisplay
+        subMenuDisplay: newSubMenuDisplay
       });
     },
     tapSubMenu: function(e) {     // 隐藏所有一级菜单
       this.setData({
-          subMenuDisplay: initSubMenuDisplay()
-      });        
+        subMenuDisplay: initSubMenuDisplay()
+      });     
       // 处理二级菜单，首先获取当前显示的二级菜单标识
       var indexArray = e.currentTarget.dataset.index.split('-');        // 初始化状态
       var Ttype = e.currentTarget.dataset.type;  
@@ -725,6 +729,7 @@ function initSubMenuDisplay() {
     onReady: function () {  //生命周期函数--监听页面初次渲染完成
     },
     onShow: function () { //生命周期函数--监听页面显示
+      let emp_no = app.globalData.userid;
       if (typeof this.getTabBar === 'function' && this.getTabBar()) {
         this.getTabBar().setData({
           selected: 1
@@ -738,6 +743,15 @@ function initSubMenuDisplay() {
           this.get_roomTotal(userid,fylx,fz,xq,fjzt,search);  
           this.get_roomList(userid,fylx,fz,xq,fjzt,search);
         }
+        let myid = "1";  //初始化到最顶层
+        this.setData({
+          lifeActiveNum: myid,
+          leftId: "left" + myid,
+          rightId: "right" + myid
+        })
+      } 
+      if(!!emp_no){
+        this.Judge_loginGJ(emp_no);  //判断用户是否有权登陆
       }
     },
     getOthername:function (fjzt) { //获取房间状态中文名
@@ -1233,6 +1247,41 @@ function initSubMenuDisplay() {
           return;
         }
       }
+    },
+    Judge_loginGJ:function (emp_no) { //判断用户是否有权登陆
+      let _this = this;
+      var _data = {ac: 'Judge_loginGJ',"userid":emp_no};
+      wx.request({
+        url: apiUrl,  //api地址
+        data: _data,
+        header: {'Content-Type': 'application/json'},
+        method: "get",
+        success(res) {
+          var units = res.data.rows;
+          if(units.length > 0){
+          }
+          else{
+            wx.showModal({    
+              title: '提示',    
+              showCancel: false,    
+              content: '请联系管理员授权',    
+              success: function (res) {
+                let _userid = "";
+                wx.setStorageSync("userid", _userid);
+                app.globalData.userid = _userid;
+                wx.redirectTo({
+                  url: '/pages/auth/auth'
+                })
+              }
+            })
+            return false;
+          }
+        },
+        fail(res) {
+        },
+        complete(){
+        }
+      });  
     },
     onHide: function () {  //生命周期函数--监听页面隐藏
     },

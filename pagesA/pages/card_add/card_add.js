@@ -87,6 +87,14 @@ Page({
     });
     this.get_mcToMS(dsn); //获取门锁信息
     //this.get_msyhQty(dsn,'gl','01',renterNo); //获取门锁用户数量
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_mcToMS:function (dsn) { //获取没锁信息
     var _that = this;
@@ -402,7 +410,49 @@ Page({
              keyType: 2, // 钥匙类型，0指纹，1密码，2卡片
              validTimeMode: 0, // 时间模式为有效期类型
            };
-           myPlugin.addKey(options1);  //下发卡片
+           myPlugin.addKey(options1);  //下发卡片  //20240328
+
+           /*
+           myPlugin
+           .addKey(options1)
+           .then(function(res) {     
+             if(res.errCode=="01"){
+               var yhbh = res.data.lockKeyId;
+              if(yhbh < 10){
+                      yhbh = '00'+yhbh
+                    }
+                    else if(yhbh >= 10 && yhbh < 100){
+                      yhbh = '0'+yhbh
+                    }
+                    else{
+                      yhbh = yhbh
+                    }
+               that.setData({
+                 showMB:true,  //显示幕布
+               })
+               wx.hideLoading();  //关闭提示框    
+               self.insert_Rh_yhb(dsn,'02',yhbh,'',Stime2,Etime2);//插入门锁用户表
+               self.insertLog_LS(userid,'',dsn,'下发','卡片('+yhbh+')','','朗思管理端');
+          
+             }              
+           })
+           .catch(function(err) {
+             wx.hideLoading();  //关闭提示框   
+             that.setData({
+               showMB:true,  //显示幕布
+             })
+             wx.showToast({
+               title: '新增卡片失败',
+               icon: "error",
+               duration: 1000
+             })   
+           });
+           */
+
+
+
+
+
          }
          else{
            wx.hideLoading();  //关闭提示框   
@@ -502,8 +552,11 @@ Page({
           if(yhbh < 10){
             yhbh = '00'+yhbh
           }
-          else{
+          else if(yhbh >= 10 && yhbh < 100){
             yhbh = '0'+yhbh
+          }
+          else{
+            yhbh = yhbh
           }
           self.setData({
             showMB:true,  //显示幕布
@@ -558,11 +611,14 @@ Page({
              let hexV2 = res.data.userID;
              var yhbh = com.ex16hex(hexV2);
              if(yhbh < 10){
-               yhbh = '00'+yhbh
-             }
-             else{
-               yhbh = '0'+yhbh
-             }
+              yhbh = '00'+yhbh
+            }
+            else if(yhbh >= 10 && yhbh < 100){
+              yhbh = '0'+yhbh
+            }
+            else{
+              yhbh = yhbh
+            }
              that.insert_Rh_yhb(dsn,'02',yhbh,'',Stime2,Etime2);//插入门锁用户表
              that.insertLog_LS(userid,'',dsn,'下发','卡片('+yhbh+')','','朗思管理端');      
              bleApi.closeBle();  //断开连接

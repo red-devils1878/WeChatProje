@@ -13,27 +13,27 @@
             <view style="display: flex;">
               <view class="service-tite" style="width: 55%;">授权方式：{{item.kslxmc}}</view>
               <view class="service-tite" style="width: 45%;">
-                <label class="button-right-type" bindtap="Resend" data-key="{{item.id}}" data-rentid="{{item.renterid}}" data-hid="{{item.hid}}" data-pwd="{{item.pwd}}" data-lx="{{item.lx}}" style="margin-right: 30rpx;">重新发送</label>
+                <label class="button-right-type" bindtap="Resend" data-key="{{item.id}}" data-rentid="{{item.renterid}}" data-hid="{{item.hid}}" data-pwd="{{item.pwd}}" data-lx="{{item.lx}}" style="margin-right: 94rpx;">重发</label>
                 <label class="button-right-type" bindtap="delList" data-key="{{item.id}}">删除</label>
               </view>
             </view> 
             <view style="display: flex;">
               <view class="service-tite" style="width: 55%;">编号：{{item.yhbh}}</view>
-              <!--<view class="service-tite" style="width: 50%;">
-                <label class="button-left-type" bindtap="frozen" data-key="{{item.id}}">冻结</label>
+              <view class="service-tite" style="width: 45%;">
+                <label class="button-left-type" bindtap="frozen" data-key="{{item.id}}" style="margin-right: 94rpx;">冻结</label>
                 <label class="button-right-type" bindtap="unfreeze" data-key="{{item.id}}">解冻</label>
-              </view>-->
-              <!--<view class="service-tite" style="width: 45%;">
-                <view wx:if="{{item.lylx=='5' || item.lylx=='6'}}"> 
-                  <label class="button-right-type" bindtap="delTX" data-key="{{item.id}}" style="margin-right: 30rpx;">蓝牙删除</label>
+              </view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 55%;">来源：{{item.ly}}</view>
+              <view class="service-tite" style="width: 45%;">
+                <view wx:if="{{item.lylx=='5' || item.lylx=='6' || item.lylx=='20' || item.lylx=='21'}}"> 
+                  <label class="button-right-type" bindtap="BLEdel" data-key="{{item.id}}" style="margin-right: 30rpx;">蓝牙删除</label>
                 </view>
                 <view wx:else>
                 </view>            
-              </view>-->
-            </view> 
-            <view style="display: flex;">
-              <view class="service-tite" style="width: 90%;">来源：{{item.ly}}</view>
-            </view>
+              </view>
+            </view>       
             <!--<view style="display: flex;">
               <view class="service-tite" style="width: 90%;">密码：{{item.pwd}}</view>
             </view>-->

@@ -1,0 +1,68 @@
+<view class="container">
+	<view class="search-flex {{scrolltop>200?'tophide':''}}">
+		<view class="search-bar">
+			<input type="text" maxlength="12" placeholder="请搜索授权方式" bindinput="inputSearch"></input>
+			<button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+		</view>
+    <!--<mp-icon icon="add2" bindtap="pwdAdd" size="30" color="#5677fc" style="height: 72rpx;line-height:72rpx;margin:2rpx 4rpx;"></mp-icon>-->
+	</view>
+	<view class="swiper-items">
+  <view style="margin: 10rpx 30rpx;font-weight: bold;">{{sbmc}}</view>
+	<scroll-view class="scroll-views" style="height:{{winHeight - 90}}px;" scroll-y="true" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<view class="service-item" wx:for="{{servicelist}}" wx:key="{{item.id}}">
+        <view class="service-text" data-index="{{index}}">
+				  <view class="text" data-key="{{item.id}}">
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">授权方式：{{item.kslxmc}}</view>
+              <view class="service-tite" style="width: 50%;">
+                <label class="button-left-type" bindtap="updList" data-key="{{item.id}}" data-kmlx="{{item.lx}}">修改</label>
+                <label class="button-right-type" bindtap="delList" data-key="{{item.id}}">删除</label>
+              </view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">编号：{{item.yhbh}}</view>
+              <view class="service-tite" style="width: 50%;">
+                <label class="button-left-type" bindtap="frozen" data-key="{{item.id}}">冻结</label>
+                <label class="button-right-type" bindtap="unfreeze" data-key="{{item.id}}">解冻</label>
+              </view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">来源：{{item.ly}}</view>
+            </view> 
+            <view style="display: flex;">
+              <view class="service-tite" style="width: 90%;">状态：{{item.ztmc}}</view>
+            </view>
+            <view style="display: flex;">
+            <mp-icon icon="time" size="14" color="#C0C0C0" style="height: 40rpx;line-height:40rpx;margin:-10rpx 8rpx 0 0;"></mp-icon>
+            <text class="service-city">{{item.yxsj}}</text>         
+            </view>
+		</view>
+      </view>  
+			</view>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+	</scroll-view>
+</view>
+<view class='toast-box' hidden="{{!ifName}}">
+    <view class='toastbg'></view>
+    <view class='showToast'>
+      <view class='toast-title'>
+          <text>修改密码</text>
+      </view>
+      <view class='toast-main'>
+          <view class='toast-input'>
+            <input placeholder='请输入6位数的新密码' bindinput='setValue' data-name='stuEidtName' value="{{fxmc}}" type="number" maxlength="6"></input>
+          </view>
+      </view>
+      <view class='toast-button'>
+          <view class='button1'>
+             <button catchtap='cancel'>取消</button>
+          </view>
+          <view class='button2'>
+              <button catchtap='confirm' data-key="{{yhbhid}}">确定</button>
+          </view>
+      </view>
+  </view>
+  </view>
+</view>

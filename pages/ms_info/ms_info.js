@@ -76,13 +76,16 @@ Page({
     let index = e.currentTarget.dataset.index;
     let dsn = e.currentTarget.dataset.key;
     let lx = that.data.lx;
-    if(lx=='2' || lx=='20' || lx=='21'){
+    if(lx=='2' || lx=='20' || lx=='21' || lx=='6'){
       if ( index == '1' ) {  //获取门锁信号
         if(lx=='2'){ //福州锁
           that.get_signal(dsn);  //获取门锁信号
         }
         else if(lx=='20' || lx=='21'){
           that.get_signalTX(dsn);  //获取门锁信号同欣
+        }
+        else if(lx=='6'){
+          that.get_signalGM(dsn);  //获取门锁信号(国民)
         }
       }
     }
@@ -219,6 +222,68 @@ Page({
           else{
             wx.showToast({
               title: res.data.reason,
+              icon: "none",
+              duration: 1000
+            })
+            that.setData({
+              showMB:true,  //显示幕布
+            })                  
+          }
+        }
+      }
+    });
+  },
+  get_signalGM: function(dsn) {  //获取门锁信号(国民)
+    var that = this;
+    that.setData({
+      showMB:false,  //显示幕布
+    })
+    wx.showLoading({
+      title: '信号获取中...',
+    })
+    var _dataNC = '{ac: "gm_get_deviceInfo","deviceid":"'+dsn+'"}'
+    wx.request({
+      url: apiNC+'gm_get_deviceInfo',
+      data: _dataNC,
+      header: {'Content-Type': 'application/json'},
+      method: "POST",
+      async:false,  //同步
+      success(res) {
+        if(res==""){
+          wx.showToast({
+            title: '失败',
+            icon: "none",
+            duration: 1000
+          })
+          that.setData({
+            showMB:true,  //显示幕布
+          })  
+        }
+        else {
+          if(res.data.code=='0'){
+            wx.hideLoading();  //关闭提示框
+            that.setData({
+              showMB:true,  //显示幕布
+            })
+            var otp= "";
+            var title = "门锁信号值";   
+            otp = "信号值: "+res.data.data.wifiRssi;
+            console.log("门锁信号值——>>："+otp);
+            wx.showModal({
+              title: title,
+              showCancel: false,
+              cancelText:'关闭',
+              cancelColor:'red',
+              confirmText:'返回',
+              confirmColor:'#47a86c',
+              content:otp,
+              success: function(res) {
+              }
+            })
+          }
+          else{
+            wx.showToast({
+              title: res.data.message,
               icon: "none",
               duration: 1000
             })

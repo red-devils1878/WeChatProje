@@ -69,7 +69,10 @@
                 "pages/lock_query/lock_query",
                 "pages/lock_test/lock_test",
                 "pages/cx_mrdl/cx_mrdl",
-                "pages/myLockYY/myLockYY"
+                "pages/myLockYY/myLockYY",
+                "pages/mssjYY_list/mssjYY_list",
+                "pages/yhxy_info/yhxy_info",
+                "pages/yszc_info/yszc_info"
             ],
             "independent": false
         },
@@ -119,7 +122,8 @@
                 "pages/tenant_info/tenant_info",
                 "pages/workOrder_info/workOrder_info",
                 "pages/fenzu_list/fenzu_list",
-                "pages/cjq_list/cjq_list"
+                "pages/cjq_list/cjq_list",
+                "pages/set_price/set_price"
             ],
             "independent": false
         },
@@ -214,13 +218,16 @@
         "myPlugin": {
             "version": "1.25.0",
             "provider": "wxd114a381b75d71fd"
-        }       
+        }
     },
     "permission": {
         "scope.userLocation": {
-            "desc": "你的位置信息将用于定位效果展示"
+            "desc": "授权定位有助于提高蓝牙的连接成功率"
         }
     },
+    "requiredPrivateInfos": [
+        "getLocation"
+    ],
     "useExtendedLib": {
         "weui": true
     },

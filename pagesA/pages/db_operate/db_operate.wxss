@@ -69,3 +69,15 @@
   left:0;
   opacity:0.4;
 }
+.item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 70%;
+  margin-top: -16rpx;
+}
+.middle-item-img{
+  width: 80rpx;
+  height: 80rpx;
+}

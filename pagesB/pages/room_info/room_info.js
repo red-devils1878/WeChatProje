@@ -17,6 +17,7 @@ Page({
     detail_sb:true,
     arrow_sb: 'arrow_bottom',
     sblist:[],
+    bottomLift: app.globalData.bottomLift, //苹果X及以上机型的底部安全区域高度
   },
   onLoad: function (options) { //生命周期函数--监听页面加载
     var that = this;
@@ -176,7 +177,7 @@ Page({
         icon: "none",
         duration: 1000
       })
-    }else if( index == '10' ){  //钥匙回收
+    }else if( index == '10' || index == '11'){  //钥匙回收
       url = '../../../pages/yshs_list/yshs_list?hid='+hid;
     }
     if( !!url ){

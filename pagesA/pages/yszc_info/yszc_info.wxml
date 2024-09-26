@@ -1,0 +1,455 @@
+<view class="container" style="background-color: white;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="rpt_title">隐私政策</view>
+        </view>
+      </view>   
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">本隐私政策于2023年9月25日公布，并于2023年9月25日生效。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">引言</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 300rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 300rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">朗思平台是由厦门朗思智能科技有限公司(下文简称“朗思”或“我们”)为您提供的房源管理、设备管理、电费充值等服务的平台，包括“朗思管家端”、“朗思租客端”微信小程序。我们将严格遵守法律法规，采用合法、正当的方式和以明确，合理的目的处理您的个人信息，已保护您的个人信息的隐私、机密和安全。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">在本隐私政策中：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">“个人信息”是以电子或其他方式记录的与已识别的自然人有关的各种信息，<span style="font-weight: bold;">不包括匿名化处理后的信息。</span></span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 300rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 300rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">敏感个人信息：是指一旦泄露、非法提供或滥用可能危害人身和财产安全，极易导致个人名誉、身心健康收到损害或歧视性待遇等的个人信息。包括<span style="font-weight: bold;">身份证号码、个人生物识别信息、银行账号、财产信息、交易信息、14岁以下(含)儿童的个人信息等</span>（我们将在本隐私权政策中对具体敏感个人信息以<span style="font-weight: bold;">粗体</span>进行显著标识）。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">本隐私政策将帮助您了解以下内容：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">一、我们收集哪些信息以及如何使用</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">二、我么如何共享、转让及公开披露您的个人信息</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">三、我们如何保障您的个人信息安全</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">四、我们如何保存您的个人信息</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">五、如何联系我们</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 450rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 450rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们深知个人信息对您的重要性，我们希望通过本隐私政策向您说明，在您使用我们的服务时我们如何收集、使用、存储、分享您的个人信息，以及我们为您提供的访问、更新、删除和保护这些信息的方式。因此，在您开始使用我们的服务前，请您务必先仔细阅读和理解本隐私政策，特别应重点阅读我们以粗体标识的条款，确保您充分理解和同意后再开始使用。如您对本政策内容有任何疑问、意见或建议，您可以通过本隐私政策提供的联系方式与我们联系。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">一、我们收集哪些信息以及如何使用</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">1、收集的信息类别</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们收集个人信息的目的在于向您提供相关服务，并且保证我们遵守适用的相关法律、法规及其他规范性文件。您有权自行选择是否提供个人信息，但如果您不提供，我们可能无法向您提供相应的服务，也无法回应 您遇到的问题。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们在以下环节和场景下会收集以下各类信息：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.登录朗思平台：</span>为便于您使用朗思产品与服务，您需要登录朗思平台，如朗思租客端。朗思平台可能会收集您的手机号码。若您拒绝提供这些信息，您将无法登录账号，亦无法使用朗思产品与服务。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.网路信息：</span>我们可能会在您的智能设备连接到网络时收集网络相关信息，包括Wi-Fi强度，设备在线状态(包括在线、离线)。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.智能设备相关信息：</span>我们会收集您的设备性能、状态等信息，包括序列号、设备型号、固件版本、硬件版本、电池电量、绑定状态、设备安装位置(如外门)、设备操作记录、权限设置等。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.设备密码：</span>为了给您提供登录朗思租客端小程序授权码，我们需要手机您的密码信息下发到门锁本地，并以短信的形式将密码发送到您的手机上。您可以输入房号+授权码，形式登录朗思租客端小程序，登录过程中，小程序会获取您的手机号用于验证租客的真是性。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.电表读数：</span>为了给您以及您的出租方式提供电费计算的基础数据，我们可能需要采集您的电表读数用于计算用电记录和电费。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.水表读数：</span>为了给您以及您的出租方式提供水费计算的基础数据，我们可能需要采集您的水表读数用于计算用水记录和水费。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.指纹：</span>如您使用了指纹锁，指纹锁需要录入您的指纹才能进行授权指纹开门。在这个场景下，我们需要采集您的指纹并下发到指纹锁本地。您可以通过我们提供的朗思租客端小程序进行指纹删除。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;"><span style="font-weight: bold;">.设备开门记录：</span>为了完成安全监控，朗思通过智能锁收集到您设备的开门记录，开门记录包括开锁人、开锁时间、开锁类型。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">二、我们何如保障您的个人信息安全</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">1、朗思的安全措施</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们承诺保证您的个人信息安全。为了防止未经授权的访问、披露或其他类似风险，我们落实了合理的物理、电子和管理措施流程，保护我们从您使用的朗思产品和服务时收集的信息。我们将采取所有合理的措施保护您的个人信息。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">您的个人信息全部被储存在安全的服务器上，并在受控设施中收受到保护。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">2、您能做什么</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">您可以通过不向任何人(除非此人经您正式授权)披露您的登录密码或账号信息，为保护您个人信息的安全发挥作用。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">三、我们如何共享、公开披露您的个人信息</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">1、共享</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们不会将任何个人信息出售给第三方。但以下情况的，我们可能与第三方共享您的个人信息：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1.事先获得您明确同意或授权；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2.为了实现本政策中声明的目的，我们可能以您知晓的方式向第三方服务提供商共享您的个人数据。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们将通过应用程序接口(API)、软件工具开发包(SDK)与第三方进行必要的数据共享，例如我们需要得到您的同意，调用手机蓝牙与第三方SDK建立连接，达到蓝牙直连开锁的目的。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">四、我们如何保存您的个人信息</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">1、储存：您的个人信息将由我们位于中华人民共和国(PRC)的服务器存储和处理。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">2、在您使用我们的产品与服务期间，您的个人信息将在为了实现本政策所述目的之期限内保存，同时将结合法律有强制的留存要求期限的规定确定。在超出保存期间后，我们会根据适用法律的要求删除您的个人信息。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">五、您如何管理您的个人信息</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">1、控制设置</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">您可以通过一下方式控制您的隐私权设置：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">1、打开或者关闭位置访问、相机、电话、蓝牙和读写手机存储权限；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">2、在隐私政策的窗口弹出时同意/不同意；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">3、登录或退出账号；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;font-weight: bold;">2、您对您的个人信息享有的权利</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">您有权要求访问、查询、更正、删除我们持有的与您相关的任何个人信息(以下简称请求)。您可以登录账号来访问或修改。也可以通过一下电子邮箱地址联系我们。电子邮箱616914725@qq.com。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">六、未成年条款</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">若您是未满18周岁的未成年人，在使用朗思产品及相关服务前，应在您的服务或其他监护人监护、指导下共同阅读并同意本隐私政策。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 300rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 300rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们根据国家法律法规保护未成年的个人信息，只会在法律允许、父母或其他监护人明确同意或保护未成年人所必要的情况下收集、使用、共享或披露未成年人的个人信息；如果我们发现在未事先获得可证实的父母同意的情况下收集未成年人的个人信息，则会设法尽快删除相关信息。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">七、本隐私政策如何更新</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">我们会对隐私政策进行定期审核，为反映我们信息惯例的变更，我们可能会更新本隐私政策。如果我们对本隐私政策进行重大变更的，我们将通过平台通知您本隐私政策具体的变更内容，您可在充分理解并同意后再开始使用更新后的隐私政策。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">八、如何联系我们</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">如您对本隐私政策或您的个人信息的相关事宜有任何问题、意见或建议，请通过以下方式与我们联系，我们将于15个工作日内安排专业团队与您取得联系，再确认您的信息后及时解决您的问题。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">联系方式如下：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">地址：厦门市湖里区高崎南五路226号航空商务广场7号楼302单元</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">电子邮箱：616914725@qq.com</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+    </scroll-view>
+</view>

@@ -5,7 +5,7 @@
     <mp-icon bindtap='addFY' color="white" icon="add" type="filled" size="26" style="margin-left: 10rpx;"></mp-icon>
   </view>
 </view>
-<view class='container' style="background-color: white;margin-top: {{navH}}px;">
+<view class='container' style="background-color: white;margin-top: {{navH}}px;padding-bottom:{{bottomLift}}px">
   <view class="search-bar" hidden="{{detail_search}}">
 		<input type="text" style="margin: 10rpx;background:#e8e8e8;border-radius:10rpx;" placeholder="请搜索房源名称/房号/租客/电话" bindinput="inputSearch">
     </input>
@@ -95,7 +95,7 @@
     </scroll-view>
     </swiper-item>
 </swiper>
-  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange" style="padding-bottom: 86px;">
     <block wx:for-items="{{actionSheetItems}}">
       <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
     </block>

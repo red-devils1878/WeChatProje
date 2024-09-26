@@ -19,6 +19,7 @@ var aesKey= "";  //秘钥
 var myPlugin= "";  //组件
 var managePassword= "";  //管理密码
 var gysly= "";  //供应商来源
+var hid= "";  //hid
 Page({
   
   data: {
@@ -57,6 +58,14 @@ Page({
     });
     this.get_mssj(dsn,search); //获取门锁数据
     this.get_mcToMS(dsn); //获取设备号
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_mssj:function (dsn,search) { //获取门锁数据
     let _this = this;
@@ -294,6 +303,7 @@ Page({
             success(res) {
               var units = res.data.rows;
               if(units.length > 0){
+                hid = units[0].hid
                 let id = units[0].id
                 let yhbh = units[0].yhbh
                 let dsn = units[0].equip_no
@@ -301,6 +311,7 @@ Page({
                 let pwd_old = units[0].password //密码
                 let lylx = units[0].lylx
                 let yhlx = units[0].yhlx
+                renterid = units[0].renterid 
                 that.password_del(yhbh,lx,dsn,pwd_old,lylx,yhlx); //删除密码
               }          
             },
@@ -508,7 +519,7 @@ Page({
         title: '删除中...',
       })
       if(lx=='01'){  //01指纹
-        var _dataYC = { ac: "deletepassword", partnerid: ptlx, deviceid: dsn, passwordid: yhbh, channel: "21"};
+        var _dataYC = { ac: "deletepassword", partnerid: ptlx, deviceid: dsn, passwordid: yhbh, channel: "21",extracode:hid};
         wx.request({
           url: apiYC,  //api地址
           data: _dataYC,
@@ -956,8 +967,11 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
+                  }
+                  else{
+                    yhbh = yhbh
                   }
                   that.insert_Rh_yhb(dsn,'03',yhbh,newPwd,bdate,edate);//插入门锁用户表
                   that.insertLog_LS(userid,'',dsn,'下发','普通用户('+yhbh+')',newPwd,'朗思管理端');
@@ -1076,8 +1090,11 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
+                  }
+                  else{
+                    yhbh = yhbh
                   }
                   that.insert_Rh_yhb(dsn,'01',yhbh,'',bdate,edate);//插入门锁用户表
                   that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
@@ -1125,7 +1142,7 @@ Page({
     else{
       title = "修改密码成功";
     }
-    if(!Stime){ Stime = "000000000000"}
+    if(!Stime){ Stime = "000101000000"}
     if(!Etime){ Etime = "991230180000"}
     var _data = {ac: 'yhb_save',"yhbh":yhbh,"lx":lx,"yhlx":yhlx,"dsn":dsn,"Pwd":newPwd,"Stime":Stime,"Etime":Etime,"channel":channel,"remark":remark};
     wx.request({
@@ -1155,7 +1172,7 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly,"renterNo":renterid};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
@@ -1723,8 +1740,11 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
+                  }
+                  else{
+                    yhbh = yhbh
                   }
                   that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端'); 
                   that.update_pwdRenterOld(dsn,'',renterid,'01',yhbh);   //更新密码所有人      
@@ -1959,6 +1979,7 @@ Page({
           let pwd_old = units[0].password //密码
           let lylx = units[0].lylx
           let yhlx = units[0].yhlx
+          renterid = units[0].renterid //归属人
           if(ljzt){  //蓝牙操作
             wx.showToast({
               title: '冻结中...',
@@ -2048,6 +2069,7 @@ Page({
             let pwd_old = units[0].password //密码
             let lylx = units[0].lylx
             let yhlx = units[0].yhlx
+            renterid = units[0].renterid //归属人
             if(ljzt){  //蓝牙操作
               wx.showToast({
                 title: '解冻中...',
@@ -2297,6 +2319,9 @@ Page({
             icon: "success",
             duration: 1000
           })
+          setTimeout(()=>{
+            that.get_mssj(dsn,search); //获取门锁数据
+          },1000)
         }
       },
       fail(res) {
@@ -2386,6 +2411,9 @@ Page({
             duration: 1000
           })
         }
+        setTimeout(()=>{
+          that.get_mssj(dsn,search); //获取门锁数据
+        },1000)     
       },
       fail(res) {
         console.log("getunits fail:",res);
@@ -2853,9 +2881,12 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
                   }
+                  else{
+                    yhbh = yhbh
+                  }                
                   if(xfbs_addBLE=='已完成'){
                     return;
                   }
@@ -2971,8 +3002,11 @@ Page({
                     if(yhbh < 10){
                       yhbh = '00'+yhbh
                     }
-                    else{
+                    else if(yhbh >= 10 && yhbh < 100){
                       yhbh = '0'+yhbh
+                    }
+                    else{
+                      yhbh = yhbh
                     }
                     xfbs_addBLE='已完成';
                     that.insert_Rh_yhb(dsn,'01',yhbh,'',bdate,edate);//插入门锁用户表
@@ -3087,6 +3121,7 @@ Page({
                 let pwd_old = units[0].password //密码
                 let lylx = units[0].lylx //来源类型
                 let yhlx = units[0].yhlx
+                renterid = units[0].renterid //归属人
                 if(yhlx == "03"){
                   wx.showToast({
                     title: '离线密码不支持蓝牙删除',
@@ -3396,6 +3431,7 @@ Page({
         var units = res.data.rows;
         if(units.length > 0){
           let yhlx = units[0].yhlx
+          renterid = units[0].renterid //归属人
           if(kmlx!='03'){
             wx.showToast({
               title: '手机端不支持修改',
@@ -3464,6 +3500,7 @@ Page({
             let lylx = units[0].lylx //来源类型
             let bdate = units[0].bdate
             let edate = units[0].edate
+            renterid = units[0].renterid //归属人
             that.password_delNC(yhbh,lx,dsn,pwd_old,lylx,newPwd,bdate,edate); //删除密码
           }          
         },
@@ -3502,6 +3539,7 @@ Page({
             let dsn = units[0].equip_no
             let pwd_old = units[0].password //密码
             let lylx = units[0].lylx //来源类型
+            renterid = units[0].renterid //归属人
             if(lylx=='5' || lylx=='6'){  //国民
               that.BLEpassword_updGM(yhbh,dsn,newPwd,pwd_old); //修改密码
             }

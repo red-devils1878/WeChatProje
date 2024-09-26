@@ -3,7 +3,9 @@ var apiUrl = "";   //获取api地址
 var apiYC = "";     //获取门锁api地址(远程)
 var apiNC = "";     //获取门锁api地址(新锁)
 var com = require('../../utils/commom.js');  //公共js
+var apiTX = app.globalData.apiTX;     //小陈指纹、卡片接口
 var newPwd = ""; //新密码
+var cardNo = ""; //卡片编号
 var userid= "";  //登陆人工号
 var ptlx= "hongqi";  //平台类型
 var index_add = 0;  //新下标(下发)
@@ -12,6 +14,9 @@ var xfcs = 0;  //下发次数
 var houseNo = ""; //房源
 var floor = ""; //楼层
 var room = ""; //房间
+
+var cjqNo_n = "" //采集器(新)
+var cjqNo = "" //采集器
 const date = new Date();
 const years = [];
 const months = [];
@@ -70,6 +75,9 @@ Page({
     pwdList:[],  //要删除的密码
     errAddList:"",  //下发失败的房号
     errDelList:"",  //删除失败的房号
+    kslxIndex: 0,
+    kslx: [{code: 0,othername: '密码'},{code: 1,othername: '卡片'}],
+    mydata : "",
   },
   onLoad: function (options) { //生命周期函数--监听页面加载
     apiUrl = app.globalData.apiUrl;
@@ -109,6 +117,35 @@ Page({
       fyIndex: e.detail.value
     })
     houseNo = this.data.fy[e.detail.value].houseNo;
+    this.get_houseInfo(houseNo);  //获取房源
+  },
+  bindKSChange: function(e) {  //开锁类型改变事件
+    this.setData({
+      kslxIndex: e.detail.value,
+    })
+  },
+  get_houseInfo:function (houseNo) { //获取房源
+    let _this = this;
+    var _data = {ac: 'get_house',"houseNo":houseNo};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+        var units = res.data.rows;
+        if(units.length > 0){
+          _this.setData({
+            lylx:units[0].txfs,
+          })
+        }
+      },
+      fail(res) {
+        console.log("getunits fail:",res);
+      },
+      complete(){
+      }
+    });
   },
   floorChange: function(e) {
     this.setData({
@@ -322,6 +359,8 @@ Page({
     var houseNo = e.detail.value.fy;
     var floor = e.detail.value.floor;
     var room = e.detail.value.room;
+    var kslx = e.detail.value.kslx;
+    cardNo = e.detail.value.cardNo;
     if(!houseNo || houseNo=='ALL'){
       wx.showToast({
         title: '请选择具体楼栋',
@@ -347,20 +386,42 @@ Page({
       Stime = Stime+':00';
       Etime = Etime+':00';
     }
-    if(!newPwd || newPwd.length != 6){
-      wx.showToast({
-        title: '请输入6位数密码！',
-        icon: 'none'
-      })
-      return false;
+    if(kslx=="0"){  //密码
+      if(!newPwd || newPwd.length != 6){
+        wx.showToast({
+          title: '请输入6位数密码！',
+          icon: 'none'
+        })
+        return false;
+      }
+      else{
+        index_add = 0; //初始化为0
+        that.get_plxfLock(houseNo,floor,room,newPwd);  //需要下发的门锁
+      }
     }
-    else{
-      index_add = 0; //初始化为0
-      that.get_plxfLock(houseNo,floor,room,newPwd);  //需要下发的门锁
+    else{ //卡片
+      if(!cardNo){
+        wx.showToast({
+          title: '卡片编号不能为空！',
+          icon: 'none'
+        })
+        return false;
+      }
+      else{
+        index_add = 0; //初始化为0
+        that.get_plxfLock(houseNo,floor,room,cardNo);  //需要下发的门锁
+      }
     }
   },
   get_plxfLock:function (houseNo,floor,room,newPwd) { //需要下发的门锁
     var that = this;
+    let kslxIndex = that.data.kslxIndex;
+    var title = "密码下发中...";
+    if(kslxIndex=="0"){
+      title = "密码下发中...";
+    }else{
+      title = "卡片下发中...";
+    }
     that.setData({
       Locklist:[],
       errAddList:"",
@@ -382,7 +443,7 @@ Page({
           })
           that.countdown(); //调用计时器
           wx.showLoading({
-            title: '密码下发中...',
+            title: title,
           })
           index_add = 0; //初始化为0
           xfcs = 0;
@@ -416,10 +477,17 @@ Page({
   password_insertN: function(ind) {
     var that = this;
     let Locklist = this.data.Locklist;
+    let kslxIndex = that.data.kslxIndex;
     let dsn = Locklist[ind].dsn;
     let lylx = Locklist[ind].lx;
     //let newPwd = that.data.pwd;
     let useType = "02"; //普通用户
+    var yhlx = "03"; //02卡片，03密码
+    if(kslxIndex=="0"){
+      yhlx = "03";
+    }else{
+      yhlx = "02"; 
+    }
     let Stime = that.data.Starttime;
     let Etime = that.data.Endtime;
     Stime = Stime+':00';
@@ -434,7 +502,7 @@ Page({
         let conStatus = res;
         console.log("网关蓝牙连接返回："+conStatus);
         var useType = "02"; //普通用户
-        var _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"03","channel":"21"}'
+        var _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"'+yhlx+'","channel":"21"}'
         wx.request({
           url: apiNC+'lockauth',  //api地址
           data: _dataNC,
@@ -574,11 +642,15 @@ Page({
         _url = apiYC;
       }
       else if(lylx=="5" || lylx=="6"){
-        _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"03","channel":"21"}'
+        _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"'+yhlx+'","channel":"21"}'
         _url = apiNC+'gm_add_user';
       }
       else if(lylx=="20" || lylx=="21"){
-        _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"03","channel":"21"}'
+        if(kslxIndex=="0"){  //密码
+          _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","password":"'+newPwd+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"'+yhlx+'","channel":"21"}'
+        }else{  //卡片
+          _dataNC = '{ac: "lockauth","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","userdata":"'+cardNo+'","usertype":"'+useType+'","begindate":"'+Stime+'","enddate":"'+Etime+'","lx":"'+yhlx+'","channel":"21"}'
+        }     
         _url = apiNC+'tx_add_user';
       }
       wx.request({
@@ -734,6 +806,8 @@ Page({
     var that = this;
     var floor = that.data.floorVal;
     var room = that.data.roomVal;
+    var kslxIndex = that.data.kslxIndex;
+    var cardNo = that.data.cardNo;
     if(!room){ room = "";}   
     if(!floor){ floor = "";}
     if(!houseNo || houseNo=='ALL'){
@@ -750,20 +824,42 @@ Page({
       })
       return false;
     }
-    if(!newPwd || newPwd.length != 6){
-      wx.showToast({
-        title: '请输入6位数密码！',
-        icon: 'none'
-      })
-      return false;
+    if(kslxIndex=="0"){ //密码
+      if(!newPwd || newPwd.length != 6){
+        wx.showToast({
+          title: '请输入6位数密码！',
+          icon: 'none'
+        })
+        return false;
+      }
+      else{
+        index_del = 0; //初始化为0
+        that.get_plDelPwd(houseNo,floor,room,newPwd);//获取需要批量删除的门锁
+      }
     }
-    else{
-      index_del = 0; //初始化为0
-      that.get_plDelPwd(houseNo,floor,room,newPwd);//获取需要批量删除的门锁
+    else{  //卡片
+      if(!cardNo){
+        wx.showToast({
+          title: '卡片编号不能为空！',
+          icon: 'none'
+        })
+        return false;
+      }
+      else{
+        index_del = 0; //初始化为0
+        that.get_plDelPwd(houseNo,floor,room,cardNo);//获取需要批量删除的门锁
+      }
     }
   },
   get_plDelPwd:function (houseNo,floor,room,newPwd) { //获取需要批量删除的门锁
     var that = this;
+    let kslxIndex = that.data.kslxIndex;
+    var title = "密码删除中...";
+    if(kslxIndex=="0"){
+      title = "密码删除中...";
+    }else{
+      title = "卡片删除中...";
+    }
     that.setData({
       pwdList:[],
       errDelList:"",
@@ -785,7 +881,7 @@ Page({
           })
           that.countdown(); //调用计时器
           wx.showLoading({
-            title: '密码删除中...',
+            title: title,
           })
           index_del = 0; //初始化为0
           xfcs = 0; //初始化为0
@@ -1159,6 +1255,88 @@ Page({
       });
     }, 1000);
   },
+  tapList: function(e) {   //根据标识跳转页面
+    wx.navigateTo({
+      url: '../../pagesB/pages/cjq_list/cjq_list'
+    })
+  },
+  getCardNo: function () {  //获取卡号
+    var that = this;
+    let cjq = that.data.cjq;
+    let lylx = that.data.lylx;
+    if(lylx=="20" || lylx=="21"){
+      if(!cjq){
+        wx.showToast({
+          title: '请先选择采集器',
+          icon: "none",
+          duration: 1000
+        })
+        return;
+      }
+      else{
+        var _dataNC = {act: "langsi_Get_card",eqnumber:cjq}
+        wx.request({
+          url: apiTX,  //api地址
+          data: _dataNC,
+          header: {'Content-Type': 'application/json'},
+          method: "POST",
+          async:false,  //同步
+          success(res) {
+            if(res==""){
+              wx.showToast({
+                title: res.data.reason,
+                icon: "none",
+                duration: 1000
+              })
+            }
+            else{
+              let resultCode = res.data.resultCode;
+              if(resultCode == "0")
+              {
+                let cardNo = res.data.data.cardNo;
+                that.setData({
+                  cardNo: cardNo
+                })
+              }
+              else{
+                let reason = res.data.reason;
+                wx.showToast({
+                  title: reason,
+                  icon: "none",
+                  duration: 1000
+                })
+                console.log("resultCode：" + resultCode + '——>' + reason);
+              }
+            }       
+          },
+          fail(res) {
+            console.log("getunits fail:",res);
+          },
+          complete(){
+          }
+        });
+      }
+    }
+    else{
+      wx.showToast({
+        title: '不支持采集',
+        icon: "none",
+        duration: 1000
+      }) 
+      return;   
+    }
+  },
   onShow: function () {  //生命周期函数--监听页面显示
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];  //当前页面
+    let cjqNo_n = currPage.data.mydata.cjq;
+    if(!!cjqNo_n){
+      cjqNo = cjqNo_n;
+    }
+    if(!!cjqNo){
+      this.setData({
+        cjq: cjqNo
+      })
+    }
   }
 })

@@ -20,6 +20,7 @@ var authCode= "";  //鉴权码
 var aesKey= "";  //秘钥
 var myPlugin= "";  //组件
 var managePassword= "";  //管理密码
+var gysly= "";  //供应商来源
 Page({
   
   data: {
@@ -32,6 +33,7 @@ Page({
     c:"",//定时器
     ljzt:"",  //连接状态
     detail_link:true, //连接按钮
+    BLE_link:"",  //连接状态
   },
   onLoad: function (options) {  //生命周期函数--监听页面加载
     var that = this;
@@ -53,6 +55,14 @@ Page({
     });
     this.get_mssj(dsn,renterNo); //获取门锁数据
     this.get_mcToMS(dsn); //获取设备号
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_mssj:function (dsn,renterNo) { //获取门锁数据
     let _this = this;
@@ -131,14 +141,14 @@ Page({
         if(units.length > 0){
           aesKey = units[0].aesKey;
           authCode = units[0].commonAuthCode;
+          gysly = units[0].lx;
           managePassword = units[0].managePassword;
         }
         else{
-          wx.showToast({
-            title: '请先添加没锁！',
-            icon: 'error',
-            duration: 1000
-          });           
+          aesKey = "";
+          authCode = "";
+          gysly = "";
+          managePassword = "";         
         }
       },
       fail(res) {
@@ -526,6 +536,8 @@ Page({
         let keyTypeArray = [1];
         if(lx=='01'){  //01指纹
           keyTypeArray = [0];
+        }else if(lx=='02'){  //卡片
+          keyTypeArray = [2];
         }else if(lx=='03'){  //密码
           keyTypeArray = [1];
         }
@@ -545,9 +557,11 @@ Page({
               that.del_Rh_yhb(dsn,yhbh,lx);//删除门锁用户
               if(lx=='01'){  //01指纹
                 that.insertLog_LS(userid,'',dsn,'删除','指纹('+yhbh+')','','朗思管理端');
+              }else if(lx=='02'){ //02卡片
+                that.insertLog_LS(userid,'',dsn,'删除','卡片('+yhbh+')',pwd_old,'朗思管理端');
               }else if(lx=='03'){ //03密码
                 that.insertLog_LS(userid,'',dsn,'删除','普通用户('+yhbh+')',pwd_old,'朗思管理端');
-              }                      
+              }                       
             }              
           })
           .catch(function(err) {
@@ -794,7 +808,7 @@ Page({
               },1000)
             }
             else{              
-              console.log("code:"+res.data.code+"——>>msg:"+res.data.msg);    
+              console.log("code:"+res.data.code+"——>>msg:"+res.data.message);    
               wx.hideLoading();  //关闭提示框        
               wx.showToast({
                 title: '删除失败',
@@ -851,7 +865,7 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly,"renterNo":renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
@@ -870,9 +884,15 @@ Page({
   },
   // 冻结
   frozen: function(e){
-    let ljzt = BLE.authState();//连接状态
     let that = this;
     let id = e.currentTarget.dataset.key;  // 当前流水号
+    let ljzt = false;
+    if(gysly=="1"){
+      ljzt = BLE.authState();//连接状态
+    }
+    else if(gysly=="2"){
+      ljzt = BLE_new.connectionState();//连接状态  
+    }
     wx.showToast({
       title: '冻结中...',
       icon: "loading",
@@ -893,6 +913,7 @@ Page({
           let lx = units[0].lx //01指纹，02卡片，03密码
           let pwd_old = units[0].password //密码
           let lylx = units[0].lylx
+          let yhlx = units[0].yhlx
           if(ljzt){  //蓝牙操作
             that.password_frozen(yhbh,lx,dsn,pwd_old,lylx); //冻结     
           }else{
@@ -900,13 +921,41 @@ Page({
               that.lockfrozen(yhbh,lx,dsn,pwd_old,'frozen'); //冻结/解冻
             }
             else if(lylx == "2"){
-              wx.hideToast();
-              wx.showToast({
-                title: '新锁冻结',
-                icon: "none",
-                duration: 1000
-              })  
+              if(yhlx == "03"){
+                wx.showToast({
+                  title: '离线密码不支持冻结',
+                  icon: "none",
+                  duration: 1500
+                })
+              }
+              else{
+                that.lockfrozen_fz(yhbh,lx,dsn,pwd_old,'frozen'); //冻结/解冻
+              }
             }
+            else if(lylx == "5" || lylx == "6"){  //国民锁       
+              if(yhlx == "03"){
+                wx.showToast({
+                  title: '离线密码不支持冻结',
+                  icon: "none",
+                  duration: 1500
+                })
+              }
+              else{
+                that.lockfrozen_gm(yhbh,lx,dsn,pwd_old,'frozen'); //冻结/解冻
+              }
+            }  
+            else if(lylx == "20" || lylx == "21"){  //同欣锁
+              if(yhlx == "03"){
+                wx.showToast({
+                  title: '离线密码不支持冻结',
+                  icon: "none",
+                  duration: 1500
+                })
+              }
+              else{
+                that.lockfrozen_tx(yhbh,lx,dsn,pwd_old,'frozen'); //冻结
+              }
+            }       
           }
         }          
       },
@@ -919,9 +968,15 @@ Page({
   },
   // 解冻
   unfreeze: function(e){
-    let ljzt = BLE.authState();//连接状态
     let that = this;
     let id = e.currentTarget.dataset.key;  // 当前流水号
+    let ljzt = false;
+    if(gysly=="1"){
+      ljzt = BLE.authState();//连接状态
+    }
+    else if(gysly=="2"){
+      ljzt = BLE_new.connectionState();//连接状态  
+    }
     wx.showToast({
       title: '解冻中...',
       icon: "loading",
@@ -942,6 +997,7 @@ Page({
             let lx = units[0].lx //01指纹，02卡片，03密码
             let pwd_old = units[0].password //密码
             let lylx = units[0].lylx
+            let yhlx = units[0].yhlx
             if(ljzt){  //蓝牙操作
               that.password_unfreeze(yhbh,lx,dsn,pwd_old,lylx); //解冻    
             }else{  //网关操作
@@ -949,13 +1005,41 @@ Page({
                 that.lockfrozen(yhbh,lx,dsn,pwd_old,'unfreeze'); //冻结/解冻
               }
               else if(lylx == "2"){
-                wx.hideToast();
-                wx.showToast({
-                  title: '新锁解冻',
-                  icon: "none",
-                  duration: 1000
-                })  
+                if(yhlx == "03"){
+                  wx.showToast({
+                    title: '离线密码不支持解冻',
+                    icon: "none",
+                    duration: 1500
+                  })
+                }  
+                else{
+                  that.lockfrozen_fz(yhbh,lx,dsn,pwd_old,'unfreeze'); //冻结/解冻
+                }  
               }
+              else if(lylx == "5" || lylx == "6"){  //国民锁            
+                if(yhlx == "03"){
+                  wx.showToast({
+                    title: '离线密码不支持解冻',
+                    icon: "none",
+                    duration: 1500
+                  })
+                }  
+                else{
+                  that.lockfrozen_gm(yhbh,lx,dsn,pwd_old,'unfreeze'); //冻结/解冻
+                }          
+              }
+              else if(lylx == "20" || lylx == "21"){  //同欣锁
+                if(yhlx == "03"){
+                  wx.showToast({
+                    title: '离线密码不支持解冻',
+                    icon: "none",
+                    duration: 1500
+                  })
+                }  
+                else{
+                  that.lockfrozen_tx(yhbh,lx,dsn,pwd_old,'unfreeze'); //解冻
+                }     
+              }       
             }      
           }          
       },
@@ -1020,12 +1104,121 @@ Page({
       });  
     }
     else if(lylx == "2"){  //新锁
-      wx.hideToast();  //关闭提示框
-      wx.showToast({
-        title: '冻结新锁',
-        icon: "none",
-        duration: 1000
-      }) 
+      that.setData({
+        showMB:false,  //显示幕布
+        second: 40,  //初始化成40秒
+      })
+      that.countdown(); //调用计时器
+      var xfbs_dj='下发中';
+      var hardwareNumber = parseInt(yhbh, 10);  //用户编号
+      var unlockModeEnum = 1;
+      if(lx=='01'){  //指纹
+        unlockModeEnum = 3; //代表密码，3代表指纹
+      }
+      else if(lx=='03'){ //密码
+        unlockModeEnum = 1;
+      } 
+      var _data2 = {
+        "deviceSn":dsn,
+        "cmd":"0305",
+        "syncNo":"0",
+        "freezeUnlockCloudBO":{
+          "freezeAccountEnum":"FREEZE",
+          "menberId":2, //填注册开锁方式实际入参
+        /*
+        "unlockModeEnum":unlockModeEnum,
+        "registerStatusEnum":"START",
+        "effectiveNum":0,
+        "memberTypeEnum":"NORMAL", //NORMAL是普通用户，ADMIN是管理员
+        "hardwareNumber":hardwareNumber,
+        "menberId":2, //2是普通用户，1是管理员
+        "isOpenCycle":0,
+        "loopType":"LOOP_NOT",
+        "loopFlag":"00000000",
+        "password":'',
+        "startTime":'',
+        "endTime":''
+        */
+        }
+      };
+      wx.request({
+        url: apiNC+'cloud_function',
+        data: _data2,
+        header: {'Content-Type': 'application/json'},
+        method: "POST",
+        dataType: 'application/json',
+        async:false,  //同步                            
+        success(res) {
+          let _res = JSON.parse(res.data);                  
+          var cmd2 = _res.data; 
+          BLE_new.sendCommand(cmd2,function(res){
+            if(res.errCode==0){
+              var _data4 = {"deviceSn":dsn,"data":res.data};
+              wx.request({
+                url: apiNC+'cloud_function_parse',
+                data: _data4,
+                header: {'Content-Type': 'application/json'},
+                method: "POST",
+                dataType: 'application/json',
+                async:false,  //同步           
+                success(res) {
+                  let _res = JSON.parse(res.data);
+                  if( _res.code == 0 ){
+                    wx.hideLoading();  //关闭提示框
+                    console.log("冻结下发标识："+xfbs_dj);
+                    that.setData({
+                      showMB:true,  //显示幕布
+                    })
+                    if(xfbs_dj =='已完成'){
+                      return;
+                    }
+                    else{
+                      xfbs_dj='已完成';
+                      that.frozen_Rh_yhb(dsn,yhbh,'8',lx);//冻结用户
+                      if(lx=='01'){  //指纹
+                        that.insertLog_LS(userid,'',dsn,'冻结','指纹('+yhbh+')','','朗思管理端');
+                      }
+                      else if(lx=='03'){ //密码
+                        that.insertLog_LS(userid,'',dsn,'冻结','普通用户('+yhbh+')',pwd_old,'朗思管理端');
+                      }
+                    }                      
+                  }
+                  else{   
+                    that.setData({
+                      showMB:true,  //显示幕布
+                    })         
+                    wx.showToast({
+                      title: '冻结用户失败',
+                      icon: "error",
+                      duration: 1000
+                    })
+                    xfbs_dj='已完成';
+                    console.log(_res.code+'——>>'+_res.msg);                    
+                  }
+                },
+                fail(res) {
+                  that.setData({
+                    showMB:true,  //显示幕布
+                  })
+                  xfbs_dj='已完成';
+                  //console.log("getunits fail:",res);
+                },
+                complete(){
+                }
+              });                    
+            }
+          });     
+        },
+        fail(res) {
+          wx.hideLoading();  //关闭提示框
+          that.setData({
+            showMB:true,  //显示幕布
+          })
+          //console.log("getunits fail:",res);
+        },
+        complete(){
+        }
+      });
     }
   },
   frozen_Rh_yhb: function (dsn,yhbh,zt,lx){  //冻结用户
@@ -1044,6 +1237,9 @@ Page({
             icon: "success",
             duration: 1000
           })
+          setTimeout(()=>{
+            that.get_mssj(dsn,renterNo); //获取门锁数据
+          },1000)
         }
       },
       fail(res) {
@@ -1132,6 +1328,9 @@ Page({
             icon: "success",
             duration: 1000
           })
+          setTimeout(()=>{
+            that.get_mssj(dsn,renterNo); //获取门锁数据
+          },1000) 
         }
       },
       fail(res) {
@@ -1203,6 +1402,303 @@ Page({
       }); 
     }
   },
+  //网关冻结/解冻用户
+  lockfrozen_fz: function(yhbh,lx,dsn,pwd_old,zclx){
+    let that = this;
+    let op = "01"; //冻结为01，解冻为00
+    let czName = "冻结";
+    if(zclx=="frozen"){  //冻结
+      op = "01";
+      czName = "冻结";
+    }
+    else{
+      op = "00";
+      czName = "解冻";
+    }
+    that.setData({
+      showMB:false,  //显示幕布
+      second: 40,  //初始化成40秒
+    })
+    that.countdown(); //调用计时器
+    clearInterval(app.globalData.c_discon);//清除断开的定时器
+    wx.showLoading({
+      title: czName+'中...',
+    })
+    com.get_Connection(dsn,function(res){
+      let conStatus = res;
+      console.log("网关蓝牙连接返回："+conStatus);
+      if(!conStatus){
+        wx.hideLoading();  //关闭提示框
+        that.setData({
+          showMB:true,  //显示幕布
+        })  
+        return;
+      }
+      var _dataNC = "";
+      var apiNC_jk = "";  //接口
+      if(zclx=="frozen"){  //冻结
+        _dataNC = '{ac: "frozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+        apiNC_jk = 'frozen_user';
+      }
+      else if(zclx=="unfreeze"){ //解冻
+        _dataNC = '{ac: "unfrozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+        apiNC_jk = 'unfrozen_user';
+      }
+      wx.request({
+        url: apiNC+apiNC_jk,  //api地址
+        data: _dataNC,
+        header: {'content-type': 'application/json'},
+        method: "POST",
+        async:false,  //同步
+        success(res) {
+          if(res==""){
+            wx.hideLoading();  //关闭提示框
+            wx.showToast({
+              title: czName+'失败',
+              icon: "none",
+              duration: 1000
+            })
+          }
+          else{
+            if(res.data.code == '0' || res.data.code == '40009'){           
+              if(lx=='01'){  //指纹
+                that.insertLog_LS(userid,'',dsn,czName,'指纹('+yhbh+')','','朗思管理端');
+              }
+              else if(lx=='03'){ //密码
+                that.insertLog_LS(userid,'',dsn,czName,'普通用户('+yhbh+')',pwd_old,'朗思管理端');
+              }     
+              wx.hideLoading();  //关闭提示框          
+              wx.showToast({
+                title: czName+'成功',
+                icon: "success",
+                duration: 1000
+              })
+              setTimeout(()=>{
+                that.get_mssj(dsn,renterNo); //获取门锁数据
+              },1000)
+            }
+            else{              
+              console.log("code:"+res.data.code+"——>>msg:"+res.data.msg);             
+              wx.hideLoading();  //关闭提示框
+              if(res.data.code=="10010"){
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: "error",
+                  duration: 1000
+                }) 
+              }
+              else{
+                wx.showToast({
+                  title: czName+'失败',
+                  icon: "error",
+                  duration: 1000
+                }) 
+              }                
+            }     
+          }
+        },
+        fail(res) {
+          wx.showToast({
+            title: czName+'失败',
+            icon: "error",
+            duration: 1000
+          })
+        },
+        complete(){
+          wx.hideLoading();  //关闭提示框
+          that.setData({
+            showMB:true,  //显示幕布
+          })  
+        }
+      }); 
+    });
+  },
+  //网关冻结/解冻用户
+  lockfrozen_tx: function(yhbh,lx,dsn,pwd_old,zclx){
+    let that = this;
+    let op = "01"; //冻结为01，解冻为00
+    let czName = "冻结";
+    if(zclx=="frozen"){  //冻结
+      op = "01";
+      czName = "冻结";
+    }
+    else{
+      op = "00";
+      czName = "解冻";
+    }
+    that.setData({
+      showMB:false,  //显示幕布
+      second: 40,  //初始化成40秒
+    })
+    that.countdown(); //调用计时器
+    clearInterval(app.globalData.c_discon);//清除断开的定时器
+    wx.showLoading({
+      title: czName+'中...',
+    })
+    var _dataNC = "";
+    var apiNC_jk = "";  //接口
+    if(zclx=="frozen"){  //冻结
+      _dataNC = '{ac: "tx_frozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+      apiNC_jk = 'tx_frozen_user';
+    }
+    else if(zclx=="unfreeze"){ //解冻
+      _dataNC = '{ac: "tx_unfrozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+      apiNC_jk = 'tx_unfrozen_user';
+    }
+    wx.request({
+      url: apiNC+apiNC_jk,  //api地址
+      data: _dataNC,
+      header: {'Content-Type': 'application/json'},
+      method: "POST",
+      async:false,  //同步
+      success(res) {
+        if(res==""){
+          wx.showToast({
+            title: czName+'失败',
+            icon: "none",
+            duration: 1000
+          })
+        }
+        else{
+          if(res.data.code=='0'){
+            if(lx=='01'){  //指纹
+              that.insertLog_LS(userid,'',dsn,czName,'指纹('+yhbh+')','','朗思管理端');
+            }
+            else if(lx=='02'){ //卡片
+              that.insertLog_LS(userid,'',dsn,czName,'卡片('+yhbh+')',pwd_old,'朗思管理端');
+            } 
+            else if(lx=='03'){ //密码
+              that.insertLog_LS(userid,'',dsn,czName,'普通用户('+yhbh+')',pwd_old,'朗思管理端');
+            }           
+            wx.hideLoading();  //关闭提示框          
+            wx.showToast({
+              title: czName+'成功',
+              icon: "success",
+              duration: 1000
+            })
+            setTimeout(()=>{
+              that.get_mssj(dsn,renterNo); //获取门锁数据
+            },1000)
+          }
+          else{       
+            wx.hideLoading();  //关闭提示框
+            console.log(res.data.code+'——>>'+res.data.message);
+            wx.showToast({
+              title: res.data.message,
+              icon: "none",
+              duration: 1000
+            })                                   
+          }
+        }        
+      },
+      fail(res) {
+        wx.showToast({
+          title: czName+'失败',
+          icon: "error",
+          duration: 1000
+        })
+      },
+      complete(){
+        wx.hideLoading();  //关闭提示框
+        that.setData({
+          showMB:true,  //显示幕布
+        })
+      }
+    });
+  },
+  //网关冻结/解冻用户
+  lockfrozen_gm: function(yhbh,lx,dsn,pwd_old,zclx){
+    let that = this;
+    let op = "01"; //冻结为01，解冻为00
+    let czName = "冻结";
+    if(zclx=="frozen"){  //冻结
+      op = "01";
+      czName = "冻结";
+    }
+    else{
+      op = "00";
+      czName = "解冻";
+    }
+    that.setData({
+      showMB:false,  //显示幕布
+      second: 40,  //初始化成40秒
+    })
+    that.countdown(); //调用计时器
+    clearInterval(app.globalData.c_discon);//清除断开的定时器
+    wx.showLoading({
+      title: czName+'中...',
+    })
+    var _dataNC = "";
+    var apiNC_jk = "";  //接口
+    if(zclx=="frozen"){  //冻结
+      _dataNC = '{ac: "gm_frozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+      apiNC_jk = 'gm_frozen_user';
+    }
+    else if(zclx=="unfreeze"){ //解冻
+      _dataNC = '{ac: "gm_unfrozen_user","partnerid":"'+ptlx+'","deviceid":"'+dsn+'","passwordid":"'+yhbh+'","op":"'+op+'","channel":"21"}'
+      apiNC_jk = 'gm_unfrozen_user';
+    }
+    wx.request({
+      url: apiNC+apiNC_jk,  //api地址
+      data: _dataNC,
+      header: {'Content-Type': 'application/json'},
+      method: "POST",
+      async:false,  //同步
+      success(res) {
+        if(res==""){
+          wx.showToast({
+            title: czName+'失败',
+            icon: "none",
+            duration: 1000
+          })
+        }
+        else{
+          if(res.data.code=='0'){
+            if(lx=='01'){  //指纹
+              that.insertLog_LS(userid,'',dsn,czName,'指纹('+yhbh+')','','朗思管理端');
+            }
+            else if(lx=='02'){ //卡片
+              that.insertLog_LS(userid,'',dsn,czName,'卡片('+yhbh+')',pwd_old,'朗思管理端');
+            } 
+            else if(lx=='03'){ //密码
+              that.insertLog_LS(userid,'',dsn,czName,'普通用户('+yhbh+')',pwd_old,'朗思管理端');
+            }           
+            wx.hideLoading();  //关闭提示框          
+            wx.showToast({
+              title: czName+'成功',
+              icon: "success",
+              duration: 1000
+            })
+            setTimeout(()=>{
+              that.get_mssj(dsn,renterNo); //获取门锁数据
+            },1000)
+          }
+          else{       
+            wx.hideLoading();  //关闭提示框
+            console.log(res.data.code+'——>>'+res.data.message);
+            wx.showToast({
+              title: res.data.message,
+              icon: "none",
+              duration: 1000
+            })                                   
+          }
+        }        
+      },
+      fail(res) {
+        wx.showToast({
+          title: czName+'失败',
+          icon: "error",
+          duration: 1000
+        })
+      },
+      complete(){
+        wx.hideLoading();  //关闭提示框
+        that.setData({
+          showMB:true,  //显示幕布
+        })
+      }
+    });
+  },
   countdown: function () {
     var that = this;
     let second = that.data.second;
@@ -1250,6 +1746,324 @@ Page({
       complete(){
       }
     });
+  },
+  //蓝牙删除
+  BLEdel: function(e){
+    let that = this;
+    let id = e.currentTarget.dataset.key;  // 当前流水号
+    wx.showModal({
+      title: '删除用户',
+      content: '确认删除用户？',
+      success: function (res) {
+        if (res.confirm) {//这里是点击了确定以后
+          var _data = {ac: "mssj_info","id":id};
+          wx.request({
+            url: apiUrl,  //api地址
+            data: _data,
+            header: {'Content-Type': 'application/json'},
+            method: "get",
+            success(res) {
+              var units = res.data.rows;
+              if(units.length > 0){
+                let yhbh = units[0].yhbh
+                let lx = units[0].lx //01指纹，02卡片，03密码
+                let pwd_old = units[0].password //密码
+                let lylx = units[0].lylx //来源类型
+                let yhlx = units[0].yhlx
+                if(yhlx == "03"){
+                  wx.showToast({
+                    title: '离线密码不支持蓝牙删除',
+                    icon: "none",
+                    duration: 1500
+                  })
+                  return false;
+                }     
+                if(lylx=='5' || lylx=='6'){  //国民锁
+                  that.BLEpassword_delGM(yhbh,lx,pwd_old); //删除密码 
+                }
+                else if(lylx=='20' || lylx=='21'){
+                  that.BLEpassword_delTX(yhbh,lx,pwd_old); //删除密码        
+                }
+              }          
+            },
+            fail(res) {
+              console.log("getunits fail:",res);
+            },
+            complete(){
+            }
+          });
+        } else {//这里是点击了取消以后
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  BLEpassword_delTX:function(yhbh,lx,pwd_old){  //删除密码
+    let that = this;
+    let lockKeyId = yhbh*1;  //用户编号
+    let keyTypeArray = [1];
+    if(lx=='01'){  //01指纹
+      keyTypeArray = [0];
+    }else if(lx=='02'){  //卡片
+      keyTypeArray = [2];
+    }else if(lx=='03'){  //密码
+      keyTypeArray = [1];
+    }
+    that.setData({
+      showMB:false,  //显示幕布
+    })
+    wx.showLoading({
+      title: '删除中...',
+    })
+    if(that.data.BLE_link==""){
+      const createPlugin = requirePlugin("myPlugin");
+      const Plugin = createPlugin()
+      // 定义数据
+      var config = {
+        keyGroupId: 903,  // 由业务服务器返回
+        lockMac: dsn,
+        aesKey: aesKey, 
+        authCode: authCode, 
+      };
+      // 初始化时调用方式
+      const self = this
+      myPlugin = new Plugin(config);
+      // 监听“初始化完成”事件
+      myPlugin.on("ready", function(plugin) {
+        if(plugin.connected="true"){
+          self.setData({
+            BLE_link:'连接成功',
+          })
+          var options1 = {
+            mode: 0,
+            lockKeyId: lockKeyId,
+            keyType: keyTypeArray
+          };
+          myPlugin
+            .removeKey(options1)
+            .then(function(res) {   
+              if(res.errCode=="01"){
+                wx.hideLoading();  //关闭提示框
+                that.setData({
+                  showMB:true,  //显示幕布
+                })
+                that.del_Rh_yhb(dsn,yhbh,lx);//删除门锁用户
+                if(lx=='01'){  //01指纹
+                  that.insertLog_LS(userid,'',dsn,'删除','指纹('+yhbh+')','','朗思管理端');
+                }else if(lx=='02'){ //02卡片
+                  that.insertLog_LS(userid,'',dsn,'删除','卡片('+yhbh+')',pwd_old,'朗思管理端');
+                }else if(lx=='03'){ //03密码
+                  that.insertLog_LS(userid,'',dsn,'删除','普通用户('+yhbh+')',pwd_old,'朗思管理端');
+                }          
+              }              
+            })
+            .catch(function(err) {
+              wx.hideLoading();  //关闭提示框   
+              that.setData({
+                showMB:true,  //显示幕布
+              })
+              wx.showToast({
+                title: '删除用户失败',
+                icon: "error",
+                duration: 1000
+              })   
+            });
+        }
+        else{
+          wx.hideLoading();  //关闭提示框   
+          self.setData({
+            BLE_link:'',
+          })
+          wx.showToast({
+            title: '连接失败',
+            icon: "none",
+            duration: 1000
+          }) 
+        }
+      });
+      // 监听“断开连接”事件
+      myPlugin.on("close", function(state) {
+        if(state.errCode="100024"){
+          wx.showToast({
+            title: '蓝牙连接已断开',
+            icon: "none",
+            duration: 1000
+          })
+          self.setData({
+            BLE_link:'',
+            showMB:true,
+          })
+        }
+      });
+      // 监听“运行错误”事件
+      myPlugin.on("error", function(err) {
+        wx.hideLoading();  //关闭提示框
+        myPlugin.disconnect();
+        self.setData({
+          BLE_link:'',
+          showMB:true,  //显示幕布
+        })
+        const { errCode, errMsg } = err
+        switch(errCode) {
+          case 10000:  // 数据解析异常
+            wx.showToast({
+              title: '请打开手机蓝牙',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          case 10001:
+            wx.showToast({
+              title: '当前蓝牙适配器不可用',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          case 10002:
+            wx.showToast({
+              title: '没有找到指定设备',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          case 10003:
+            wx.showToast({
+              title: '连接失败',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          case 10006:
+            wx.showToast({
+              title: '当前连接已断开',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          case 10012:
+            wx.showToast({
+              title: '连接超时',
+              icon: "none",
+              duration: 1000
+            })
+          break;
+          default:
+          wx.showToast({
+            title: errMsg,
+            icon: "none",
+            duration: 1000
+          })
+        }
+      });
+      // 监听“删除钥匙”事件
+      myPlugin.on("removeKey", function(data){
+        //console.log('plugin is on addKey, data is ', data)
+      });
+      // 监听“删除钥匙”事件上报
+      myPlugin.on("report:removeKey", function(data) {
+        //console.info("plugin is on remove key, data is ", data);
+      });
+    }
+    else{
+      var options1 = {
+        mode: 0,
+        lockKeyId: lockKeyId,
+        keyType: keyTypeArray
+      };
+      myPlugin
+        .removeKey(options1)
+        .then(function(res) {    
+          if(res.errCode=="01"){
+            wx.hideLoading();  //关闭提示框
+            that.setData({
+              showMB:true,  //显示幕布
+            })   
+            that.del_Rh_yhb(dsn,yhbh,lx);//删除门锁用户
+            if(lx=='01'){  //01指纹
+              that.insertLog_LS(userid,'',dsn,'删除','指纹('+yhbh+')','','朗思管理端');
+            }else if(lx=='02'){ //02卡片
+              that.insertLog_LS(userid,'',dsn,'删除','卡片('+yhbh+')',pwd_old,'朗思管理端');
+            }else if(lx=='03'){ //03密码
+              that.insertLog_LS(userid,'',dsn,'删除','普通用户('+yhbh+')',pwd_old,'朗思管理端');
+            }       
+          }              
+        })
+        .catch(function(err) {
+          wx.hideLoading();  //关闭提示框   
+          that.setData({
+            showMB:true,  //显示幕布
+          })
+          wx.showToast({
+            title: '删除用户失败',
+            icon: "error",
+            duration: 1000
+          })   
+        });
+    }
+  },
+  BLEpassword_delGM:function(yhbh,lx,pwd_old){  //国民蓝牙修改密码
+    let that = this;
+    that.setData({
+      showMB:false,  //显示幕布
+    })
+    wx.showLoading({
+      title: '删除中...',
+    })
+    let lockKeyId = yhbh*1;  //用户编号
+    let cls = 0x01;   //操作类型(0x01 删除 	0x02 修改有效期 	0x03 修改密码，仅限密码)
+    let id = lockKeyId;  //用户id
+    let pwd = ''; //修改密码
+    let date = '';  //有效期
+    let circle = '00';   //循环周期
+    let pwdHex = lockUtils.authChangePwdCode(managePassword);
+    wx.setStorageSync("device_key_" + dsn, pwdHex)
+    let cmd = lockUtils.c_update_user(cls,id,pwd,date,circle);
+    lockUtils.executeCmd({
+      isAuthConnect: true,
+      deviceSn: dsn,
+      data: cmd,
+      success: function (res) {
+        console.log(JSON.stringify(res))
+        if (res.code == 0) {
+          that.del_Rh_yhb(dsn,yhbh,lx);//删除门锁用户
+          if(lx=='01'){  //01指纹
+            that.insertLog_LS(userid,'',dsn,'删除','指纹('+yhbh+')','','朗思管理端');
+          }else if(lx=='02'){ //02卡片
+            that.insertLog_LS(userid,'',dsn,'删除','卡片('+yhbh+')',pwd_old,'朗思管理端');
+          }else if(lx=='03'){ //03密码
+            that.insertLog_LS(userid,'',dsn,'删除','普通用户('+yhbh+')',pwd_old,'朗思管理端');
+          }
+          wx.hideLoading();  //关闭提示框 
+          that.setData({
+            showMB:true,  //显示幕布
+          })
+          bleApi.closeBle();  //断开连接
+        }
+        else{
+          wx.showToast({
+            title: '删除用户失败',
+            icon: "error",
+            duration: 1000
+          })
+          that.setData({
+            showMB:true,  //隐藏幕布
+          })
+          bleApi.closeBle();  //断开连接             
+        } 
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: err.msg,
+          icon: "none",
+          duration: 1000
+        })
+        bleApi.closeBle();
+        that.setData({
+          showMB:true,  //隐藏幕布
+        })
+        console.log(err.code+'——>>'+err.msg);    
+      }
+    })
   },
   linkBLE: function() {  //重新连接
     var that = this;

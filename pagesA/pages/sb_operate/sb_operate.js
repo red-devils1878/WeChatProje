@@ -164,12 +164,8 @@ Page({
         else if(ptlx=="LORA"){
           _this.ZZ_meterReading(dsn,ptlx);
         }
-        else if(ptlx=="4G"){
-          wx.showToast({
-            title: '不支持查询',
-            icon: "none",
-            duration: 2000
-          })
+        else if(ptlx=="4G" || ptlx=="NB"){
+          that.ZZ_meterReading(dsn,ptlx);
         }
       }
     }

@@ -22,7 +22,7 @@ Page({
         });
       }
     });
-   if( !userid){
+   if( !userid || !QZ){
     wx.redirectTo({
       url: '/pages/auth/auth'
     })
@@ -51,6 +51,15 @@ Page({
       yhid:userid,
     })
    },20);
+   /*调用一次定位*/
+    /*
+   wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+   })
+   */
   },
   onShow: function() {
     let emp_no = app.globalData.userid;
@@ -61,6 +70,7 @@ Page({
     }
     if(!!emp_no){
       this.getHome_data(emp_no); //获取首页统计数据
+      this.Judge_loginGJ(emp_no);  //判断用户是否有权登陆
     }
   },
   tapEvent: function(e) {
@@ -155,6 +165,41 @@ Page({
       },
       fail(res) {
         console.log("getunits fail:",res);
+      },
+      complete(){
+      }
+    });  
+  },
+  Judge_loginGJ:function (emp_no) { //判断用户是否有权登陆
+    let _this = this;
+    var _data = {ac: 'Judge_loginGJ',"userid":emp_no};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+        var units = res.data.rows;
+        if(units.length > 0){
+        }
+        else{
+          wx.showModal({    
+            title: '提示',    
+            showCancel: false,    
+            content: '请联系管理员授权',    
+            success: function (res) {
+              let _userid = "";
+              wx.setStorageSync("userid", _userid);
+              app.globalData.userid = _userid;
+              wx.redirectTo({
+                url: '/pages/auth/auth'
+              })
+            }
+          })
+          return false;
+        }
+      },
+      fail(res) {
       },
       complete(){
       }

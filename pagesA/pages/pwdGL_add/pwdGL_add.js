@@ -77,6 +77,14 @@ Page({
     });
     this.get_mcToMS(dsn); //获取门锁信息
     this.get_pwd(); //生成密码
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_htrq:function (roomId) { //获取合同有效期
     let _this = this;
@@ -431,8 +439,11 @@ Page({
                       if(yhbh < 10){
                         yhbh = '00'+yhbh
                       }
-                      else{
+                      else if(yhbh >= 10 && yhbh < 100){
                         yhbh = '0'+yhbh
+                      }
+                      else{
+                        yhbh = yhbh
                       }
                       if(xfbs=='已完成'){
                         return;
@@ -494,7 +505,7 @@ Page({
     var yhlx = "02";    //用户类型
     var channel = "21"; //下发来源
     var remark = "";
-    if(!Stime){ Stime = "000000000000"}
+    if(!Stime){ Stime = "000101000000"}
     if(!Etime){ Etime = "991230180000"}
     var _data = {ac: 'yhb_save',"yhbh":yhbh,"lx":lx,"yhlx":yhlx,"dsn":dsn,"Pwd":newPwd,"Stime":Stime,"Etime":Etime,"channel":channel,"remark":remark};
     wx.request({
@@ -527,7 +538,8 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    let renterNo = "";
+    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly,"renterNo":renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,

@@ -280,7 +280,7 @@ Page({
         var Etime = EdDJ+' 23:59:00';
         that.open_record(mac,Stime,Etime); //获取开门记录   
       }
-    }else if(lylx=="5" || lylx=="6" || lylx=="20" || lylx=="21"){
+    }else if(lylx=="5" || lylx=="6" || lylx=="20" || lylx=="21" || lylx=="22"){
       wx.hideLoading();
       that.get_kmjl(mac,search,SdDJ,EdDJ); //获取开门记录       
     }

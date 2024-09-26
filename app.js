@@ -12,6 +12,19 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
+    
+    //获取当前设备信息
+    wx.getSystemInfo({
+      success: res => {
+        // 苹果X及以上的底部安全区域
+        if (res.safeArea.top > 20) {
+          this.globalData.bottomLift = (res.screenHeight - res.safeArea.bottom)+2;
+        }
+      },
+      fail:err => {
+        console.log(err);
+      }
+    })
   },
   globalData: {
     authcode:'',
@@ -54,6 +67,7 @@ App({
     //userid:'gly5387',  //登陆人工号
     QZ:wx.getStorageSync("QZ") || "",  //账号前缀
     LoginID:wx.getStorageSync("LoginID") || "",  //登录账号
+    bottomLift: 0 //苹果X及以上的底部小黑条高度
 
     /* 添加到域名
     https://jxWeChat.langsi.com.cn

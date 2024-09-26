@@ -9,3 +9,13 @@
   left:0;
   opacity:0.4;
 }
+.button_left{
+  font-size: 14px;
+  width: 20%;
+  background-color: #3fafa6;
+  text-align: center;
+  border-radius: 10rpx;
+  color: #ffffff;
+  padding: 2rpx 10rpx;
+  margin-left: 50rpx;
+}

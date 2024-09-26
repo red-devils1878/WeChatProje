@@ -7,7 +7,7 @@ function initSubMenuDisplay() {
   var gjzt= "";  //跟进状态
   var search= "";  //搜索内容
   var tabV = 0;
-  var userid= "";  //登陆人工号
+  var userid= "空";  //登陆人工号
   var orderNo = "";  //工单号
   var mysl = 20; //每页数量
   var page_total = 0; //总页数

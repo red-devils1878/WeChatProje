@@ -6,6 +6,7 @@ var apiHost = app.globalData.apiHost;   //获取api地址
 var dsn= "";  //设备号
 var userid= "";  //登陆人工号
 var newPwd = "" //新密码
+var lylx= "1";  //供应商类型
 Page({
   data: {
     cmdText:"",
@@ -38,6 +39,13 @@ Page({
         })    
       }
     });
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_mcToMS:function (dsn) { //获取设备号
     let _this = this;
@@ -135,7 +143,7 @@ Page({
     }
     else if (index == '02') { //管理
       wx.navigateTo({
-        url: '../../../pagesA/pages/mssj_list/mssj_list?dsn='+dsn
+        url: '../../../pagesA/pages/mssjYY_list/mssjYY_list?dsn='+dsn
       })
     } else if ( index == '03' ) { //授时
       that.timeService(); //授时
@@ -192,7 +200,7 @@ Page({
       }
       */
      wx.navigateTo({
-      url: '/pages/pwd_add/pwd_add?dsn='+dsn
+      url: '../../../pagesA/pages/pwd_add/pwd_add?dsn='+dsn
      })
     }else if( index == '06' ){ //新增指纹
       if(ljzt){

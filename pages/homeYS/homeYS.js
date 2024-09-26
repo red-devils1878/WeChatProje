@@ -54,7 +54,7 @@ Page({
         });
       }
     });
-    if( !emp_no ){
+    if( !emp_no || !QZ){
       wx.redirectTo({
         url: '/pages/auth/auth'
       })
@@ -82,6 +82,15 @@ Page({
      */
     that.myLockZK_list(emp_no,'');  //获取门锁列表
     that.myRoomLock_list(emp_no,'');  //获取房间列表
+    /*调用一次定位*/
+    /*
+   wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+   })
+   */
   },
   myLockZK_list:function (userid,search) { //获取门锁列表
     let _this = this;
@@ -1971,8 +1980,11 @@ Page({
         selected: 0
       })
     }
-    that.myLockZK_list(emp_no,'');  //获取门锁列表
+    //that.myLockZK_list(emp_no,'');  //获取门锁列表
     that.myRoomLock_list(emp_no,'');  //获取房间列表
+    if(!!emp_no){
+      that.Judge_loginGJ(emp_no);  //判断用户是否有权登陆
+    }
     setTimeout(()=>{
       let ljztS = false;//连接状态
       if(lylx == "1"){
@@ -1994,5 +2006,40 @@ Page({
         })    
       }
     },1000)
+  },
+  Judge_loginGJ:function (emp_no) { //判断用户是否有权登陆
+    let _this = this;
+    var _data = {ac: 'Judge_loginGJ',"userid":emp_no};
+    wx.request({
+      url: apiUrl,  //api地址
+      data: _data,
+      header: {'Content-Type': 'application/json'},
+      method: "get",
+      success(res) {
+        var units = res.data.rows;
+        if(units.length > 0){
+        }
+        else{
+          wx.showModal({    
+            title: '提示',    
+            showCancel: false,    
+            content: '请联系管理员授权',    
+            success: function (res) {
+              let _userid = "";
+              wx.setStorageSync("userid", _userid);
+              app.globalData.userid = _userid;
+              wx.redirectTo({
+                url: '/pages/auth/auth'
+              })
+            }
+          })
+          return false;
+        }
+      },
+      fail(res) {
+      },
+      complete(){
+      }
+    });  
   }
 })

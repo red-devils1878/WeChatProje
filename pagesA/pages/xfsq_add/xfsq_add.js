@@ -101,6 +101,14 @@ Page({
     this.get_mcToMS(dsn); //获取门锁信息
     this.get_pwd(); //生成密码
     this.get_msyhQty(dsn,'gl','03',renterNo); //获取门锁用户数量
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_kslx:function () { //获取开锁类型
     let _this = this;
@@ -447,18 +455,18 @@ Page({
     var buttonType = e.detail.target.dataset.labelnum;
     var cjq = e.detail.value.cjq;
     if(ksType=='01'){  //指纹
-      if(pwdsl >= 1){
+      if(pwdsl >= 2){
         wx.showToast({
-          title: '指纹最多1个,不能再下发!',
+          title: '指纹最多2个,不能再下发!',
           icon: "none",
         })
         return false;
       }
     }
     else if(ksType=='03'){  //密码
-      if(pwdsl >= 1){
+      if(pwdsl >= 2){
         wx.showToast({
-          title: '密码最多1个,不能再下发!',
+          title: '密码最多2个,不能再下发!',
           icon: "none",
         })
         return false;
@@ -541,8 +549,11 @@ Page({
                       if(yhbh < 10){
                         yhbh = '00'+yhbh
                       }
-                      else{
+                      else if(yhbh >= 10 && yhbh < 100){
                         yhbh = '0'+yhbh
+                      }
+                      else{
+                        yhbh = yhbh
                       }
                       that.setData({
                         showMB:true,  //隐藏幕布
@@ -677,8 +688,11 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
+                  }
+                  else{
+                    yhbh = yhbh
                   }
                   that.insert_Rh_yhb(dsn,'03',yhbh,newPwd,Stime2,Etime2);//插入门锁用户表
                   that.insertLog_LS(userid,'',dsn,'下发','普通用户('+yhbh+')',newPwd,'朗思管理端');
@@ -753,8 +767,11 @@ Page({
                         if(yhbh < 10){
                           yhbh = '00'+yhbh
                         }
-                        else{
+                        else if(yhbh >= 10 && yhbh < 100){
                           yhbh = '0'+yhbh
+                        }
+                        else{
+                          yhbh = yhbh
                         }
                         that.insert_Rh_yhb(dsn,'03',yhbh,newPwd,Stime2,Etime2);//插入门锁用户表
                         that.insertLog_LS(userid,'',dsn,'下发','普通用户('+yhbh+')',newPwd,'朗思管理端');
@@ -859,12 +876,15 @@ Page({
                             that.setData({
                               showMB:true,  //隐藏幕布
                             })
-                            var yhbh = _res.data.hardwareNumber;
+                            var yhbh = _res.data.hardwareNumber;     
                             if(yhbh < 10){
                               yhbh = '00'+yhbh
                             }
-                            else{
+                            else if(yhbh >= 10 && yhbh < 100){
                               yhbh = '0'+yhbh
+                            }
+                            else{
+                              yhbh = yhbh
                             }
                             if(xfbs=='已完成'){
                               return;
@@ -1263,8 +1283,11 @@ Page({
             if(yhbh < 10){
               yhbh = '00'+yhbh
             }
-            else{
+            else if(yhbh >= 10 && yhbh < 100){
               yhbh = '0'+yhbh
+            }
+            else{
+              yhbh = yhbh
             }
             self.setData({
               showMB:true,  //显示幕布
@@ -1327,8 +1350,11 @@ Page({
                         if(yhbh < 10){
                           yhbh = '00'+yhbh
                         }
-                        else{
+                        else if(yhbh >= 10 && yhbh < 100){
                           yhbh = '0'+yhbh
+                        }
+                        else{
+                          yhbh = yhbh
                         }
                         that.insert_Rh_yhb(dsn,'01',yhbh,'',Stime2,Etime2);//插入门锁用户表
                         that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
@@ -1436,8 +1462,11 @@ Page({
                           if(yhbh < 10){
                             yhbh = '00'+yhbh
                           }
-                          else{
+                          else if(yhbh >= 10 && yhbh < 100){
                             yhbh = '0'+yhbh
+                          }
+                          else{
+                            yhbh = yhbh
                           }
                           xfbs='已完成';
                           that.insert_Rh_yhb(dsn,'01',yhbh,'',Stime_b,Etime_b);//插入门锁用户表
@@ -1533,8 +1562,11 @@ Page({
                     if(yhbh < 10){
                       yhbh = '00'+yhbh
                     }
-                    else{
+                    else if(yhbh >= 10 && yhbh < 100){
                       yhbh = '0'+yhbh
+                    }
+                    else{
+                      yhbh = yhbh
                     }
                     that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
                     that.update_pwdRenterOld(dsn,'',renterNo,'01',yhbh);   //更新密码所有人
@@ -1769,8 +1801,11 @@ Page({
           if(yhbh < 10){
             yhbh = '00'+yhbh
           }
-          else{
+          else if(yhbh >= 10 && yhbh < 100){
             yhbh = '0'+yhbh
+          }
+          else{
+            yhbh = yhbh
           }
           self.setData({
             showMB:true,  //显示幕布
@@ -1878,7 +1913,7 @@ Page({
     var yhlx = "02";    //用户类型
     var channel = "21"; //下发来源
     var remark = "";  
-    if(!Stime){ Stime = "000000000000"}
+    if(!Stime){ Stime = "000101000000"}
     if(!Etime){ Etime = "991230180000"}
     var _data = {ac: 'yhb_save',"yhbh":yhbh,"lx":lx,"yhlx":yhlx,"dsn":dsn,"Pwd":newPwd,"Stime":Stime,"Etime":Etime,"channel":channel,"remark":remark};
     wx.request({
@@ -1910,12 +1945,13 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    var _data = {act: "operateLog_save2",wx_id:wx_id,hid:hid,sbh:sbh,czlx:czlx,Pwd_type:Pwd_type,Pwd:Pwd,xfly:xfly,renterNo:renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
-      header: {'Content-Type': 'application/json'},
-      method: "get",
+      header: {'content-type': 'application/x-www-form-urlencoded'},
+      method: "POST",
+      async:false,  //同步
       success(res) {
       },
       fail(res) {
@@ -2043,7 +2079,7 @@ Page({
   connectWebSocket: function (cjqbh,Stime,Etime){  //创建WebSocket服务器
     var that = this;
     wx.connectSocket({
-      url: 'ws://139.9.182.161:7500/webSocket',
+      url: 'wss://139.9.182.161:7500/webSocket',
       success(res) {
         console.log('webSocket连接成功');
       },
@@ -2101,7 +2137,7 @@ Page({
   },
   enterFinger: function (cjqbh){  //进入指纹模式
     var that = this;
-    var _dataNC = {act: "langsi_Get_fingerprints",eqnumber:cjqbh}
+    var _dataNC = {act: "langsi_Get_fingerprints",eqnumber:cjqbh,url:'http://139.9.182.161:7300'}
     wx.request({
       url: apiTX,  //api地址
       data: _dataNC,
@@ -2150,7 +2186,7 @@ Page({
         else{
           if(res.data.code=='0'){
             wx.hideLoading();  //关闭提示框      
-            that.insertLog_LS(userid,'',dsn,'下发','指纹','','朗思管理端');  
+            that.insertLog_LS(userid,'',dsn,'下发','指纹',message,'朗思管理端');  
             that.update_pwdRenter(dsn,'',renterNo,'01'); 
             wx.showToast({
               title: '新增指纹成功',

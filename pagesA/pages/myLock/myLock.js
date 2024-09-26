@@ -22,6 +22,11 @@ var aesKey= "";  //秘钥
 var myPlugin= "";  //组件
 var managePassword= "";  //管理密码
 var gatewaySn= "";  //网关编号
+var newPwd = "" //新密码
+var val_fq= 1; //防撬开启
+var vol_tx= 1; //音量
+var vol_ffz= 1; //防复制
+var ldNo = "" //楼栋编号
 
 const date = new Date();
 const years = [];
@@ -83,9 +88,11 @@ Page({
     setInter: '',
     num: 1,
     showTime:true, //隐藏
+    ifNameGL: false,
   },
   onLoad: function (options) {
     let that = this;
+    newPwd = ""; //密码设置成空
     myPlugin= "";
     dsn = options.dsn;
     apiUrl = app.globalData.apiUrl;   //获取api地址
@@ -137,6 +144,17 @@ Page({
     this.setData({
       choose_year: this.data.multiArray[0][0]
     });
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    },
+    fail(error) {
+      console.error("获取失败:",error)
+    },
+  })
   },
   introduce_myPlugin: function () {  //引入组件
     this.setData({
@@ -252,6 +270,10 @@ Page({
     // 监听“开锁”事件上报
     myPlugin.on("report:openLock", function(data) {
     });
+    //事件监听方式
+    myPlugin.on("report:setSystemInfo", function(data) {
+      console.info("plugin is on add key, data is ", data);
+    });
   },
   // 同欣蓝牙开锁
   BLEopenLock_TX: function() {
@@ -310,6 +332,7 @@ Page({
           authCode = units[0].commonAuthCode;
           managePassword = units[0].managePassword;
           gatewaySn = units[0].gatewaySn;
+          ldNo = units[0].ldNo;
           _this.setData({
             hid:units[0].hid,
             dsn:units[0].equip_no,
@@ -317,6 +340,7 @@ Page({
             powerV:units[0].powerV,
             mslx:units[0].lx,
             yhid:userid,
+            ldNo:units[0].ldNo,
           })
         }
         else{
@@ -533,7 +557,7 @@ Page({
       ljzt = BLE_new.connectionState();//连接状态  
     }
     if (index == '01') {  //蓝牙开门
-      if(lylx=="20" || lylx=="21"){  //同欣锁
+      if(lylx=="20" || lylx=="21" || lylx=="22"){  //同欣锁
         let zt = that.data.ljzt;
         if(zt=="连接成功"){
           wx.showToast({
@@ -645,7 +669,7 @@ Page({
       }
     }
     else if (index == '02') { //管理
-      if(lylx=="20" || lylx=="21"){
+      if(lylx=="20" || lylx=="21" || lylx=="22"){
         if(!!myPlugin){
           myPlugin.disconnect();
         }
@@ -695,7 +719,7 @@ Page({
           duration: 1000
         });
       }
-      else if(lylx=="20" || lylx=="21"){
+      else if(lylx=="20" || lylx=="21" || lylx=="22"){
         //that.readDNAInfo_TX(); //读取DNA信息
         let zt = that.data.ljzt;
         if(zt=="连接成功"){
@@ -752,7 +776,12 @@ Page({
          jk = 'temppassword';
        }
        else if(lylx=="5" || lylx=="6"){ //国民
-         jk = 'gm_otp';
+          if(ldNo=="FN2403080744"){
+            jk = 'gm_otp_c';
+          }
+          else{
+            jk = 'gm_otp';
+          }
        }
        var _dataNC = '{ac: "temppassword","partnerid":"'+ptlx+'","deviceid":"'+dsn+'"}'
        wx.request({
@@ -782,7 +811,7 @@ Page({
               else if(lylx=="5" || lylx=="6"){
                 otp = res.data.data.password;
                 result_opt = otp.substr(0,4) + '  ' + otp.substr(4,4)+ '  ' + otp.substr(8,4);
-                title = "注：一次性密码，有效期10分钟";
+                title = "注：一次性密码，有效期2小时";
               }
               wx.showModal({
                   title: title,
@@ -808,7 +837,7 @@ Page({
          }
        });
       }
-      else if(lylx=="20" || lylx=="21"){ //同欣一次性密码
+      else if(lylx=="20" || lylx=="21" || lylx=="22"){ //同欣一次性密码
         var _dataNC = '{ac: "temppassword","partnerid":"'+ptlx+'","deviceid":"'+dsn+'"}'
         wx.request({
           url: apiNC+'tx_otp',  //api地址
@@ -957,7 +986,7 @@ Page({
       if(lylx=="2"){
         that.gatewayOpen(); //网关开门 
       }
-      else if(lylx=="20" || lylx=="21"){
+      else if(lylx=="20" || lylx=="21" || lylx=="22"){
         that.gatewayOpen_TX(); //网关开门(同欣)
       }
     }else if( index == '17' ){ //离线密码
@@ -966,6 +995,215 @@ Page({
       })
     }else if( index == '18' ){ //门锁OTA
       that.Lock_OTA(); //门锁OTA
+    }else if( index == '19' ){ //管理密码
+      this.setData( {
+        ifNameGL: true,    //显示弹出框
+      }); 
+      let Num = that.MathRand(); //随机生成8位数密码
+      newPwd = Num;
+      this.setData({
+        fxmc:Num
+      });   
+    }else if( index == '20' ){ //防撬设置
+      let zt = that.data.ljzt;
+      if(zt=="连接成功"){
+        this.setData( {
+          ifNameFQ: true,    //显示弹出框
+        });
+      }
+      else{
+        wx.showToast({
+          title: '请先连接门锁',
+          icon: 'error',
+          duration: 1000
+        });
+      }
+    }else if( index == '21' ){ //防复制设置
+     /*
+     this.setData( {
+      ifNameFFZ: true,    //显示弹出框
+     });
+     */
+     let zt = that.data.ljzt;
+     if(zt=="连接成功"){
+       this.setData( {
+        ifNameFFZ: true,    //显示弹出框
+       });
+     }
+     else{
+       wx.showToast({
+         title: '请先连接门锁',
+         icon: 'error',
+         duration: 1000
+       });
+     }
+    }else if( index == '22' ){ //获取信息
+      that.tx_synLockInfo(); //获取信息
+    }
+  },
+  cancelFQ: function (e) {  //返回
+    let that = this;
+    that.setData({
+      ifNameFQ: false,    //隐藏弹出框
+    }); 
+  },
+  confirmFQ: function (e) {
+    let that = this;
+    that.setData({
+      ifNameFQ: false,    //隐藏弹出框
+    });
+    if(lylx == "20" || lylx == "21" || lylx=="22"){  //同欣锁
+      console.log("防撬值："+val_fq);
+      that.shackleAlarmEnable(val_fq); //防撬设置
+    }
+    else{
+      wx.showToast({
+        title: '该锁不支持此功能',
+        icon: "none",
+        duration: 1000
+      })
+    }
+  },
+  cancelFFZ: function (e) {  //返回
+    let that = this;
+    that.setData({
+      ifNameFFZ: false,    //隐藏弹出框
+    }); 
+  },
+  confirmFFZ: function (e) {
+    let that = this;
+    that.setData({
+      ifNameFFZ: false,    //隐藏弹出框
+    });
+    if(lylx == "20" || lylx == "21" || lylx=="22"){  //同欣锁
+      console.log("防复制："+vol_ffz);
+      let zt = that.data.ljzt;
+      if(zt=="连接成功"){
+        that.antiCopyFunction(vol_ffz); //防复制设置
+      }
+      else{
+        that.tx_setParam(vol_ffz); //防复制设置
+      }
+    }
+    else{
+      wx.showToast({
+        title: '该锁不支持此功能',
+        icon: "none",
+        duration: 1000
+      })
+    }
+  },
+  cancelYL: function (e) {  //返回
+    let that = this;
+    that.setData({
+      volTX: false,    //隐藏弹出框
+    }); 
+  },
+  confirmYL: function (e) {
+    let that = this;
+    that.setData({
+      volTX: false,    //隐藏弹出框
+    });
+    if(lylx == "20" || lylx == "21" || lylx=="22"){  //同欣锁
+      console.log("音量值："+vol_tx);
+      that.systemVolume(vol_tx); //音量设置
+    }
+    else{
+      wx.showToast({
+        title: '该锁不支持此功能',
+        icon: "none",
+        duration: 1000
+      })
+    }
+  },
+  MathRand: function() { //生成密码
+    var Num="";
+    for(var i=0;i < 100;i++){
+      for(var i=0;i < 6;i++)
+      {
+        var chr = Math.floor(Math.random()*10);
+        //首个字母为0时，替换为6
+        if( i == 0 && chr == 0 ){
+          chr = 6;
+        }
+        Num+=chr;
+      }
+      break; 
+    }
+    return Num;
+  },
+  setValue: function(e) {   //密码值改变事件
+    newPwd = e.detail.value;
+  },
+  cancelGL: function (e) {  //取消
+    newPwd = "";
+    this.setData( {
+      ifNameGL: false,    //隐藏弹出框
+      fxmc:""
+    }); 
+  },
+  confirmGL: function (e) {  //确定
+    if(!newPwd || newPwd.length != 6){
+      wx.showToast({
+        title: '请输入6位数字！',
+        icon: 'none'
+      })
+    }
+    else{
+      var that = this;
+      that.setData( {
+        ifNameGL: false,    //隐藏弹出框
+        fxmc:""
+      });
+      wx.showToast({
+        title: '密码修改中...',
+        icon: "loading",
+        duration: 15000
+      })
+
+      let cls = 0x03;   //操作类型(0x01 删除 	0x02 修改有效期 	0x03 修改密码，仅限密码 )
+      let id = 1;
+      let pwd = newPwd; //密码值
+      //let date = Stime2+Etime2;  //有效期
+      let date = 210101013000991231173000; 
+      let circle = '00';   //循环周期
+      let pwdHex = lockUtils.authChangePwdCode(managePassword);
+      wx.setStorageSync("device_key_" + dsn, pwdHex)
+      let cmd = lockUtils.c_update_user(cls,id,pwd,date,circle);
+      lockUtils.executeCmd({
+        isAuthConnect: true,
+        deviceSn: dsn,
+        data: cmd,
+        success: function (res) {
+          console.log(JSON.stringify(res))
+          if (res.code == 0) {
+            that.update_managePwd(dsn,newPwd);//修改管理密码
+            bleApi.closeBle();  //断开连接
+            /*
+            that.setData({
+              showMB:true,  //显示幕布
+            })     
+            */  
+          }
+          else{
+            wx.showToast({
+              title: '修改失败',
+              icon: "error",
+              duration: 1000
+            })
+            bleApi.closeBle();  //断开连接             
+          } 
+        },
+        fail: function (err) {
+          wx.showToast({
+            title: err.msg,
+            icon: "none",
+            duration: 1000
+          })
+          bleApi.closeBle();
+          console.log(err.code+'——>>'+err.msg);    
+        }
+      })
     }
   },
   back: function() { //返回首页
@@ -977,7 +1215,7 @@ Page({
       clearInterval(app.globalData.c_discon);//清除断开的定时器
       BLE_new.closeBLEConnection();
     }
-    else if(lylx=="20" || lylx=="21"){
+    else if(lylx=="20" || lylx=="21" || lylx=="22"){
       if(!!myPlugin){
         myPlugin.disconnect();
       }
@@ -1021,7 +1259,7 @@ Page({
     else if(lylx=="2"){  //新锁
       that.get_BLEConnection();  //蓝牙连接
     }
-    else if(lylx=="20" || lylx=="21"){
+    else if(lylx=="20" || lylx=="21" || lylx=="22"){
       that.introduce_myPlugin();  //引入组件
     }
     else if(lylx=="5" || lylx=="6"){
@@ -1044,7 +1282,7 @@ Page({
     else if(lylx=="2"){
       BLE_new.closeBLEConnection();
     }
-    else if(lylx=="20" || lylx=="21"){
+    else if(lylx=="20" || lylx=="21" || lylx=="22"){
       myPlugin.disconnect();
     }
   },
@@ -1264,7 +1502,7 @@ Page({
       BLE_new.closeBLEConnection();
       com.break_link(dsn); //断开连接
     }
-    else if(lylx=="20" || lylx=="21"){
+    else if(lylx=="20" || lylx=="21" || lylx=="22"){
       if(!!myPlugin){
         myPlugin.disconnect();
       }
@@ -1553,7 +1791,8 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    let renterNo = "";
+    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly,"renterNo":renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
@@ -1667,6 +1906,38 @@ Page({
       }); 
     }
     console.log("下发类型："+xflx);
+  },
+  radioChangeFQ:function(e){  //防撬事件
+    let chk_fq=e.detail.value;//获取选中的值
+    if(chk_fq=="1"){
+      val_fq = 1;
+    }
+    else{
+      val_fq = 2;
+    }
+  },
+  radioChangeFFZ:function(e){  //防复制事件
+    let chk_ffz=e.detail.value;//获取选中的值
+    if(chk_ffz=="1"){
+      vol_ffz = 1;
+    }
+    else{
+      vol_ffz = 2;
+    }
+  },
+  radioChangeYL:function(e){  //音量事件
+    let chk_yl=e.detail.value;//获取选中的值
+    if(chk_yl=="1"){
+      vol_tx = 1;
+    }else if(chk_yl=="2"){
+      vol_tx = 2;
+    }else if(chk_yl=="3"){
+      vol_tx = 3;
+    }else if(chk_yl=="4"){
+      vol_tx = 4;
+    }else if(chk_yl=="5"){
+      vol_tx = 5;
+    }
   },
   cancel: function (e) {  //返回
     let that = this;
@@ -2080,7 +2351,7 @@ Page({
             }
             else{    
               wx.hideLoading();  //关闭提示框
-              console.log(res.data.code+'——>>'+res.data.msg);
+              console.log(res.data.code+'——>>'+res.data.message);
               wx.showToast({
                 title: '开锁失败',
                 icon: "error",
@@ -2133,7 +2404,7 @@ Page({
         }
         else{
           if(res.data.code=='0'){
-            that.insert_OpenLog(userid,dsn,'朗思管理端');//插入开门日志
+            //that.insert_OpenLog(userid,dsn,'朗思管理端');//插入开门日志
             wx.showLoading({
               title: '已开锁',
             })
@@ -2146,7 +2417,7 @@ Page({
           }
           else{   
             wx.hideLoading();  //关闭提示框
-            console.log(res.data.code+'——>>'+res.data.message);
+            console.log(res.data.resultCode+'——>>'+res.data.reason);
             wx.showToast({
               title: '开锁失败',
               icon: "error",
@@ -2467,4 +2738,239 @@ upgrade_result: function() { //最终进度查询
     }
   });    
  },
+ update_managePwd: function (dsn,pwd){  //删除门锁用户
+  var that = this;
+  var _data = {ac: 'update_managePwd',"dsn":dsn,"pwd":pwd};
+  wx.request({
+    url: apiUrl,  //api地址
+    data: _data,
+    header: {'Content-Type': 'application/json'},
+    method: "get",
+    success(res) {
+      if(res.data.status=="1"){
+        newPwd = "";
+        wx.hideToast();  //关闭提示框
+        wx.showToast({
+          title: '修改成功',
+          icon: "success",
+          duration: 1000
+        })
+      }
+    },
+    fail(res) {
+      console.log("getunits fail:",res);
+    },
+    complete(){
+    }
+  });   
+},
+  // 同欣防撬设置
+  shackleAlarmEnable: function(val_fq) {
+    let title = "开启成功";
+    if(val_fq==1){
+      title = "开启成功";
+    }else{
+      title = "关闭成功";
+    }
+    const options = {
+      shackleAlarmEnable: val_fq,  //防撬设置，1代表开启，2代表关闭
+    };
+    myPlugin.setSystemInfo(options).then(res => {
+      if(res.errCode=="01"){
+        wx.showToast({
+          title: title,
+          icon: "success",
+          duration: 1000
+        })
+      }
+    })
+    .catch(err => {
+      wx.showToast({
+        title: '设置失败',
+        icon: "error",
+        duration: 1000
+      })
+    });
+  },
+ // 同欣防复制设置
+ antiCopyFunction: function(vol_ffz) {
+  let title = "开启成功";
+  if(vol_ffz==1){
+    title = "开启成功";
+    myPlugin.setCardFunctionForApartment({
+      cardFunctionEnable: 1,
+      aes128Key: aesKey,
+      cardSector: 15,
+      buildingNo: '',
+      floorNo: '',
+      roomNo: '',
+      slaveRoomNo: '',
+      type: 2,
+    })
+    .then((res) => {
+      //console.log("setCardFunctionForApartment res -->", res);
+      if(res.errCode=="01"){
+        const options_ffz = {
+          antiCopyFunction: vol_ffz,  //防复制设置，1代表开启，2代表关闭
+        };
+        myPlugin.setSystemInfo(options_ffz).then(res => {
+          if(res.errCode=="01"){
+            wx.showToast({
+              title: title,
+              icon: "success",
+              duration: 1000
+            })
+          }
+        })
+        .catch(err => {
+          wx.showToast({
+            title: '设置失败',
+            icon: "error",
+            duration: 1000
+          })
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("setCardFunctionForApartment err -->", err);
+    });
+  }else{
+    title = "关闭成功";
+    const options_ffz = {
+      antiCopyFunction: vol_ffz,  //防复制设置，1代表开启，2代表关闭
+    };
+    myPlugin.setSystemInfo(options_ffz).then(res => {
+      if(res.errCode=="01"){
+        wx.showToast({
+          title: title,
+          icon: "success",
+          duration: 1000
+        })
+      }
+    })
+    .catch(err => {
+      wx.showToast({
+        title: '设置失败',
+        icon: "error",
+        duration: 1000
+      })
+    });
+  }
+},
+  // 同欣音量设置
+  systemVolume: function(vol_tx) {
+    const options = {
+      systemVolume: vol_tx,
+    };
+    myPlugin.setSystemInfo(options).then(res => {
+      if(res.errCode=="01"){
+        wx.showToast({
+          title: '设置成功',
+          icon: "success",
+          duration: 1000
+        })
+      }
+    })
+    .catch(err => {
+      wx.showToast({
+        title: '设置失败',
+        icon: "error",
+        duration: 1000
+      })
+    });
+  },
+ // 同欣防复制设置
+ tx_setParam: function(vol_ffz) {
+  let jk = "tx_setParam"; //接口
+  var _dataNC = '{ac: "tx_setParam","deviceid":"'+dsn+'","antiCopyFunction":'+vol_ffz+'}'
+  wx.request({
+    url: apiNC+jk,  //api地址
+    data: _dataNC,
+    header: {'Content-Type': 'application/json'},
+    method: "POST",
+    async:false,  //同步
+    success(res) {
+      if(res==""){
+        wx.showToast({
+          title: '失败',
+          icon: "none",
+          duration: 2000
+        })
+      }
+      else{
+        if(res.data.resultCode=='0'){
+          wx.showToast({
+            title: '设置成功',
+            icon: "success",
+            duration: 1000
+          })                      
+        }
+        else{       
+          console.log(res.data.resultCode+'——>>'+res.data.reason);
+          wx.showToast({
+            title: res.data.reason,
+            icon: "none",
+            duration: 2000
+          })                                   
+        }
+      }        
+    },
+    fail(res) {
+      wx.showToast({
+        title: '设置失败',
+        icon: "error",
+        duration: 2000
+      })
+    },
+    complete(){
+    }
+  });
+},
+tx_synLockInfo: function() {
+  let jk = "tx_synLockInfo"; //接口
+  var _dataNC = '{ac: "tx_synLockInfo","deviceid":"'+dsn+'"}'
+  wx.request({
+    url: apiNC+jk,  //api地址
+    data: _dataNC,
+    header: {'Content-Type': 'application/json'},
+    method: "POST",
+    async:false,  //同步
+    success(res) {
+      if(res==""){
+        wx.showToast({
+          title: '失败',
+          icon: "none",
+          duration: 2000
+        })
+      }
+      else{
+        if(res.data.resultCode=='0'){
+          console.log("antiCopyFunction:"+res.data.data.lockInfoBase.antiCopyFunction);
+          wx.showToast({
+            title: '获取成功',
+            icon: "success",
+            duration: 1000
+          })                      
+        }
+        else{       
+          console.log(res.data.resultCode+'——>>'+res.data.reason);
+          wx.showToast({
+            title: res.data.reason,
+            icon: "none",
+            duration: 2000
+          })                                   
+        }
+      }        
+    },
+    fail(res) {
+      wx.showToast({
+        title: '设置失败',
+        icon: "error",
+        duration: 2000
+      })
+    },
+    complete(){
+    }
+  });
+},
 })

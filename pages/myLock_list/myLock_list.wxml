@@ -25,8 +25,8 @@
   <view style="margin: 10rpx 20rpx;">
     共{{total}}条消息
   </view>
-<view class="swiper-items" style="height:{{winHeight - 125}}px;">
-  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 125}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
+<view class="swiper-items" style="height:{{winHeight - 125}}px;padding-bottom:{{bottomLift}}px">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight - 125}}px;padding-bottom:{{bottomLift}}px;" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
     <view class="service-list">
 	  <view class="{{item.find=='' ? 'service-item' : 'service-item'}}" wx:for="{{servicelist}}" wx:key="{{item.id}}" bindtap="{{item.find=='' ? 'jupLock' : 'jupLock'}}" data-key="{{item.id}}">
         <view class="service-img">
@@ -34,13 +34,13 @@
 		</view>
 		<view class="service-text">
 		  <view class="service-tite">{{item.name}}</view>
-          <view style="display: flex;">
-            <text class="service-city">{{item.id}}</text>  
-            <span class="Link-singVal">{{item.singVal}}</span>
-            <span wx:if="{{item.find==''}}" class="notLink-span">不可连接</span>
-            <span wx:else class="Link-span">点击连接</span>
-            <!--<span class="Link-span">点击连接</span>-->
-          </view>
+      <view style="display: flex;">
+        <text class="service-city">{{item.id}}</text>  
+        <span class="Link-singVal">{{item.singVal}}</span>
+        <!--<span wx:if="{{item.find==''}}" class="notLink-span">不可连接</span>
+        <span wx:else class="Link-span">点击连接</span>-->
+        <span class="Link-span">点击连接</span>
+      </view>
 		</view>
 	  </view>
 	</view>

@@ -95,6 +95,14 @@ Page({
     });
     this.get_mcToMS(dsn); //获取门锁信息
     //this.get_msyhQty(dsn,'gl','01',renterNo); //获取门锁用户数量
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_htrq:function (hid) { //获取合同有效期
     let _this = this;
@@ -549,9 +557,12 @@ Page({
           if(yhbh < 10){
             yhbh = '00'+yhbh
           }
-          else{
+          else if(yhbh >= 10 && yhbh < 100){
             yhbh = '0'+yhbh
           }
+          else{
+            yhbh = yhbh
+          }  
           self.setData({
             showMB:true,  //显示幕布
             imgurl: "../../../static/images/my/zhiwen_add5.png",//赋值图片
@@ -606,11 +617,14 @@ Page({
            let hexV2 = res.data.userID;
            var yhbh = com.ex16hex(hexV2);
            if(yhbh < 10){
-             yhbh = '00'+yhbh
-           }
-           else{
-             yhbh = '0'+yhbh
-           }
+            yhbh = '00'+yhbh
+          }
+          else if(yhbh >= 10 && yhbh < 100){
+            yhbh = '0'+yhbh
+          }
+          else{
+            yhbh = yhbh
+          }
            that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
            that.insert_Rh_yhb(dsn,'01',yhbh,'',Stime2,Etime2);//插入门锁用户表
            bleApi.closeBle();  //断开连接
@@ -680,8 +694,11 @@ Page({
                       if(yhbh < 10){
                         yhbh = '00'+yhbh
                       }
-                      else{
+                      else if(yhbh >= 10 && yhbh < 100){
                         yhbh = '0'+yhbh
+                      }
+                      else{
+                        yhbh = yhbh
                       }
                       that.insert_Rh_yhb(dsn,'01',yhbh,'',Stime2,Etime2);//插入门锁用户表
                       that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
@@ -788,8 +805,11 @@ Page({
                         if(yhbh < 10){
                           yhbh = '00'+yhbh
                         }
-                        else{
+                        else if(yhbh >= 10 && yhbh < 100){
                           yhbh = '0'+yhbh
+                        }
+                        else{
+                          yhbh = yhbh
                         }
                         xfbs='已完成';
                         that.insert_Rh_yhb(dsn,'01',yhbh,'',Stime_b,Etime_b);//插入门锁用户表
@@ -885,8 +905,11 @@ Page({
                   if(yhbh < 10){
                     yhbh = '00'+yhbh
                   }
-                  else{
+                  else if(yhbh >= 10 && yhbh < 100){
                     yhbh = '0'+yhbh
+                  }
+                  else{
+                    yhbh = yhbh
                   }
                   that.insertLog_LS(userid,'',dsn,'下发','指纹('+yhbh+')','','朗思管理端');
                   wx.showToast({
@@ -969,7 +992,7 @@ Page({
     var yhlx = "02";    //用户类型
     var channel = "21"; //下发来源
     var remark = "";  
-    if(!Stime){ Stime = "000000000000"}
+    if(!Stime){ Stime = "000101000000"}
     if(!Etime){ Etime = "991230180000"}
     var _data = {ac: 'yhb_save',"yhbh":yhbh,"lx":lx,"yhlx":yhlx,"dsn":dsn,"Pwd":newPwd,"Stime":Stime,"Etime":Etime,"channel":channel,"remark":remark};
     wx.request({
@@ -1001,12 +1024,14 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    let renterNo = "";
+    var _data = {act: "operateLog_save2",wx_id:wx_id,hid:hid,sbh:sbh,czlx:czlx,Pwd_type:Pwd_type,Pwd:Pwd,xfly:xfly,renterNo:renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
-      header: {'Content-Type': 'application/json'},
-      method: "get",
+      header: {'content-type': 'application/x-www-form-urlencoded'},
+      method: "POST",
+      async:false,  //同步
       success(res) {
       },
       fail(res) {
@@ -1014,7 +1039,7 @@ Page({
       },
       complete(){
       }
-    });
+    });    
   },
   countdown: function () {
     var that = this;
@@ -1063,7 +1088,7 @@ Page({
   connectWebSocket: function (cjqbh,Stime,Etime){  //创建WebSocket服务器
     var that = this;
     wx.connectSocket({
-      url: 'ws://139.9.182.161:7300/webSocket',
+      url: 'wss://139.9.182.161:7500/webSocket',
       success(res) {
         console.log('webSocket连接成功');
       },
@@ -1169,7 +1194,7 @@ Page({
         else{
           if(res.data.code=='0'){
             wx.hideLoading();  //关闭提示框      
-            that.insertLog_LS(userid,'',dsn,'下发','指纹','','朗思管理端');
+            that.insertLog_LS(userid,'',dsn,'下发','指纹',message,'朗思管理端');
             wx.showToast({
               title: '新增指纹成功',
               icon: "success",

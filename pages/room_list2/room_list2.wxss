@@ -340,3 +340,6 @@
   flex-wrap: wrap;
   background-color:#fafafa;
 }
+.ActionSheet{
+  margin-bottom: 100rpx;
+}

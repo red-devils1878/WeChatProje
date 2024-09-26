@@ -1,5 +1,5 @@
 <view class="container" style="background-color: white;">
-  <view class="page-body">
+  <view class="page-body" style="padding-bottom:{{bottomLift}}px">
     <form catchsubmit="formSubmit" catchreset="formReset">
       <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight -50}}px" scroll-top="{{scrolltop}}" lower-threshold="50" bindscrolltolower="scrollLoading">
       <view class="form_table_border" style="margin: 20rpx 40rpx;border: none;">
@@ -32,7 +32,7 @@
         <view class="form_table_border_in">
           <view class="form_table_left">用户管理</view>
             <view class="form_table_right">
-              <span style="color: #c0c0c0;float: right;">查看所有用户</span>
+              <span style="color: #c0c0c0;float: right;" bindtap='tapEvent' data-index="11" data-key="{{hid}}">查看所有用户</span>
             </view>
         </view>
       </view>
@@ -166,7 +166,8 @@
             <view class="arrow2"></view>
           </view>
       </view>-->
-      <view class="form_info_bot1" style="border: none;">
+    </scroll-view>    
+    <view class="form_info_bot1" style="border: none;">
         <view class="tr bg-w" wx:if="{{czzt=='1002'}}" >
           <view class="form_info_bot_td2_r" bindtap='tapBLRZ' data-key="{{hid}}">办理入住</view>
           <view style="width: 2rpx;"></view>
@@ -186,7 +187,6 @@
           <!--<view class="form_info_bot_td2_r" bindtap='tapFX' data-key="{{hid}}">分享</view>-->
         </view>
       </view>
-    </scroll-view>     
     </form>
   </view>
 </view>

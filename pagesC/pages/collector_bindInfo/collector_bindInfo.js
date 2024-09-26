@@ -1,7 +1,7 @@
 var hid3 = ""  //位置id
 var cjqlx = ""; //采集器类型
 var app = getApp();
-var apiUrl = app.globalData.apiUrl;   //获取api地址
+var apiUrl = app.globalData.apiUrl_LS;   //获取api地址
 var apiSB = app.globalData.apiSB;   //水表指令api
 var apiDB = app.globalData.apiDB;   //电表指令api
 Page({
@@ -13,7 +13,7 @@ Page({
   },
   onLoad: function (options) {  //生命周期函数--监听页面加载
     var that = this;
-    apiUrl = app.globalData.apiUrl;
+    apiUrl = app.globalData.apiUrl_LS;
     hid3 = options.hid3;
     cjqlx = options.cjqlx;
     if(cjqlx=="sb"){  //水表
@@ -140,16 +140,36 @@ Page({
       content: '确认解绑？',
       success: function (res) {
         if (res.confirm) {//这里是点击了确定以后
-          if(cjqlx=="sb"){ //水表
-            if(lylx=="ZZ"){ //卓正
-              that.ZZ_unRelation_collectorALL(collectorNo);  //ZZ水表解除关联          
+          var _data = {ac: 'get_collector_device',"collectorNo":collectorNo,"cjqlx":cjqlx};
+          wx.request({
+            url: apiUrl,  //api地址
+            data: _data,
+            header: {'Content-Type': 'application/json'},
+            method: "get",
+            success(res) {
+              var units = res.data.rows;
+              if(units.length > 0){
+                if(cjqlx=="sb"){ //水表
+                  if(lylx=="ZZ"){ //卓正
+                    that.ZZ_unRelation_collectorALL(collectorNo);  //ZZ水表解除关联          
+                  }
+                }
+                else if(cjqlx=="db"){ //电表
+                  if(lylx=="QC"){ //启程
+                    that.QC_unRelation_collectorALL(collectorNo,txlx); //QC电表解除关联           
+                  }        
+                }
+              }
+              else{
+                that.Unbind_collector(collectorNo);  //解绑采集器
+              }
+            },
+            fail(res) {
+              console.log("getunits fail:",res);
+            },
+            complete(){
             }
-          }
-          else if(cjqlx=="db"){ //电表
-            if(lylx=="QC"){ //启程
-              that.QC_unRelation_collectorALL(collectorNo,txlx); //QC电表解除关联           
-            }        
-          }
+          });
         } else {//这里是点击了取消以后
           console.log('用户点击取消')
         }

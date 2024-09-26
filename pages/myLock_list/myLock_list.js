@@ -16,6 +16,7 @@ Page({
     winHeight: 0,
     fyIndex: 0,
     total: 0,
+    bottomLift: app.globalData.bottomLift, //苹果X及以上机型的底部安全区域高度
   },
 
   onLoad: function (options) {  //生命周期函数--监听页面加载
@@ -183,7 +184,7 @@ Page({
                   })
                   if (!pDev) {
                     const _deviceId = dev.deviceId;              
-                    if( dev.localName != null && (dev.localName.indexOf("LS-A4") != -1 || dev.localName.indexOf("LS-501") != -1 || dev.localName.indexOf("LS-FFFFFFFFFFFFFFF") != -1 || dev.localName.indexOf("CF100") != -1)){
+                    if( dev.localName != null && (dev.localName.indexOf("LS-A4") != -1 || dev.localName.indexOf("LS-501") != -1 || dev.localName.indexOf("LS-FFFFFFFFFFFFFFF") != -1 || dev.localName.indexOf("CF100") != -1 || dev.localName.indexOf("H1") != -1 || dev.localName.indexOf("HSJ-") != -1)){
                       let _sn = dev.localName.replace("LS-","");
                       var _mac = dev.deviceId; 
                       //新增代码开始                

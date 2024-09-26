@@ -3,6 +3,11 @@
   <view class="form_table_border_none" style="margin-top: 40rpx;">
     <view class="form_table_border_in">
       <view class="form_table_left" style="font-size: 6.5vw;font-weight:bold;">电表</view>
+      <view wx:if="{{ptlx==='BLE'}}" class='item' hover-class="opcity" hover-stay-time="150">
+        <image class='middle-item-img' src="{{ljzt=='连接成功' ? '../../../static/images/my/myLock001.gif' : '../../../static/images/my/myLock000.gif'}}" bindtap="{{ljzt=='连接成功' ? 'closeBLEConnection' : 'linkBLE'}}"></image>
+      </view>
+      <view wx:else> 
+      </view>
       <view class="clear"></view>
     </view>
   </view>
@@ -222,13 +227,13 @@
         <view class="clear"></view>
       </view>
     </view>
-    <!--<view class="form_table_border" bindtap='tapYD' data-index="7" data-key="{{dsn}}">
+    <view class="form_table_border" bindtap='tapYD' data-index="7" data-key="{{dsn}}">
       <view class="form_table_border_in">
-        <view class="form_table_detail_left">房间用电配置</view>
+        <view class="form_table_detail_left">设置电价</view>
         <view class="arrow"></view>
         <view class="clear"></view>
       </view>
-    </view>-->
+    </view>
     <view class="form_table_border" bindtap='tapYD' data-index="8" data-key="{{dsn}}">
       <view class="form_table_border_in">
         <view class="form_table_detail_left">智能抄表</view>

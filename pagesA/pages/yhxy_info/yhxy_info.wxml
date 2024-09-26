@@ -1,0 +1,249 @@
+<view class="container" style="background-color: white;">
+  <scroll-view class="scroll-views" scroll-y="true" style="height:{{winHeight}}px">
+      <view class="form_table_border_none">
+        <view class="form_table_border_in">
+          <view class="rpt_title">用户服务协议</view>
+        </view>
+      </view>   
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 400rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 400rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">本《用户服务协议》（以下简称《协议》）是您（以下简称用户）与“厦门朗思智能科技有限公司”（以下简称“朗思”）之间关于用户登录、使用当前应用所订立的协议，本协议描述当前应用与用户之间关于服务相关方面的权利义务。在此特别提醒您认真阅读、充分理解本《协议》中各条款。如您在阅读完本协议后继续使用朗思任何产品或服务，即视为您已充分理解和同意本协议的全部内容。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 300rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 300rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">本《协议》可由朗思随时更新，更新后的协议一旦公布即代替原来的协议条款，恕不再另行通知，用户可在当前应用中查阅最新协议条款。在朗思修改《协议》条款后，如用户不接受修改后的服务，请立即停止使用当前应用提供的服务，用户继续使用当前应用提供的服务将被视为已接受了修改后的协议。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">一、账号登录</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、用户在办理入住后，朗思平台会将授权码以短信的形式发送给用户，用户在朗思租客端小程序输入房号+授权码的形式登录小程序。登录过程中小程序需要获取用户的手机号用于验证用户的真实性。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">二、服务内容</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、本服务的具体内容由朗思根据实际情况提供。朗思可以对其提供的服务予以变更，且朗思提供的服务内容可随时变更；用户将会收到朗思关于服务变更的通知。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">三、用户个人隐私信息保护</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、用户在登录账号或使用本服务的过程中，可能需要填写提交一些必要的信息，如法律法规、规章规范性文件(以下称“法律法规”)规定的需要填写的身份信息。如用户提交的信息不完整或不符合法律法规的规定，则用户可能无法使用本服务或在使用本服务的过程中受到限制。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2、个人隐私信息是指涉及用户个人身份或个人隐私的信息，比如，用户真实姓名、手机号、地址。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 250rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 250rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">3、尊重用户个人隐私信息的私有性是朗思的一贯制度，朗思将采取技术措施和其他必要措施，确保用户个人隐私信息安全，防止在本服务中收集的个人隐私信息泄露、损毁或丢失。在发生前述情形或者朗思发现存在发生前述情形的可能时，将及时采取补救措施。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 400rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 400rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">4、朗思未经用户同意不向任何第三方公开、透露用户个人隐私信息。但以下特定情形除外：(1)朗思根据法律法规规定或有权机关的指示提供用户的个人隐私信息；(2)由于用户将其用户密码告诉他人或与他人共享账号与密码，由此导致的任何个人信息泄露，或其他非因朗思原因导致的个人信息泄露；(3)用户向第三方公开其个人隐私信息；(4)任何由于黑客攻击、电脑病毒侵入及其他不可抗力事件导致用户个人隐私信息的泄露。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">5、用户同意朗思在以下事项中使用用户的个人隐私信息：(1)朗思向用户及时发送重要信息，如下发授权码，软件更新、本协议条款的变更。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 400rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 400rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">6、朗思重视对未成年人个人隐私信息的保护。任何18岁以下的未成年人注册账号或使用本服务应事先取得家长或其法定监护人(以下简称“监护人”)的书面同意。除根据法律法规的规定及有权机关的指示披露外，朗思不会使用或向任何第三方透露未成年人的聊天记录及其他个人隐私信息。除本协议约定的例外情形外，未经监护人事先同意，朗思不会使用或向任何第三方透露未成年人的个人隐私信息。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">四、用户发布内容规范</view>
+          <view class='clear'></view>
+        </view>
+      </view>  
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、本条例所述内容是指用户使用本服务过程中所制作、上载、复制、发布、传播的内容，包括但不限于账号头像、照片、人脸、指纹、用户说明的注册信息及认证资料，或文字、语音、图片、视频等发送。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 450rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 450rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2、用户不得利用当前应用账号或本服务制作、上载、复制、发布、传播如下法律、法规和政策禁止的内容：(1)反对宪法所确定的基本原则的；(2)危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；(3)损害国家荣誉和利益的；(4)煽动民族仇恨、民族歧视，破坏民族团价的；(5)破坏国家宗教政策，宣扬邪教和封建迷信的；(6)散布谣言，扰乱社会秩序，破坏社会稳定的；(7)散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">五、使用规则</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、用户在本服务中或通过本服务所传送、发布的任何内容并不反映或代表，也不得被视为反映或代表朗思的观点、立场或政策，朗思对此不承担任何责任。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2、用户不得利用当前应用账号或服务进行如下行为：</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">(1)提交、发布虚假信息，或盗用其他人头像或资料，冒充、利用他人名义的；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">(2)强制、诱导其他用户关注、点击链接或分享信息的；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">(3)虚构事实、隐瞒真相以误导、欺骗他人的；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 50rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 50rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">(4)利用当前应用账号或服务从事任何违法犯罪活动的；</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">六、账号管理</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 200rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 200rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、当前应用账号的所有权归朗思所有，用户注册或办理入住后，获得当前应用账号的使用权，该使用权仅属于入住的租客所有，禁止赠与、借用、租用。租客一旦办理退租，朗思有权收回用户的账号。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2、用户有责任妥善保管账号信息及账号密码的安全，因用户保管不善可能导致遭受盗号或密码失窃，责任由用户自行承担。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">3、用户应遵守本协议的各项条款，正确、适当地使用本服务，如因用户违反本协议中的任何条款，朗思在通知用户后有权依据协议中断或终止对违约用户账号提供服务。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">七、数据储存</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 100rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 100rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">1、朗思不对用户在本服务中相关数据的删除或储存失败负责。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 150rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 150rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;">2、朗思可根据实际情况自行决定用户在本服务中数据的最长储存期限，并在服务器上为其分配数据最大存储空间等。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="rpt_table_title_none">
+        <view class="rpt_table_border_in">
+          <view class="rpt_table_title_one">八、知识产权声明</view>
+          <view class='clear'></view>
+        </view>
+      </view>
+      <view class="form_table_border_none">
+        <view class="rpt_table_border_in" style="height: 400rpx;">
+          <view class="rpt_table_left_none" style="width: 100%;height: 400rpx;">
+          <span class="form_show_right_text" style="font-size: 3.5vw;margin-left: 50rpx;">该应用由朗思独立开发或获得授权许可。朗思所提供的网络服务的相关著作权、专利权、商标、营业机密及其它任何所有权或权利，均属于朗思所有，包括但不限于文字表述及其组合、图标、图饰、图表、色彩、界面设计、有关数据等均受著作权法和国际著作权条约及其他知识产权法律法规的保护。非经朗思的同意，任何人或用户均不得擅自下载、重制、传输、改作、编辑，否则用户应承担由此产生的一切法律责任。</span>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </view>
+    </scroll-view>
+</view>

@@ -36,15 +36,21 @@
               <view class="service-tite" style="width: 55%;">
                 <view wx:if="{{item.lylx=='20' || item.lylx=='21'}}"> 
                   <label class="button-right-type" bindtap="BLEdel" data-key="{{item.id}}" style="margin-right: 30rpx;">蓝牙删除</label>
-                  <label class="button-right-type" bindtap="updTX" data-key="{{item.id}}" data-kmlx="{{item.lx}}">修改</label>
+                  <label wx:if="{{item.renterid==''}}" class="button-right-type" bindtap="updTX" data-key="{{item.id}}" data-kmlx="{{item.lx}}">修改</label>
+                  <label wx:else>
+                  </label>     
                 </view>
                 <view wx:elif="{{item.lylx=='5' || item.lylx=='6'}}"> 
                   <label class="button-right-type" bindtap="BLEdel" data-key="{{item.id}}" style="margin-right: 30rpx;">蓝牙删除</label>
-                  <label class="button-right-type" bindtap="updTX" data-key="{{item.id}}" data-kmlx="{{item.lx}}">修改</label>
+                  <label wx:if="{{item.renterid==''}}" class="button-right-type" bindtap="updTX" data-key="{{item.id}}" data-kmlx="{{item.lx}}">修改</label>
+                  <label wx:else>
+                  </label>
                 </view>
                 <view wx:elif="{{item.lylx=='2'}}"> 
-                  <label class="button-left-type" bindtap="updList" data-key="{{item.id}}" data-kmlx="{{item.lx}}" style="margin-right: 94rpx;">修改</label>
-                  <label class="button-right-type" bindtap="deferList" data-key="{{item.id}}">延期</label>
+                  <label wx:if="{{item.renterid==''}}" class="button-left-type" bindtap="updList" data-key="{{item.id}}" data-kmlx="{{item.lx}}" style="margin-right: 94rpx;">修改</label>
+                  <label wx:else>
+                  </label>
+                  <!--<label class="button-right-type" bindtap="deferList" data-key="{{item.id}}">延期</label>-->
                 </view>
                 <view wx:else>
                 </view>            

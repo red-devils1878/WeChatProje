@@ -16,6 +16,16 @@ Page({
     var that = this;
     let LoginId = e.detail.value.zh;
     let pwd = e.detail.value.pwd;
+    var chk = e.detail.value.chk;
+    let chk_value = chk[0];
+    if(chk_value!="1"){
+      wx.showToast({
+        title: '请阅读用户协议与隐私政策',
+        icon: "none",
+        duration: 2000
+      })
+      return false;      
+    }
     if(LoginId.length < 1 ) {
       wx.showModal({    
         title: '提示',    
@@ -35,10 +45,10 @@ Page({
       return false; 
     }
     if(LoginId.indexOf("zhongjun") != -1 && LoginId.indexOf("zhongjun")==0){   //中骏
-      apiUrl = "http://aptWeChat.langsi.funplus.cn/api.ashx";   //获取api地址
-      let apiHost = "http://api.apt.langsi.funplus.cn/api/lock/";
-      let apiPC = "http://api.apt.langsi.funplus.cn/api/lock/cmd2";
-      let apiNC = "http://aiot.langsi.funplus.cn/api/lock/";
+      apiUrl = "https://aptWeChat.langsi.funplus.cn/api.ashx";   //获取api地址
+	    let apiHost = "https://aptApi.langsi.funplus.cn/api/lock/";
+	    let apiPC = "https://aptApi.langsi.funplus.cn/api/lock/cmd2";
+	    let apiNC = "https://aiot.langsi.funplus.cn/api/lock/";
       QZ = "zhongjun";
       wx.setStorageSync("apiUrl", apiUrl);
       wx.setStorageSync("apiHost", apiHost);
@@ -121,9 +131,11 @@ Page({
     }
     else{  //公寓版
       apiUrl = "https://aptWeChat.langsi.com.cn/api.ashx";   //获取api地址
+      //apiUrl = "http://localhost:7857/api.ashx";
       let apiHost = "https://aptApi.langsi.com.cn/api/lock/";
       let apiPC = "https://aptApi.langsi.com.cn/api/lock/cmd2";
       let apiNC = "https://aiot.langsi.com.cn/api/lock/";
+      //let apiNC = "http://192.168.1.111/api/v1/lock/";
       let apiYC = "http://ldrk.langsi.com.cn/api/api.ashx";
       QZ = "langsi";  //公寓版
       wx.setStorageSync("apiUrl", apiUrl);
@@ -223,6 +235,22 @@ Page({
     }
   },
   */
+ checkboxChange: function(event) {
+  console.log('Checkbox发生change事件，携带value值为：',event.detail.value);
+  this.setData({
+    chk2: event.detail.value
+  });
+  },
+ yhxy: function(e) {  //跳转到用户协议
+   wx.navigateTo({
+      url: '../../pagesA/pages/yhxy_info/yhxy_info'
+   })
+  },
+  yssm: function(e) {  //跳转到隐私政策
+    wx.navigateTo({
+      url: '../../pagesA/pages/yszc_info/yszc_info'
+    })
+  },
   onShow: function () {  //生命周期函数--监听页面显示
     wx.hideHomeButton();
   }

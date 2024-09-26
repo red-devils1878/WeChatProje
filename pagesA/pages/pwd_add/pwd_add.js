@@ -74,6 +74,8 @@ Page({
     second: 20, //倒计时20秒
     c:'',//定时器
     second_discon: 20, //倒计时20秒
+    setInter: '',
+    num: 1,
   },
   onLoad: function (options) { //生命周期函数--监听页面加载
     myPlugin= "";
@@ -90,6 +92,14 @@ Page({
     this.get_mcToMS(dsn); //获取门锁信息
     this.get_pwd(); //生成密码
     //this.get_msyhQty(dsn,'gl','03',userid); //获取门锁用户数量
+
+  /*调用一次定位*/
+  wx.getLocation({
+    type: 'gcj02',
+    success (res) {
+      console.log(res)
+    }
+  })
   },
   get_htrq:function (roomId) { //获取合同有效期
     let _this = this;
@@ -390,7 +400,7 @@ Page({
     var buttonType = e.detail.target.dataset.labelnum;
     if(pwdsl >= 5){
       wx.showToast({
-        title: '密码最多1个,不能再下发!',
+        title: '密码最多5个,不能再下发!',
         icon: "none",
       })
       return false;
@@ -450,8 +460,11 @@ Page({
                 if(yhbh < 10){
                   yhbh = '00'+yhbh
                 }
-                else{
+                else if(yhbh >= 10 && yhbh < 100){
                   yhbh = '0'+yhbh
+                }
+                else{
+                  yhbh = yhbh
                 }
                 that.insertLog_LS(userid,'',dsn,'下发','普通用户('+yhbh+')',newPwd,'朗思管理端');
                 that.insert_Rh_yhb(dsn,'03',yhbh,newPwd,Stime2,Etime2);//插入门锁用户表
@@ -511,7 +524,7 @@ Page({
               var validStartTime = new Date(Stime);
               //validStartTime.setHours(9, 12, 23);
               validStartTime = Math.floor(validStartTime.getTime() / 1000);
-              var validEndTime = new Date(endDate);
+              var validEndTime = new Date(Etime);
               //validEndTime.setHours(9, 12, 23);
               validEndTime = Math.floor(validEndTime.getTime() / 1000);
               var lockKeyId = 0; // 钥匙ID由设备分配
@@ -536,8 +549,11 @@ Page({
                     if(yhbh < 10){
                       yhbh = '00'+yhbh
                     }
-                    else{
+                    else if(yhbh >= 10 && yhbh < 100){
                       yhbh = '0'+yhbh
+                    }
+                    else{
+                      yhbh = yhbh
                     }
                     that.setData({
                       showMB:true,  //显示幕布
@@ -687,9 +703,12 @@ Page({
                         if(yhbh < 10){
                           yhbh = '00'+yhbh
                         }
-                        else{
+                        else if(yhbh >= 10 && yhbh < 100){
                           yhbh = '0'+yhbh
                         }
+                        else{
+                          yhbh = yhbh
+                        }                   
                         that.insertLog_LS(userid,'',dsn,'下发','普通用户('+yhbh+')',newPwd,'朗思管理端');
                         that.insert_Rh_yhb(dsn,'03',yhbh,newPwd,Stime2,Etime2);//插入门锁用户表
                         that.setData({
@@ -800,9 +819,12 @@ Page({
                           if(yhbh < 10){
                             yhbh = '00'+yhbh
                           }
-                          else{
+                          else if(yhbh >= 10 && yhbh < 100){
                             yhbh = '0'+yhbh
                           }
+                          else{
+                            yhbh = yhbh
+                          }                   
                           if(xfbs=='已完成'){
                             return;
                           }
@@ -1073,7 +1095,7 @@ Page({
     var yhlx = "02";    //用户类型
     var channel = "21"; //下发来源
     var remark = "";  
-    if(!Stime){ Stime = "000000000000"}
+    if(!Stime){ Stime = "000101000000"}
     if(!Etime){ Etime = "991230180000"}
     var _data = {ac: 'yhb_save',"yhbh":yhbh,"lx":lx,"yhlx":yhlx,"dsn":dsn,"Pwd":newPwd,"Stime":Stime,"Etime":Etime,"channel":channel,"remark":remark};
     wx.request({
@@ -1106,7 +1128,8 @@ Page({
   },
   //插入下发日志
   insertLog_LS:function(wx_id,hid,sbh,czlx,Pwd_type,Pwd,xfly){
-    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly};
+    let renterNo = "";
+    var _data = {ac: 'operateLog_save',"wx_id":wx_id,"hid":hid,"sbh":sbh,"czlx":czlx,"Pwd_type":Pwd_type,"Pwd":Pwd,"xfly":xfly,"renterNo":renterNo};
     wx.request({
       url: apiUrl,  //api地址
       data: _data,
@@ -1187,6 +1210,16 @@ Page({
       });
       //console.log(second_discon);
     }, 1000);  
+  },
+  onUnload: function () {
+    if(lylx=="20" || lylx=="21"){
+      if(!!myPlugin){
+        myPlugin.disconnect();
+      }
+    }
+    else if(lylx=="5" || lylx=="6"){
+      bleApi.closeBle();
+    }
   },
   onShow: function () {  //生命周期函数--监听页面显示
     //this.get_msyhQty(dsn,'gl','03',userid); //获取门锁用户数量
